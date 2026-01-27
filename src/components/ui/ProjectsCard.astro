@@ -126,7 +126,6 @@ const uniqueId = `modal-${title.toLowerCase().replace(/\s+/g, '-')}`;
   gap: 1rem;
   border-radius: 28px;
   padding: .5rem 1rem;
- 
 }
 
 .info {
@@ -164,6 +163,7 @@ const uniqueId = `modal-${title.toLowerCase().replace(/\s+/g, '-')}`;
 
 
 /* Modal Styles */
+
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -326,8 +326,19 @@ const uniqueId = `modal-${title.toLowerCase().replace(/\s+/g, '-')}`;
 
 
 
+@media (max-width: 1522px) {
+  .info h3{
+    font-size: 1.5rem;
+  }
 
+  .info p{
+    font-size: 1.1rem;
+  }
 
+  .actions{
+    padding: .8rem;
+  }
+}
 
 
 
@@ -359,16 +370,17 @@ const uniqueId = `modal-${title.toLowerCase().replace(/\s+/g, '-')}`;
 @media (max-width: 480px) {
 
   .project-card{
-  padding: .5rem 1.4rem;
+  padding: .5rem 1rem;
 
   }
   .info h3 {
-    font-size: 1.350rem;
+    font-size: 1.3rem;
   }
 
   .info p{
-    font-size: .950rem;
+    font-size: 1rem;
   }
+
   
 }
 </style>

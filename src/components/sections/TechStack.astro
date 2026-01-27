@@ -68,12 +68,22 @@ h2{
   align-items: start;           
 }
 
+/* ============================================
+    small desktop (1522px)
+   ============================================ */
+
 @media (max-width: 1522px) {
+  h2{
+    margin: 3rem;
+  }
+
   .tech-grid {
-    /* Aquí podés definir las 3 columnas sin !important porque estás adentro del componente */
     grid-template-columns: repeat(3, 1fr);
+    row-gap: 2.5rem;
   }
 }
+
+
 
 /* ============================================
     TABLET (1024px)
@@ -93,11 +103,14 @@ h2{
   h2 {
     font-size: 1.5rem;
     text-align: center;
+    margin: 2rem;
   }
 
   .tech-grid {
   grid-template-columns: repeat(4, 1fr);
-  margin: 1rem;
+  margin: .5rem;
+    row-gap: 1.5rem;
+
   }
 }
 
@@ -111,7 +124,7 @@ h2{
   }
   .tech-grid {
   grid-template-columns: repeat(3, 1fr);
-  column-gap: 2rem;
+  column-gap: 1.5rem;
   }
 
 }

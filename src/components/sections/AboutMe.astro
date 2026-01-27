@@ -17,15 +17,15 @@ import WordRotate from "@/components/ui/WordRotate.tsx";
         </p>
         
    <h1 class="main-title">
-   Desarrollador Frontend, enfocado en transformar requisitos complejos en experiencias de usuario destacadas,
-  creadas con código
-  <span class="word-rotate-wrapper">
+   Desarrollador Frontend, enfocado en transformar requisitos complejos en experiencias de usuario destacadas. 
+   Abordando cada proyecto con entusiasmo y trabajo duro.
+  <!-- <span class="word-rotate-wrapper">
     <WordRotate
       client:load
       words={["limpio.", "seguro.", "optimizado.", "escalable."]}
       delay={1600}
     />
-  </span>
+  </span> -->
 </h1>
         <br />
         <h2 class="commitment">Siempre comprometido a colaborar, aprender y mejorar cada día, con una gran atención al detalle y buenas prácticas.</h2>
@@ -35,7 +35,7 @@ import WordRotate from "@/components/ui/WordRotate.tsx";
 <style>
     .about-me {
         padding: 0rem;
-        padding-inline: 2rem;
+        padding-inline: 1.5rem;
     }
 
     .name {
@@ -53,7 +53,7 @@ import WordRotate from "@/components/ui/WordRotate.tsx";
     }
 
     .main-title {
-        font-size: 2rem;
+        font-size: 1.8rem;
         line-height: 1.3;
         margin-bottom: 0;
         margin-top: 0;
@@ -77,9 +77,40 @@ import WordRotate from "@/components/ui/WordRotate.tsx";
         margin-bottom: 1.5rem;
         line-height: 1.3;
 
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         color: rgba(240, 248, 255, 0.927);
 }
+
+
+ /* ============================================
+    small desktop (1522px)
+   ============================================ */
+
+@media (max-width: 1522px) {
+
+    .about-me{
+        padding-block: .5rem;
+
+    }
+
+
+    .name{
+        font-size: 1.750rem;
+    }
+
+    .subtitle{
+        font-size: .980rem;
+    }
+
+    .main-title{
+        font-size: 2.2rem;
+    }
+
+
+}
+
+
+
 
 @media (max-width: 1024px) {
     .about-me {
@@ -126,10 +157,10 @@ import WordRotate from "@/components/ui/WordRotate.tsx";
         font-size: .9rem;
     }
     .main-title {
-        font-size: 1.7rem;
+        font-size: 1.6rem;
     }
     .commitment {
-        font-size: 1.050rem;
+        font-size: 1.1rem;
 
     }
 }

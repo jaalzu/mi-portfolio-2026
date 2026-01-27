@@ -163,26 +163,30 @@ const { projectUrl, codeUrl, modalId } = Astro.props;
   }
 
 
+@media (max-width: 1522px) {
+  .pillButton{
+    font-size: 1rem;
+  }
+          }
 
-  /* ============================================
-    TABLET (1024px)
-   ============================================ */
-@media (max-width: 1024px) {
-  .pillContainer {}
-  .pillButton {}
-  .icon-spacer {}
-  .divider {}
-}
 
 
 /* ============================================
      MOBILE (480px)
    ============================================ */
 @media (max-width: 480px) {
-  .pillButton {
-    padding: 0.5rem .9rem;
-    font-size: 0.87rem !important;
 
+  .pillButton {
+    padding: 0.5rem .550rem;
+    font-size: 0.720rem !important;
+  }
+
+  .icon-spacer{
+    margin-right: 0.4rem;
+  }
+
+  .divider{
+    width: 1px;
   }
 }
 </style>

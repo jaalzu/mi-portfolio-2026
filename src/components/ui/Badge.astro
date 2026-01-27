@@ -17,11 +17,20 @@ const { text } = Astro.props;
   color: var(--color-white-pure); 
   background-color: #00000062; 
   border: 1px solid rgba(255, 255, 255, 0.142);
+
+
 } 
+
+@media (max-width: 1522px) {
+ .badge-glass{
+    font-size:.850rem;
+  }
+
+}
 
 @media (max-width:480px){
   .badge-glass{
-    font-size:.8rem;
+    font-size:.750rem;
   }
 }
 </style>

@@ -39,6 +39,7 @@ import ButtonLink from '../ui/ButtonLink.astro';
     flex-direction: column;
     text-align: center;
     gap: 3rem;
+    margin-bottom: 1rem;
   }
   
   h2 {
@@ -69,6 +70,37 @@ import ButtonLink from '../ui/ButtonLink.astro';
   }
 
 
+  
+ /* ============================================
+    small desktop (1522px)
+   ============================================ */
+
+@media (max-width: 1522px) {
+
+    .email{
+      font-size: 1.7rem;
+    }
+
+    .btn-content{
+      font-size: 1.2rem;
+    }
+
+    .btn-content svg {
+    width: 28px; 
+    height: 28px;
+  }
+
+  .buttons :global(.glass-base),
+  .buttons :global(div) {
+    width: 100% !important; 
+    height: 48px !important;
+    max-width: 220px;
+  }
+    
+}
+
+
+
 
   /* ============================================
     TABLET (1024px)
@@ -84,8 +116,6 @@ import ButtonLink from '../ui/ButtonLink.astro';
   .email {
     font-size: 1.4rem;
   }
-  .buttons {}
-  .btn-content {}
 }
 
 /* ============================================

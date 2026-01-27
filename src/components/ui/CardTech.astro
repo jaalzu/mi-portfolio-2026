@@ -38,13 +38,26 @@ const { title, width = 80, height = 80, borderRadius = 24 } = Astro.props;
     object-fit: contain;
   }
 
- 
+  /* ============================================
+    small desktop (1522px)
+   ============================================ */
 
-  @media (max-width: 1024px) {
-  .tech-title {
-    font-size: 1rem;
+@media (max-width: 1522px) {
+  .glass-image-container {
+    width: 90px !important; 
+    height: 90px !important;
+  }
+
+  .glass-image-container :global(svg) {
+    width: 65% !important;
+    height: 65% !important;
   }
 }
+
+
+   /* ============================================
+    mobile (760px)
+   ============================================ */
 
 @media (max-width: 760px) {
 
@@ -62,6 +75,11 @@ const { title, width = 80, height = 80, borderRadius = 24 } = Astro.props;
     font-size: 1.1rem;
   }
 }
+
+
+   /* ============================================
+    small mobile (480px)
+   ============================================ */
 
 @media (max-width: 480px) {
   .tech-title {

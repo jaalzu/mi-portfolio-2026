@@ -1,3 +1,9 @@
-pasar todo a la raíz
-subir a GitHub pages
+pasar todo a la raíz listo
+subir a GitHub pages listo
+arreglar elproject section en mobile
+
+arreglar eso de que todo es clickeable no se pq.
+mejorar rendimiento
+mejorar accesibilidad
+mejorar seo 
 arreglar el modal.
