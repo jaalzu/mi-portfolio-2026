@@ -1,0 +1,247 @@
+---
+import Projects from '../components/sections/Projects.astro';
+import AboutMe from '../components/sections/AboutMe.astro';
+import Picture from '../components/sections/Picture.astro';
+import Contact from '../components/sections/Contact.astro';
+import TechStack from '../components/sections/TechStack.astro';
+import '../styles/global.css'
+
+---
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width" />
+    <title>Mi Portfolio</title>
+  </head>
+  <body>
+    <div class="parent">    
+      <div class="projects"><Projects /></div>
+      <div class="about-me"><AboutMe /></div>
+      <div class="right-column">
+        <div class="picture"><Picture /></div>
+        <div class="contact"><Contact /></div>
+      </div>
+      <div class="tech-stack"><TechStack /></div>
+    </div>
+  </body>
+</html>
+
+<style>
+  body {
+    margin: 0;
+    padding: 0 40px;
+    box-sizing: border-box;
+
+    min-height: 100vh;
+    font-family: 'Inter', monospace;
+    background: url('/windows_vista_90.jpg') center/cover no-repeat fixed;
+    color: var(--color-white-pure);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .right-column{
+    display: contents;
+  }
+
+  /* ============================================
+     DESKTOP (>1024px) - Layout original
+     ============================================ */
+  .parent {
+    display: grid;
+    grid-template-columns: 2.2fr 0.9fr 0.7fr 1fr; 
+    grid-template-rows: repeat(4, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    width: 100%;
+    /* max-width: 1700px; */
+    height: 90vh;
+  }
+
+  .projects { grid-area: 1 / 3 / 5 / 5; }
+  .about-me { grid-area: 1 / 1 / 3 / 2; }
+  .picture { grid-area: 1 / 2 / 3 / 3; }
+  .contact { grid-area: 3 / 2 / 5 / 3; }
+  .tech-stack { grid-area: 3 / 1 / 5 / 1; }
+
+  .projects, .about-me, .picture, .contact, .tech-stack {
+    display: flex;
+  }
+
+  .projects :global(.glass-card),
+  .about-me :global(.glass-card),
+  .picture :global(.glass-card),
+  .contact :global(.glass-card),
+  .tech-stack :global(.glass-card) {
+    width: 100%;
+    height: 100%;
+  }
+
+
+
+/* ============================================
+    DESKTOP MEDIANO (1025px - 1522px)
+   ============================================ */
+@media (max-width: 1522px) {
+  .parent {
+    grid-template-columns: 1.2fr 0.8fr; 
+    grid-template-rows: auto auto auto;
+    height: auto;
+    gap: 20px;
+  }
+
+  .about-me { 
+    grid-area: 1 / 1 / 2 / 3; 
+  }
+
+  .projects { 
+    grid-area: 2 / 1 / 3 / 2; 
+  }
+
+  .tech-stack { 
+    grid-area: 2 / 2 / 3 / 3; 
+  }
+
+
+  .right-column {
+    grid-area: 3 / 1 / 4 / 3;
+    display: grid;
+    grid-template-columns: 0.6fr 1.4fr; 
+    gap: 20px;
+  }
+
+  .picture {
+    grid-area: auto;
+    width: 100%;
+    max-height: auto; 
+  }
+  
+  .contact {
+    grid-area: auto;
+    width: 100%;
+  }
+}
+
+  
+
+  
+ 
+ /* ============================================
+      TABLET (768px - 1024px)
+     ============================================ */
+  @media (max-width: 1024px) {
+    body {
+      padding: 20px;
+    }
+
+    .parent {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr; 
+      grid-template-rows: auto; 
+      align-items: start; 
+      height: auto;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .about-me { grid-area: 1 / 1 / 2 / 3; }
+  .projects { grid-area: 2 / 1 / 3 / 2; }
+  
+  /* Aquí está el truco */
+  .right-column {
+    display: flex;       /* Cambiamos de contents a flex */
+    flex-direction: column; 
+    gap: 15px;           /* El espacio que vos quieras entre foto y contacto */
+    grid-area: 2 / 2 / 3 / 3; /* Ocupa el lugar al lado de proyectos */
+  }
+
+  /* Reseteamos los grid-areas individuales porque ahora manda el padre */
+  .picture, .contact { grid-area: auto; }
+
+  .tech-stack { grid-area: 3 / 1 / 4 / 3; }
+  }
+
+
+
+  
+/* ============================================
+      MOBILE (hasta 768px)
+     ============================================ */
+  @media (max-width: 768px) {
+    body {
+      padding: 10px; /* Reducimos el padding para ganar espacio */
+      display: block; /* Quitamos el flex del body para que el scroll sea natural */
+    }
+
+    .parent {
+      display: grid;
+      grid-template-columns: 100%; /* Una sola columna real */
+      grid-template-rows: auto;
+      gap: 20px; 
+      height: auto;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    /* Clave: para que los hijos ignoren el contenedor intermedio */
+    .right-column {
+      display: contents; 
+    }
+
+    .about-me, .projects, .picture, .tech-stack, .contact {
+      width: 100% !important;
+      max-width: 100% !important;
+      grid-area: auto !important; /* Resetea cualquier grid-area de tablet */
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    /* Definimos el orden exacto en la grilla */
+    .about-me { order: 1; }
+    .projects { order: 2; min-height: 400px; }
+    .picture  { order: 3; height: 250px; }
+    .tech-stack { order: 4; }
+    .contact  { order: 5; }
+  }
+
+  /* ============================================
+     MOBILE PEQUEÑO (hasta 480px)
+     ============================================ */
+ /* ============================================
+      MOBILE PEQUEÑO (hasta 480px)
+     ============================================ */
+  @media (max-width: 480px) {
+    body {
+      padding: 10px; /* Evita que el body apriete el contenido */
+      margin: 0;
+    }
+
+    .parent {
+      /* Bajamos el gap porque 42px es demasiado y te quita espacio para el contenido */
+      gap: 25px; 
+      display: flex;
+      flex-direction: column;
+    }
+
+    .projects {
+      /* Quitamos cualquier restricción de altura para que el contenido la estire */
+      height: auto !important;
+      min-height: 500px; /* Le damos aire para que se vean las cards */
+      width: 100% !important;
+    }
+
+    .picture {
+      height: 200px !important; /* Altura fija para la foto */
+      max-height: none;
+    }
+
+    /* Aseguramos que nada se salga por la derecha */
+    * {
+      max-width: 100vw;
+      box-sizing: border-box;
+    }
+  }
+</style>

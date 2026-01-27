@@ -1,0 +1,17 @@
+---
+import Card from '../ui/Card.astro';
+---
+
+<Card>
+  <img src="/catcat.png" alt="Mi foto" class="full-img" />
+</Card>
+
+<style>
+  .full-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px; /* opcional, para que combine con el Card */
+    display: block;
+    object-fit:  cover ;
+  }
+</style>

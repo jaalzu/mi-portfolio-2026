@@ -1,0 +1,3 @@
+pasar todo a la raíz
+subir a GitHub pages
+arreglar el modal.

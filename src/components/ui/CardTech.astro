@@ -1,0 +1,87 @@
+---
+import '../../styles/glassRetro.css';
+const { title, width = 80, height = 80, borderRadius = 24 } = Astro.props;
+---
+
+<div class="tech-wrapper">
+  <div
+    class="glass-base glass-image-container"
+    style={`width: ${width}px; height: ${height}px; border-radius: ${borderRadius}px;`}
+  >
+    <slot />
+  </div>
+
+  <p class="tech-title">{title}</p>
+</div>
+
+<style>
+  .tech-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tech-title {
+    font-size: 1rem;
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .glass-image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .glass-image-container :global(svg),
+  .glass-image-container :global(img) {
+    object-fit: contain;
+  }
+
+ 
+
+  @media (max-width: 1024px) {
+  .tech-title {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 760px) {
+
+
+ .glass-image-container {
+    width: 85px !important; 
+    height: 85px !important;
+  }
+
+  .glass-image-container :global(svg) {
+    width: 60% !important;
+    height: 60% !important;
+  }
+.tech-title {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tech-title {
+    font-size: 1rem;
+  }
+
+   .glass-image-container {
+    width: 75px !important; 
+    height: 75px !important;
+  }
+
+  .glass-image-container :global(svg) {
+    width: 65% !important;
+    height: 65% !important;
+  }
+}
+  
+</style>
+
+
+
+
+

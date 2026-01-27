@@ -1,0 +1,188 @@
+---
+interface Props {
+  projectUrl: string;
+  codeUrl: string;
+  modalId: string;
+}
+
+const { projectUrl, codeUrl, modalId } = Astro.props;
+---
+
+<div class="buttonGlass glass-base pillContainer">
+  
+  <a href={projectUrl} target="_blank" rel="noopener noreferrer" class="pillButton pillButton--first">
+    <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="25"
+  height="25"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="#6CFF9D"
+  stroke-width="1.6"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon-spacer"
+  aria-label="Sitio Web"
+>
+  <circle cx="12" cy="12" r="10"></circle>
+  <line x1="2" y1="12" x2="22" y2="12"></line>
+  <path d="M12 2a15.3 15.3 0 0 1 0 20a15.3 15.3 0 0 1 0-20"></path>
+</svg>
+
+    <span>Sitio web</span>
+  </a>
+  
+  <div class="divider"></div>
+
+  <a href={codeUrl} target="_blank" rel="noopener noreferrer" class="pillButton pillButton--middle">
+    <svg 
+      width="25" 
+      height="25" 
+      viewBox="0 0 24 24" 
+      fill="#6CFF9D" 
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-spacer"
+      aria-label="Código en GitHub"
+    >
+      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+    </svg>
+    <span>Código</span>
+  </a>
+  
+  <div class="divider"></div>
+
+  <button data-modal={modalId} class="pillButton pillButton--last info-btn">
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      width="25" 
+      height="25" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="#6CFF9D" 
+      stroke-width="2" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"
+      class="icon-spacer" 
+      aria-label="Información"
+    >
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="12" y1="16" x2="12" y2="12"></line>
+      <line x1="12" y1="8" x2="12.01" y2="8"></line>
+    </svg>
+    <span>Información</span>
+  </button>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const infoButtons = document.querySelectorAll('.info-btn');
+    
+    infoButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const modalId = button.getAttribute('data-modal');
+        const modal = document.getElementById(modalId as string);
+        
+        if (modal) {
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .pillContainer {
+    width: fit-content;
+    align-items: stretch !important;
+    padding: 0 !important;
+    transition: 
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.1s ease;
+  }
+
+  .pillContainer:hover {
+    background-color: rgba(255, 255, 255, 0) !important;
+  }
+
+
+  .pillButton {
+    padding: 0.5rem 1rem;
+    color: inherit;
+    white-space: nowrap;
+    font-size: 0.87rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+  cursor: url('/cursor/normal.cur'), pointer; 
+   transition: 
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.1s ease;
+  } 
+
+   
+
+  .icon-spacer {
+    margin-right: 0.5rem; 
+    width: 1rem;
+    height: 1rem;
+    color: currentColor; 
+  }
+
+  .pillButton--first {
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 28px;
+  }
+
+  .pillButton--last {
+    border-top-right-radius: 28px;
+    border-bottom-right-radius: 28px;
+  }
+
+  .pillButton:hover {
+      background-color: rgba(255, 255, 255, 0.089);
+  }
+
+  .pillButton:active {
+    background-color: rgba(255, 255, 255, 0.166);
+  }
+
+  .divider {
+    width: 2px;
+    align-self: stretch;
+    background-color: #b0afaf1f;
+    margin: 0;
+  }
+
+
+
+  /* ============================================
+    TABLET (1024px)
+   ============================================ */
+@media (max-width: 1024px) {
+  .pillContainer {}
+  .pillButton {}
+  .icon-spacer {}
+  .divider {}
+}
+
+
+/* ============================================
+     MOBILE (480px)
+   ============================================ */
+@media (max-width: 480px) {
+  .pillButton {
+    padding: 0.5rem .9rem;
+    font-size: 0.87rem !important;
+
+  }
+}
+</style>

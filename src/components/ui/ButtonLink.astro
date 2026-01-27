@@ -1,0 +1,17 @@
+---
+import '../../styles/glass.css';
+import '../../styles/glassRetro.css';
+const { width, height, borderRadius = 28 } = Astro.props;
+---
+
+<button
+  class="buttonGlass glass-base"
+  style={`
+    ${width ? `width: ${width}px;` : ''}
+    ${height ? `height: ${height}px;` : ''}
+    ${borderRadius ? `border-radius: ${borderRadius}px;` : ''}
+  `}
+>
+  <slot />
+</button>
+
