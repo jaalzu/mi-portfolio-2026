@@ -1,30 +1,87 @@
 ---
+// src/components/sections/AboutMe.astro
 import Card from '../ui/Card.astro';
-import DecryptedText from '@/components/ui/DecryptedText.tsx';
+const originalText = "25 años · Chaco, Argentina";
+const hoverText = "Gracias por pasarte. No te olvides de ver mis proyectos!";
 ---
 
 <Card>
     <div class="about-me">
         <h2 class="name">Hola! Soy Javier A.</h2>
         <p class="subtitle">
-            <DecryptedText 
-                client:load
-                originalText="25 años ·  Chaco, Argentina"
-                hoverText="Gracias por pasarte. No te olvides de ver mis proyectos!"
-                className=""
-            />
+            <span 
+              id="decrypt-text" 
+              class="decrypt-text"
+              data-original={originalText}
+              data-hover={hoverText}
+            >
+              <span class="text-content">{originalText}</span>
+              <img src="/ar.svg" alt="Argentina flag" class="flag" />
+            </span>
         </p>
         
-   <h1 class="main-title">
-   Desarrollador Frontend, enfocado en transformar requisitos complejos en experiencias de usuario destacadas. 
-   Abordando cada proyecto con entusiasmo y trabajo duro.
-</h1>
+        <h1 class="main-title">
+            Desarrollador Frontend, enfocado en transformar requisitos complejos en experiencias de usuario destacadas. 
+            Abordando cada proyecto con entusiasmo y trabajo duro.
+        </h1>
         <br />
         <h2 class="commitment">Siempre comprometido a colaborar, aprender y mejorar cada día, con una gran atención al detalle y buenas prácticas.</h2>
     </div>
 </Card>
 
+<script>
+    const el = document.getElementById('decrypt-text');
+    const textSpan = el?.querySelector('.text-content');
+    const flag = el?.querySelector('.flag');
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+    let interval: any = null;
+
+    const animate = (targetText: string, isHovering: boolean) => {
+        let iteration = 0;
+        clearInterval(interval);
+        
+        // Manejo de la bandera
+        if (flag instanceof HTMLElement) {
+            flag.style.opacity = isHovering ? "0" : "1";
+            flag.style.display = isHovering ? "none" : "inline-block";
+        }
+
+        interval = setInterval(() => {
+            if (textSpan instanceof HTMLElement) {
+                textSpan.innerText = targetText.split("")
+                    .map((char, index) => {
+                        if(index < iteration) return targetText[index];
+                        return chars[Math.floor(Math.random() * chars.length)];
+                    })
+                    .join("");
+            }
+            
+            if(iteration >= targetText.length) clearInterval(interval);
+            iteration += 1;
+        }, 18);
+    };
+
+    el?.addEventListener('mouseenter', () => animate(el.dataset.hover!, true));
+    el?.addEventListener('mouseleave', () => animate(el.dataset.original!, false));
+</script>
+
 <style>
+
+    /* Agrega esto a tus estilos existentes */
+    .decrypt-text {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer; /* Astro usará tu cursor personalizado del body */
+    }
+
+    .flag {
+        width: 18px;
+        height: auto;
+        transition: opacity 0.3s ease;
+    }
+
+
     .about-me {
         padding: 0rem;
         padding-inline: 1.5rem;

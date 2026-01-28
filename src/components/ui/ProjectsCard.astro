@@ -2,35 +2,18 @@
 import '../../styles/glassRetro.css';
 import Badge from './Badge.astro';
 import ButtonPill from './ButtonPill.astro';
+import ProjectModal from './ProjectModal.astro'; // Importamos el nuevo componente
 
 interface Props {
-  title?: string;
-  description?: string;
-  projectUrl?: string; 
-  codeUrl?: string;
-  tech?: string[];
- projectInfo?: {
-  origin: string;
-  architecture: string;
-  stack: string;
-  images?: string[];
-};
-
+  title: string;
+  description: string;
+  projectUrl: string; 
+  codeUrl: string;
+  tech: string[];
+  projectInfo: any;
 }
 
-const {
-  title = "Proyecto sin título",
-  description = "Descripción no disponible.",
-  projectUrl = "#",
-  codeUrl = "#",
-  tech = [],
-  projectInfo = {
-    origin: "Información no disponible",
-    architecture: "Información no disponible",
-    stack: "Información no disponible"
-  }
-} = Astro.props as Props;
-
+const { title, description, projectUrl, codeUrl, tech, projectInfo } = Astro.props;
 const uniqueId = `modal-${title.toLowerCase().replace(/\s+/g, '-')}`;
 ---
 
@@ -38,11 +21,8 @@ const uniqueId = `modal-${title.toLowerCase().replace(/\s+/g, '-')}`;
   <div class="info">
     <h3>{title}</h3>
     <p>{description}</p>
-
     <div class="tech-list">
-      {tech.map(t => (
-        <Badge text={t} />
-      ))}
+      {tech.map(t => <Badge text={t} />)}
     </div>
   </div>
 
@@ -55,72 +35,7 @@ const uniqueId = `modal-${title.toLowerCase().replace(/\s+/g, '-')}`;
   </div>
 </div>
 
-<!-- Modal -->
-<div id={uniqueId} class="modal-overlay ">
-  <div class="modal-content glass-base">
-    <button class="modal-close" aria-label="Cerrar modal">
-      <svg
-  xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="4"
-  stroke-linecap="round"
->
-  <line x1="6" y1="6" x2="18" y2="18" />
-  <line x1="18" y1="6" x2="6" y2="18" />
-</svg>
-
-    </button>
-
-    <!-- modal img -->
-   {projectInfo.images && (
-  <div class="slider" data-slider>
-    <button class="slider-btn prev" aria-label="Anterior">
-  <svg viewBox="0 0 24 24" width="20" height="20">
-    <path d="M15 6l-6 6 6 6" stroke="white" stroke-width="3" fill="none"/>
-  </svg>
-</button>
-
-    <div class="slider-track">
-  {projectInfo.images.map(img => (
-    <img 
-      src={img} 
-      alt={`Imagen de ${title}`} 
-      loading="lazy"   decoding="async" />
-  ))}
-</div>
-
-    <button class="slider-btn next" aria-label="Siguiente">
-  <svg viewBox="0 0 24 24" width="20" height="20">
-    <path d="M9 6l6 6-6 6" stroke="white" stroke-width="3" fill="none"/>
-  </svg>
-</button>
-
-  </div>
-)}
-
-    <!-- modal body  -->
-    <div class="modal-body">
-      <section class="modal-section">
-        <h3>Cómo surgió el proyecto</h3>
-        <p>{projectInfo.origin}</p>
-      </section>
-
-      <section class="modal-section">
-        <h3>Patrones de Arquitectura</h3>
-        <p>{projectInfo.architecture}</p>
-      </section>
-
-      <section class="modal-section">
-        <h3>Stack Tecnológico</h3>
-        <p>{projectInfo.stack}</p>
-      </section>
-    </div>
-  </div>
-</div>
-
-
+<ProjectModal id={uniqueId} title={title} projectInfo={projectInfo} />
 
 <style>
 .project-card {
@@ -164,168 +79,6 @@ const uniqueId = `modal-${title.toLowerCase().replace(/\s+/g, '-')}`;
 }
 
 
-
-/* Modal Styles */
-
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
-  padding: .8rem;
-}
-
-.modal-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.modal-content {
-  width: 100%;
-  max-width: 700px;
-  max-height: 80vh;
-  overflow-y: auto;
-  border-radius: 32px;
-  padding:2.1rem;
-  position: relative;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.907) 0%,
-    rgba(22, 22, 22, 0.877) 70%,
-    rgba(0, 0, 0, 0.906) 100%,
-    rgba(1, 22, 22, 0.609) 100% 
-  );
-
-  transform: scale(0.3);
-  transition: transform 0.3s ease;
-}
-
-.modal-overlay.active .modal-content {
-  transform: scale(1);
-}
-
-.modal-close {
-  position: absolute;
-  top: .1rem;
-  right: 1.5rem;
-  background: transparent;
-  border-radius: 50%;
-  border: none;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  color: red;
-  z-index: 10;
-}
-
-.modal-close svg {
-  width: 30px;
-  height: 30px;
-}
-
-.modal-close:hover {
-  background: rgba(255, 255, 255, 0.264);
-}
-
-
-.modal-body {
-  display: flex;
-  flex-direction: column;
-}
-
-.modal-section h3 {
-  font-size: 1.1rem;
-  color: var(--color-primary, #6CFF9D);
-  margin-top: 1rem;
-  margin-bottom:0rem;
-}
-
-.modal-section p {
-  font-size: 0.9rem;
-  line-height: 1.4;
-  margin-top: .7rem;
-}
-
-
-
-.slider {
-  position: relative;
-  width: 100%;
-  height: 170px;
-  overflow: hidden;
-  border-radius: 8px;
-  margin-bottom: .5rem;
-}
-
-.slider-track {
-  display: flex;
-  height: 100%;
-  transition: transform 0.2s ease;
-}
-
-.slider-track img {
-  min-width: 100%;
-  height: 100%;
-  object-fit:  cover ;
-}
-
-.slider-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 33px;
-  height: 33px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255, 255, 255, 0.515);
-  font-size: 27px;
-  z-index: 5; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: .2s ease;
-}
-
-.slider-btn.prev {
-  left: 8px;
-}
-
-.slider-btn.next {
-  right: 8px;
-}
-
-
-.slider-btn:hover {
-    background: rgba(121, 121, 121, 0.581);
-}
-
-
-.modal-content::-webkit-scrollbar {
-  width: 4px;
-  height: 100%;
-}
-
-.modal-content::-webkit-scrollbar-track {
-  border-radius: 10px;
-  margin-block: 1.5rem;
-}
-
-.modal-content::-webkit-scrollbar-thumb {
-  background: rgba(108, 255, 157, 0.3);
-  border-radius: px;
-}
-
-.modal-content::-webkit-scrollbar-thumb:hover {
-  background: rgba(108, 255, 157, 0.5);
-}
 
 
 
@@ -388,60 +141,3 @@ const uniqueId = `modal-${title.toLowerCase().replace(/\s+/g, '-')}`;
 }
 </style>
 
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const modals = document.querySelectorAll('.modal-overlay');
-    
-    modals.forEach(modal => {
-      const closeBtn = modal.querySelector('.modal-close');
-      
-      // Cerrar al hacer click en el botón de cerrar
-      closeBtn?.addEventListener('click', () => {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-      });
-      
-      // Cerrar al hacer click fuera del modal
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          modal.classList.remove('active');
-          document.body.style.overflow = '';
-        }
-      });
-      
-      // Cerrar con tecla ESC
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
-          modal.classList.remove('active');
-          document.body.style.overflow = '';
-        }
-      });
-    });
-  });
-
-
-  document.querySelectorAll('[data-slider]').forEach(slider => {
-  const track = slider.querySelector('.slider-track');
-  const images = track.children;
-  const prev = slider.querySelector('.prev');
-  const next = slider.querySelector('.next');
-
-  let index = 0;
-
-  function update() {
-    track.style.transform = `translateX(-${index * 100}%)`;
-  }
-
-  prev.addEventListener('click', () => {
-    index = (index - 1 + images.length) % images.length;
-    update();
-  });
-
-  next.addEventListener('click', () => {
-    index = (index + 1) % images.length;
-    update();
-  });
-});
-
-</script>

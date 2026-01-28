@@ -1,13 +1,14 @@
 import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
-import icon from 'astro-icon'; // <-- IMPORTA LA LIBRERÍA
+import icon from 'astro-icon';
+
 export default defineConfig({
-  integrations: [react(),icon({
+  integrations: [
+    icon({
       include: {
         devicon: ['*'], 
       }
-    }),],
-
+    }),
+  ],
   vite: {
     plugins: [],
   },
