@@ -230,57 +230,65 @@ const { id, title, projectInfo } = Astro.props;
 
 
 
-<script>
-  // Esta función inicializa los modales
-  function initModals() {
-    const modals = document.querySelectorAll('.modal-overlay');
-    
-    modals.forEach(modal => {
-      const closeBtn = modal.querySelector('.modal-close');
+<script is:inline>
+  // Usamos una función autoejecutable para no ensuciar el scope global
+  (function() {
+    const initModals = () => {
+      const modals = document.querySelectorAll('.modal-overlay');
       
-      const closeModal = () => {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-      };
+      modals.forEach(modal => {
+        const closeBtn = modal.querySelector('.modal-close');
+        
+        const closeModal = () => {
+          modal.classList.remove('active');
+          document.body.style.overflow = '';
+        };
 
-      closeBtn?.addEventListener('click', closeModal);
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-      });
-      
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
-      });
-    });
-
-    // Inicializar Sliders
-    document.querySelectorAll('[data-slider]').forEach(slider => {
-      const track = slider.querySelector('.slider-track') as HTMLElement;
-      const images = track?.children;
-      const prev = slider.querySelector('.prev');
-      const next = slider.querySelector('.next');
-      let index = 0;
-
-      if (!track || !images) return;
-
-      function update() {
-        track.style.transform = `translateX(-${index * 100}%)`;
-      }
-
-      prev?.addEventListener('click', () => {
-        index = (index - 1 + images.length) % images.length;
-        update();
+        closeBtn?.addEventListener('click', closeModal);
+        
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeModal();
+        });
+        
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+        });
       });
 
-      next?.addEventListener('click', () => {
-        index = (index + 1) % images.length;
-        update();
-      });
-    });
-  }
+      // Lógica del Slider
+      document.querySelectorAll('[data-slider]').forEach(slider => {
+        const track = slider.querySelector('.slider-track');
+        // Convertimos a array para evitar líos de iteración
+        const images = track ? Array.from(track.children) : [];
+        const prev = slider.querySelector('.prev');
+        const next = slider.querySelector('.next');
+        let index = 0;
 
-  // Ejecutar al cargar
-  initModals();
-  // Si usas ViewTransitions de Astro, descomenta la siguiente línea:
-  // document.addEventListener('astro:after-swap', initModals);
+        if (!track || images.length === 0) return;
+
+        function update() {
+          // requestAnimationFrame para máxima suavidad (60fps)
+          window.requestAnimationFrame(() => {
+            track.style.transform = `translateX(-${index * 100}%)`;
+          });
+        }
+
+        prev?.addEventListener('click', () => {
+          index = (index - 1 + images.length) % images.length;
+          update();
+        });
+
+        next?.addEventListener('click', () => {
+          index = (index + 1) % images.length;
+          update();
+        });
+      });
+    };
+
+    // Corremos la función
+    initModals();
+
+    // Si usas ViewTransitions de Astro, esto es vital para que no se rompa al navegar
+    document.addEventListener('astro:after-swap', initModals);
+  })();
 </script>

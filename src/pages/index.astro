@@ -8,13 +8,18 @@ import '../styles/global.css'
 import { Image } from 'astro:assets';
 import bgImage from '../assets/windows_vista_90.webp';
 ---
+
+
+
 <html lang="es">
   <head>
     <meta charset="utf-8" />
-
+ <link rel="preload" href="/fonts/Inter-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <meta name="viewport" content="width=device-width" />
-    <title>Mi Portfolio</title>
+    <title>Javier Alzú Portfolio</title>
   </head>
+
   <body>
    <div class="bg-container">
     <Image 
@@ -26,7 +31,7 @@ import bgImage from '../assets/windows_vista_90.webp';
     />
   </div>
 
-    <div class="parent">    
+    <main class="parent">    
       <div class="projects"><Projects /></div>
       <div class="about-me"><AboutMe /></div>
       <div class="right-column">
@@ -34,7 +39,7 @@ import bgImage from '../assets/windows_vista_90.webp';
         <div class="contact"><Contact /></div>
       </div>
       <div class="tech-stack"><TechStack /></div>
-    </div>
+    </main>
   </body>
 </html>
 
@@ -77,7 +82,6 @@ import bgImage from '../assets/windows_vista_90.webp';
     grid-column-gap: 20px;
     grid-row-gap: 20px;
     width: 100%;
-    /* max-width: 1700px; */
     height: 90vh;
   }
 
@@ -171,15 +175,13 @@ import bgImage from '../assets/windows_vista_90.webp';
     .about-me { grid-area: 1 / 1 / 2 / 3; }
   .projects { grid-area: 2 / 1 / 3 / 2; }
   
-  /* Aquí está el truco */
   .right-column {
-    display: flex;       /* Cambiamos de contents a flex */
+    display: flex;       
     flex-direction: column; 
-    gap: 15px;           /* El espacio que vos quieras entre foto y contacto */
-    grid-area: 2 / 2 / 3 / 3; /* Ocupa el lugar al lado de proyectos */
+    gap: 15px;          
+    grid-area: 2 / 2 / 3 / 3; */
   }
 
-  /* Reseteamos los grid-areas individuales porque ahora manda el padre */
   .picture, .contact { grid-area: auto; }
 
   .tech-stack { grid-area: 3 / 1 / 4 / 3; }
@@ -193,13 +195,13 @@ import bgImage from '../assets/windows_vista_90.webp';
      ============================================ */
   @media (max-width: 768px) {
     body {
-      padding: 10px; /* Reducimos el padding para ganar espacio */
-      display: block; /* Quitamos el flex del body para que el scroll sea natural */
+      padding: 10px;
+      display: block; 
     }
 
     .parent {
       display: grid;
-      grid-template-columns: 100%; /* Una sola columna real */
+      grid-template-columns: 100%; 
       grid-template-rows: auto;
       gap: 20px; 
       height: auto;
@@ -208,7 +210,6 @@ import bgImage from '../assets/windows_vista_90.webp';
       padding: 0;
     }
 
-    /* Clave: para que los hijos ignoren el contenedor intermedio */
     .right-column {
       display: contents; 
     }
@@ -216,12 +217,11 @@ import bgImage from '../assets/windows_vista_90.webp';
     .about-me, .projects, .picture, .tech-stack, .contact {
       width: 100% !important;
       max-width: 100% !important;
-      grid-area: auto !important; /* Resetea cualquier grid-area de tablet */
+      grid-area: auto !important; 
       margin: 0;
       box-sizing: border-box;
     }
 
-    /* Definimos el orden exacto en la grilla */
     .about-me { order: 1; }
     .projects { order: 2; min-height: 400px; }
     .picture  { order: 3; height: 250px; }
@@ -229,38 +229,33 @@ import bgImage from '../assets/windows_vista_90.webp';
     .contact  { order: 5; }
   }
 
-  /* ============================================
-     MOBILE PEQUEÑO (hasta 480px)
-     ============================================ */
  /* ============================================
       MOBILE PEQUEÑO (hasta 480px)
      ============================================ */
   @media (max-width: 480px) {
     body {
-      padding: 10px; /* Evita que el body apriete el contenido */
+      padding: 10px; 
       margin: 0;
     }
 
     .parent {
-      /* Bajamos el gap porque 42px es demasiado y te quita espacio para el contenido */
       gap: 25px; 
       display: flex;
       flex-direction: column;
     }
 
     .projects {
-      /* Quitamos cualquier restricción de altura para que el contenido la estire */
+   
       height: auto !important;
-      min-height: 500px; /* Le damos aire para que se vean las cards */
+      min-height: 500px; 
       width: 100% !important;
     }
 
     .picture {
-      height: 200px !important; /* Altura fija para la foto */
+      height: 200px !important;
       max-height: none;
     }
 
-    /* Aseguramos que nada se salga por la derecha */
     * {
       max-width: 100vw;
       box-sizing: border-box;

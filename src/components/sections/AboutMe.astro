@@ -29,25 +29,28 @@ const hoverText = "Gracias por pasarte. No te olvides de ver mis proyectos!";
     </div>
 </Card>
 
-<script>
-    const el = document.getElementById('decrypt-text');
-    const textSpan = el?.querySelector('.text-content');
-    const flag = el?.querySelector('.flag');
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
-    let interval: any = null;
 
-    const animate = (targetText: string, isHovering: boolean) => {
+<script is:inline>
+  (function() {
+    const el = document.getElementById('decrypt-text');
+    if (!el) return;
+
+    const textSpan = el.querySelector('.text-content');
+    const flag = el.querySelector('.flag');
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+    let interval = null;
+
+    const animate = (targetText, isHovering) => {
         let iteration = 0;
         clearInterval(interval);
         
-        // Manejo de la bandera
-        if (flag instanceof HTMLElement) {
+        if (flag) {
             flag.style.opacity = isHovering ? "0" : "1";
             flag.style.display = isHovering ? "none" : "inline-block";
         }
 
         interval = setInterval(() => {
-            if (textSpan instanceof HTMLElement) {
+            if (textSpan) {
                 textSpan.innerText = targetText.split("")
                     .map((char, index) => {
                         if(index < iteration) return targetText[index];
@@ -61,8 +64,9 @@ const hoverText = "Gracias por pasarte. No te olvides de ver mis proyectos!";
         }, 18);
     };
 
-    el?.addEventListener('mouseenter', () => animate(el.dataset.hover!, true));
-    el?.addEventListener('mouseleave', () => animate(el.dataset.original!, false));
+    el.addEventListener('mouseenter', () => animate(el.dataset.hover, true));
+    el.addEventListener('mouseleave', () => animate(el.dataset.original, false));
+  })();
 </script>
 
 <style>
@@ -102,7 +106,7 @@ const hoverText = "Gracias por pasarte. No te olvides de ver mis proyectos!";
     }
 
     .main-title {
-        font-size: 1.8rem;
+        font-size: 1.930rem;
         line-height: 1.3;
         margin-bottom: 0;
         margin-top: 0;
@@ -185,7 +189,7 @@ const hoverText = "Gracias por pasarte. No te olvides de ver mis proyectos!";
         font-size: 1.8rem;
     }
      .main-title {
-        font-size: 2rem;
+        font-size: 1.7rem;
     }
     .commitment {
         font-size: 1.2rem;
@@ -202,7 +206,6 @@ const hoverText = "Gracias por pasarte. No te olvides de ver mis proyectos!";
     }
     
     .subtitle {
-        
         font-size: .9rem;
     }
     .main-title {

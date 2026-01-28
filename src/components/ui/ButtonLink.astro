@@ -1,17 +1,85 @@
 ---
 import '../../styles/glass.css';
 import '../../styles/glassRetro.css';
-const { width, height, borderRadius = 28 } = Astro.props;
+
+interface Props {
+  href?: string;
+  width?: number;
+  height?: number;
+  borderRadius?: number;
+  target?: string;
+  class?: string;
+}
+
+const { 
+  href, 
+  width, 
+  height, 
+  borderRadius = 28, 
+  target = "_blank",
+  class: className 
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
 ---
 
-<button
-  class="buttonGlass glass-base"
-  style={`
-    ${width ? `width: ${width}px;` : ''}
-    ${height ? `height: ${height}px;` : ''}
-    ${borderRadius ? `border-radius: ${borderRadius}px;` : ''}
-  `}
+<Tag
+  href={href}
+  target={href ? target : undefined}
+  rel={href && target === "_blank" ? "noopener noreferrer" : undefined}
+  class:list={["buttonGlass", "glass-base", className]}
+  style={{
+    width: width ? `${width}px` : 'auto',
+    height: height ? `${height}px` : '48px', 
+    borderRadius: `${borderRadius}px`,
+  }}
 >
   <slot />
-</button>
+</Tag>
 
+<style>
+  .buttonGlass {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px; 
+    padding: 0 24px;
+    transition: all 0.1s ease-in-out; 
+    margin: 8px;
+    font-family: inherit;
+    font-size: 15px; 
+    user-select: none;
+  }
+
+  .buttonGlass:hover {
+    filter: brightness(1.2);
+  }
+
+  .buttonGlass:active {
+    transform: scale(0.9); 
+    filter: brightness(0.9);
+  }
+
+  .buttonGlass :global(svg) {
+    flex-shrink: 0;
+    width: 23px; 
+    height: 23px;
+    transition: transform 0.1s ease;
+  }
+
+  /* ============================================
+     RESPONSIVE (MOBILE)
+  ============================================ */
+  @media (max-width: 480px) {
+    .buttonGlass {
+      width: 180px !important; 
+      height: 50px !important; 
+      font-size: 17px;
+    }
+
+    .buttonGlass :global(svg) {
+      width: 30px; 
+      height: 30px;
+    }
+  }
+</style>

@@ -2,7 +2,7 @@
 import '../../styles/glassRetro.css';
 import Badge from './Badge.astro';
 import ButtonPill from './ButtonPill.astro';
-import ProjectModal from './ProjectModal.astro'; // Importamos el nuevo componente
+import ProjectModal from './ProjectModal.astro';
 
 interface Props {
   title: string;
@@ -79,7 +79,9 @@ const uniqueId = `modal-${title.toLowerCase().replace(/\s+/g, '-')}`;
 }
 
 
-
+/* ============================================
+   small desktop
+   ============================================ */
 
 
 @media (max-width: 1522px) {
@@ -95,8 +97,6 @@ const uniqueId = `modal-${title.toLowerCase().replace(/\s+/g, '-')}`;
     padding: .8rem;
   }
 }
-
-
 
 
 /* ============================================
