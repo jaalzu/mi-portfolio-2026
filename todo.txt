@@ -1,8 +1,8 @@
 pasar todo a la raíz listo
 subir a GitHub pages listo
-arreglar elproject section en mobile
+arreglar elproject section en mobile listo
 
-arreglar eso de que todo es clickeable no se pq.
+arreglar eso de que todo es clickeable no se pq. listo
 mejorar rendimiento
 mejorar accesibilidad
 mejorar seo 

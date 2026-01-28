@@ -3,7 +3,13 @@ import Card from '../ui/Card.astro';
 ---
 
 <Card>
-  <img src="/catcat.png" alt="Mi foto" class="full-img" />
+  <img 
+    src="/catcat.webp" 
+    alt="Mi foto" 
+    class="full-img" 
+    loading="eager" 
+    fetchpriority="high" 
+  />
 </Card>
 
 <style>

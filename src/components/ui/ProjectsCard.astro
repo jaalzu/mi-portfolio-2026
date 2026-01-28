@@ -83,10 +83,13 @@ const uniqueId = `modal-${title.toLowerCase().replace(/\s+/g, '-')}`;
 </button>
 
     <div class="slider-track">
-      {projectInfo.images.map(img => (
-        <img src={img} alt={`Imagen de ${title}`} />
-      ))}
-    </div>
+  {projectInfo.images.map(img => (
+    <img 
+      src={img} 
+      alt={`Imagen de ${title}`} 
+      loading="lazy"   decoding="async" />
+  ))}
+</div>
 
     <button class="slider-btn next" aria-label="Siguiente">
   <svg viewBox="0 0 24 24" width="20" height="20">
