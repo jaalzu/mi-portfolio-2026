@@ -1,0 +1,91 @@
+---
+import { Image } from 'astro:assets';
+import bgImage from '../assets/windows_7_194.webp';
+import RetroAboutMe from '../components/sections/RetroAboutMe.astro';
+import RetroProjects from '../components/sections/RetroProjects.astro';
+import RetroTechStack from '../components/sections/RetroTechStack.astro';
+import RetroContact from '../components/sections/RetroContact.astro';
+import '7.css/dist/7.css';
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Javier Alzú · Retro</title>
+  </head>
+
+  <body>
+
+    <div class="bg-container">
+      <Image
+        src={bgImage}
+        alt="Fondo Windows"
+        quality="80"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+
+    <main class="desktop">
+      <div class="win about-win"><RetroAboutMe /></div>
+      <div class="win projects-win"><RetroProjects /></div>
+      <div class="win tech-win"><RetroTechStack /></div>
+      <div class="win contact-win"><RetroContact /></div>
+    </main>
+
+  </body>
+</html>
+
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    color: #000;
+  }
+
+  .bg-container {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+  .bg-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .desktop {
+    padding: 24px;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 16px;
+    align-items: start;
+  }
+
+  .about-win    { grid-area: 1 / 1 / 2 / 2; }
+  .projects-win { grid-area: 1 / 2 / 3 / 3; }
+  .tech-win { 
+  grid-area: 2 / 1 / 3 / 2;
+  align-self: start;
+  justify-self: start;
+}
+  .contact-win  { grid-area: 3 / 1 / 4 / 3; }
+
+  .win { display: flex; flex-direction: column; }
+
+  @media (max-width: 900px) {
+    .desktop { grid-template-columns: 1fr; }
+    .about-win, .projects-win, .tech-win, .contact-win { grid-area: auto; }
+  }
+
+  @media (max-width: 500px) {
+    .desktop { padding: 10px; gap: 10px; }
+  }
+</style>

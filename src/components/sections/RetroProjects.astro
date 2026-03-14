@@ -1,0 +1,73 @@
+---
+import WinGlass from '../ui/WinGlass.astro';
+
+const projects = [
+  {
+    title: "Courses WebApp",
+    description: "Plataforma e-Learning con autenticación, control de acceso y CRUD completo de cursos.",
+    projectUrl: "https://courses-demo.com",
+    codeUrl: "https://github.com/noname/weather",
+    tech: ["Next.js", "React", "Supabase", "TypeScript", "Tailwind"],
+  },
+  {
+    title: "RealTime Colors",
+    description: "Creación y visualización de paletas de colores en tiempo real con estado global.",
+    projectUrl: "https://courses-demo.com",
+    codeUrl: "https://github.com/noname/todo",
+    tech: ["Astro", "React", "TypeScript", "Tailwind"],
+  },
+  {
+    title: "Portfolio 2025",
+    description: "Dashboard de criptomonedas con datos en tiempo real y gestión de estado optimizada.",
+    projectUrl: "https://courses-demo.com",
+    codeUrl: "https://github.com/noname/portfolio",
+    tech: ["Next.js", "React", "TanStack Query", "Axios", "TypeScript"],
+  },
+];
+---
+
+<WinGlass title="Proyectos" color="#296b7e">
+  {projects.map((p, i) => (
+    <>
+      <div class="project-item">
+        <div class="project-header">
+          <strong>{p.title}</strong>
+          <div class="project-links">
+            <a href={p.projectUrl} target="_blank"><button>Demo</button></a>
+            <a href={p.codeUrl} target="_blank"><button>Código</button></a>
+          </div>
+        </div>
+        <p>{p.description}</p>
+        <div class="tech-badges">
+          {p.tech.map(t => <span class="badge">{t}</span>)}
+        </div>
+      </div>
+      {i < projects.length - 1 && <hr />}
+    </>
+  ))}
+</WinGlass>
+
+<style>
+  .project-item { margin-bottom: 4px; }
+  .project-item p { margin: 4px 0; font-size: .9rem; color: #000; }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .project-links { display: flex; gap: 6px; }
+  .project-links a { text-decoration: none; }
+
+  .tech-badges { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+  .badge {
+    font-size: 11px;
+    padding: 2px 7px;
+    background: #dde8f8;
+    border-radius: 2px;
+    color: #000;
+    font-weight: 600;
+  }
+</style>

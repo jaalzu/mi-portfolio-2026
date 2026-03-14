@@ -1,0 +1,28 @@
+---
+import WinGlass from '../ui/WinGlass.astro';
+---
+
+<WinGlass title="Contacto">
+  <p>¿Tenés algún proyecto en mente? Hablemos.</p>
+  <div class="contact-links">
+    <a href="mailto:javieralzuu@gmail.com">
+      <button class="default">✉ Email</button>
+    </a>
+    <a href="https://github.com/javieralzu" target="_blank">
+      <button>GitHub</button>
+    </a>
+    <a href="https://linkedin.com/in/javieralzu" target="_blank">
+      <button>LinkedIn</button>
+    </a>
+  </div>
+</WinGlass>
+
+<style>
+  .contact-links {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .contact-links a { text-decoration: none; }
+</style>
