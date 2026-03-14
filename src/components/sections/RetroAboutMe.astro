@@ -1,11 +1,11 @@
 ---
 import WinGlass from '../ui/WinGlass.astro';
----
 
-<WinGlass title="Sobre mí">
+---
+<WinGlass title="Sobre mí"  color="var(--win-about)" >
   <div class="about-body">
     <div class="win picture-win">
-      <WinGlass noControls noPadding>
+      <WinGlass noControls noPadding  >
         <img src="/src/assets/catcat.webp" alt="Foto" class="profile-img" />
         <div slot="status-bar" class="status-bar"></div>
       </WinGlass>
@@ -13,7 +13,7 @@ import WinGlass from '../ui/WinGlass.astro';
     <div class="about-text">
       <h2>Hola! Soy Javier A.</h2>
       <p class="subtitle">
-          <span class="text-content">25 años · Chaco, Argentina</span>
+          <span class="text-content">25 años - Chaco, Argentina</span>
           <img src="/ar.svg" alt="Argentina" class="flag" />
         </span>
       </p>
@@ -29,6 +29,7 @@ import WinGlass from '../ui/WinGlass.astro';
     display: flex;
     gap: 26px;
     align-items: flex-start;
+    margin-block: .8rem;
   }
 
   .picture-win .profile-img {
@@ -38,19 +39,16 @@ import WinGlass from '../ui/WinGlass.astro';
     display: block;
   }
 
-  .about-text h2 { margin: 0 0 -4px; font-size: 1.4rem; }
-  .about-text p  { margin: 0 0 16px; font-size: 1.4rem; font-weight: bold; 
-    line-height: 1.3; }
+
+  .about-text h2 { margin: 0 0 -4px; font-size: 1.3rem; font-weight: 600}
+  .about-text p  { margin: 0 0 16px; font-size: 1.250rem; font-weight: 700; 
+    line-height: 1.250; }
 .about-text span{
+    font-weight: 400;
     font-size: .950rem;
 }
-  .decrypt-text {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-  }
-  .flag { width: 16px; height: auto; }
+
+  .flag { width: 18px; height: auto; }
 
   @media (max-width: 500px) {
     .about-body { flex-direction: column; }

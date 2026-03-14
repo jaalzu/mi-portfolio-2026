@@ -22,7 +22,7 @@ const techs = [
 ];
 ---
 
-<WinGlass title="Tech Stack">
+<WinGlass title="Tech Stack" noControls transparent>
   <div class="tech-grid">
     {techs.map(tech => (
   <div class="tech-item">
@@ -37,7 +37,8 @@ const techs = [
 .tech-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  padding: .6rem;
+  padding: .5rem;
+  margin-block: .4rem;
   gap: 15px 18px;
 }
   .tech-item {
