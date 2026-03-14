@@ -13,12 +13,6 @@ import WinGlass from '../ui/WinGlass.astro';
     <div class="about-text">
       <h2>Hola! Soy Javier A.</h2>
       <p class="subtitle">
-        <span
-          id="decrypt-text"
-          class="decrypt-text"
-          data-original="25 años · Chaco, Argentina"
-          data-hover="Gracias por pasarte. No te olvides de ver mis proyectos!"
-        >
           <span class="text-content">25 años · Chaco, Argentina</span>
           <img src="/ar.svg" alt="Argentina" class="flag" />
         </span>
@@ -28,57 +22,28 @@ import WinGlass from '../ui/WinGlass.astro';
   </div>
 </WinGlass>
 
-<script is:inline>
-  (function() {
-    const el = document.getElementById('decrypt-text');
-    if (!el) return;
-    const textSpan = el.querySelector('.text-content');
-    const flag = el.querySelector('.flag');
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
-    let interval = null;
 
-    const animate = (targetText, isHovering) => {
-      let iteration = 0;
-      clearInterval(interval);
-      if (flag) {
-        flag.style.opacity = isHovering ? "0" : "1";
-        flag.style.display = isHovering ? "none" : "inline-block";
-      }
-      interval = setInterval(() => {
-        if (textSpan) {
-          textSpan.innerText = targetText.split("")
-            .map((char, index) => {
-              if (index < iteration) return targetText[index];
-              return chars[Math.floor(Math.random() * chars.length)];
-            }).join("");
-        }
-        if (iteration >= targetText.length) clearInterval(interval);
-        iteration += 1;
-      }, 18);
-    };
-
-    el.addEventListener('mouseenter', () => animate(el.dataset.hover, true));
-    el.addEventListener('mouseleave', () => animate(el.dataset.original, false));
-  })();
-</script>
 
 <style>
   .about-body {
     display: flex;
-    gap: 16px;
+    gap: 26px;
     align-items: flex-start;
   }
 
   .picture-win .profile-img {
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
     object-fit: cover;
     display: block;
   }
 
-  .about-text h2 { margin: 0 0 4px; font-size: 1.1rem; }
-  .about-text p  { margin: 0 0 8px; font-size: 1.2rem; font-weight: bold; line-height: 1.3; }
-
+  .about-text h2 { margin: 0 0 -4px; font-size: 1.4rem; }
+  .about-text p  { margin: 0 0 16px; font-size: 1.4rem; font-weight: bold; 
+    line-height: 1.3; }
+.about-text span{
+    font-size: .950rem;
+}
   .decrypt-text {
     display: inline-flex;
     align-items: center;
