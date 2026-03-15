@@ -1,0 +1,264 @@
+---
+import { Image } from 'astro:assets';
+import bgImage from '../assets/city.webp';
+import RetroAboutMe from '../components/sections/RetroAboutMe.astro';
+import RetroTechStack from '../components/sections/RetroTechStack.astro';
+import RetroContact from '../components/sections/RetroContact.astro';
+import RetroInfo from '../components/sections/RetroInfo.astro';
+import RetroProjectCardTabs from '../components/sections/RetroProjectCardTabs.astro';
+import '../styles/winxp.css';
+
+---
+
+<html lang="es" data-theme="xp">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Javier Alzú · Retro XP</title>
+  </head>
+
+  <body>
+
+    <div class="bg-container">
+      <Image
+        src={bgImage}
+        alt="Fondo Windows"
+        quality="100"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+
+    <a href="/" id="theme-switcher" role="button">Cambiar a Win 7</a>
+
+    <main class="desktop">
+    <div class="win" id="win-about" style="top: 24px; left: 84px; width: 980px;">
+  <RetroAboutMe xp />
+</div>
+      <div class="win" id="win-info" style="top: 315px; left: 104px; width: 400px;">
+        <RetroInfo xp/>
+      </div>
+      <div class="win" id="win-p1" style="top: 20px; left: 1200px; width: 500px;">
+        <RetroProjectCardTabs xp
+          title="Proyectos"
+          projectTitle="Courses WebApp"
+          description="Plataforma e-Learning completa con autenticación, roles de usuario, control de acceso, gestión de videos y administración CRUD de cursos y lecciones."
+          projectUrl="https://courses-demo.com"
+          codeUrl="https://github.com/noname/weather"
+          tech={["Next.js", "React", "Supabase", "TypeScript", "Tailwind"]}
+          techDetail={{
+            "Next.js": "App Router, SSR y Server Actions",
+            "React": "Componentes y hooks personalizados",
+            "Supabase": "Auth, base de datos y storage de videos",
+            "TypeScript": "Tipado estricto en todo el proyecto",
+            "Tailwind": "Diseño responsivo y utilidades CSS"
+          }}
+          images={["/projects/course/home.webp", "/projects/course/form.webp", "/projects/course/lesson.webp"]}
+          origin="El proyecto surgió de la necesidad de crear una plataforma educativa moderna que permitiera gestionar cursos de manera eficiente, con control de acceso granular para estudiantes e instructores."
+          color="var(--win-projects)"
+        />
+      </div>
+      <div class="win" id="win-p2" style="top: 300px; left: 1200px; width: 500px;">
+        <RetroProjectCardTabs xp
+          title="Proyectos"
+          projectTitle="PickYourColor"
+          description="Herramienta de diseño para crear y previsualizar paletas de colores en tiempo real. Los cambios se reflejan instantáneamente en toda la interfaz gracias al estado global reactivo."
+          projectUrl="https://pick-your-color-fi6u5v9bm-javier-alzus-projects.vercel.app/"
+          codeUrl="https://github.com/jaalzu/PickYourColor"
+          tech={["Astro", "React", "TypeScript", "Tailwind"]}
+          techDetail={{
+            "Astro": "Framework principal, generación estática",
+            "React": "Componentes interactivos con Zustand",
+            "TypeScript": "Tipado de colores y estado",
+            "Tailwind": "Configuración dinámica con CSS variables"
+          }}
+          images={["/projects/color/hero.webp","/projects/color/features.webp","/projects/color/comments.webp"]}
+          origin="Nació de la frustración de cambiar constantemente entre código y navegador al diseñar paletas. La idea era ver los cambios aplicados al instante en toda la interfaz."
+          color="var(--win-projects)"
+        />
+      </div>
+      <div class="win" id="win-p3" style="top: 600px; left: 1200px; width: 500px;">
+        <RetroProjectCardTabs xp
+          title="Proyectos"
+          projectTitle="RentaLibre"
+          description="Marketplace de compra y venta de artículos de segunda mano. Publicá lo que no usás, encontrá lo que buscás. Mensajería interna, filtros por categoría y ubicación, y gestión de publicaciones en tiempo real."
+          projectUrl="https://courses-demo.com"
+          codeUrl="https://github.com/noname/portfolio"
+          tech={["Next.js", "React", "Supabase", "TypeScript", "Tailwind"]}
+          techDetail={{
+            "Next.js": "App Router, SSR y Server Actions",
+            "React": "UI de publicaciones y mensajería",
+            "Supabase": "Auth, base de datos y storage de imágenes",
+            "TypeScript": "Tipado estricto en todo el proyecto",
+            "Tailwind": "Diseño responsivo y utilidades CSS"
+          }}
+          images={["/projects/rentalLibre/home.webp"]}
+          origin="Surgió de querer construir algo útil y real — un marketplace donde la gente pueda dar segunda vida a lo que ya no usa. Inspirado en Wallapop pero pensado para el mercado local argentino."
+          color="var(--win-projects)"
+        />
+      </div>
+      <div class="win" id="win-tech" style="top: 530px; left: 80px; width: 550px;">
+        <RetroTechStack xp />
+      </div>
+      <div class="win" id="win-contact" style="top: 320px; left: 710px; width: 420px;">
+        <RetroContact xp />
+      </div>
+    </main>
+
+  </body>
+</html>
+
+<script is:inline>
+  document.querySelectorAll('.win').forEach(win => {
+    let dragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    win.addEventListener('mousedown', (e) => {
+      if (!e.target.closest('.title-bar')) return;
+      dragging = true;
+      offsetX = e.clientX - win.offsetLeft;
+      offsetY = e.clientY - win.offsetTop;
+      document.querySelectorAll('.win').forEach(w => w.style.zIndex = 1);
+      win.style.zIndex = 10;
+      e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (!dragging) return;
+      win.style.left = (e.clientX - offsetX) + 'px';
+      win.style.top  = (e.clientY - offsetY) + 'px';
+    });
+
+    document.addEventListener('mouseup', () => { dragging = false; });
+  });
+
+  document.querySelectorAll('[role="tablist"]').forEach(tablist => {
+    const tabs = tablist.querySelectorAll('[role="tab"]');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => {
+          t.setAttribute('aria-selected', 'false');
+          document.getElementById(t.getAttribute('aria-controls'))?.setAttribute('hidden', '');
+        });
+        tab.setAttribute('aria-selected', 'true');
+        document.getElementById(tab.getAttribute('aria-controls'))?.removeAttribute('hidden');
+      });
+    });
+  });
+
+  document.querySelectorAll('[id$="-img"]').forEach(img => {
+    const base = img.id.replace('-img', '');
+    const images = img.getAttribute('data-images')?.split(',') ?? [];
+    const counter = document.getElementById(`${base}-counter`);
+    let current = 0;
+
+    document.getElementById(`${base}-prev`)?.addEventListener('click', () => {
+      current = (current - 1 + images.length) % images.length;
+      img.src = images[current];
+      if (counter) counter.textContent = `${current + 1} / ${images.length}`;
+    });
+
+    document.getElementById(`${base}-next`)?.addEventListener('click', () => {
+      current = (current + 1) % images.length;
+      img.src = images[current];
+      if (counter) counter.textContent = `${current + 1} / ${images.length}`;
+    });
+  });
+</script>
+
+<style is:global>
+  * { box-sizing: border-box; }
+
+  a, button, [role="button"] {
+    cursor: url('/cursor/win7cur.cur'), pointer !important;
+  }
+
+    [data-theme="xp"] a[role="button"] {
+    display: inline-block;
+    padding: 4px 12px;
+    background: #ECE9D8;
+    border: 2px solid;
+    border-color: #fff #808080 #808080 #fff;
+    cursor: pointer;
+    font-size: 11px;
+    text-decoration: none;
+    color: #000;
+  }
+
+  [data-theme="xp"] a[role="button"]:active {
+    border-color: #808080 #fff #fff #808080;
+  }
+
+  :root {
+    --win-about:    #40f25549;
+    --win-projects: #e75cff4f;
+    --win-tech:     #c28e4e55;
+    --win-contact:  #04fae14b;
+    --win-info:     #ff071c44;
+  }
+
+  #theme-switcher {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 100;
+    text-decoration: none;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    color: #000;
+    overflow: hidden;
+  }
+
+  .bg-container {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .bg-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+  }
+
+  .desktop {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .win {
+    position: absolute;
+    cursor: default;
+    z-index: 1;
+  }
+
+  .win .title-bar {
+    cursor: move;
+  }
+
+  [data-theme="xp"] .background {
+    display: contents;
+  }
+
+[data-theme="xp"] .window.glass {
+  background: none !important;
+  --w7-w-bg: transparent !important;
+}
+
+[data-theme="xp"] .window[style] {
+  background: unset !important;
+  --w7-w-bg: unset !important;
+}
+
+  [data-theme="xp"] .window-body {
+    background: #ECE9D8 !important;
+  }
+</style>

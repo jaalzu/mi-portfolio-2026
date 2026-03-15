@@ -12,7 +12,8 @@
   "dependencies": {
     "@iconify-json/devicon": "^1.2.50",
     "7.css": "^0.21.1",
-    "astro-icon": "^1.1.5"
+    "astro-icon": "^1.1.5",
+    "xp.css": "^0.2.6"
   },
   "devDependencies": {
     "astro": "^5.16.15"

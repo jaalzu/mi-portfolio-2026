@@ -1,8 +1,10 @@
 ---
 import WinGlass from '../ui/WinGlass.astro';
+const { xp = false } = Astro.props;
+
 ---
 
-<WinGlass title="Acerca" noControls color="var(--win-info)">
+<WinGlass title="Acerca" noControls color="var(--win-info)" {xp}>
   <ul class="info-list">
     <li> Autodidacta (el camino difícil)</li>
     <li> Inglés - Alto</li>

@@ -1,10 +1,10 @@
 ---
-const { title, noControls = false, noPadding = false, color, transparent = false } = Astro.props;
+const { title, noControls = false, noPadding = false, color, xp = false } = Astro.props;
 ---
 
-<div class="background">
-<div class="window glass active" style={color ? `--w7-w-bg: ${color} !important; background: ${color} !important;` : ''}>
-      <div class="title-bar" >
+{xp ? (
+  <div class="window active">
+    <div class="title-bar">
       <div class="title-bar-text">{title}</div>
       {!noControls && (
         <div class="title-bar-controls">
@@ -20,5 +20,24 @@ const { title, noControls = false, noPadding = false, color, transparent = false
     <slot name="status-bar" />
     <slot name="footer" />
   </div>
-</div>
-
+) : (
+  <div class="background">
+    <div class="window glass active" style={color ? `--w7-w-bg: ${color} !important; background: ${color} !important;` : ''}>
+      <div class="title-bar">
+        <div class="title-bar-text">{title}</div>
+        {!noControls && (
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        )}
+      </div>
+      <div class={noPadding ? "window-body" : "window-body has-space"}>
+        <slot />
+      </div>
+      <slot name="status-bar" />
+      <slot name="footer" />
+    </div>
+  </div>
+)}

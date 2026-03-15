@@ -1,8 +1,9 @@
 ---
 import WinGlass from '../ui/WinGlass.astro';
+const { xp = false } = Astro.props;
 
 ---
-<WinGlass title="Sobre mí"  color="var(--win-about)" >
+<WinGlass title="Sobre mí" color="var(--win-about)" {xp}>
   <div class="about-body">
     <div class="win picture-win">
       <WinGlass noControls noPadding  >

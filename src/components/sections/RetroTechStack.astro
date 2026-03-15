@@ -1,5 +1,7 @@
 ---
 import WinGlass from '../ui/WinGlass.astro';
+const { xp = false } = Astro.props;
+
 const techs = [
   { name: "HTML5",      icon: "/icons/html5.svg" },
   { name: "CSS3",       icon: "/icons/css.svg" },
@@ -22,7 +24,7 @@ const techs = [
 ];
 ---
 
-<WinGlass title="Tech Stack" noControls transparent>
+<WinGlass title="Tech Stack" noControls transparent xp>
   <div class="tech-grid">
     {techs.map(tech => (
   <div class="tech-item">

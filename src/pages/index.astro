@@ -1,263 +1,268 @@
 ---
-import Projects from '../components/sections/Projects.astro';
-import AboutMe from '../components/sections/AboutMe.astro';
-import Picture from '../components/sections/Picture.astro';
-import Contact from '../components/sections/Contact.astro';
-import TechStack from '../components/sections/TechStack.astro';
-import '../styles/global.css'
 import { Image } from 'astro:assets';
+import bg1 from '../assets/city.webp';
+import bg2 from '../assets/windows_vista_90hd.webp';
+import bg3 from '../assets/windows_7_194.webp';
+import RetroAboutMe from '../components/sections/RetroAboutMe.astro';
+
+import RetroTechStack from '../components/sections/RetroTechStack.astro';
+import RetroContact from '../components/sections/RetroContact.astro';
+import RetroInfo from '../components/sections/RetroInfo.astro';
+import RetroProjectCardTabs from '../components/sections/RetroProjectCardTabs.astro';
+
+import '../styles/win7.css';
+
 ---
-
-
 
 <html lang="es">
   <head>
     <meta charset="utf-8" />
- <link rel="preload" href="/fonts/Inter-Bold.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <meta name="viewport" content="width=device-width" />
-    <title>Javier Alzú Portfolio</title>
+    <title>Javier Alzú · Retro</title>
   </head>
 
   <body>
-   <div class="bg-container">
-    <Image 
-      src={bgImage} 
-      alt="Fondo Windows Vista" 
-      quality="80" 
-      loading="eager"
-      fetchpriority="high"
-    />
-  </div>
 
-    <main class="parent">    
-      <div class="projects"><Projects /></div>
-      <div class="about-me"><AboutMe /></div>
-      <div class="right-column">
-        <div class="picture"><Picture /></div>
-        <div class="contact"><Contact /></div>
+    <div class="bg-container">
+      <Image
+        src={bg1}
+        alt="Fondo Windows"
+        quality="100"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+<a href="/retro-xp" id="theme-switcher" role="button">Cambiar a XP</a>
+<button id="bg-switcher">🖼 Fondo</button>
+
+</button>
+    <main class="desktop">
+      <div class="win" id="win-about" style="top: 24px; left: 84px; width: 980px;">
+        <RetroAboutMe />
       </div>
-      <div class="tech-stack"><TechStack /></div>
+      <div class="win" id="win-info" style="top: 315px; left: 104px; width: 400px;">
+  <RetroInfo />
+</div>
+   <div class="win" id="win-p1" style="top: 20px; left: 1200px; width: 500px;">
+  <RetroProjectCardTabs
+    title="Proyectos"
+    projectTitle="Courses WebApp"
+    description="Plataforma e-Learning completa con autenticación, roles de usuario, control de acceso, gestión de videos y administración CRUD de cursos y lecciones."
+    projectUrl="https://courses-demo.com"
+    codeUrl="https://github.com/noname/weather"
+    tech={["Next.js", "React", "Supabase", "TypeScript", "Tailwind"]}
+    techDetail={{
+      "Next.js": "App Router, SSR y Server Actions",
+      "React": "Componentes y hooks personalizados",
+      "Supabase": "Auth, base de datos y storage de videos",
+      "TypeScript": "Tipado estricto en todo el proyecto",
+      "Tailwind": "Diseño responsivo y utilidades CSS"
+    }}
+    images={["/projects/course/home.webp", "/projects/course/form.webp", "/projects/course/lesson.webp"]}
+    origin="El proyecto surgió de la necesidad de crear una plataforma educativa moderna que permitiera gestionar cursos de manera eficiente, con control de acceso granular para estudiantes e instructores."
+    color="var(--win-projects)"
+  />
+</div>
+<div class="win" id="win-p2" style="top: 300px; left: 1200px; width: 500px;">
+  <RetroProjectCardTabs
+    title="Proyectos"
+    projectTitle="PickYourColor"
+    description="Herramienta de diseño para crear y previsualizar paletas de colores en tiempo real. Los cambios se reflejan instantáneamente en toda la interfaz gracias al estado global reactivo."
+    projectUrl="https://pick-your-color-fi6u5v9bm-javier-alzus-projects.vercel.app/"
+    codeUrl="https://github.com/jaalzu/PickYourColor"
+    tech={["Astro", "React", "TypeScript", "Tailwind"]}
+    techDetail={{
+      "Astro": "Framework principal, generación estática",
+      "React": "Componentes interactivos con Zustand",
+      "TypeScript": "Tipado de colores y estado",
+      "Tailwind": "Configuración dinámica con CSS variables"
+    }}
+    images={["/projects/color/hero.webp","/projects/color/features.webp","/projects/color/comments.webp"]}
+    origin="Nació de la frustración de cambiar constantemente entre código y navegador al diseñar paletas. La idea era ver los cambios aplicados al instante en toda la interfaz."
+    color="var(--win-projects)"
+  />
+</div>
+
+<div class="win" id="win-p3" style="top: 600px; left: 1200px; width: 500px;">
+  <RetroProjectCardTabs
+    title="Proyectos"
+    projectTitle="RentaLibre"
+    description="Marketplace de compra y venta de artículos de segunda mano. Publicá lo que no usás, encontrá lo que buscás. Mensajería interna, filtros por categoría y ubicación, y gestión de publicaciones en tiempo real."
+    projectUrl="https://courses-demo.com"
+    codeUrl="https://github.com/noname/portfolio"
+    tech={["Next.js", "React", "Supabase", "TypeScript", "Tailwind"]}
+    techDetail={{
+      "Next.js": "App Router, SSR y Server Actions",
+      "React": "UI de publicaciones y mensajería",
+      "Supabase": "Auth, base de datos y storage de imágenes",
+      "TypeScript": "Tipado estricto en todo el proyecto",
+      "Tailwind": "Diseño responsivo y utilidades CSS"
+    }}
+    images={["/projects/rentalLibre/home.webp"]}
+    origin="Surgió de querer construir algo útil y real — un marketplace donde la gente pueda dar segunda vida a lo que ya no usa. Inspirado en Wallapop pero pensado para el mercado local argentino."
+    color="var(--win-projects)"
+  />
+</div>
+      <div class="win" id="win-tech" style="top: 530px; left: 80px; width: 550px;">
+        <RetroTechStack />
+      </div>
+      <div class="win" id="win-contact" style="top: 320px; left: 710px; width: 420px;">
+        <RetroContact />
+      </div>
     </main>
+
   </body>
 </html>
 
+<script define:vars={{ bg1: bg1.src, bg2: bg2.src, bg3: bg3.src }}>
+
+  // ============================================
+  // DRAG & DROP — mover ventanas por la title bar
+  // ============================================
+ // UN solo listener global en vez de uno por ventana
+let dragging = null;
+let offsetX = 0;
+let offsetY = 0;
+
+document.querySelectorAll('.win').forEach(win => {
+  win.addEventListener('mousedown', (e) => {
+    if (!e.target.closest('.title-bar')) return;
+    dragging = win;
+    offsetX = e.clientX - win.offsetLeft;
+    offsetY = e.clientY - win.offsetTop;
+    document.querySelectorAll('.win').forEach(w => w.style.zIndex = 1);
+    win.style.zIndex = 10;
+    e.preventDefault();
+  });
+});
+
+document.addEventListener('mousemove', (e) => {
+  if (!dragging) return;
+  dragging.style.left = (e.clientX - offsetX) + 'px';
+  dragging.style.top  = (e.clientY - offsetY) + 'px';
+});
+
+document.addEventListener('mouseup', () => { dragging = null; });
+
+
+  // ============================================
+  // TABS — cambiar paneles dentro de las ventanas
+  // ============================================
+  document.querySelectorAll('[role="tablist"]').forEach(tablist => {
+    const tabs = tablist.querySelectorAll('[role="tab"]');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => {
+          t.setAttribute('aria-selected', 'false');
+          document.getElementById(t.getAttribute('aria-controls'))?.setAttribute('hidden', '');
+        });
+        tab.setAttribute('aria-selected', 'true');
+        document.getElementById(tab.getAttribute('aria-controls'))?.removeAttribute('hidden');
+      });
+    });
+  });
+
+
+  // ============================================
+  // SLIDER DE IMÁGENES — flechas prev/next por proyecto
+  // ============================================
+  document.querySelectorAll('[id$="-img"]').forEach(img => {
+    const base = img.id.replace('-img', '');
+    const images = img.getAttribute('data-images')?.split(',') ?? [];
+    const counter = document.getElementById(`${base}-counter`);
+    let current = 0;
+
+    document.getElementById(`${base}-prev`)?.addEventListener('click', () => {
+      current = (current - 1 + images.length) % images.length;
+      img.src = images[current];
+      if (counter) counter.textContent = `${current + 1} / ${images.length}`;
+    });
+
+    document.getElementById(`${base}-next`)?.addEventListener('click', () => {
+      current = (current + 1) % images.length;
+      img.src = images[current];
+      if (counter) counter.textContent = `${current + 1} / ${images.length}`;
+    });
+  });
+
+
+  // ============================================
+  // SWITCHER DE FONDO — ciclar entre imágenes de fondo
+  // ============================================
+  const bgs = [bg1, bg2, bg3];
+  let currentBg = 0;
+
+  document.getElementById('bg-switcher')?.addEventListener('click', () => {
+    currentBg = (currentBg + 1) % bgs.length;
+    document.querySelector('.bg-container img').src = bgs[currentBg];
+  });
+
+</script>
+
 <style>
-  body {
-    margin: 0;
-    padding: 0 40px;
-    box-sizing: border-box;
-    min-height: 100vh;
-    font-family: 'Inter', monospace;
-    color: var(--color-white-pure);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  * { box-sizing: border-box; 
+  }
+
+  #bg-switcher {
+  position: fixed;
+  top: 10px;
+  right: 160px;
+  z-index: 100;
+}
+
+  a, button, [role="button"] {
+  cursor: url('/cursor/win7cur.cur'), pointer !important;
+}
+
+    :root {
+    --win-about:    #40f25549;
+        --win-projects: #e75cff4f;
+    --win-tech:     #c28e4e55;
+    --win-contact:  #04fae14b;
+    --win-info:  #ff071c44;
   }
   
-  .right-column{
-    display: contents;
+#theme-switcher {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 100;
+}
+
+  body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    color: #000;
+    overflow: hidden;
   }
 
   .bg-container {
     position: fixed;
     inset: 0;
     z-index: -1;
-    pointer-events: none; 
+    pointer-events: none;
   }
   .bg-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center bottom;
   }
 
-  /* ============================================
-     DESKTOP (>1024px) - Layout original
-     ============================================ */
-  .parent {
-    display: grid;
-    grid-template-columns: 2.2fr 0.9fr 0.7fr 1fr; 
-    grid-template-rows: repeat(4, 1fr);
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
-    width: 100%;
-    height: 90vh;
+  .desktop {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
   }
 
-  .projects { grid-area: 1 / 3 / 5 / 5; }
-  .about-me { grid-area: 1 / 1 / 3 / 2; }
-  .picture { grid-area: 1 / 2 / 3 / 3; }
-  .contact { grid-area: 3 / 2 / 5 / 3; }
-  .tech-stack { grid-area: 3 / 1 / 5 / 1; }
-
-  .projects, .about-me, .picture, .contact, .tech-stack {
-    display: flex;
+  .win {
+    position: absolute;
+    cursor: default;
+    z-index: 1;
   }
 
-  .projects :global(.glass-card),
-  .about-me :global(.glass-card),
-  .picture :global(.glass-card),
-  .contact :global(.glass-card),
-  .tech-stack :global(.glass-card) {
-    width: 100%;
-    height: 100%;
-  }
-
-
-
-/* ============================================
-    DESKTOP MEDIANO (1025px - 1522px)
-   ============================================ */
-@media (max-width: 1522px) {
-  .parent {
-    grid-template-columns: 1.2fr 0.8fr; 
-    grid-template-rows: auto auto auto;
-    height: auto;
-    margin-block: 1rem;
-    gap: 20px;
-  }
-
-  .about-me { 
-    grid-area: 1 / 1 / 2 / 3; 
-  }
-
-  .projects { 
-    grid-area: 2 / 1 / 3 / 2; 
-  }
-
-  .tech-stack { 
-    grid-area: 2 / 2 / 3 / 3; 
-  }
-
-
-  .right-column {
-    grid-area: 3 / 1 / 4 / 3;
-    display: grid;
-    grid-template-columns: 0.6fr 1.4fr; 
-    gap: 20px;
-  }
-
-  .picture {
-    grid-area: auto;
-    width: 100%;
-    max-height: auto; 
-  }
-  
-  .contact {
-    grid-area: auto;
-    width: 100%;
-  }
-}
-
-  
-
-  
- 
- /* ============================================
-      TABLET (768px - 1024px)
-     ============================================ */
-  @media (max-width: 1024px) {
-    body {
-      padding: 20px;
-    }
-
-    .parent {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr; 
-      grid-template-rows: auto; 
-      align-items: start; 
-      height: auto;
-      gap: 15px;
-      width: 100%;
-    }
-
-    .about-me { grid-area: 1 / 1 / 2 / 3; }
-  .projects { grid-area: 2 / 1 / 3 / 2; }
-  
-  .right-column {
-    display: flex;       
-    flex-direction: column; 
-    gap: 15px;          
-    grid-area: 2 / 2 / 3 / 3; */
-  }
-
-  .picture, .contact { grid-area: auto; }
-
-  .tech-stack { grid-area: 3 / 1 / 4 / 3; }
-  }
-
-
-
-  
-/* ============================================
-      MOBILE (hasta 768px)
-     ============================================ */
-  @media (max-width: 768px) {
-    body {
-      padding: 10px;
-      display: block; 
-    }
-
-    .parent {
-      display: grid;
-      grid-template-columns: 100%; 
-      grid-template-rows: auto;
-      gap: 20px; 
-      height: auto;
-      width: 100%;
-      margin: 0 auto;
-      padding: 0;
-    }
-
-    .right-column {
-      display: contents; 
-    }
-
-    .about-me, .projects, .picture, .tech-stack, .contact {
-      width: 100% !important;
-      max-width: 100% !important;
-      grid-area: auto !important; 
-      margin: 0;
-      box-sizing: border-box;
-    }
-
-    .about-me { order: 1; }
-    .projects { order: 2; min-height: 400px; }
-    .picture  { order: 3; height: 250px; }
-    .tech-stack { order: 4; }
-    .contact  { order: 5; }
-  }
-
- /* ============================================
-      MOBILE PEQUEÑO (hasta 480px)
-     ============================================ */
-  @media (max-width: 480px) {
-    body {
-      padding: 10px; 
-      margin: 0;
-    }
-
-    .parent {
-      gap: 25px; 
-      display: flex;
-      flex-direction: column;
-    }
-
-    .projects {
-   
-      height: auto !important;
-      min-height: 500px; 
-      width: 100% !important;
-    }
-
-    .picture {
-      height: 200px !important;
-      max-height: none;
-    }
-
-    * {
-      max-width: 100vw;
-      box-sizing: border-box;
-    }
+  .win .title-bar {
+    cursor: move;
   }
 </style>

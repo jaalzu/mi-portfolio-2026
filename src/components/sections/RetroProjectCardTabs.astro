@@ -3,10 +3,12 @@ import WinGlass from '../ui/WinGlass.astro';
 
 const { title, projectTitle, description, projectUrl, codeUrl, tech, color, images, origin, techDetail } = Astro.props;
 const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
+const { xp = false } = Astro.props;
+
 ---
 
 <div class="project-card">
-<WinGlass title={title} color={color}>
+<WinGlass title={title} color={color} {xp}>
   <section class="tabs">
     <menu role="tablist">
       <button role="tab" aria-controls={`${id}-overview`} aria-selected="true">Overview</button>
