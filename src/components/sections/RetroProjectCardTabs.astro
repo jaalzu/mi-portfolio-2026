@@ -1,9 +1,9 @@
 ---
 import WinGlass from '../ui/WinGlass.astro';
 
-const { title, projectTitle, description, projectUrl, codeUrl, tech, color, images, origin, techDetail } = Astro.props;
+const { title, projectTitle, description, projectUrl, codeUrl, tech, color, images, origin, techDetail, xp = false } = Astro.props;
+
 const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
-const { xp = false } = Astro.props;
 
 ---
 
@@ -22,16 +22,23 @@ const { xp = false } = Astro.props;
       <p>{description}</p>
     </article>
 
-    <article role="tabpanel" id={`${id}-tech`} hidden>
-      <div class="tech-list">
-        {tech.map((t: string) => (
-          <div class="tech-row">
-            <span class="badge">{t}</span>
-            <span class="tech-use">{techDetail?.[t] ?? '—'}</span>
-          </div>
-        ))}
-      </div>
-    </article>
+  <article role="tabpanel" id={`${id}-tech`} hidden>
+  <ul class="tree-view has-container">
+    {Object.entries(techDetail ?? {}).map(([category, items]: [string, any]) => (
+      <li>
+        <details>
+          <summary>{category}</summary>
+          <ul>
+            {Array.isArray(items) 
+              ? items.map((item: string) => <li>{item}</li>)
+              : <li>{items}</li>
+            }
+          </ul>
+        </details>
+      </li>
+    ))}
+  </ul>
+</article>
 
 <article role="tabpanel" id={`${id}-images`} hidden>
  <div class="img-viewer">
