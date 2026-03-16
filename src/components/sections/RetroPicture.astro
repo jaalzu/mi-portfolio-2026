@@ -3,7 +3,7 @@ import WinGlass from '../ui/WinGlass.astro';
 const { xp = false } = Astro.props;
 ---
 
-<WinGlass noControls noPadding transparent xp={xp}>
+<WinGlass noControls noPadding color="var(--win-picture)" xp={xp} >
   <img src="/src/assets/catcat.webp" alt="Foto" class="profile-img" />
   <div slot="status-bar" class="status-bar">
   </div>

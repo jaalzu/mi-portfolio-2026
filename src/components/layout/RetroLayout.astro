@@ -49,14 +49,99 @@ const config = THEMES[theme];
       <div class="win" id="win-info" style="top: 315px; left: 244px; width: 400px;">
         <RetroInfo xp={config.noGlass} />
       </div>
-      <div class="win" id="win-p1" style="top: 20px; left: 1265px; width: 500px;">
+    
+      <div class="win" id="win-p2" style="top: 300px; left: 1265px; width: 500px;">
+        <RetroProjectCardTabs
+          xp={config.noGlass}
+          title="Proyectos"
+          projectTitle="PickYourColor"
+          description="Visualizador interactivo de paletas de color con toolbar para modificar colores en tiempo real. Los cambios se aplican instantáneamente sobre componentes de UI y las paletas se pueden compartir por URL."
+          projectUrl="https://pick-your-color-fi6u5v9bm-javier-alzus-projects.vercel.app/"
+          codeUrl="https://github.com/jaalzu/PickYourColor"
+          tech={["React", "Vite", "TypeScript", "Tailwind", "Zustand"]}
+          techDetail={{
+  "Core": [
+    "React 19 + Vite — SPA ultra rápida sin SSR",
+    "TypeScript — tipado estricto de colores y estado",
+    "Zustand — estado global de paleta reactivo",
+  ],
+  "UI": [
+    "Tailwind CSS v4 — estilos dinámicos por CSS variables",
+    "Radix UI — primitivos accesibles (Popover, Dialog, Switch)",
+    "react-colorful — color picker liviano y accesible",
+  ],
+  "Color Engine": [
+    "tinycolor2 — manipulación y validación de colores",
+    "Cálculo dinámico de contraste WCAG",
+    "Serialización de paleta en URL (?colors=...)",
+  ],
+  "Testing & Monitoring": [
+    "Vitest + Testing Library — unit tests",
+    "Playwright — tests end-to-end",
+    "Sentry — monitoreo de errores",
+  ],
+}}
+          images={["/projects/color/hero.webp","/projects/color/features.webp","/projects/color/comments.webp"]}
+          origin="Nació de la frustración de cambiar constantemente entre código y navegador al diseñar paletas. La idea era ver los cambios aplicados al instante en toda la interfaz."
+          color="var(--win-projects)"
+        />
+      </div>
+      <div class="win" id="win-p3" style="top: 20px; left: 1265px; width: 500px;">
+        <RetroProjectCardTabs
+          xp={config.noGlass}
+          title="Proyectos"
+          projectTitle="rentalibre"
+          description="Marketplace de segunda mano para alquilar y vender objetos entre personas. Mensajería en tiempo real, sistema de reviews mutuas y flujo completo de compra con estados y notificaciones."
+          projectUrl="https://courses-demo.com"
+          codeUrl="https://github.com/noname/portfolio"
+        tech={["Next.js 16", "Client State", "Supabase", "Arquitectura", "UI"]}
+
+techDetail={{
+ "Next.js 16": [
+  "App Router con Server / Client Components",
+  "Server Actions para mutaciones",
+   "Routing dinámico y condicional ",
+  "Middleware para protección de rutas",
+  "API Routes para uploads de imágenes",
+],
+  "Client State": [
+    "React — arquitectura de componentes",
+    "TanStack Query — caché, sincronización y notificaciones",
+    "React Hook Form + Zod — formularios y validación",
+  ],
+  "Supabase": [
+    "Auth — email/password + OAuth (Google)",
+    "PostgreSQL con RLS en todas las tablas",
+    "Realtime — mensajería sin polling",
+    "Storage — fotos de items y avatars",
+    "Triggers — perfil automático y sistema de rating por reseñas",
+    
+  ],
+"Arquitectura": [
+  "Feature-Sliced Design (FSD)",
+  "Seguridad multi-capa: Middleware + RLS + Server Actions",
+  "Separación clara de capas: UI, estado y lógica de negocio",
+  "Sistema de roles (autorización) y UI condicional",
+  "Rate limiting por acción",
+],
+  "UI": [
+    "Chakra UI v3 — sistema de diseño y componentes",
+    "boxicons — Iconografía",
+  ],
+}}
+          images={["/projects/color/hero.webp"]}
+          origin="Surgió de querer construir algo útil y real — un marketplace donde la gente pueda dar segunda vida a lo que ya no usa. Inspirado en Wallapop pero pensado para el mercado local argentino."
+          color="var(--win-projects)"
+        />
+      </div>
+        <div class="win" id="win-p1" style="top: 610px; left: 1265px; width: 500px;">
         <RetroProjectCardTabs
           xp={config.noGlass}
           title="Proyectos"
           projectTitle="Courses WebApp"
           description="Plataforma e-Learning con acceso por roles, gestión de cursos y lecciones, progreso de alumnos en tiempo real y foro de comunidad por curso."
-          projectUrl="https://courses-demo.com"
-          codeUrl="https://github.com/noname/weather"
+          projectUrl="https://courses-webapp-delta.vercel.app/login"
+          codeUrl="https://github.com/jaalzu/courses-webapp"
     tech={[
   "Next.js 16",
   "Client State",
@@ -110,63 +195,9 @@ techDetail={{
           color="var(--win-projects)"
         />
       </div>
-      <div class="win" id="win-p2" style="top: 300px; left: 1265px; width: 500px;">
-        <RetroProjectCardTabs
-          xp={config.noGlass}
-          title="Proyectos"
-          projectTitle="PickYourColor"
-          description="Visualizador interactivo de paletas de color con toolbar para modificar colores en tiempo real. Los cambios se aplican instantáneamente sobre componentes de UI y las paletas se pueden compartir por URL."
-          projectUrl="https://pick-your-color-fi6u5v9bm-javier-alzus-projects.vercel.app/"
-          codeUrl="https://github.com/jaalzu/PickYourColor"
-          tech={["React", "Vite", "TypeScript", "Tailwind", "Zustand"]}
-          techDetail={{
-  "Core": [
-    "React 19 + Vite — SPA ultra rápida sin SSR",
-    "TypeScript — tipado estricto de colores y estado",
-    "Zustand — estado global de paleta reactivo",
-  ],
-  "UI": [
-    "Tailwind CSS v4 — estilos dinámicos por CSS variables",
-    "Radix UI — primitivos accesibles (Popover, Dialog, Switch)",
-    "react-colorful — color picker liviano y accesible",
-  ],
-  "Color Engine": [
-    "tinycolor2 — manipulación y validación de colores",
-    "Cálculo dinámico de contraste WCAG",
-    "Serialización de paleta en URL (?colors=...)",
-  ],
-  "Testing & Monitoring": [
-    "Vitest + Testing Library — unit tests",
-    "Playwright — tests end-to-end",
-    "Sentry — monitoreo de errores",
-  ],
-}}
-          images={["/projects/color/hero.webp","/projects/color/features.webp","/projects/color/comments.webp"]}
-          origin="Nació de la frustración de cambiar constantemente entre código y navegador al diseñar paletas. La idea era ver los cambios aplicados al instante en toda la interfaz."
-          color="var(--win-projects)"
-        />
-      </div>
-      <div class="win" id="win-p3" style="top: 610px; left: 1265px; width: 500px;">
-        <RetroProjectCardTabs
-          xp={config.noGlass}
-          title="Proyectos"
-          projectTitle="RentaLibre"
-          description="Marketplace de compra y venta de artículos de segunda mano. Publicá lo que no usás, encontrá lo que buscás. Mensajería interna, filtros por categoría y ubicación, y gestión de publicaciones en tiempo real."
-          projectUrl="https://courses-demo.com"
-          codeUrl="https://github.com/noname/portfolio"
-          tech={["Next.js", "React", "Supabase", "TypeScript", "Tailwind"]}
-          techDetail={{
-            "Next.js": "App Router, SSR y Server Actions",
-            "React": "UI de publicaciones y mensajería",
-            "Supabase": "Auth, base de datos y storage de imágenes",
-            "TypeScript": "Tipado estricto en todo el proyecto",
-            "Tailwind": "Diseño responsivo y utilidades CSS"
-          }}
-          images={["/projects/rentalLibre/home.webp"]}
-          origin="Surgió de querer construir algo útil y real — un marketplace donde la gente pueda dar segunda vida a lo que ya no usa. Inspirado en Wallapop pero pensado para el mercado local argentino."
-          color="var(--win-projects)"
-        />
-      </div>
+
+
+
       <div class="win" id="win-tech" style="top: 580px; left: 80px; width: 750px;">
         <RetroTechStack xp={config.noGlass} />
       </div>
@@ -344,11 +375,12 @@ document.querySelectorAll('[role="tablist"]').forEach(tablist => {
      VARIABLES DE COLOR POR VENTANA
   ============================================ */
   :root {
-    --win-about:    #40f25549;
-    --win-projects: #e75cff4f;
-    --win-tech:     #c28e4e55;
-    --win-contact:  #04fae14b;
-    --win-info:     #ff071c44;
+    --win-about:    #2fff00;
+    --win-projects: #d901ffe4;
+    --win-tech:     #11ea40e1;
+    --win-picture:     #0af038fb;
+    --win-contact:  #22e20d66;
+    --win-info:     #11fe00d8;
   }
 
   /* ============================================

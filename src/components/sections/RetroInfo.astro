@@ -6,7 +6,7 @@ const { xp = false } = Astro.props;
 
 <WinGlass title="Acerca" noControls color="var(--win-info)" {xp}>
   <ul class="info-list">
-    <li> Autodidacta (el camino difícil)</li>
+    <li> Aprendizaje: autodidacta (curioso de nacimiento) </li>
     <li> Inglés - Alto</li>
     <li> +3 años de experiencia en desarrollo web</li>
   </ul>
@@ -14,12 +14,13 @@ const { xp = false } = Astro.props;
 
 <style>
  .info-list {
+  list-style: none;
   margin-block: .4rem;
-  padding-left: 24px;
+  padding-left: 10px;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  font-size: .980rem;
+  font-size: .950rem;
   font-weight: 400;
 }
 </style>
