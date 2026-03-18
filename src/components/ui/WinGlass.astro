@@ -1,9 +1,13 @@
 ---
-const { title, noControls = false, noPadding = false, color, xp = false } = Astro.props;
+const { title, icon = null, noControls = false, noPadding = false, color } = Astro.props;
 ---
 
-{xp ? (
-  <div class="window active">
+<!-- WIN7 -->
+<div class="win7-window background">
+  <div
+    class="window glass active"
+    style={color ? `--w7-w-bg: ${color}; background: ${color};` : ''}
+  >
     <div class="title-bar">
       <div class="title-bar-text">{title}</div>
       {!noControls && (
@@ -14,30 +18,64 @@ const { title, noControls = false, noPadding = false, color, xp = false } = Astr
         </div>
       )}
     </div>
-    <div class={noPadding ? "window-body" : "window-body has-space"}>
+    <div class={noPadding ? 'window-body' : 'window-body has-space'}>
       <slot />
     </div>
     <slot name="status-bar" />
     <slot name="footer" />
   </div>
-) : (
-  <div class="background">
-    <div class="window glass active" style={color ? `--w7-w-bg: ${color} !important; background: ${color} !important;` : ''}>
-      <div class="title-bar">
-        <div class="title-bar-text">{title}</div>
-        {!noControls && (
-          <div class="title-bar-controls">
-            <button aria-label="Minimize"></button>
-            <button aria-label="Maximize"></button>
-            <button aria-label="Close"></button>
-          </div>
-        )}
-      </div>
-      <div class={noPadding ? "window-body" : "window-body has-space"}>
-        <slot />
-      </div>
-      <slot name="status-bar" />
-      <slot name="footer" />
-    </div>
+</div>
+
+<!-- XP -->
+<div class="xp-window">
+  <div class="window active">
+  <div class="title-bar">
+  <div class="title-bar-left">
+    {icon && <img src={icon} alt="" class="title-icon" />}
+    <div class="title-bar-text">{title}</div>
   </div>
-)}
+  {!noControls && (
+    <div class="title-bar-controls">
+      <button aria-label="Minimize"></button>
+      <button aria-label="Maximize"></button>
+      <button aria-label="Close"></button>
+    </div>
+  )}
+</div>
+    <div class={noPadding ? 'window-body' : 'window-body has-space'}>
+      <slot />
+    </div>
+    <slot name="status-bar" />
+    <slot name="footer" />
+  </div>
+</div>
+
+<style>
+  .title-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+ .xp-window .title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.xp-window .title-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.title-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+  .title-bar {
+    display: flex;
+    align-items: center;
+  }
+</style>

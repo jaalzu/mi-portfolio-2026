@@ -7,8 +7,8 @@ const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
 
 ---
 
-<div class="project-card">
-<WinGlass title={title} color={color} {xp}>
+<div class="project-card" >
+<WinGlass title={title} color={color} {xp} icon="retro/projects2-8.webp">
   <section class="tabs">
     <menu role="tablist">
       <button role="tab" aria-controls={`${id}-overview`} aria-selected="true">Overview</button>
@@ -78,6 +78,8 @@ const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
 
 </WinGlass>
 </div>
+
+
 
 <style>
  

@@ -3,7 +3,7 @@ import WinGlass from '../ui/WinGlass.astro';
 const { xp = false } = Astro.props;
 
 ---
-<WinGlass title="Sobre mí" color="var(--win-about)" {xp}>
+<WinGlass title="Sobre mí" icon="retro/me-7.webp" color="var(--win-about)" {xp}>
   <div class="about-body">
     <div class="about-text">
       <h2>Hola! Soy Javier A.</h2>
@@ -35,11 +35,11 @@ const { xp = false } = Astro.props;
   }
 
 
-  .about-text h2 { margin: 0 0 -4px; font-size: 1.3rem; font-weight: 600}
-  .about-text p  { margin: 0 0 16px; font-size: 1.3rem; font-weight: 700; 
+  .about-text h2 { margin: 0 0 -4px; font-size: 1.3rem; font-weight: 500}
+  .about-text p  { margin: 0 0 16px; font-size: 1.3rem; font-weight: 600; 
     line-height: 1.250; }
 .about-text span{
-    font-weight: 400;
+    font-weight: 300;
     font-size: .950rem;
 }
 

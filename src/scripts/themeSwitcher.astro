@@ -1,0 +1,44 @@
+<script is:inline>
+  function initTabs() {
+    document.querySelectorAll('[role="tablist"]').forEach(tablist => {
+      const tabs = tablist.querySelectorAll('[role="tab"]');
+      const panels = tablist.closest('.tabs')?.querySelectorAll('[role="tabpanel"]') ?? [];
+
+      tabs.forEach((tab, i) => {
+        tab.addEventListener('click', () => {
+          tabs.forEach((t, j) => {
+            t.setAttribute('aria-selected', 'false');
+            if (panels[j]) panels[j].setAttribute('hidden', '');
+          });
+          tab.setAttribute('aria-selected', 'true');
+          if (panels[i]) panels[i].removeAttribute('hidden');
+        });
+      });
+    });
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    document.querySelector('.desktop').classList.toggle('win7', theme === 'win7');
+    localStorage.setItem('retro-theme', theme);
+
+    // re-init tabs al cambiar tema
+    initTabs();
+
+    document.querySelectorAll('#theme-switchers a').forEach(b => {
+      const isActive = b.getAttribute('data-theme-target') === theme;
+      b.style.opacity = isActive ? '0.5' : '1';
+      b.style.pointerEvents = isActive ? 'none' : '';
+    });
+  }
+
+  const saved = localStorage.getItem('retro-theme') ?? 'win7';
+  applyTheme(saved);
+
+  document.querySelectorAll('#theme-switchers a').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      applyTheme(btn.getAttribute('data-theme-target'));
+    });
+  });
+</script>

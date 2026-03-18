@@ -1,5 +1,1 @@
-@import "7.css/dist/gui/window.css";
-@import "7.css/dist/gui/tabs.css";
-@import "7.css/dist/gui/button.css";
-@import "7.css/dist/gui/treeview.css";
-@import "7.css/dist/gui/typography.css";
+@import "7.css/dist/7.scoped.css"; /* solo aplica dentro de .win7 */
