@@ -11,6 +11,7 @@ import RetroInfo from '../sections/RetroInfo.astro';
 import RetroProjectCardTabs from '../sections/RetroProjectCardTabs.astro';
 import RetroPicture from '../sections/RetroPicture.astro';
 import { THEMES, type ThemeKey } from '../../lib/themes';
+import AboutPortfolio from '../sections/AboutPortfolio.astro';
 
 
 import DragScript from '../../scripts/drag.astro';
@@ -38,24 +39,26 @@ const config = THEMES[theme];
       <Image src={bg1} alt="Fondo Windows" quality="100" loading="eager" fetchpriority="high" />
     </div>
 
+    
     <main class="desktop win7">
-      <div class="win" id="win-picture" style="top: 304px; left: 54px; width: 150px;">
+        <AboutPortfolio xp={config.noGlass} />
+      <div class="win" id="win-picture" style="top: 304px; left: 54px; width: 165px;">
         <RetroPicture xp={config.noGlass} />
       </div>
-      <div class="win" id="win-about" style="top: 24px; left: 84px; width: 980px;">
+      <div class="win" id="win-about" style="top: 35px; left: 84px; width: 980px;">
         <RetroAboutMe xp={config.noGlass} />
       </div>
       <div class="win" id="win-info" style="top: 315px; left: 244px; width: 400px;">
         <RetroInfo xp={config.noGlass} />
       </div>
       <div class="win" id="win-p2" style="top: 300px; left: 1265px; width: 500px;">
-        <RetroProjectCardTabs xp={config.noGlass} title="Proyecto #2" projectTitle="PickYourColor" description="Visualizador interactivo de paletas de color con toolbar para modificar colores en tiempo real. Los cambios se aplican instantáneamente sobre componentes de UI y las paletas se pueden compartir por URL." projectUrl="https://pick-your-color-fi6u5v9bm-javier-alzus-projects.vercel.app/" codeUrl="https://github.com/jaalzu/PickYourColor" tech={["React", "Vite", "TypeScript", "Tailwind", "Zustand"]} techDetail={{"Core": ["React 19 + Vite — SPA ultra rápida sin SSR","TypeScript — tipado estricto de colores y estado","Zustand — estado global de paleta reactivo"],"UI": ["Tailwind CSS v4 — estilos dinámicos por CSS variables","Radix UI — primitivos accesibles (Popover, Dialog, Switch)","react-colorful — color picker liviano y accesible"],"Color Engine": ["tinycolor2 — manipulación y validación de colores","Cálculo dinámico de contraste WCAG","Serialización de paleta en URL (?colors=...)"],"Testing & Monitoring": ["Vitest + Testing Library — unit tests","Playwright — tests end-to-end","Sentry — monitoreo de errores"]}} images={["/projects/color/hero.webp","/projects/color/features.webp","/projects/color/comments.webp"]} origin="Nació de la frustración de cambiar constantemente entre código y navegador al diseñar paletas." color="var(--win-projects)" />
+        <RetroProjectCardTabs xp={config.noGlass} title="Proyecto #2" projectTitle="PickYourColor" description="Visualizador interactivo de paletas de color con toolbar para modificar colores en tiempo real. Los cambios se aplican instantáneamente sobre componentes de UI y las paletas se pueden compartir por URL." projectUrl="https://pick-your-color-fi6u5v9bm-javier-alzus-projects.vercel.app/" codeUrl="https://github.com/jaalzu/PickYourColor" tech={["React", "Vite", "TypeScript", "Tailwind", "Zustand"]} techDetail={{"Core": ["React 19 + Vite — SPA ultra rápida sin SSR","TypeScript — tipado estricto de colores y estado","Zustand — estado global de paleta reactivo"],"UI": ["Tailwind CSS v4 — estilos dinámicos por CSS variables","Radix UI — primitivos accesibles (Popover, Dialog, Switch)","react-colorful — color picker liviano y accesible"],"Color Engine": ["tinycolor2 — manipulación y validación de colores","Cálculo dinámico de contraste WCAG","Serialización de paleta en URL (?colors=...)"],"Testing & Monitoring": ["Vitest + Testing Library — unit tests","Playwright — tests end-to-end","Sentry — monitoreo de errores"]}} images={["/projects/color/hero.webp","/projects/color/features.webp","/projects/color/comments.webp"]} origin="Nació para evitar el constante ir y venir entre el código y el navegador al crear y ajustar paletas de colores, permitiendo ver cambios en tiempo real y probar los colores directamente en una web profesional." color="var(--win-projects)" />
       </div>
       <div class="win" id="win-p3" style="top: 20px; left: 1265px; width: 500px;">
-        <RetroProjectCardTabs xp={config.noGlass} title="Proyecto #1" projectTitle="rentalibre" description="Marketplace de segunda mano para alquilar y vender objetos entre personas." projectUrl="https://courses-demo.com" codeUrl="https://github.com/noname/portfolio" tech={["Next.js 16", "Client State", "Supabase", "Arquitectura", "UI"]} techDetail={{"Next.js 16": ["App Router con Server / Client Components","Server Actions para mutaciones","Routing dinámico y condicional","Middleware para protección de rutas","API Routes para uploads de imágenes"],"Client State": ["React — arquitectura de componentes","TanStack Query — caché, sincronización y notificaciones","React Hook Form + Zod — formularios y validación"],"Supabase": ["Auth — email/password + OAuth (Google)","PostgreSQL con RLS en todas las tablas","Realtime — mensajería sin polling","Storage — fotos de items y avatars","Triggers — perfil automático y sistema de rating por reseñas"],"Arquitectura": ["Feature-Sliced Design (FSD)","Seguridad multi-capa: Middleware + RLS + Server Actions","Separación clara de capas: UI, estado y lógica de negocio","Sistema de roles (autorización) y UI condicional","Rate limiting por acción"],"UI": ["Chakra UI v3 — sistema de diseño y componentes","boxicons — Iconografía"]}} images={["/projects/color/hero.webp"]} origin="Surgió de querer construir algo útil y real." color="var(--win-projects)" />
+        <RetroProjectCardTabs xp={config.noGlass} title="Proyecto #1" projectTitle="rentalibre" description="Marketplace de segunda mano para alquilar y vender objetos entre personas. Mensajería en tiempo real, sistema de reviews mutuas y flujo completo de compra con estados y notificaciones." projectUrl="https://courses-demo.com" codeUrl="https://github.com/noname/portfolio" tech={["Next.js 16", "Client State", "Supabase", "Arquitectura", "UI"]} techDetail={{"Next.js 16": ["App Router con Server / Client Components","Server Actions para mutaciones","Routing dinámico y condicional","Middleware para protección de rutas","API Routes para uploads de imágenes"],"Client State": ["React — arquitectura de componentes","TanStack Query — caché, sincronización y notificaciones","React Hook Form + Zod — formularios y validación"],"Supabase": ["Auth — email/password + OAuth (Google)","PostgreSQL con RLS en todas las tablas","Realtime — mensajería sin polling","Storage — fotos de items y avatars","Triggers — perfil automático y sistema de rating por reseñas"],"Arquitectura": ["Feature-Sliced Design (FSD)","Seguridad multi-capa: Middleware + RLS + Server Actions","Separación clara de capas: UI, estado y lógica de negocio","Sistema de roles (autorización) y UI condicional","Rate limiting por acción"],"UI": ["Chakra UI v3 — sistema de diseño y componentes","boxicons — Iconografía"]}} images={["/projects/color/hero.webp"]} origin="Todos tenemos objetos que nos da vergüenza, pereza o miedo vender. Por eso surgió esta app, inspirada en Wallapop pero pensada para el mercado argentino, para que puedas vender lo que quieras sin costo." color="var(--win-projects)" />
       </div>
       <div class="win" id="win-p1" style="top: 610px; left: 1265px; width: 500px;">
-        <RetroProjectCardTabs xp={config.noGlass} title="Proyecto #3" projectTitle="Courses WebApp" description="Plataforma e-Learning con acceso por roles, gestión de cursos y lecciones." projectUrl="https://courses-webapp-delta.vercel.app/login" codeUrl="https://github.com/jaalzu/courses-webapp" tech={["Next.js 16", "Client State", "Supabase", "Arquitectura", "UI"]} techDetail={{"Next.js 16": ["App Router con layouts anidados","Server Actions para mutaciones","Middleware para protección de rutas","Route Handlers para interceptores del demo mode"],"Client State": ["React — arquitectura de componentes","Zustand — estado global de sesión y UI","TanStack Query — caché y sincronización con el servidor"],"Supabase": ["PostgreSQL con Row Level Security","Auth SSR con @supabase/ssr","Sincronización DB–Storage sin archivos huérfanos"],"Arquitectura": ["Feature-Sliced Design (FSD)","Seguridad multi-capa: Middleware + RLS + API","Modo demo con bloqueo de escrituras"],"UI": ["Tailwind CSS v4","shadcn/ui sobre Radix primitives","Sonner — notificaciones","next-themes — dark/light mode"],"Validation & Testing": ["Zod — validación end-to-end","React Hook Form — formularios complejos","Vitest + Testing Library — unit tests","Sentry — monitoreo de errores"]}} images={["/projects/course/home.webp","/projects/course/form.webp","/projects/course/lesson.webp"]} origin="El proyecto surgió cuando un mentor necesitaba una plataforma privada." color="var(--win-projects)" />
+        <RetroProjectCardTabs xp={config.noGlass} title="Proyecto #3" projectTitle="Courses WebApp" description="Plataforma e-Learning con acceso por roles, gestión de cursos y lecciones, progreso de alumnos en tiempo real y foro de comunidad por curso." projectUrl="https://courses-webapp-delta.vercel.app/login" codeUrl="https://github.com/jaalzu/courses-webapp" tech={["Next.js 16", "Client State", "Supabase", "Arquitectura", "UI"]} techDetail={{"Next.js 16": ["App Router con layouts anidados","Server Actions para mutaciones","Middleware para protección de rutas","Route Handlers para interceptores del demo mode"],"Client State": ["React — arquitectura de componentes","Zustand — estado global de sesión y UI","TanStack Query — caché y sincronización con el servidor"],"Supabase": ["PostgreSQL con Row Level Security","Auth SSR con @supabase/ssr","Sincronización DB–Storage sin archivos huérfanos"],"Arquitectura": ["Feature-Sliced Design (FSD)","Seguridad multi-capa: Middleware + RLS + API","Modo demo con bloqueo de escrituras"],"UI": ["Tailwind CSS v4","shadcn/ui sobre Radix primitives","Sonner — notificaciones","next-themes — dark/light mode"],"Validation & Testing": ["Zod — validación end-to-end","React Hook Form — formularios complejos","Vitest + Testing Library — unit tests","Sentry — monitoreo de errores"]}} images={["/projects/course/home.webp","/projects/course/form.webp","/projects/course/lesson.webp"]} origin="El proyecto surgió cuando un mentor digital necesitaba una plataforma privada para ofrecer cursos a sus alumnos como parte de su programa de mentoría." color="var(--win-projects)" />
       </div>
       <div class="win" id="win-tech" style="top: 580px; left: 80px; width: 750px;">
         <RetroTechStack xp={config.noGlass} />
@@ -65,12 +68,15 @@ const config = THEMES[theme];
       </div>
 
         <div id="retro-toolbar">
-      <button id="bg-switcher">Cambiar Fondo</button>
-    <div id="theme-switchers">
-  <a role="button" data-theme-target="win7" style="display: inline-flex; align-items: center; justify-content: center;">Win 7</a>
-  <a role="button" data-theme-target="xp" style="display: inline-flex; align-items: center; justify-content: center;">Win XP</a>
+  <div style="display: flex; gap: 6px;">
+    <button id="bg-switcher" style="display: flex; align-items: center; justify-content: center;">Cambiar Fondo</button>
+    <button id="btn-about-portfolio" style="display: flex; align-items: center; justify-content: center;">Acerca del portfolio</button>
+  </div>
+  <div id="theme-switchers">
+    <a role="button" data-theme-target="win7" style="display: inline-flex; align-items: center; justify-content: center;">Win 7</a>
+    <a role="button" data-theme-target="xp" style="display: inline-flex; align-items: center; justify-content: center;">Win XP</a>
+  </div>
 </div>
-    </div>
     </main>
 
   
@@ -79,5 +85,33 @@ const config = THEMES[theme];
     <SliderScript />
     <BgSwitcher bg1={bg1.src} bg2={bg2.src} bg3={bg3.src} bg4={bg4.src} />
     <ThemeSwitcher />
+
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('click', (e) => {
+      if (e.target.id !== 'btn-about-portfolio') return;
+      
+      const theme = document.documentElement.getAttribute('data-theme');
+      const id = theme === 'xp' ? 'win-about-portfolio-xp' : 'win-about-portfolio-w7';
+      const modal = document.getElementById(id);
+      if (modal) {
+        modal.style.display = 'block';
+        modal.style.zIndex = '50';
+      }
+    });
+
+    ['win-about-portfolio-w7', 'win-about-portfolio-xp'].forEach(id => {
+      const modal = document.getElementById(id);
+      if (!modal) return;
+      modal.querySelectorAll('[aria-label="Minimize"], [aria-label="Close"]')
+        .forEach(b => b.addEventListener('click', () => {
+          modal.style.display = 'none';
+        }));
+    });
+  });
+</script>
+
   </body>
 </html>
+

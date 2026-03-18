@@ -1,0 +1,44 @@
+---
+import WinGlass from '../ui/WinGlass.astro';
+const { xp = false } = Astro.props;
+---
+
+<!-- WIN7 -->
+<div class="win" id="win-about-portfolio-w7" style="display:none; top: 200px; left: 400px; width: 420px; z-index: 50;">
+  <WinGlass title="Acerca del portfolio" color="var(--win-info)">
+    <section class="tabs">
+      <menu role="tablist">
+        <button role="tab" aria-selected="true" aria-controls="ap-xp-w7">Windows XP</button>
+        <button role="tab" aria-selected="false" aria-controls="ap-win7-w7">Windows 7</button>
+      </menu>
+      <article role="tabpanel" id="ap-xp-w7">
+         <p>Inspiré mi portfolio en Windows XP lanzado en 2001. Fue el primer windows que use cuando mi madre me daba la computadora para ayudarla en su trabajo , jugar juegos en la web y descargar música 100% legal.</p> 
+      </article>
+      <article role="tabpanel" id="ap-win7-w7" hidden>
+    <article role="tabpanel" id="ap-win7-w7" hidden>
+<article role="tabpanel" id="ap-win7-w7" hidden>
+  <p>Windows 7, lanzado en 2009, el futuro que nos prometieron. Inspirado en la estética Frutiger Aero de los 2000s, trajo el Aero Glass, ventanas translúcidas con blur, colores brillantes con un look futurista y energético , sin duda el sistema operativo mas bello.</p>
+</article>
+</article>
+      </article>
+    </section>
+  </WinGlass>
+</div>
+
+<!-- XP -->
+<div class="win" id="win-about-portfolio-xp" style="display:none; top: 200px; left: 400px; width: 420px; z-index: 50;">
+  <WinGlass title="Acerca del portfolio" color="var(--win-info)" xp={true}>
+    <section class="tabs">
+      <menu role="tablist">
+        <button role="tab" aria-selected="true" aria-controls="ap-xp-xp">Windows XP</button>
+        <button role="tab" aria-selected="false" aria-controls="ap-win7-xp">Windows 7</button>
+      </menu>
+      <article role="tabpanel" id="ap-xp-xp">
+      <p>Inspiré mi portfolio en Windows XP lanzado en 2001. Fue el primer windows que use cuando mi madre me daba la computadora para ayudarla en su trabajo , jugar juegos en la web y descargar música 100% legal.</p> 
+      </article>
+      <article role="tabpanel" id="ap-win7-xp" hidden>
+         <p>Windows 7, lanzado en 2009, el futuro que nos prometieron. Inspirado en la estética Frutiger Aero de los 2000s, trajo el Aero Glass, ventanas translúcidas con blur, colores brillantes con un look futurista y lleno de paz. Sin duda mi favorito.</p>
+      </article>
+    </section>
+  </WinGlass>
+</div>

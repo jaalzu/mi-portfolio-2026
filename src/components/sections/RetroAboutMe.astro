@@ -6,13 +6,14 @@ const { xp = false } = Astro.props;
 <WinGlass title="Sobre mí" icon="retro/me-7.webp" color="var(--win-about)" {xp}>
   <div class="about-body">
     <div class="about-text">
-      <h2>Hola! Soy Javier A.</h2>
+      <!-- <h2>Hola! Soy Javier A.</h2>
       <p class="subtitle">
           <span class="text-content">25 años - Chaco, Argentina</span>
           <img src="/ar.svg" alt="Argentina" class="flag" />
-        </span>
+        </span> -->
       </p>
-      <p>Desarrollador Frontend con experiencia en el diseño, desarrollo y mejora de aplicaciones web. Transformo requisitos complejos en experiencias de usuario destacadas, abordando cada proyecto con entusiasmo y compromiso.</p>
+      <p>Desarrollador Frontend con experiencia en el diseño, desarrollo ,mantenimiento y mejora de aplicaciones web. Transformo requisitos complejos en experiencias de usuario destacadas, abordando cada proyecto con entusiasmo y compromiso.</p>
+      <span>Disfruto colaborar y formar parte de decisiones, ya sea en el diseño de sistemas,  ui/ux o producto.</span>
     </div>
   </div>
 </WinGlass>
@@ -24,8 +25,11 @@ const { xp = false } = Astro.props;
     display: flex;
     gap: 26px;
     align-items: flex-start;
-    padding: .5rem;
+    padding-top: .4rem;
+    padding-inline: .6rem;
+    padding-bottom: 1.1rem;
   }
+  
 
   .picture-win .profile-img {
     width: 110px;
@@ -36,11 +40,11 @@ const { xp = false } = Astro.props;
 
 
   .about-text h2 { margin: 0 0 -4px; font-size: 1.3rem; font-weight: 500}
-  .about-text p  { margin: 0 0 16px; font-size: 1.3rem; font-weight: 600; 
-    line-height: 1.250; }
+  .about-text p  { margin: 0 0 16px; font-size: 1.4rem; font-weight: 600; 
+    line-height: 1.3; }
 .about-text span{
-    font-weight: 300;
-    font-size: .950rem;
+    font-weight: 600;
+    font-size: .9rem;
 }
 
   .flag { width: 18px; height: auto; }
