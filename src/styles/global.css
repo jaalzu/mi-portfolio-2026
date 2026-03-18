@@ -1,0 +1,136 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Cursores */
+a,
+button,
+[role="button"] {
+  cursor: url("/cursor/win7cur.cur"), pointer !important;
+}
+* {
+  cursor: url("/cursor/cursor1.cur"), default !important;
+}
+
+/* ============================================
+   BASE
+============================================ */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.bg-container {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.bg-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  transition: opacity 0.3s;
+}
+
+.desktop {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* ============================================
+   VENTANAS
+============================================ */
+.win {
+  position: absolute;
+  cursor: default;
+  z-index: 1;
+}
+
+.win .title-bar {
+  cursor: move;
+}
+
+/* ============================================
+   VARIABLES DE COLOR
+============================================ */
+:root {
+  --win-about: #2fff00;
+  --win-projects: #d901ffe4;
+  --win-tech: #11ea40e1;
+  --win-picture: #0af038fb;
+  --win-contact: #22e20d66;
+  --win-info: #11fe00d8;
+}
+
+/* ============================================
+   TOOLBAR
+============================================ */
+#retro-toolbar {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+}
+
+#retro-toolbar > * {
+  pointer-events: all;
+}
+
+#theme-switchers {
+  display: flex;
+  gap: 6px;
+}
+
+/* ============================================
+   TEMA XP
+============================================ */
+[data-theme="xp"] a[role="button"] {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #ece9d8;
+  border: 2px solid;
+  border-color: #fff #808080 #808080 #fff;
+  cursor: pointer;
+  font-size: 11px;
+  text-decoration: none;
+  color: #000;
+}
+
+[data-theme="xp"] a[role="button"]:active {
+  border-color: #808080 #fff #fff #808080;
+}
+
+[data-theme="xp"] .title-bar {
+  padding-bottom: 3px;
+  min-height: 26px;
+  align-items: center;
+}
+
+[data-theme="xp"] .background {
+  display: contents;
+}
+
+[data-theme="xp"] .window.glass {
+  background: none !important;
+  --w7-w-bg: transparent !important;
+}
+
+[data-theme="xp"] .window[style] {
+  background: unset !important;
+  --w7-w-bg: unset !important;
+}
+
+[data-theme="xp"] .window-body {
+  background: #ece9d8 !important;
+}

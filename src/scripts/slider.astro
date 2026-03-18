@@ -1,0 +1,20 @@
+<script is:inline>
+  document.querySelectorAll('[id$="-img"]').forEach(img => {
+    const base = img.id.replace('-img', '');
+    const images = img.getAttribute('data-images')?.split(',') ?? [];
+    const counter = document.getElementById(`${base}-counter`);
+    let current = 0;
+
+    document.getElementById(`${base}-prev`)?.addEventListener('click', () => {
+      current = (current - 1 + images.length) % images.length;
+      img.src = images[current];
+      if (counter) counter.textContent = `${current + 1} / ${images.length}`;
+    });
+
+    document.getElementById(`${base}-next`)?.addEventListener('click', () => {
+      current = (current + 1) % images.length;
+      img.src = images[current];
+      if (counter) counter.textContent = `${current + 1} / ${images.length}`;
+    });
+  });
+</script>

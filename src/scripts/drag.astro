@@ -1,0 +1,25 @@
+<script is:inline>
+  let dragging = null;
+  let offsetX = 0;
+  let offsetY = 0;
+
+  document.querySelectorAll('.win').forEach(win => {
+    win.addEventListener('mousedown', (e) => {
+      if (!e.target.closest('.title-bar')) return;
+      dragging = win;
+      offsetX = e.clientX - win.offsetLeft;
+      offsetY = e.clientY - win.offsetTop;
+      document.querySelectorAll('.win').forEach(w => w.style.zIndex = 1);
+      win.style.zIndex = 10;
+      e.preventDefault();
+    });
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!dragging) return;
+    dragging.style.left = (e.clientX - offsetX) + 'px';
+    dragging.style.top  = (e.clientY - offsetY) + 'px';
+  });
+
+  document.addEventListener('mouseup', () => { dragging = null; });
+</script>

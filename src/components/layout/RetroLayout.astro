@@ -9,8 +9,15 @@ import RetroTechStack from '../sections/RetroTechStack.astro';
 import RetroContact from '../sections/RetroContact.astro';
 import RetroInfo from '../sections/RetroInfo.astro';
 import RetroProjectCardTabs from '../sections/RetroProjectCardTabs.astro';
-import { THEMES, type ThemeKey } from '../../lib/themes';
 import RetroPicture from '../sections/RetroPicture.astro';
+import { THEMES, type ThemeKey } from '../../lib/themes';
+
+import DragScript from '../../scripts/drag.astro';
+import TabsScript from '../../scripts/tabs.astro';
+import SliderScript from '../../scripts/slider.astro';
+import BgSwitcher from '../../scripts/bgSwitcher.astro';
+
+import '../../styles/global.css';
 
 const { theme = 'win7' } = Astro.props as { theme: ThemeKey };
 const config = THEMES[theme];
@@ -25,31 +32,20 @@ const config = THEMES[theme];
   </head>
 
   <body>
-
     <div class="bg-container">
-      <Image
-        src={bg1}
-        alt="Fondo Windows"
-        quality="100"
-        loading="eager"
-        fetchpriority="high"
-      />
-
+      <Image src={bg1} alt="Fondo Windows" quality="100" loading="eager" fetchpriority="high" />
     </div>
- 
-
 
     <main class="desktop">
-        <div class="win" id="win-picture" style="top: 304px; left: 54px; width: 150px;">
-  <RetroPicture xp={config.noGlass} />
-</div>
+      <div class="win" id="win-picture" style="top: 304px; left: 54px; width: 150px;">
+        <RetroPicture xp={config.noGlass} />
+      </div>
       <div class="win" id="win-about" style="top: 24px; left: 84px; width: 980px;">
         <RetroAboutMe xp={config.noGlass} />
       </div>
       <div class="win" id="win-info" style="top: 315px; left: 244px; width: 400px;">
         <RetroInfo xp={config.noGlass} />
       </div>
-    
       <div class="win" id="win-p2" style="top: 300px; left: 1265px; width: 500px;">
         <RetroProjectCardTabs
           xp={config.noGlass}
@@ -60,27 +56,27 @@ const config = THEMES[theme];
           codeUrl="https://github.com/jaalzu/PickYourColor"
           tech={["React", "Vite", "TypeScript", "Tailwind", "Zustand"]}
           techDetail={{
-  "Core": [
-    "React 19 + Vite — SPA ultra rápida sin SSR",
-    "TypeScript — tipado estricto de colores y estado",
-    "Zustand — estado global de paleta reactivo",
-  ],
-  "UI": [
-    "Tailwind CSS v4 — estilos dinámicos por CSS variables",
-    "Radix UI — primitivos accesibles (Popover, Dialog, Switch)",
-    "react-colorful — color picker liviano y accesible",
-  ],
-  "Color Engine": [
-    "tinycolor2 — manipulación y validación de colores",
-    "Cálculo dinámico de contraste WCAG",
-    "Serialización de paleta en URL (?colors=...)",
-  ],
-  "Testing & Monitoring": [
-    "Vitest + Testing Library — unit tests",
-    "Playwright — tests end-to-end",
-    "Sentry — monitoreo de errores",
-  ],
-}}
+            "Core": [
+              "React 19 + Vite — SPA ultra rápida sin SSR",
+              "TypeScript — tipado estricto de colores y estado",
+              "Zustand — estado global de paleta reactivo",
+            ],
+            "UI": [
+              "Tailwind CSS v4 — estilos dinámicos por CSS variables",
+              "Radix UI — primitivos accesibles (Popover, Dialog, Switch)",
+              "react-colorful — color picker liviano y accesible",
+            ],
+            "Color Engine": [
+              "tinycolor2 — manipulación y validación de colores",
+              "Cálculo dinámico de contraste WCAG",
+              "Serialización de paleta en URL (?colors=...)",
+            ],
+            "Testing & Monitoring": [
+              "Vitest + Testing Library — unit tests",
+              "Playwright — tests end-to-end",
+              "Sentry — monitoreo de errores",
+            ],
+          }}
           images={["/projects/color/hero.webp","/projects/color/features.webp","/projects/color/comments.webp"]}
           origin="Nació de la frustración de cambiar constantemente entre código y navegador al diseñar paletas. La idea era ver los cambios aplicados al instante en toda la interfaz."
           color="var(--win-projects)"
@@ -94,47 +90,45 @@ const config = THEMES[theme];
           description="Marketplace de segunda mano para alquilar y vender objetos entre personas. Mensajería en tiempo real, sistema de reviews mutuas y flujo completo de compra con estados y notificaciones."
           projectUrl="https://courses-demo.com"
           codeUrl="https://github.com/noname/portfolio"
-        tech={["Next.js 16", "Client State", "Supabase", "Arquitectura", "UI"]}
-
-techDetail={{
- "Next.js 16": [
-  "App Router con Server / Client Components",
-  "Server Actions para mutaciones",
-   "Routing dinámico y condicional ",
-  "Middleware para protección de rutas",
-  "API Routes para uploads de imágenes",
-],
-  "Client State": [
-    "React — arquitectura de componentes",
-    "TanStack Query — caché, sincronización y notificaciones",
-    "React Hook Form + Zod — formularios y validación",
-  ],
-  "Supabase": [
-    "Auth — email/password + OAuth (Google)",
-    "PostgreSQL con RLS en todas las tablas",
-    "Realtime — mensajería sin polling",
-    "Storage — fotos de items y avatars",
-    "Triggers — perfil automático y sistema de rating por reseñas",
-    
-  ],
-"Arquitectura": [
-  "Feature-Sliced Design (FSD)",
-  "Seguridad multi-capa: Middleware + RLS + Server Actions",
-  "Separación clara de capas: UI, estado y lógica de negocio",
-  "Sistema de roles (autorización) y UI condicional",
-  "Rate limiting por acción",
-],
-  "UI": [
-    "Chakra UI v3 — sistema de diseño y componentes",
-    "boxicons — Iconografía",
-  ],
-}}
+          tech={["Next.js 16", "Client State", "Supabase", "Arquitectura", "UI"]}
+          techDetail={{
+            "Next.js 16": [
+              "App Router con Server / Client Components",
+              "Server Actions para mutaciones",
+              "Routing dinámico y condicional",
+              "Middleware para protección de rutas",
+              "API Routes para uploads de imágenes",
+            ],
+            "Client State": [
+              "React — arquitectura de componentes",
+              "TanStack Query — caché, sincronización y notificaciones",
+              "React Hook Form + Zod — formularios y validación",
+            ],
+            "Supabase": [
+              "Auth — email/password + OAuth (Google)",
+              "PostgreSQL con RLS en todas las tablas",
+              "Realtime — mensajería sin polling",
+              "Storage — fotos de items y avatars",
+              "Triggers — perfil automático y sistema de rating por reseñas",
+            ],
+            "Arquitectura": [
+              "Feature-Sliced Design (FSD)",
+              "Seguridad multi-capa: Middleware + RLS + Server Actions",
+              "Separación clara de capas: UI, estado y lógica de negocio",
+              "Sistema de roles (autorización) y UI condicional",
+              "Rate limiting por acción",
+            ],
+            "UI": [
+              "Chakra UI v3 — sistema de diseño y componentes",
+              "boxicons — Iconografía",
+            ],
+          }}
           images={["/projects/color/hero.webp"]}
           origin="Surgió de querer construir algo útil y real — un marketplace donde la gente pueda dar segunda vida a lo que ya no usa. Inspirado en Wallapop pero pensado para el mercado local argentino."
           color="var(--win-projects)"
         />
       </div>
-        <div class="win" id="win-p1" style="top: 610px; left: 1265px; width: 500px;">
+      <div class="win" id="win-p1" style="top: 610px; left: 1265px; width: 500px;">
         <RetroProjectCardTabs
           xp={config.noGlass}
           title="Proyectos"
@@ -142,62 +136,47 @@ techDetail={{
           description="Plataforma e-Learning con acceso por roles, gestión de cursos y lecciones, progreso de alumnos en tiempo real y foro de comunidad por curso."
           projectUrl="https://courses-webapp-delta.vercel.app/login"
           codeUrl="https://github.com/jaalzu/courses-webapp"
-    tech={[
-  "Next.js 16",
-  "Client State",
-  "Supabase",
-  "Arquitectura",
-  "UI",
-]}
-
-techDetail={{
-  "Next.js 16": [
-    "App Router con layouts anidados",
-    "Server Actions para mutaciones",
-    "Middleware para protección de rutas",
-    "Route Handlers para interceptores del demo mode",
-  ],
-
-  "Client State": [
-    "React — arquitectura de componentes",
-    "Zustand — estado global de sesión y UI",
-    "TanStack Query — caché y sincronización con el servidor",
-  ],
-
-  "Supabase": [
-    "PostgreSQL con Row Level Security",
-    "Auth SSR con @supabase/ssr",
-    "Sincronización DB–Storage sin archivos huérfanos",
-  ],
-
-  "Arquitectura": [
-    "Feature-Sliced Design (FSD)",
-    "Seguridad multi-capa: Middleware + RLS + API",
-    "Modo demo con bloqueo de escrituras",
-  ],
-
-  "UI": [
-    "Tailwind CSS v4",
-    "shadcn/ui sobre Radix primitives",
-    "Sonner — notificaciones",
-    "next-themes — dark/light mode",
-  ],
-
-"Validation & Testing": [
-  "Zod — validación end-to-end",
-  "React Hook Form — formularios complejos",
-  "Vitest + Testing Library — unit tests",
-  "Sentry — monitoreo de errores",
-]
-}}
+          tech={["Next.js 16", "Client State", "Supabase", "Arquitectura", "UI"]}
+          techDetail={{
+            "Next.js 16": [
+              "App Router con layouts anidados",
+              "Server Actions para mutaciones",
+              "Middleware para protección de rutas",
+              "Route Handlers para interceptores del demo mode",
+            ],
+            "Client State": [
+              "React — arquitectura de componentes",
+              "Zustand — estado global de sesión y UI",
+              "TanStack Query — caché y sincronización con el servidor",
+            ],
+            "Supabase": [
+              "PostgreSQL con Row Level Security",
+              "Auth SSR con @supabase/ssr",
+              "Sincronización DB–Storage sin archivos huérfanos",
+            ],
+            "Arquitectura": [
+              "Feature-Sliced Design (FSD)",
+              "Seguridad multi-capa: Middleware + RLS + API",
+              "Modo demo con bloqueo de escrituras",
+            ],
+            "UI": [
+              "Tailwind CSS v4",
+              "shadcn/ui sobre Radix primitives",
+              "Sonner — notificaciones",
+              "next-themes — dark/light mode",
+            ],
+            "Validation & Testing": [
+              "Zod — validación end-to-end",
+              "React Hook Form — formularios complejos",
+              "Vitest + Testing Library — unit tests",
+              "Sentry — monitoreo de errores",
+            ],
+          }}
           images={["/projects/course/home.webp", "/projects/course/form.webp", "/projects/course/lesson.webp"]}
           origin="El proyecto surgió cuando un mentor necesitaba una plataforma privada para ofrecer cursos a sus alumnos como parte de su programa de mentoría. A partir de esa necesidad real se desarrolló esta aplicación."
           color="var(--win-projects)"
         />
       </div>
-
-
-
       <div class="win" id="win-tech" style="top: 580px; left: 80px; width: 750px;">
         <RetroTechStack xp={config.noGlass} />
       </div>
@@ -205,260 +184,26 @@ techDetail={{
         <RetroContact xp={config.noGlass} />
       </div>
     </main>
-   <div id="retro-toolbar">
-    <button id="bg-switcher">Cambiar Fondo</button>
-  <div id="theme-switchers">
-    {config.links.map((o) => (
-      <a 
-        href={o.href} 
-        role="button"
-        aria-disabled={o.href === Astro.url.pathname}
-        style={o.href === Astro.url.pathname ? 'opacity: 0.5; pointer-events: none;' : ''}
-      >
-        {o.label}
-      </a>
-    ))}
-  </div>
-</div>
+
+    <div id="retro-toolbar">
+      <button id="bg-switcher">Cambiar Fondo</button>
+      <div id="theme-switchers">
+        {config.links.map((o) => (
+          <a
+            href={o.href}
+            role="button"
+            aria-disabled={o.href === Astro.url.pathname}
+            style={o.href === Astro.url.pathname ? 'opacity: 0.5; pointer-events: none;' : ''}
+          >
+            {o.label}
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <DragScript />
+    <TabsScript />
+    <SliderScript />
+    <BgSwitcher bg1={bg1.src} bg2={bg2.src} bg3={bg3.src} bg4={bg4.src} />
   </body>
 </html>
-
-<script is:inline>
-
-  // ============================================
-  // DRAG & DROP — mover ventanas por la title bar
-  // ============================================
-  let dragging = null;
-  let offsetX = 0;
-  let offsetY = 0;
-
-  document.querySelectorAll('.win').forEach(win => {
-    win.addEventListener('mousedown', (e) => {
-      if (!e.target.closest('.title-bar')) return;
-      dragging = win;
-      offsetX = e.clientX - win.offsetLeft;
-      offsetY = e.clientY - win.offsetTop;
-      document.querySelectorAll('.win').forEach(w => w.style.zIndex = 1);
-      win.style.zIndex = 10;
-      e.preventDefault();
-    });
-  });
-
-  document.addEventListener('mousemove', (e) => {
-    if (!dragging) return;
-    dragging.style.left = (e.clientX - offsetX) + 'px';
-    dragging.style.top  = (e.clientY - offsetY) + 'px';
-  });
-
-  document.addEventListener('mouseup', () => { dragging = null; });
-
-
-  // ============================================
-  // TABS — cambiar paneles dentro de las ventanas
-  // ============================================
-document.querySelectorAll('[role="tablist"]').forEach(tablist => {
-  const tabs = tablist.querySelectorAll('[role="tab"]');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => {
-        t.setAttribute('aria-selected', 'false');
-        document.getElementById(t.getAttribute('aria-controls'))?.setAttribute('hidden', '');
-      });
-      tab.setAttribute('aria-selected', 'true');
-      document.getElementById(tab.getAttribute('aria-controls'))?.removeAttribute('hidden');
-    });
-  });
-});
-
-
-  // ============================================
-  // SLIDER DE IMÁGENES — flechas prev/next por proyecto
-  // ============================================
-  document.querySelectorAll('[id$="-img"]').forEach(img => {
-    const base = img.id.replace('-img', '');
-    const images = img.getAttribute('data-images')?.split(',') ?? [];
-    const counter = document.getElementById(`${base}-counter`);
-    let current = 0;
-
-    document.getElementById(`${base}-prev`)?.addEventListener('click', () => {
-      current = (current - 1 + images.length) % images.length;
-      img.src = images[current];
-      if (counter) counter.textContent = `${current + 1} / ${images.length}`;
-    });
-
-    document.getElementById(`${base}-next`)?.addEventListener('click', () => {
-      current = (current + 1) % images.length;
-      img.src = images[current];
-      if (counter) counter.textContent = `${current + 1} / ${images.length}`;
-    });
-  });
-
-</script>
-
-<script define:vars={{ bg1: bg1.src, bg2: bg2.src, bg3: bg3.src , bg4: bg4.src }}>
-  // ============================================
-  // SWITCHER DE FONDO — ciclar entre imágenes
-  // ============================================
-  const bgs = [bg1, bg2, bg3,bg4];
-  const img = document.querySelector('.bg-container img');
-  
-  // Restaurar fondo guardado
-  let currentBg = parseInt(localStorage.getItem('retro-bg') ?? '0');
-  if (img) {
-    img.src = bgs[currentBg];
-    img.style.opacity = '0';
-    img.onload = () => { img.style.opacity = '1'; };
-  }
-
-  document.getElementById('bg-switcher')?.addEventListener('click', () => {
-    currentBg = (currentBg + 1) % bgs.length;
-    if (img) {
-      img.style.opacity = '0';
-      img.src = bgs[currentBg];
-      img.onload = () => { img.style.opacity = '1'; };
-    }
-    localStorage.setItem('retro-bg', currentBg.toString());
-  });
-</script>
-
-<style is:global>
-  * { box-sizing: border-box; }
-
-  a, button, [role="button"] {
-    cursor: url('/cursor/win7cur.cur'), pointer !important;
-  }
-
-  /* ============================================
-     TOOLBAR — contenedor de botones fijos
-  ============================================ */
-  #retro-toolbar {
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    pointer-events: none;
-  }
-
-  #retro-toolbar > * {
-    pointer-events: all;
-  }
-
-  #theme-switchers {
-    display: flex;
-    gap: 6px;
-  }
-
-  /* ============================================
-     TEMA XP — estilos de botones
-  ============================================ */
-  [data-theme="xp"] a[role="button"] {
-    display: inline-block;
-    padding: 4px 12px;
-    background: #ECE9D8;
-    border: 2px solid;
-    border-color: #fff #808080 #808080 #fff;
-    cursor: pointer;
-    font-size: 11px;
-    text-decoration: none;
-    color: #000;
-  }
-
-  [data-theme="xp"] a[role="button"]:active {
-    border-color: #808080 #fff #fff #808080;
-  }
-
-  /* ============================================
-     VARIABLES DE COLOR POR VENTANA
-  ============================================ */
-  :root {
-    --win-about:    #2fff00;
-    --win-projects: #d901ffe4;
-    --win-tech:     #11ea40e1;
-    --win-picture:     #0af038fb;
-    --win-contact:  #22e20d66;
-    --win-info:     #11fe00d8;
-  }
-
-  /* ============================================
-     BASE
-  ============================================ */
-  body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    overflow: hidden;
-  }
-
-  .bg-container {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-  }
-
-.bg-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center bottom;
-  transition: opacity 0.3s;
-}
-
-  .desktop {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-  }
-
-  a, button, [role="button"] {
-  cursor: url('/cursor/cursor1.cur'), pointer !important;
-}
-
-* {
-  cursor: url('/cursor/cursor1.cur'), default !important;
-}
-
-  /* ============================================
-     VENTANAS ARRASTRABLES
-  ============================================ */
-  .win {
-    position: absolute;
-    cursor: default;
-    z-index: 1;
-  }
-
-  .win .title-bar {
-    cursor: move;
-  }
-
-[data-theme="xp"] .title-bar {
-  padding-bottom: 3px;
-  min-height: 26px;
-  align-items: center;
-}
-
-  /* ============================================
-     GLASS — desactivar en XP
-  ============================================ */
-  [data-theme="xp"] .background {
-    display: contents;
-  }
-
-  [data-theme="xp"] .window.glass {
-    background: none !important;
-    --w7-w-bg: transparent !important;
-  }
-
-  [data-theme="xp"] .window[style] {
-    background: unset !important;
-    --w7-w-bg: unset !important;
-  }
-
-  [data-theme="xp"] .window-body {
-    background: #ECE9D8 !important;
-  }
-</style>

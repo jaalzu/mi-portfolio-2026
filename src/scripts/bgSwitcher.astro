@@ -1,0 +1,31 @@
+---
+interface Props {
+  bg1: string;
+  bg2: string;
+  bg3: string;
+  bg4: string;
+}
+const { bg1, bg2, bg3, bg4 } = Astro.props;
+---
+
+<script define:vars={{ bg1, bg2, bg3, bg4 }}>
+  const bgs = [bg1, bg2, bg3, bg4];
+  const img = document.querySelector('.bg-container img');
+
+  let currentBg = parseInt(localStorage.getItem('retro-bg') ?? '0');
+  if (img) {
+    img.src = bgs[currentBg];
+    img.style.opacity = '0';
+    img.onload = () => { img.style.opacity = '1'; };
+  }
+
+  document.getElementById('bg-switcher')?.addEventListener('click', () => {
+    currentBg = (currentBg + 1) % bgs.length;
+    if (img) {
+      img.style.opacity = '0';
+      img.src = bgs[currentBg];
+      img.onload = () => { img.style.opacity = '1'; };
+    }
+    localStorage.setItem('retro-bg', currentBg.toString());
+  });
+</script>

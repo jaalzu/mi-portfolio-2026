@@ -1,0 +1,15 @@
+<script is:inline>
+  document.querySelectorAll('[role="tablist"]').forEach(tablist => {
+    const tabs = tablist.querySelectorAll('[role="tab"]');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => {
+          t.setAttribute('aria-selected', 'false');
+          document.getElementById(t.getAttribute('aria-controls'))?.setAttribute('hidden', '');
+        });
+        tab.setAttribute('aria-selected', 'true');
+        document.getElementById(tab.getAttribute('aria-controls'))?.removeAttribute('hidden');
+      });
+    });
+  });
+</script>
