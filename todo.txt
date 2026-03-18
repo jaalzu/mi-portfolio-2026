@@ -13,3 +13,15 @@ mejorar el contenido , si quiero pasar los filtros.
 añadir mas tecnologías herramientas que utilizo.
 añadir algo como experiencia de freelancer? o experiencia desarrollando +3 años ej.
 nivel de ingles? 
+
+
+agregar vercel como provider para rollback y evitador de problemas en produciion??
+simplificar las cosas usadas en pickyourcolor...
+
+hacer el responsive , nothing fancy.. 
+
+sacarme la maldita foto y ponerla!! 
+ 
+comprar el dominio?
+
+mejorar el cambio de imagen y de css..optimizarlo un poco
