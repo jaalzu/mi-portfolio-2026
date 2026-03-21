@@ -15,8 +15,11 @@ añadir algo como experiencia de freelancer? o experiencia desarrollando +3 año
 nivel de ingles? 
 
 
-agregar vercel como provider para rollback y evitador de problemas en produciion??
 simplificar las cosas usadas en pickyourcolor...
+
+arreglar el email en winxp .
+poner el win xp como main
+poner el botón de ingles!
 
 hacer el responsive , nothing fancy.. 
 
@@ -24,4 +27,3 @@ sacarme la maldita foto y ponerla!!
  
 comprar el dominio?
 
-mejorar el cambio de imagen y de css..optimizarlo un poco
