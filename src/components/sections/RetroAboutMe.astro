@@ -17,18 +17,19 @@ const { xp = false } = Astro.props;
 <style>
   .about-body {
     display: flex;
-    padding-top: .4rem;
     padding-left: .6rem;
-    padding-bottom: .4rem;
   }
 
   .about-text h1  { margin: 0 0 16px; font-size: 1.4rem; font-weight: 600; 
     line-height: 1.3; }
 
-
-  .flag { width: 18px; height: auto; }
-
   @media (max-width: 500px) {
-    .about-body { flex-direction: column; }
+    .about-body {
+    padding-left: .2rem;
+  }
+    .about-text h1{
+      font-size: 1.1rem;
+      padding: .2rem;
+    }
   }
 </style>

@@ -6,6 +6,20 @@
   document.querySelectorAll('.win').forEach(win => {
     win.addEventListener('mousedown', (e) => {
       if (!e.target.closest('.title-bar')) return;
+
+      // Si está en el grid (position static), liberarla al vuelo
+      const computed = window.getComputedStyle(win);
+      if (computed.position === 'static') {
+        const rect = win.getBoundingClientRect();
+        const parent = win.offsetParent ?? document.body;
+        const parentRect = parent.getBoundingClientRect();
+        win.style.position = 'absolute';
+        win.style.top = (rect.top - parentRect.top + parent.scrollTop) + 'px';
+        win.style.left = (rect.left - parentRect.left) + 'px';
+        win.style.width = rect.width + 'px';
+        win.style.zIndex = 10;
+      }
+
       dragging = win;
       offsetX = e.clientX - win.offsetLeft;
       offsetY = e.clientY - win.offsetTop;
