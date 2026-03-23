@@ -1,5 +1,5 @@
 ---
-const { title, icon = null, noControls = false, noPadding = false, color } = Astro.props;
+const { title, titleKey = null, icon = null, noControls = false, noPadding = false, color } = Astro.props;
 ---
 
 <!-- WIN7 -->
@@ -9,7 +9,7 @@ const { title, icon = null, noControls = false, noPadding = false, color } = Ast
     style={color ? `--w7-w-bg: ${color}; background: ${color};` : ''}
   >
     <div class="title-bar">
-      <div class="title-bar-text">{title}</div>
+      <div class="title-bar-text" data-i18n={titleKey || undefined}>{title}</div>
       {!noControls && (
         <div class="title-bar-controls">
           <button aria-label="Minimize"></button>
@@ -29,19 +29,19 @@ const { title, icon = null, noControls = false, noPadding = false, color } = Ast
 <!-- XP -->
 <div class="xp-window">
   <div class="window active">
-  <div class="title-bar">
-  <div class="title-bar-left">
-    {icon && <img src={icon} alt="" class="title-icon" />}
-    <div class="title-bar-text">{title}</div>
-  </div>
-  {!noControls && (
-    <div class="title-bar-controls">
-      <button aria-label="Minimize"></button>
-      <button aria-label="Maximize"></button>
-      <button aria-label="Close"></button>
+    <div class="title-bar">
+      <div class="title-bar-left">
+        {icon && <img src={icon} alt="" class="title-icon" />}
+        <div class="title-bar-text" data-i18n={titleKey || undefined}>{title}</div>
+      </div>
+      {!noControls && (
+        <div class="title-bar-controls">
+          <button aria-label="Minimize"></button>
+          <button aria-label="Maximize"></button>
+          <button aria-label="Close"></button>
+        </div>
+      )}
     </div>
-  )}
-</div>
     <div class={noPadding ? 'window-body' : 'window-body has-space'}>
       <slot />
     </div>
@@ -49,6 +49,7 @@ const { title, icon = null, noControls = false, noPadding = false, color } = Ast
     <slot name="footer" />
   </div>
 </div>
+
 
 <style>
   .title-icon {

@@ -5,8 +5,8 @@ const { xp = false } = Astro.props;
 ---
 
 <WinGlass title="Contacto"  icon="retro/contact.webp" color="var(--win-contact)" xp>
-  <p>Podes contactarme por cualquiera de estos medios!</p>
-  <span id="email-text">Ver correo</span>
+  <p data-i18n="contactP">Podes contactarme por cualquiera de estos medios!</p>
+  <span id="email-text" data-i18n="contactEmail">Ver correo</span>
  <div class="contact-links">
   <a href="https://github.com/jaalzu" target="_blank" role="button">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
@@ -49,7 +49,7 @@ const { xp = false } = Astro.props;
   #email-text { cursor: pointer; 
     padding-right: .4rem;
     padding-left: .3rem;
-color: rgba(224, 0, 0, 0.896);
+color: red;
 
     padding-block: 4px;
     text-decoration: underline; 
@@ -57,24 +57,24 @@ color: rgba(224, 0, 0, 0.896);
   font-weight: 700;
   }
 </style>
-
 <script is:inline>
-  const el = document.getElementById('email-text');
   const user = 'javieralzuu';
   const domain = 'gmail.com';
   const email = `${user}@${domain}`;
 
-  el.addEventListener('mouseenter', () => {
-    el.textContent = `${email} · click para copiar`;
-  });
+  document.querySelectorAll('#email-text').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      el.textContent = `${email} · click para copiar`;
+    });
 
-  el.addEventListener('mouseleave', () => {
-    el.textContent = 'Ver correo';
-  });
+    el.addEventListener('mouseleave', () => {
+      el.textContent = 'Ver correo';
+    });
 
-  el.addEventListener('click', () => {
-    navigator.clipboard.writeText(email);
-    el.textContent = '✓ Copiado!';
-    setTimeout(() => { el.textContent = 'Ver correo'; }, 2000);
+    el.addEventListener('click', () => {
+      navigator.clipboard.writeText(email);
+      el.textContent = '✓ Copiado!';
+      setTimeout(() => { el.textContent = 'Ver correo'; }, 2000);
+    });
   });
 </script>

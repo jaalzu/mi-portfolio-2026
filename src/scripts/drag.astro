@@ -1,39 +1,30 @@
 <script is:inline>
-  let dragging = null;
-  let offsetX = 0;
-  let offsetY = 0;
+  document.addEventListener('DOMContentLoaded', () => {
+    let dragging = null;
+    let offsetX = 0;
+    let offsetY = 0;
 
-  document.querySelectorAll('.win').forEach(win => {
-    win.addEventListener('mousedown', (e) => {
-      if (!e.target.closest('.title-bar')) return;
+    document.querySelectorAll('.win').forEach(win => {
+      win.addEventListener('mousedown', (e) => {
+        if (!e.target.closest('.title-bar')) return;
+        if (window.innerWidth <= 1300) return;
 
-      // Si está en el grid (position static), liberarla al vuelo
-      const computed = window.getComputedStyle(win);
-      if (computed.position === 'static') {
-        const rect = win.getBoundingClientRect();
-        const parent = win.offsetParent ?? document.body;
-        const parentRect = parent.getBoundingClientRect();
-        win.style.position = 'absolute';
-        win.style.top = (rect.top - parentRect.top + parent.scrollTop) + 'px';
-        win.style.left = (rect.left - parentRect.left) + 'px';
-        win.style.width = rect.width + 'px';
+        dragging = win;
+        offsetX = e.clientX - win.offsetLeft;
+        offsetY = e.clientY - win.offsetTop;
+        document.querySelectorAll('.win').forEach(w => w.style.zIndex = 1);
         win.style.zIndex = 10;
-      }
-
-      dragging = win;
-      offsetX = e.clientX - win.offsetLeft;
-      offsetY = e.clientY - win.offsetTop;
-      document.querySelectorAll('.win').forEach(w => w.style.zIndex = 1);
-      win.style.zIndex = 10;
-      e.preventDefault();
+        e.preventDefault();
+      });
     });
-  });
 
-  document.addEventListener('mousemove', (e) => {
-    if (!dragging) return;
-    dragging.style.left = (e.clientX - offsetX) + 'px';
-    dragging.style.top  = (e.clientY - offsetY) + 'px';
-  });
+   document.addEventListener('mousemove', (e) => {
+  if (!dragging) return;
+  console.log('dx:', e.clientX - offsetX, 'dy:', e.clientY - offsetY);
+  dragging.style.left = (e.clientX - offsetX) + 'px';
+  dragging.style.top  = (e.clientY - offsetY) + 'px';
+});
 
-  document.addEventListener('mouseup', () => { dragging = null; });
+    document.addEventListener('mouseup', () => { dragging = null; });
+  });
 </script>

@@ -12,11 +12,6 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
-es */ a,
-button,
-[role="button"] {
-  cursor: url("/cursor/win7cur.cur"), pointer !important;
-}
 * {
   cursor: url("/cursor/cursor1.cur"), default !important;
 }
@@ -184,6 +179,7 @@ body {
     left: auto !important;
     height: auto !important;
   }
+
   #win-picture {
     grid-column: 1;
     grid-row: 1;
@@ -233,5 +229,32 @@ body {
   #win-p1 {
     grid-column: 1 !important;
     grid-row: auto !important;
+  }
+}
+
+@media (min-width: 1920px) {
+  #win-picture {
+    left: 3.1vw;
+  }
+  #win-about {
+    left: 16.9vw;
+  }
+  #win-info {
+    left: 4.2vw;
+  }
+  #win-contact {
+    left: 32.3vw;
+  }
+  #win-tech {
+    left: 4.2vw;
+  }
+  #win-p3 {
+    left: 62.5vw;
+  }
+  #win-p2 {
+    left: 62.5vw;
+  }
+  #win-p1 {
+    left: 62.5vw;
   }
 }

@@ -6,8 +6,11 @@ const { xp = false } = Astro.props;
 <WinGlass title="Sobre mí" icon="retro/me-7.webp" color="var(--win-about)" {xp}>
   <div class="about-body">
     <div class="about-text">
-      <h1>Desarrollador Frontend con experiencia en el diseño, desarrollo, mantenimiento y mejora de aplicaciones web. <br>
-        Transformo requisitos complejos en experiencias de usuario destacadas, abordando cada proyecto con entusiasmo y compromiso.</h1>
+    <h1>
+  <span style="color: red;" data-i18n="aboutRole">Desarrollador Frontend</span>
+  <span data-i18n="aboutText"> con experiencia en el diseño, desarrollo, mantenimiento y mejora de aplicaciones web.</span>
+  <span data-i18n="aboutText2">Transformo requisitos complejos en experiencias de usuario destacadas, abordando cada proyecto con entusiasmo y compromiso.</span>
+</h1>
     </div>
   </div>
 </WinGlass>

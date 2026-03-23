@@ -1,14 +1,13 @@
 ---
 import WinGlass from '../ui/WinGlass.astro';
 
-const { title, projectTitle, description, projectUrl, codeUrl,  color, images, origin, techDetail, xp = false } = Astro.props;
+const { title, titleKey, projectTitle, description, descKey, projectUrl, codeUrl, color, images, origin, originKey, techDetail, xp = false } = Astro.props;
 
 const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
-
 ---
 
-<div class="project-card" >
-<WinGlass title={title} color={color} {xp} icon="retro/projects2-8.webp">
+<div class="project-card">
+<WinGlass title={title} titleKey={titleKey} color={color} {xp} icon="retro/projects2-8.webp">
   <section class="tabs">
     <menu role="tablist">
       <button role="tab" aria-controls={`${id}-overview`} aria-selected="true">Overview</button>
@@ -19,66 +18,65 @@ const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
 
     <article role="tabpanel" id={`${id}-overview`}>
       <strong class="project-title">{projectTitle}</strong>
-      <p>{description}</p>
+      <p data-i18n={descKey}>{description}</p>
     </article>
 
-  <article role="tabpanel" id={`${id}-tech`} hidden>
-  <ul class="tree-view has-container">
-    {Object.entries(techDetail ?? {}).map(([category, items]: [string, any]) => (
-      <li>
-        <details>
-          <summary>{category}</summary>
-          <ul>
-            {Array.isArray(items) 
-              ? items.map((item: string) => <li>{item}</li>)
-              : <li>{items}</li>
-            }
-          </ul>
-        </details>
-      </li>
-    ))}
-  </ul>
-</article>
+    <article role="tabpanel" id={`${id}-tech`} hidden>
+      <ul class="tree-view has-container">
+        {Object.entries(techDetail ?? {}).map(([category, items]: [string, any]) => (
+          <li>
+            <details>
+              <summary>{category}</summary>
+              <ul>
+                {Array.isArray(items)
+                  ? items.map((item: string) => <li>{item}</li>)
+                  : <li>{items}</li>
+                }
+              </ul>
+            </details>
+          </li>
+        ))}
+      </ul>
+    </article>
 
-<article role="tabpanel" id={`${id}-images`} hidden>
- <div class="img-viewer">
-<div class="img-nav">
-  <button class="img-prev" id={`${id}-prev`}>
-    <svg width="10" height="10" viewBox="0 0 10 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M8 1L2 7L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-  </button>
-  <p class="img-counter" id={`${id}-counter`}>1 / {images?.length}</p>
-  <button class="img-next" id={`${id}-next`}>
-    <svg width="10" height="10" viewBox="0 0 10 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M2 1L8 7L2 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-  </button>
-</div>
-  <img 
-    id={`${id}-img`}
-    src={images?.[0]}
-    data-images={images?.join(',')}
-    alt={projectTitle}
-    class="project-img"
-  />
-</div>
-</article>
+    <article role="tabpanel" id={`${id}-images`} hidden>
+      <div class="img-viewer">
+        <div class="img-nav">
+          <button class="img-prev" id={`${id}-prev`}>
+            <svg width="10" height="10" viewBox="0 0 10 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 1L2 7L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <p class="img-counter" id={`${id}-counter`}>1 / {images?.length}</p>
+          <button class="img-next" id={`${id}-next`}>
+            <svg width="10" height="10" viewBox="0 0 10 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 1L8 7L2 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+        <img
+          id={`${id}-img`}
+          src={images?.[0]}
+          data-images={images?.join(',')}
+          alt={projectTitle}
+          class="project-img"
+        />
+      </div>
+    </article>
 
     <article role="tabpanel" id={`${id}-origin`} hidden>
-      <p>{origin}</p>
+      <p data-i18n={originKey}>{origin}</p>
     </article>
 
   </section>
 
   <section style="display: flex; justify-content: flex-end; gap: 6px; margin-top: 8px;">
-    <a href={projectUrl} target="_blank" role="button" >Sitio web</a>
-    <a href={codeUrl} target="_blank" role="button">Código</a>
+    <a href={projectUrl} target="_blank" role="button" data-i18n="btnSite">Sitio web</a>
+    <a href={codeUrl} target="_blank" role="button" data-i18n="btnCode">Código</a>
   </section>
 
 </WinGlass>
 </div>
-
 
 
 <style>
