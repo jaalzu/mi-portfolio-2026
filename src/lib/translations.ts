@@ -12,11 +12,10 @@ export const translations = {
       "Transformo requisitos complejos en experiencias de usuario destacadas, abordando cada proyecto con entusiasmo y compromiso.",
 
     // Info
-    info1: "Aprendizaje autodidacta",
-    info2: "Alto nivel de inglés",
-    info3: "+3 años de experiencia en desarrollo web",
-    info4:
-      "Disfruto colaborar tanto en decisiones técnicas como de producto y UI/UX",
+    info1: "Desarrollador autodidacta.",
+    info2: "Inglés técnico fluido.",
+    info3: "+3 años de experiencia en desarrollo web.",
+    info4: "Participación activa en decisiones técnicas y de producto.",
 
     // Contact
     contactP: "Podés contactarme por cualquiera de estos medios!",
@@ -60,6 +59,9 @@ export const translations = {
     tabImages: "Imágenes",
     tabOrigin: "Origen",
   },
+
+  ////////////////// English //////////////////
+
   en: {
     winAbout: "About me",
     winContact: "Contact",
@@ -70,11 +72,10 @@ export const translations = {
     aboutText2:
       "I transform complex requirements into outstanding user experiences, approaching each project with enthusiasm and commitment.",
 
-    info1: "Self-taught learner (the hard way)",
-    info2: "Native Spanish speaker, high level of English",
-    info3: "+3 years of experience in web development",
-    info4:
-      "I enjoy collaborating on both technical and product , UI/UX decisions",
+    info1: "Self-taught developer.",
+    info2: "Fluent technical English.",
+    info3: "+3 years of experience in web development.",
+    info4: "Active participation in technical and product decisions.",
 
     contactP: "You can reach me through any of these channels!",
     contactEmail: "View email",

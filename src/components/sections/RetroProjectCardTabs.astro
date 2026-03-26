@@ -9,12 +9,40 @@ const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
 <div class="project-card">
 <WinGlass title={title} titleKey={titleKey} color={color} {xp} icon="retro/projects2-8.webp">
   <section class="tabs">
-    <menu role="tablist">
-      <button role="tab" aria-controls={`${id}-overview`} aria-selected="true">Overview</button>
-      <button role="tab" aria-controls={`${id}-tech`}>Stack</button>
-      <button role="tab" aria-controls={`${id}-images`}>Imágenes</button>
-      <button role="tab" aria-controls={`${id}-origin`}>Origen</button>
-    </menu>
+  <menu role="tablist">
+  <button 
+    role="tab" 
+    aria-controls={`${id}-overview`} 
+    aria-selected="true" 
+    data-i18n="tabOverview"
+  >
+    Overview
+  </button>
+  
+  <button 
+    role="tab" 
+    aria-controls={`${id}-tech`} 
+    data-i18n="tabStack"
+  >
+    Stack
+  </button>
+  
+  <button 
+    role="tab" 
+    aria-controls={`${id}-images`} 
+    data-i18n="tabImages"
+  >
+    Imágenes
+  </button>
+  
+  <button 
+    role="tab" 
+    aria-controls={`${id}-origin`} 
+    data-i18n="tabOrigin"
+  >
+    Origen
+  </button>
+</menu>
 
     <article role="tabpanel" id={`${id}-overview`}>
       <strong class="project-title">{projectTitle}</strong>

@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import bg4 from '../../assets/windows_7_194.webp';
 import bg2 from '../../assets/windows_vista_90hd.webp';
-import bg3 from '../../assets/windows_xp_18.webp';
+import bg3 from '../../assets/city.webp';
 import bg1 from '../../assets/windows_xp_35.webp';
 import RetroAboutMe from '../sections/RetroAboutMe.astro';
 import RetroTechStack from '../sections/RetroTechStack.astro';
@@ -50,7 +50,31 @@ const config = THEMES[theme];
       <div class="win" id="win-info" style="top: 315px; left: 80px; width: 400px;">
         <RetroInfo xp={config.noGlass} />
       </div>
-   <div class="win" id="win-p2" style="top: 300px; left: 1200px; width: 500px;">
+   <div class="win" id="win-p1" style="top: 20px; left: 1200px; width: 500px;">
+  <RetroProjectCardTabs 
+    xp={config.noGlass} 
+    title="Proyecto #1"
+    titleKey="p1WinTitle"
+    projectTitle="TratoLibre" 
+    description="Marketplace de segunda mano para alquilar y vender objetos entre personas. Mensajería en tiempo real, sistema de reviews mutuas y flujo completo de compra con estados y notificaciones." 
+    descKey="p1Desc"
+    origin="Todos tenemos objetos que nos da vergüenza, pereza o miedo vender. Por eso surgió esta app, inspirada en Wallapop pero pensada para el mercado argentino, para que puedas vender lo que quieras sin costo." 
+    originKey="p1Origin"
+    projectUrl="https://tratolibre.vercel.app" 
+    codeUrl="https://github.com/jaalzu/tratolibre" 
+    tech={["Next.js 16", "Client State", "Supabase", "Arquitectura", "UI"]} 
+    techDetail={{
+      "Next.js 16": ["App Router con Server / Client Components","Server Actions para mutaciones","Routing dinámico y condicional","Middleware para protección de rutas","API Routes para uploads de imágenes"],
+      "Client State": ["React — arquitectura de componentes","TanStack Query — caché, sincronización y notificaciones","React Hook Form + Zod — formularios y validación"],
+      "Supabase": ["Auth — email/password + OAuth (Google)","PostgreSQL con RLS en todas las tablas","Realtime — mensajería sin polling","Storage — fotos de items y avatars","Triggers — perfil automático y sistema de rating por reseñas"],
+      "Arquitectura": ["Feature-Sliced Design (FSD)","Seguridad multi-capa: Middleware + RLS + Server Actions","Separación clara de capas: UI, estado y lógica de negocio","Sistema de roles (autorización) y UI condicional","Rate limiting por acción"],
+      "UI": ["Chakra UI v3 — sistema de diseño y componentes","boxicons — Iconografía"]
+    }} 
+    images={["/projects/tratolibre/hero.webp"]} 
+    color="var(--win-projects)" 
+  />
+</div>
+<div class="win" id="win-p2" style="top: 300px; left: 1200px; width: 500px;">
   <RetroProjectCardTabs 
     xp={config.noGlass} 
     title="Proyecto #2"
@@ -63,17 +87,53 @@ const config = THEMES[theme];
     projectUrl="https://pick-your-color-fi6u5v9bm-javier-alzus-projects.vercel.app/" 
     codeUrl="https://github.com/jaalzu/PickYourColor" 
     tech={["React", "Vite", "TypeScript", "Tailwind", "Zustand"]} 
-    techDetail={{"Core": ["React 19 + Vite — SPA ultra rápida sin SSR","TypeScript — tipado estricto de colores y estado","Zustand — estado global de paleta reactivo"],"UI": ["Tailwind CSS v4 — estilos dinámicos por CSS variables","Radix UI — primitivos accesibles (Popover, Dialog, Switch)","react-colorful — color picker liviano y accesible"],"Color Engine": ["tinycolor2 — manipulación y validación de colores","Cálculo dinámico de contraste WCAG","Serialización de paleta en URL (?colors=...)"],"Testing & Monitoring": ["Vitest + Testing Library — unit tests","Playwright — tests end-to-end","Sentry — monitoreo de errores"]}}
+    techDetail={{
+      "Core": [
+        "React 19 + Vite — Single Page Application (SPA)",
+        "TypeScript — Tipado estricto para modelos de color y estado",
+        "Zustand — Estado global reactivo para sincronizar la paleta"
+      ],
+      "UI & UX": [
+        "Tailwind CSS v4 — Estilos dinámicos mediante variables CSS",
+        "Radix UI — Primitivos con accesibilidad nativa (WAI-ARIA)",
+        "react-colorful — Selector de color liviano y accesible"
+      ],
+      "Color Engine": [
+        "tinycolor2 — Manipulación y validación de formatos de color",
+        "WCAG Algorithm — Cálculo dinámico de contraste para accesibilidad",
+        "URL Serialization — Persistencia de paletas mediante parámetros en la URL"
+      ]
+    }}
     images={["/projects/color/hero.webp","/projects/color/features.webp","/projects/color/comments.webp"]} 
     color="var(--win-projects)" 
   />
 </div>
-      <div class="win" id="win-p3" style="top: 20px; left: 1200px; width: 500px;">
-        <RetroProjectCardTabs xp={config.noGlass} title="Proyecto #1" projectTitle="rentalibre" description="Marketplace de segunda mano para alquilar y vender objetos entre personas. Mensajería en tiempo real, sistema de reviews mutuas y flujo completo de compra con estados y notificaciones." projectUrl="https://courses-demo.com" codeUrl="https://github.com/noname/portfolio" tech={["Next.js 16", "Client State", "Supabase", "Arquitectura", "UI"]} techDetail={{"Next.js 16": ["App Router con Server / Client Components","Server Actions para mutaciones","Routing dinámico y condicional","Middleware para protección de rutas","API Routes para uploads de imágenes"],"Client State": ["React — arquitectura de componentes","TanStack Query — caché, sincronización y notificaciones","React Hook Form + Zod — formularios y validación"],"Supabase": ["Auth — email/password + OAuth (Google)","PostgreSQL con RLS en todas las tablas","Realtime — mensajería sin polling","Storage — fotos de items y avatars","Triggers — perfil automático y sistema de rating por reseñas"],"Arquitectura": ["Feature-Sliced Design (FSD)","Seguridad multi-capa: Middleware + RLS + Server Actions","Separación clara de capas: UI, estado y lógica de negocio","Sistema de roles (autorización) y UI condicional","Rate limiting por acción"],"UI": ["Chakra UI v3 — sistema de diseño y componentes","boxicons — Iconografía"]}} images={["/projects/color/hero.webp"]} origin="Todos tenemos objetos que nos da vergüenza, pereza o miedo vender. Por eso surgió esta app, inspirada en Wallapop pero pensada para el mercado argentino, para que puedas vender lo que quieras sin costo." color="var(--win-projects)" />
-      </div>
-      <div class="win" id="win-p1" style="top: 610px; left: 1200px; width: 500px;">
-        <RetroProjectCardTabs xp={config.noGlass} title="Proyecto #3" projectTitle="Courses WebApp" description="Plataforma e-Learning con acceso por roles, gestión de cursos y lecciones, progreso de alumnos en tiempo real y foro de comunidad por curso." projectUrl="https://courses-webapp-delta.vercel.app/login" codeUrl="https://github.com/jaalzu/courses-webapp" tech={["Next.js 16", "Client State", "Supabase", "Arquitectura", "UI"]} techDetail={{"Next.js 16": ["App Router con layouts anidados","Server Actions para mutaciones","Middleware para protección de rutas","Route Handlers para interceptores del demo mode"],"Client State": ["React — arquitectura de componentes","Zustand — estado global de sesión y UI","TanStack Query — caché y sincronización con el servidor"],"Supabase": ["PostgreSQL con Row Level Security","Auth SSR con @supabase/ssr","Sincronización DB–Storage sin archivos huérfanos"],"Arquitectura": ["Feature-Sliced Design (FSD)","Seguridad multi-capa: Middleware + RLS + API","Modo demo con bloqueo de escrituras"],"UI": ["Tailwind CSS v4","shadcn/ui sobre Radix primitives","Sonner — notificaciones","next-themes — dark/light mode"],"Validation & Testing": ["Zod — validación end-to-end","React Hook Form — formularios complejos","Vitest + Testing Library — unit tests","Sentry — monitoreo de errores"]}} images={["/projects/course/home.webp","/projects/course/form.webp","/projects/course/lesson.webp"]} origin="El proyecto surgió cuando un mentor digital necesitaba una plataforma privada para ofrecer cursos a sus alumnos como parte de su programa de mentoría." color="var(--win-projects)" />
-      </div>
+
+<div class="win" id="win-p3" style="top: 610px; left: 1200px; width: 500px;">
+  <RetroProjectCardTabs 
+    xp={config.noGlass} 
+    title="Proyecto #3" 
+    titleKey="p3WinTitle"
+    projectTitle="Courses WebApp" 
+    description="Plataforma e-Learning con acceso por roles, gestión de cursos y lecciones, progreso de alumnos en tiempo real y foro de comunidad por curso." 
+    descKey="p3Desc"
+    origin="El proyecto surgió cuando un mentor digital necesitaba una plataforma privada para ofrecer cursos a sus alumnos como parte de su programa de mentoría."
+    originKey="p3Origin"
+    projectUrl="https://courses-webapp-delta.vercel.app/login" 
+    codeUrl="https://github.com/jaalzu/courses-webapp" 
+    tech={["Next.js 16", "Client State", "Supabase", "Arquitectura", "UI"]} 
+    techDetail={{
+      "Next.js 16": ["App Router con layouts anidados","Server Actions para mutaciones","Middleware para protección de rutas","Route Handlers para interceptores del demo mode"],
+      "Client State": ["React — arquitectura de componentes","Zustand — estado global de sesión y UI","TanStack Query — caché y sincronización con el servidor"],
+      "Supabase": ["PostgreSQL con Row Level Security","Auth SSR con @supabase/ssr","Sincronización DB–Storage sin archivos huérfanos"],
+      "Arquitectura": ["Feature-Sliced Design (FSD)","Seguridad multi-capa: Middleware + RLS + API","Modo demo con bloqueo de escrituras"],
+      "UI": ["Tailwind CSS v4","shadcn/ui sobre Radix primitives","Sonner — notificaciones","next-themes — dark/light mode"],
+      "Validation & Testing": ["Zod — validación end-to-end","React Hook Form — formularios complejos","Vitest + Testing Library — unit tests","Sentry — monitoreo de errores"]
+    }} 
+    images={["/projects/course/home.webp","/projects/course/form.webp","/projects/course/lesson.webp"]} 
+    color="var(--win-projects)" 
+  />
+</div>
       <div class="win" id="win-tech" style="top: 580px; left: 80px; width: 750px;">
         <RetroTechStack xp={config.noGlass} />
       </div>
@@ -83,7 +143,9 @@ const config = THEMES[theme];
 
       <div id="retro-toolbar">
   <div style="display: flex; gap: 6px;">
-  <button id="bg-switcher" style="display: flex; align-items: center; justify-content: center;">Cambiar Fondo</button>
+  <button id="bg-switcher" data-i18n="btnChangeBg" style="display: flex; align-items: center; justify-content: center;">
+  Cambiar Fondo
+</button>
  <button id="lang-switcher">EN</button>
 
   </div>
