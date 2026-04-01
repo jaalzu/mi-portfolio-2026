@@ -1,20 +1,58 @@
 <script is:inline>
-  document.querySelectorAll('[id$="-img"]').forEach(img => {
-    const base = img.id.replace('-img', '');
-    const images = img.getAttribute('data-images')?.split(',') ?? [];
-    const counter = document.getElementById(`${base}-counter`);
-    let current = 0;
+  (() => {
+    const initProjects = () => {
+      document.querySelectorAll('.tabs:not([data-initialized])').forEach(container => {
+        const tabs = container.querySelectorAll('[role="tab"]');
+        const panels = container.querySelectorAll('[role="tabpanel"]');
 
-    document.getElementById(`${base}-prev`)?.addEventListener('click', () => {
-      current = (current - 1 + images.length) % images.length;
-      img.src = images[current];
-      if (counter) counter.textContent = `${current + 1} / ${images.length}`;
-    });
+        tabs.forEach(tab => {
+          tab.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = tab.getAttribute('aria-controls');
 
-    document.getElementById(`${base}-next`)?.addEventListener('click', () => {
-      current = (current + 1) % images.length;
-      img.src = images[current];
-      if (counter) counter.textContent = `${current + 1} / ${images.length}`;
-    });
-  });
+            tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+            panels.forEach(p => p.hidden = true);
+
+            tab.setAttribute('aria-selected', 'true');
+            const activePanel = document.getElementById(targetId);
+            if (activePanel) activePanel.hidden = false;
+          });
+        });
+        container.setAttribute('data-initialized', 'true');
+      });
+
+      document.querySelectorAll('.img-viewer:not([data-initialized])').forEach(viewer => {
+        const img = viewer.querySelector('.project-img');
+        if (!img) return;
+
+        const images = img.getAttribute('data-images')?.split(',') ?? [];
+        const counter = viewer.querySelector('.img-counter');
+        const prevBtn = viewer.querySelector('.img-prev');
+        const nextBtn = viewer.querySelector('.img-next');
+        
+        let current = 0;
+
+        const updateImage = (index) => {
+          current = (index + images.length) % images.length;
+          img.src = images[current];
+          if (counter) counter.textContent = `${current + 1} / ${images.length}`;
+        };
+
+        prevBtn?.addEventListener('click', (e) => {
+          e.preventDefault();
+          updateImage(current - 1);
+        });
+
+        nextBtn?.addEventListener('click', (e) => {
+          e.preventDefault();
+          updateImage(current + 1);
+        });
+        
+        viewer.setAttribute('data-initialized', 'true');
+      });
+    };
+
+    initProjects();
+    document.addEventListener('astro:page-load', initProjects);
+  })();
 </script>

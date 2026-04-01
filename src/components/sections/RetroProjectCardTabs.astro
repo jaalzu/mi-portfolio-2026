@@ -1,12 +1,13 @@
 ---
 import WinGlass from '../ui/WinGlass.astro';
+import { translations } from '../../lib/translations';
 
-const { title, titleKey, projectTitle, description, descKey, projectUrl, codeUrl, color, images, origin, originKey, techDetail, xp = false } = Astro.props;
+const { title, titleKey, projectTitle, description, descKey, projectUrl, codeUrl, color, images, origin, originKey, techKeys, xp = false } = Astro.props;
 
 const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
 ---
 
-<div class="project-card">
+<div class="project-card" data-tech-keys={JSON.stringify(techKeys)}>
 <WinGlass title={title} titleKey={titleKey} color={color} {xp} icon="retro/projects2-8.webp">
   <section class="tabs">
   <menu role="tablist">
@@ -49,21 +50,9 @@ const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
       <p data-i18n={descKey}>{description}</p>
     </article>
 
-    <article role="tabpanel" id={`${id}-tech`} hidden>
+   <article role="tabpanel" id={`${id}-tech`} hidden data-tech-container={id}>
       <ul class="tree-view has-container">
-        {Object.entries(techDetail ?? {}).map(([category, items]: [string, any]) => (
-          <li>
-            <details>
-              <summary>{category}</summary>
-              <ul>
-                {Array.isArray(items)
-                  ? items.map((item: string) => <li>{item}</li>)
-                  : <li>{items}</li>
-                }
-              </ul>
-            </details>
-          </li>
-        ))}
+        <!-- Se llenará dinámicamente con JS -->
       </ul>
     </article>
 
@@ -87,6 +76,7 @@ const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
           src={images?.[0]}
           data-images={images?.join(',')}
           alt={projectTitle}
+          loading="lazy"
           class="project-img"
         />
       </div>
@@ -106,10 +96,117 @@ const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
 </WinGlass>
 </div>
 
+<script is:inline define:vars={{ translations }}>
+  (() => {
+    const renderTechDetail = (container, techKeys, lang = 'es') => {
+      const ul = container.querySelector('ul');
+      if (!ul) return;
+      ul.innerHTML = '';
+
+      Object.entries(techKeys).forEach(([category, key]) => {
+        const items = translations[lang][key] || [];
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <details>
+            <summary>${category}</summary>
+            <ul>
+              ${Array.isArray(items) 
+                ? items.map(item => `<li>${item}</li>`).join('')
+                : `<li>${items}</li>`
+              }
+            </ul>
+          </details>
+        `;
+        ul.appendChild(li);
+      });
+    };
+
+    const initProjects = () => {
+      const currentLang = document.documentElement.getAttribute('lang') || 'es';
+
+      // Renderizar tech details
+      document.querySelectorAll('[data-tech-container]:not([data-initialized])').forEach(container => {
+        const card = container.closest('.project-card');
+        const techKeys = card ? JSON.parse(card.getAttribute('data-tech-keys') || '{}') : {};
+        renderTechDetail(container, techKeys, currentLang);
+        container.setAttribute('data-initialized', 'true');
+      });
+
+      // Tabs
+      document.querySelectorAll('.tabs:not([data-initialized])').forEach(container => {
+        const tabs = container.querySelectorAll('[role="tab"]');
+        const panels = container.querySelectorAll('[role="tabpanel"]');
+
+        tabs.forEach(tab => {
+          tab.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = tab.getAttribute('aria-controls');
+
+            tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+            panels.forEach(p => p.hidden = true);
+
+            tab.setAttribute('aria-selected', 'true');
+            const activePanel = document.getElementById(targetId);
+            if (activePanel) activePanel.hidden = false;
+          });
+        });
+        container.setAttribute('data-initialized', 'true');
+      });
+
+      // Images
+      document.querySelectorAll('.img-viewer:not([data-initialized])').forEach(viewer => {
+        const img = viewer.querySelector('.project-img');
+        if (!img) return;
+
+        const images = img.getAttribute('data-images')?.split(',') ?? [];
+        const counter = viewer.querySelector('.img-counter');
+        const prevBtn = viewer.querySelector('.img-prev');
+        const nextBtn = viewer.querySelector('.img-next');
+        
+        let current = 0;
+
+        const updateImage = (index) => {
+          current = (index + images.length) % images.length;
+          img.src = images[current];
+          if (counter) counter.textContent = `${current + 1} / ${images.length}`;
+        };
+
+        prevBtn?.addEventListener('click', (e) => {
+          e.preventDefault();
+          updateImage(current - 1);
+        });
+
+        nextBtn?.addEventListener('click', (e) => {
+          e.preventDefault();
+          updateImage(current + 1);
+        });
+        
+        viewer.setAttribute('data-initialized', 'true');
+      });
+    };
+
+    // Renderizar al cargar
+    initProjects();
+    document.addEventListener('astro:page-load', initProjects);
+
+    // Re-renderizar cuando cambia de idioma
+    const originalApplyLang = window.applyLang;
+    if (typeof window !== 'undefined' && originalApplyLang) {
+      window.applyLang = function(lang, updateUrl = true) {
+        originalApplyLang.call(this, lang, updateUrl);
+        
+        // Re-renderizar tech details con nuevo idioma
+        document.querySelectorAll('[data-tech-container]').forEach(container => {
+          const card = container.closest('.project-card');
+          const techKeys = card ? JSON.parse(card.getAttribute('data-tech-keys') || '{}') : {};
+          renderTechDetail(container, techKeys, lang);
+        });
+      };
+    }
+  })();
+</script>
 
 <style>
- 
-
   .project-title {
     display: block;
     font-size: 1rem;
@@ -123,14 +220,11 @@ const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
 
   section a[role="button"] {
     text-decoration: none;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
 
-
-
-  /* Stack */
   .tech-list {
     display: flex;
     flex-direction: column;
@@ -160,47 +254,37 @@ const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
     color: #222;
   }
 
-  /* Imágenes */
-.img-viewer {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
+  .img-viewer {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
 
-.img-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  .img-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-.project-img {
-  width: 100%;
-  height: 162px;
-  object-fit: cover;
-  object-position: top;
-  border: 1px solid #aaa;
-}
+  .project-img {
+    width: 100%;
+    height: 202px;
+    object-fit: cover;
+    object-position: center;
+    border: 1px solid #aaa;
+  }
 
-.img-prev, .img-next {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2px 11px;
-  min-width: 18px;
-}
+  .img-prev, .img-next {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 11px;
+    min-width: 18px;
+  }
 
-.img-counter {
-  text-align: center;
-  font-size: .8rem;
-  margin: 4px 0 0;
-}
+  .img-counter {
+    text-align: center;
+    font-size: .8rem;
+    margin: 4px 0 0;
+  }
 </style>
-
-
-
-
-
-
-
-
-

@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+*::-webkit-scrollbar {
+  display: none;
+}
+
 *:focus,
 *:focus-visible {
   outline: none !important;
@@ -38,7 +42,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center bottom;
+  object-position: center;
   transition: opacity 0.2s;
 }
 
@@ -65,12 +69,12 @@ body {
    VARIABLES DE COLOR
 ============================================ */
 :root {
-  --win-about: #2fff0054;
-  --win-projects: #d901ff77;
-  --win-tech: #fef6007c;
+  --win-about: #2fff0038;
+  --win-projects: #d901ff4c;
+  --win-tech: #fef6005d;
   --win-picture: #0de2db2f;
   --win-contact: #0de2db89;
-  --win-info: #2fff0054;
+  --win-info: #2fff0045;
 }
 
 /* ============================================

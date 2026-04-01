@@ -32,9 +32,102 @@ export const translations = {
     p2WinTitle: "Proyecto #2",
     p3WinTitle: "Proyecto #3",
 
+    tratolibreNextjs: [
+      "App Router con Server / Client Components",
+      "Server Actions para mutaciones",
+      "Routing dinámico y condicional",
+      "Proxy para protección de rutas",
+      "API Routes para uploads de imágenes",
+    ],
+    tratolibreClientState: [
+      "React — arquitectura de componentes",
+      "TypeScript — tipado estricto en todo el código",
+      "TanStack Query — caché, sincronización y notificaciones",
+      "React Hook Form + Zod — formularios y validación",
+    ],
+    tratolibreSupabase: [
+      "Auth — email/password + OAuth (Google)",
+      "PostgreSQL con RLS en todas las tablas",
+      "Realtime — mensajería sin polling",
+      "Storage — fotos de items y avatars",
+      "Compresión de imágenes en cliente — reduce antes de subir a Storage",
+    ],
+    tratolibreArquitectura: [
+      "Feature-Sliced Design (FSD)",
+      "Seguridad multi-capa: Proxy + RLS + Server Actions",
+      "Separación clara de capas: UI, estado y lógica de negocio",
+      "Sistema de roles (autorización) y UI condicional",
+      "Rate limiting por acción",
+    ],
+    tratolibreUI: [
+      "Chakra UI v3 — sistema de diseño y componentes",
+      "boxicons — Iconografía",
+      "Image optimization — next/image con lazy loading nativo",
+      "Skeletons & Spinners — loading states mientras cargan datos",
+    ],
+    tratolibreValidation: [
+      "Vitest — unit testing",
+      "Playwright — e2e testing",
+      "Sentry — monitoreo de errores en producción",
+      "Vercel — Speed Insights y Analytics",
+    ],
+
+    // Tech Details - PickYourColor
+    colorCore: [
+      "React 19 + Vite — Single Page Application (SPA)",
+      "TypeScript — Tipado estricto para modelos de color y estado",
+      "Zustand — Estado global reactivo para sincronizar la paleta",
+    ],
+    colorUI: [
+      "Tailwind CSS v4 — Estilos dinámicos mediante variables CSS",
+      "Radix UI — Primitivos con accesibilidad nativa (WAI-ARIA)",
+      "react-colorful — Selector de color liviano y accesible",
+    ],
+    colorEngine: [
+      "tinycolor2 — Manipulación y validación de formatos de color",
+      "WCAG Algorithm — Cálculo dinámico de contraste para accesibilidad",
+      "URL Serialization — Persistencia de paletas mediante parámetros en la URL",
+    ],
+
+    // Tech Details - Courses
+    coursesNextjs: [
+      "App Router con layouts anidados",
+      "Server Actions para mutaciones",
+      "Proxy para protección de rutas",
+      "Route Handlers para interceptores del demo mode",
+    ],
+    coursesClientState: [
+      "React — arquitectura de componentes",
+      "Zustand — estado global de sesión y UI",
+      "TanStack Query — caché y sincronización con el servidor",
+    ],
+    coursesSupabase: [
+      "PostgreSQL con Row Level Security",
+      "Auth SSR con @supabase/ssr",
+      "Sincronización DB–Storage sin archivos huérfanos",
+    ],
+    coursesArquitectura: [
+      "Feature-Sliced Design (FSD)",
+      "Seguridad multi-capa: Proxy + RLS + API",
+      "Modo demo con bloqueo de escrituras",
+    ],
+    coursesUI: [
+      "Tailwind CSS v4",
+      "shadcn/ui sobre Radix primitives",
+      "Sonner — notificaciones",
+      "next-themes — dark/light mode",
+      "Dynamic imports — lazy loading of heavy components",
+    ],
+    coursesValidation: [
+      "Zod — validación end-to-end",
+      "React Hook Form — formularios complejos",
+      "Vitest + Testing Library — unit tests",
+      "Sentry — monitoreo de errores",
+    ],
+
     // Proyecto rentalibre
     p1Desc:
-      "Marketplace de segunda mano para alquilar y vender objetos entre personas. Mensajería en tiempo real, sistema de reviews mutuas y flujo completo de compra con estados y notificaciones.",
+      "Marketplace de venta y intercambio de objetos nuevos y usados. Mensajería en tiempo real, sistema de reviews mutuas y flujo completo de compra con estados y notificaciones.",
     p1Origin:
       "Todos tenemos objetos que nos da vergüenza, pereza o miedo vender. Por eso surgió esta app, inspirada en Wallapop pero pensada para el mercado argentino, para que puedas vender lo que quieras sin costo.",
 
@@ -89,8 +182,103 @@ export const translations = {
     p2WinTitle: "Project #2",
     p3WinTitle: "Project #3",
 
+    // Tech Details - TratoLibre
+    tratolibreNextjs: [
+      "App Router with Server / Client Components",
+      "Server Actions for mutations",
+      "Dynamic and conditional routing",
+      "Proxy for route protection",
+      "API Routes for image uploads",
+    ],
+    tratolibreClientState: [
+      "React — component architecture",
+      "TypeScript — strict typing throughout the codebase",
+      "TanStack Query — caching, synchronization and notifications",
+      "React Hook Form + Zod — forms and validation",
+    ],
+    tratolibreSupabase: [
+      "Auth — email/password + OAuth (Google)",
+      "PostgreSQL with RLS on all tables",
+      "Realtime — messaging without polling",
+      "Storage — item photos and avatars",
+      "Client-side image compression — reduces before uploading to Storage",
+    ],
+    tratolibreArquitectura: [
+      "Feature-Sliced Design (FSD)",
+      "Multi-layer security: Proxy + RLS + Server Actions",
+      "Clear separation of layers: UI, state and business logic",
+      "Role system (authorization) and conditional UI",
+      "Rate limiting per action",
+    ],
+    tratolibreUI: [
+      "Chakra UI v3 — design system and components",
+      "boxicons — Iconography",
+      "Image optimization — next/image with lazy loading.",
+      "Skeletons & Spinners — loading states while data fetches",
+    ],
+
+    tratolibreValidation: [
+      "Vitest — unit testing",
+      "Playwright — e2e testing",
+      "Sentry — error monitoring in production",
+      "Vercel — Speed Insights and Analytics",
+    ],
+
+    // Tech Details - PickYourColor
+    colorCore: [
+      "React 19 + Vite — Single Page Application (SPA)",
+      "TypeScript — Strict typing for color models and state",
+      "Zustand — Reactive global state for palette sync",
+    ],
+    colorUI: [
+      "Tailwind CSS v4 — Dynamic styles via CSS variables",
+      "Radix UI — Primitives with native accessibility (WAI-ARIA)",
+      "react-colorful — Lightweight and accessible color picker",
+    ],
+    colorEngine: [
+      "tinycolor2 — Color format manipulation and validation",
+      "WCAG Algorithm — Dynamic contrast calculation for accessibility",
+      "URL Serialization — Palette persistence via URL parameters",
+    ],
+
+    // Tech Details - Courses
+    coursesNextjs: [
+      "App Router with nested layouts",
+      "Server Actions for mutations",
+      "Proxy for route protection",
+      "Route Handlers for demo mode interceptors",
+    ],
+    coursesClientState: [
+      "React — component architecture",
+      "Zustand — global state for session and UI",
+      "TanStack Query — caching and server sync",
+    ],
+    coursesSupabase: [
+      "PostgreSQL with Row Level Security",
+      "Auth SSR with @supabase/ssr",
+      "DB–Storage sync without orphaned files",
+    ],
+    coursesArquitectura: [
+      "Feature-Sliced Design (FSD)",
+      "Multi-layer security: Proxy + RLS + API",
+      "Demo mode with write blocking",
+    ],
+    coursesUI: [
+      "Tailwind CSS v4",
+      "shadcn/ui over Radix primitives",
+      "Sonner — notifications",
+      "next-themes — dark/light mode",
+      "Dynamic imports — carga bajo demanda de componentes pesados",
+    ],
+    coursesValidation: [
+      "Zod — end-to-end validation",
+      "React Hook Form — complex forms",
+      "Vitest + Testing Library — unit tests",
+      "Sentry — error monitoring",
+    ],
+
     p1Desc:
-      "Second-hand marketplace to rent and sell items between people. Real-time messaging, mutual review system and complete purchase flow with statuses and notifications.",
+      "Marketplace to sell and exchange new and used items between people. Real-time messaging, mutual review system and complete purchase flow with statuses and notifications.",
     p1Origin:
       "We all have items we're embarrassed, lazy or afraid to sell. That's why this app was born, inspired by Wallapop but designed for the Argentine market, so you can sell whatever you want for free.",
 

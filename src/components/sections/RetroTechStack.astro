@@ -28,7 +28,7 @@ const techs = [
     <div class="tech-grid">
     {techs.map(tech => (
   <div class="tech-item">
-    <img src={tech.icon} alt={tech.name} width="30" height="30" />
+    <img loading="lazy" src={tech.icon} alt={tech.name} width="30" height="30" />
     <span>{tech.name}</span>
   </div>
 ))}

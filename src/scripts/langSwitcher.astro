@@ -20,6 +20,35 @@ import { translations } from '../lib/translations';
   }
 
   document.getElementById('lang-switcher').textContent = lang === 'es' ? 'EN' : 'ES';
+
+  // Re-renderizar tech details
+  document.querySelectorAll('[data-tech-container]').forEach(container => {
+    const card = container.closest('.project-card');
+    const techKeysStr = card?.getAttribute('data-tech-keys');
+    if (!techKeysStr) return;
+    
+    const techKeys = JSON.parse(techKeysStr);
+    const ul = container.querySelector('ul');
+    if (!ul) return;
+    
+    ul.innerHTML = '';
+    Object.entries(techKeys).forEach(([category, key]) => {
+      const items = t[key] || [];
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <details>
+          <summary>${category}</summary>
+          <ul>
+            ${Array.isArray(items) 
+              ? items.map(item => `<li>${item}</li>`).join('')
+              : `<li>${items}</li>`
+            }
+          </ul>
+        </details>
+      `;
+      ul.appendChild(li);
+    });
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
