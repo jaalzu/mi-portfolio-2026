@@ -16,6 +16,7 @@ export const translations = {
     info2: "Inglés técnico fluido.",
     info3: "+3 años de experiencia en desarrollo web.",
     info4: "Participación activa en decisiones técnicas y de producto.",
+    info5: "Proactivo y resolutivo.",
 
     // Contact
     contactP: "Podés contactarme por cualquiera de estos medios!",
@@ -169,6 +170,7 @@ export const translations = {
     info2: "Fluent technical English.",
     info3: "+3 years of experience in web development.",
     info4: "Active participation in technical and product decisions.",
+    info5: "Proactive and solution-oriented.",
 
     contactP: "You can reach me through any of these channels!",
     contactEmail: "View email",
