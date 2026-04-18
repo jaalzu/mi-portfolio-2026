@@ -68,7 +68,6 @@ color: red;
     const email = 'javieralzuu@gmail.com';
 
     el.addEventListener('mouseenter', () => {
-      // Quitamos el atributo para que el i18n no lo sobreescriba al cambiar de idioma
       el.removeAttribute('data-i18n');
       el.textContent = email;
     });
