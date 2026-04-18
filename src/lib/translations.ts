@@ -44,7 +44,8 @@ export const translations = {
       "React — arquitectura de componentes",
       "TypeScript — tipado estricto en todo el código",
       "TanStack Query — caché, sincronización y notificaciones",
-      "React Hook Form + Zod — formularios y validación",
+      "Zustand — manejo de estado global liviano",
+      "React Hook Form — manejo eficiente de formularios",
     ],
     tratolibreSupabase: [
       "Auth — email/password + OAuth (Google)",
@@ -56,20 +57,21 @@ export const translations = {
     tratolibreArquitectura: [
       "Feature-Sliced Design (FSD)",
       "Seguridad multi-capa: Proxy + RLS + Server Actions",
+      "Zod — schemas tipados para validación y consistencia de datos",
       "Separación clara de capas: UI, estado y lógica de negocio",
       "Sistema de roles (autorización) y UI condicional",
       "Rate limiting por acción",
     ],
     tratolibreUI: [
       "Chakra UI v3 — sistema de diseño y componentes",
-      "boxicons — Iconografía",
+      "Tailwind CSS — estilos utilitarios para layouts ",
+      "Boxicons — Iconografía",
       "Image optimization — next/image con lazy loading nativo",
       "Skeletons & Spinners — loading states mientras cargan datos",
     ],
     tratolibreValidation: [
       "Vitest — unit testing",
       "Playwright — e2e testing",
-      "Sentry — monitoreo de errores en producción",
       "Vercel — Speed Insights y Analytics",
     ],
 
@@ -195,8 +197,9 @@ export const translations = {
     tratolibreClientState: [
       "React — component architecture",
       "TypeScript — strict typing throughout the codebase",
-      "TanStack Query — caching, synchronization and notifications",
-      "React Hook Form + Zod — forms and validation",
+      "TanStack Query — caching, synchronization and server state ",
+      "Zustand — lightweight global state management",
+      "React Hook Form — efficient form handling",
     ],
     tratolibreSupabase: [
       "Auth — email/password + OAuth (Google)",
@@ -208,13 +211,15 @@ export const translations = {
     tratolibreArquitectura: [
       "Feature-Sliced Design (FSD)",
       "Multi-layer security: Proxy + RLS + Server Actions",
+      "Zod — typed schemas for validation and data consistency",
       "Clear separation of layers: UI, state and business logic",
       "Role system (authorization) and conditional UI",
       "Rate limiting per action",
     ],
     tratolibreUI: [
       "Chakra UI v3 — design system and components",
-      "boxicons — Iconography",
+      "Tailwind CSS — utility-first styling for layouts and fine adjustments",
+      "Boxicons — Iconography",
       "Image optimization — next/image with lazy loading.",
       "Skeletons & Spinners — loading states while data fetches",
     ],
@@ -222,7 +227,6 @@ export const translations = {
     tratolibreValidation: [
       "Vitest — unit testing",
       "Playwright — e2e testing",
-      "Sentry — error monitoring in production",
       "Vercel — Speed Insights and Analytics",
     ],
 
@@ -270,7 +274,7 @@ export const translations = {
       "shadcn/ui over Radix primitives",
       "Sonner — notifications",
       "next-themes — dark/light mode",
-      "Dynamic imports — carga bajo demanda de componentes pesados",
+      "Dynamic imports — lazy loading of heavy components",
     ],
     coursesValidation: [
       "Zod — end-to-end validation",
