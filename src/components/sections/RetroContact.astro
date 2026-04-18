@@ -63,17 +63,14 @@ color: red;
   font-weight: 700;
   }
 </style>
-
 <script is:inline>
   document.querySelectorAll('#email-text').forEach(el => {
     const email = 'javieralzuu@gmail.com';
-    let revealed = false;
 
     el.addEventListener('mouseenter', () => {
-      if (revealed) return;
-
+      // Quitamos el atributo para que el i18n no lo sobreescriba al cambiar de idioma
+      el.removeAttribute('data-i18n');
       el.textContent = email;
-      revealed = true;
     });
   });
 </script>
