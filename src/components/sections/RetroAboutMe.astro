@@ -3,7 +3,13 @@ import WinGlass from '../ui/WinGlass.astro';
 const { xp = false } = Astro.props;
 
 ---
-<WinGlass title="Sobre mí" icon="retro/me-7.webp" color="var(--win-about)" {xp}>
+<WinGlass 
+  title="Sobre mí" 
+  titleKey="winAbout" 
+  icon="retro/me-7.webp" 
+  color="var(--win-about)" 
+  {xp}
+>
   <div class="about-body">
     <div class="about-text">
     <h1>
