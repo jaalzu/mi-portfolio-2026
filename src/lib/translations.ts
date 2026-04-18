@@ -179,7 +179,7 @@ export const translations = {
     contactCopied: "✓ Copied!",
     contactHover: "· click to copy",
 
-    picAge: "25 years old",
+    picAge: "25 years",
     picCountry: "Argentina",
 
     p1WinTitle: "Project #1",
