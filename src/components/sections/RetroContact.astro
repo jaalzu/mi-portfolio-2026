@@ -64,33 +64,16 @@ color: red;
   }
 </style>
 
-
 <script is:inline>
-  // Mejoramos el script para que respete las traducciones al hacer hover
-  const getTranslation = (key) => {
-    const lang = document.documentElement.getAttribute('lang') || 'es';
-    // Asumiendo que translations está disponible globalmente o pasado por window
-    return window.translations?.[lang]?.[key] || key;
-  };
-
   document.querySelectorAll('#email-text').forEach(el => {
     const email = 'javieralzuu@gmail.com';
+    let revealed = false;
 
     el.addEventListener('mouseenter', () => {
-      const hoverText = getTranslation('contactHover');
-      el.textContent = `${email} ${hoverText}`;
-    });
+      if (revealed) return;
 
-    el.addEventListener('mouseleave', () => {
-      el.textContent = getTranslation('contactEmail');
-    });
-
-    el.addEventListener('click', () => {
-      navigator.clipboard.writeText(email);
-      el.textContent = getTranslation('contactCopied');
-      setTimeout(() => { 
-        el.textContent = getTranslation('contactEmail'); 
-      }, 2000);
+      el.textContent = email;
+      revealed = true;
     });
   });
 </script>
