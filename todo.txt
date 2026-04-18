@@ -3,11 +3,10 @@
 
 comprar el dominio?
 
+mejorar las tecnologías en tratolibre.
+implementar que usamos zod para schemas, mappeamos, etc.
 
 
-
-añadir: Tenga buena comunicación y trabajo en equipo.
-Sea proactivo/a y resolutivo/a.
 
 finish.
 

@@ -4,7 +4,13 @@ const { xp = false } = Astro.props;
 
 ---
 
-<WinGlass title="Contacto"  icon="retro/contact.webp" color="var(--win-contact)" xp>
+<WinGlass 
+  title="Contacto" 
+  titleKey="winContact" 
+  icon="retro/contact.webp" 
+  color="var(--win-contact)" 
+  {xp}
+>
   <p data-i18n="contactP">Podes contactarme por cualquiera de estos medios!</p>
   <span id="email-text" data-i18n="contactEmail">Ver correo</span>
  <div class="contact-links">
@@ -57,24 +63,34 @@ color: red;
   font-weight: 700;
   }
 </style>
+
+
 <script is:inline>
-  const user = 'javieralzuu';
-  const domain = 'gmail.com';
-  const email = `${user}@${domain}`;
+  // Mejoramos el script para que respete las traducciones al hacer hover
+  const getTranslation = (key) => {
+    const lang = document.documentElement.getAttribute('lang') || 'es';
+    // Asumiendo que translations está disponible globalmente o pasado por window
+    return window.translations?.[lang]?.[key] || key;
+  };
 
   document.querySelectorAll('#email-text').forEach(el => {
+    const email = 'javieralzuu@gmail.com';
+
     el.addEventListener('mouseenter', () => {
-      el.textContent = `${email} · click para copiar`;
+      const hoverText = getTranslation('contactHover');
+      el.textContent = `${email} ${hoverText}`;
     });
 
     el.addEventListener('mouseleave', () => {
-      el.textContent = 'Ver correo';
+      el.textContent = getTranslation('contactEmail');
     });
 
     el.addEventListener('click', () => {
       navigator.clipboard.writeText(email);
-      el.textContent = '✓ Copiado!';
-      setTimeout(() => { el.textContent = 'Ver correo'; }, 2000);
+      el.textContent = getTranslation('contactCopied');
+      setTimeout(() => { 
+        el.textContent = getTranslation('contactEmail'); 
+      }, 2000);
     });
   });
 </script>
