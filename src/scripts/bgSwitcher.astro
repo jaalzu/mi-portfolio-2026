@@ -12,11 +12,28 @@ const { bg1, bg2, bg3, bg4 } = Astro.props;
   const bgs = [bg1, bg2, bg3, bg4];
   const img = document.querySelector('.bg-container img');
 
+  // Precargar todas las imágenes en segundo plano
+  const preloadImages = () => {
+    bgs.forEach(src => {
+      const preloadImg = new Image();
+      preloadImg.src = src;
+    });
+  };
+
   let currentBg = parseInt(localStorage.getItem('retro-bg') ?? '0');
   if (img) {
-    img.src = bgs[currentBg];
+    img.src = bgs[currentBg]; 
     img.style.opacity = '0';
-    img.onload = () => { img.style.opacity = '1'; };
+    img.onload = () => { 
+      img.style.opacity = '1';
+      
+      // Fallback para Safari/iOS
+      if (window.requestIdleCallback) {
+        requestIdleCallback(() => preloadImages(), { timeout: 3000 });
+      } else {
+        setTimeout(() => preloadImages(), 3000);
+      }
+    };
   }
 
   document.getElementById('bg-switcher')?.addEventListener('click', () => {
