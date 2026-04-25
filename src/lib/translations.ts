@@ -16,7 +16,6 @@ export const translations = {
     info2: "Inglés técnico fluido.",
     info3: "+3 años de experiencia en desarrollo web.",
     info4: "Participación activa en decisiones técnicas y de producto.",
-    info5: "Proactivo y resolutivo.",
 
     // Contact
     contactP: "Podés contactarme por cualquiera de estos medios!",
@@ -132,7 +131,7 @@ export const translations = {
     p1Desc:
       "Marketplace de venta y intercambio de objetos nuevos y usados. Mensajería en tiempo real, sistema de reviews mutuas y flujo completo de compra con estados y notificaciones.",
     p1Origin:
-      "Todos tenemos objetos que nos da vergüenza, pereza o miedo vender. Por eso surgió esta app, inspirada en Wallapop pero pensada para el mercado argentino, para que puedas vender lo que quieras sin costo.",
+      "Surgió de la idea de vender e intercambiar cosas entre mis amigos, así que armé esta app, simple y rápida, inspirada en Wallapop.",
 
     // Proyecto PickYourColor
     p2Desc:
@@ -172,7 +171,6 @@ export const translations = {
     info2: "Fluent technical English.",
     info3: "+3 years of experience in web development.",
     info4: "Active participation in technical and product decisions.",
-    info5: "Proactive and solution-oriented.",
 
     contactP: "You can reach me through any of these channels!",
     contactEmail: "View email",
@@ -286,7 +284,7 @@ export const translations = {
     p1Desc:
       "Marketplace to sell and exchange new and used items between people. Real-time messaging, mutual review system and complete purchase flow with statuses and notifications.",
     p1Origin:
-      "We all have items we're embarrassed, lazy or afraid to sell. That's why this app was born, inspired by Wallapop but designed for the Argentine market, so you can sell whatever you want for free.",
+      "It came from the idea of buying, selling, and trading things between my friends, so I built this app—simple and fast, inspired by Wallapop.",
 
     p2Desc:
       "Interactive color palette visualizer with a toolbar to modify colors in real time. Changes are instantly applied to UI components and palettes can be shared via URL.",

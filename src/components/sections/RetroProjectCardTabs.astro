@@ -76,7 +76,6 @@ const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
           src={images?.[0]}
           data-images={images?.join(',')}
           alt={projectTitle}
-          loading="lazy"
           class="project-img"
         />
       </div>
@@ -96,8 +95,10 @@ const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
 </WinGlass>
 </div>
 
+
 <script is:inline define:vars={{ translations }}>
   (() => {
+    // Renderizado de detalles técnicos (Stack)
     const renderTechDetail = (container, techKeys, lang = 'es') => {
       const ul = container.querySelector('ul');
       if (!ul) return;
@@ -124,7 +125,7 @@ const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
     const initProjects = () => {
       const currentLang = document.documentElement.getAttribute('lang') || 'es';
 
-      // Renderizar tech details
+      // 1. Inicializar Tech Details
       document.querySelectorAll('[data-tech-container]:not([data-initialized])').forEach(container => {
         const card = container.closest('.project-card');
         const techKeys = card ? JSON.parse(card.getAttribute('data-tech-keys') || '{}') : {};
@@ -132,7 +133,7 @@ const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
         container.setAttribute('data-initialized', 'true');
       });
 
-      // Tabs
+      // 2. Inicializar Tabs (Lógica de navegación)
       document.querySelectorAll('.tabs:not([data-initialized])').forEach(container => {
         const tabs = container.querySelectorAll('[role="tab"]');
         const panels = container.querySelectorAll('[role="tabpanel"]');
@@ -141,10 +142,8 @@ const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
           tab.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = tab.getAttribute('aria-controls');
-
             tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
             panels.forEach(p => p.hidden = true);
-
             tab.setAttribute('aria-selected', 'true');
             const activePanel = document.getElementById(targetId);
             if (activePanel) activePanel.hidden = false;
@@ -153,7 +152,7 @@ const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
         container.setAttribute('data-initialized', 'true');
       });
 
-      // Images
+      // 3. Inicializar Image Viewers (Navegación de imágenes)
       document.querySelectorAll('.img-viewer:not([data-initialized])').forEach(viewer => {
         const img = viewer.querySelector('.project-img');
         if (!img) return;
@@ -183,19 +182,40 @@ const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
         
         viewer.setAttribute('data-initialized', 'true');
       });
+
+      // 4. CARGA DIFERIDA (BAJA PRIORIDAD)
+      // Esta función se ejecuta cuando el thread principal está libre
+      const loadProjectImages = () => {
+        document.querySelectorAll('.project-img').forEach(img => {
+          const deferredSrc = img.getAttribute('data-src');
+          if (deferredSrc) {
+            img.src = deferredSrc;
+            // Opcional: remover el atributo una vez cargado
+            img.removeAttribute('data-src');
+          }
+        });
+      };
+
+      // Usamos requestIdleCallback para enviarlo al final de la cola (Macrotask de baja prioridad)
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(() => loadProjectImages());
+      } else {
+        // Fallback para navegadores antiguos
+        setTimeout(loadProjectImages, 1);
+      }
     };
 
-    // Renderizar al cargar
+    // Ejecución inicial
     initProjects();
+
+    // Compatibilidad con transiciones de Astro
     document.addEventListener('astro:page-load', initProjects);
 
-    // Re-renderizar cuando cambia de idioma
+    // Observer para cambios de idioma
     const originalApplyLang = window.applyLang;
     if (typeof window !== 'undefined' && originalApplyLang) {
       window.applyLang = function(lang, updateUrl = true) {
         originalApplyLang.call(this, lang, updateUrl);
-        
-        // Re-renderizar tech details con nuevo idioma
         document.querySelectorAll('[data-tech-container]').forEach(container => {
           const card = container.closest('.project-card');
           const techKeys = card ? JSON.parse(card.getAttribute('data-tech-keys') || '{}') : {};
@@ -214,7 +234,8 @@ const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
   }
 
   p {
-    font-size: .88rem;
+    font-size: .9rem;
+    line-height: 1.3;
     margin: 0 0 0px;
   }
 

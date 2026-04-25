@@ -5,12 +5,18 @@
       const panels = tablist.closest('.tabs')?.querySelectorAll('[role="tabpanel"]') ?? [];
 
       tabs.forEach((tab, i) => {
-        tab.addEventListener('click', () => {
+        // Clonamos para limpiar listeners previos y evitar duplicados al re-iniciar
+        const newTab = tab.cloneNode(true);
+        tab.parentNode.replaceChild(newTab, tab);
+
+        newTab.addEventListener('click', () => {
           tabs.forEach((t, j) => {
-            t.setAttribute('aria-selected', 'false');
+            // Buscamos el tab original en el DOM actualizado
+            const allTabs = tablist.querySelectorAll('[role="tab"]');
+            allTabs[j].setAttribute('aria-selected', 'false');
             if (panels[j]) panels[j].setAttribute('hidden', '');
           });
-          tab.setAttribute('aria-selected', 'true');
+          newTab.setAttribute('aria-selected', 'true');
           if (panels[i]) panels[i].removeAttribute('hidden');
         });
       });
@@ -18,20 +24,41 @@
   }
 
   function applyTheme(theme) {
+    // --- LÓGICA DE RESET ---
+    // 1. Cerramos todos los acordeones del Stack (details)
+    document.querySelectorAll('details').forEach(d => d.removeAttribute('open'));
+
+    // 2. Reseteamos los paneles de pestañas al estado inicial (primera pestaña activa)
+    document.querySelectorAll('.tabs').forEach(container => {
+      const tabs = container.querySelectorAll('[role="tab"]');
+      const panels = container.querySelectorAll('[role="tabpanel"]');
+      
+      tabs.forEach((t, i) => {
+        t.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      });
+      panels.forEach((p, i) => {
+        if (i === 0) p.removeAttribute('hidden');
+        else p.setAttribute('hidden', '');
+      });
+    });
+    // --- FIN RESET ---
+
     document.documentElement.setAttribute('data-theme', theme);
     document.querySelector('.desktop').classList.toggle('win7', theme === 'win7');
     localStorage.setItem('retro-theme', theme);
 
-    // re-init tabs al cambiar tema
+    // re-init tabs al cambiar tema para asegurar que los eventos respondan al nuevo layout
     initTabs();
 
     document.querySelectorAll('#theme-switchers a').forEach(b => {
-      const isActive = b.getAttribute('data-theme-target') === theme;
+      const target = b.getAttribute('data-theme-target');
+      const isActive = target === theme;
       b.style.opacity = isActive ? '0.5' : '1';
       b.style.pointerEvents = isActive ? 'none' : '';
     });
   }
 
+  // Inicialización
   const saved = localStorage.getItem('retro-theme') ?? 'xp';
   applyTheme(saved);
 
@@ -40,5 +67,5 @@
       e.preventDefault();
       applyTheme(btn.getAttribute('data-theme-target'));
     });
-  });
+  }); 
 </script>

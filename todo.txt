@@ -1,6 +1,15 @@
 
 hacer el readme.
+añadir que utilize css dinamico para cambiar los estilos
+usamos el event loop para delegar cargar de imágenes.
+usamos una técnica para evitar el web scraping invirtiendo el css con rlt. 
 
+
+
+
+CUANDO ABRISTE EL STACK Y DEMAS ,Y DSPS TE VAS A WINDOWS XP QUEDAN ABIERTOS!!!!!!
+
+la lógica de esconder el email no funciona te la detectan igual genio.
 
 comprar el dominio?.
 
