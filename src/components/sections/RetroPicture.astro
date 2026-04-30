@@ -7,7 +7,10 @@ const { xp = false } = Astro.props;
   <img src="me/me13.webp" alt="Foto" class="profile-img" />
 <div slot="status-bar" class="status-bar" style="display: flex; align-items: center;">
   <p class="status-bar-field" style="text-align: center;" data-i18n="picAge">25 años</p>
-  <p class="status-bar-field" style="text-align: center;" data-i18n="picCountry">Argentina</p>
+  <p class="status-bar-field" style="text-align: center;">
+  <span data-i18n="picCountry" >Argentina</span>
+  <img src="/ar.svg" alt="Flag of Argentina" width="16" />
+</p>
 </div>
 </WinGlass>
 

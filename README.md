@@ -1,43 +1,39 @@
-# Astro Starter Kit: Minimal
+# My Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
-```
+This is a my personal portfolio built with Astro, using HTML, CSS and TypeScript.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The project is inspired by Windows 7 and Windows Vista aesthetics. It includes two visual modes that replicate those styles. The interface is designed as a single view without scrolling, so everything is immediately accessible and fast to explore.
+Really aesthetic and visually pleasing interface, customizable background-image and window styles
 
-## 🚀 Project Structure
+## Tech Stack
 
-Inside of your Astro project, you'll see the following folders and files:
+- Astro
+- HTML
+- CSS
+- TypeScript
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Features
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+- Retro UI inspired by Windows 7 and Vista
+- Single screen layout (no scroll)
+- Multi-language support
+- Dynamic CSS for theme switching
+- Optimized image loading for better performance
+- Basic protection against scraping using RTL-based CSS inversion
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### Windows 7 Style
 
-Any static assets, like images, can be placed in the `public/` directory.
+![Windows 7 Mode](./public/og2.png)
 
-## 🧞 Commands
+### Windows Vista Style
 
-All commands are run from the root of the project, from a terminal:
+![Windows Vista Mode](./public/winVista.webp)
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Commands
 
-## 👀 Want to learn more?
+Run all commands from the project root:
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- `npm install` — install dependencies
+- `npm run dev` — start development server
+- `npm run build` — build for production
+- `npm run preview` — preview production build
