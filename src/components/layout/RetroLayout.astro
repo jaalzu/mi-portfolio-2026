@@ -29,6 +29,23 @@ const config = THEMES[theme];
 
 <html lang="es" data-theme={config.dataTheme}>
   <head>
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-D213Q3J7LS"></script>
+
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag(...args) {
+      window.dataLayer.push(args);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-D213Q3J7LS');
+  </script>
+</head>
+
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Javier Alzú · Retro {config.dataTheme.toUpperCase()}</title>
