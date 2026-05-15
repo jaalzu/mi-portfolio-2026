@@ -1,6 +1,5 @@
 @import "xp.css/dist/XP.css";
 
-/* cuando es XP, el .win7 scoping de 7.css no debe ganar */
 [data-theme="xp"] .win7 .window {
   all: revert;
 }
