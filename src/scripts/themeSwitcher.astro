@@ -5,7 +5,6 @@
       const panels = tablist.closest('.tabs')?.querySelectorAll('[role="tabpanel"]') ?? [];
 
       tabs.forEach((tab, i) => {
-        // Clonamos para limpiar listeners previos y evitar duplicados al re-iniciar
         const newTab = tab.cloneNode(true);
         tab.parentNode.replaceChild(newTab, tab);
 
@@ -25,10 +24,8 @@
 
   function applyTheme(theme) {
     // --- LÓGICA DE RESET ---
-    // 1. Cerramos todos los acordeones del Stack (details)
     document.querySelectorAll('details').forEach(d => d.removeAttribute('open'));
 
-    // 2. Reseteamos los paneles de pestañas al estado inicial (primera pestaña activa)
     document.querySelectorAll('.tabs').forEach(container => {
       const tabs = container.querySelectorAll('[role="tab"]');
       const panels = container.querySelectorAll('[role="tabpanel"]');
@@ -58,7 +55,6 @@
     });
   }
 
-  // Inicialización
   const saved = localStorage.getItem('retro-theme') ?? 'xp';
   applyTheme(saved);
 
