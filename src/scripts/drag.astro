@@ -20,7 +20,6 @@
 
    document.addEventListener('mousemove', (e) => {
   if (!dragging) return;
-  console.log('dx:', e.clientX - offsetX, 'dy:', e.clientY - offsetY);
   dragging.style.left = (e.clientX - offsetX) + 'px';
   dragging.style.top  = (e.clientY - offsetY) + 'px';
 });
