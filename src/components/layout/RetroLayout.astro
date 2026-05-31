@@ -11,6 +11,7 @@ import RetroInfo from '../sections/RetroInfo.astro';
 import RetroProjectCardTabs from '../sections/RetroProjectCardTabs.astro';
 import RetroPicture from '../sections/RetroPicture.astro';
 import { THEMES, type ThemeKey } from '../../lib/themes';
+import MusicPlayer from '../../scripts/musicPlayer.astro';
 
 
 import DragScript from '../../scripts/drag.astro';
@@ -47,7 +48,8 @@ const config = THEMES[theme];
 
 
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Javier Alzú · Retro {config.dataTheme.toUpperCase()}</title>
 
 
@@ -167,6 +169,7 @@ const config = THEMES[theme];
   <div id="theme-switchers">
   <a role="button" data-theme-target="win7" style="display: inline-flex; align-items: center; justify-content: center;">Win 7</a>
   <a role="button" data-theme-target="xp" style="display: inline-flex; align-items: center; justify-content: center;">Win XP</a>
+
   </div>
   </div>
     </main>
@@ -178,6 +181,7 @@ const config = THEMES[theme];
     <BgSwitcher bg1={bg1.src} bg2={bg2.src} bg3={bg3.src} bg4={bg4.src} />
     <ThemeSwitcher />
     <LangSwitcher />
+<MusicPlayer />
 
 
 <script is:inline>

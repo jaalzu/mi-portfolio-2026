@@ -1,0 +1,28 @@
+<script>
+  const btn = document.getElementById('music-toggle');
+  let audio: HTMLAudioElement | null = null;
+  let playing = false;
+
+  const updateBtn = () => {
+    if (btn) btn.textContent = playing ? 'Música: ON' : 'Música: OFF';
+  };
+
+  btn?.addEventListener('click', () => {
+    if (!audio) {
+      // Se carga solo al primer click, no al entrar
+      audio = new Audio('/music/sound1.mp3');
+      audio.loop = true;
+      audio.preload = 'none';
+    }
+
+    if (playing) {
+      audio.pause();
+      playing = false;
+    } else {
+      audio.play();
+      playing = true;
+    }
+
+    updateBtn();
+  });
+</script>
