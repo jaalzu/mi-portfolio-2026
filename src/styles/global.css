@@ -6,12 +6,6 @@
   display: none;
 }
 
-*:focus,
-*:focus-visible {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
 [data-theme="win7"] * {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
 }
@@ -27,7 +21,6 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  font-size: 0.9rem;
   overflow: hidden;
 }
 
@@ -43,7 +36,6 @@ body {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: opacity 0.2s;
 }
 
 .desktop {
@@ -82,9 +74,9 @@ body {
 ============================================ */
 #retro-toolbar {
   position: fixed;
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
+  bottom: 5px;
+  left: 5px;
+  right: 3px;
   z-index: 100;
   display: flex;
   justify-content: space-between;
@@ -132,23 +124,6 @@ body {
 }
 [data-theme="xp"] .win7-window {
   display: none;
-}
-
-/* XP: botones del toolbar */
-[data-theme="xp"] a[role="button"] {
-  display: inline-block;
-  padding: 4px 12px;
-  background: #ece9d8;
-  border: 2px solid;
-  border-color: #fff #808080 #808080 #fff;
-  cursor: pointer;
-  font-size: 11px;
-  text-decoration: none;
-  color: #000;
-}
-
-[data-theme="xp"] a[role="button"]:active {
-  border-color: #808080 #fff #fff #808080;
 }
 
 [data-theme="win7"] .title-bar {
@@ -235,7 +210,7 @@ body {
     grid-row: auto !important;
   }
 }
-
+/* 
 @media (min-width: 1920px) {
   #win-picture {
     left: 3.1vw;
@@ -261,4 +236,4 @@ body {
   #win-p1 {
     left: 62.5vw;
   }
-}
+} */

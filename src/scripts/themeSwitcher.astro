@@ -10,7 +10,6 @@
 
         newTab.addEventListener('click', () => {
           tabs.forEach((t, j) => {
-            // Buscamos el tab original en el DOM actualizado
             const allTabs = tablist.querySelectorAll('[role="tab"]');
             allTabs[j].setAttribute('aria-selected', 'false');
             if (panels[j]) panels[j].setAttribute('hidden', '');
@@ -23,7 +22,6 @@
   }
 
   function applyTheme(theme) {
-    // --- LÓGICA DE RESET ---
     document.querySelectorAll('details').forEach(d => d.removeAttribute('open'));
 
     document.querySelectorAll('.tabs').forEach(container => {
@@ -38,30 +36,27 @@
         else p.setAttribute('hidden', '');
       });
     });
-    // --- FIN RESET ---
 
     document.documentElement.setAttribute('data-theme', theme);
     document.querySelector('.desktop').classList.toggle('win7', theme === 'win7');
     localStorage.setItem('retro-theme', theme);
 
-    // re-init tabs al cambiar tema para asegurar que los eventos respondan al nuevo layout
     initTabs();
 
-    document.querySelectorAll('#theme-switchers a').forEach(b => {
+    document.querySelectorAll('#theme-switchers button[data-theme-target]').forEach(b => {
       const target = b.getAttribute('data-theme-target');
       const isActive = target === theme;
-      b.style.opacity = isActive ? '0.5' : '1';
-      b.style.pointerEvents = isActive ? 'none' : '';
+      isActive ? b.setAttribute('disabled', '') : b.removeAttribute('disabled');
     });
   }
 
   const saved = localStorage.getItem('retro-theme') ?? 'xp';
   applyTheme(saved);
 
-  document.querySelectorAll('#theme-switchers a').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
+  document.querySelectorAll('#theme-switchers button[data-theme-target]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (btn.disabled) return;
       applyTheme(btn.getAttribute('data-theme-target'));
     });
-  }); 
+  });
 </script>

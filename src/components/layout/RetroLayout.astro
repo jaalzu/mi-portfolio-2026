@@ -11,6 +11,7 @@ import RetroInfo from '../sections/RetroInfo.astro';
 import RetroProjectCardTabs from '../sections/RetroProjectCardTabs.astro';
 import RetroPicture from '../sections/RetroPicture.astro';
 import { THEMES, type ThemeKey } from '../../lib/themes';
+import MusicPlayer from '../../scripts/musicPlayer.astro';
 
 
 import DragScript from '../../scripts/drag.astro';
@@ -47,7 +48,8 @@ const config = THEMES[theme];
 
 
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Javier Alzú · Retro {config.dataTheme.toUpperCase()}</title>
 
 
@@ -69,17 +71,17 @@ const config = THEMES[theme];
 
     
     <main class="desktop win7">
-      <div class="win" id="win-picture" style="top: 35px; left: 60px; width: 200px;">
+      <div class="win" id="win-picture" style="top: 10px; left:3vw">
         <RetroPicture xp={config.noGlass} />
       </div>
-      <div class="win" id="win-about" style="top: 35px; left: 325px; width: 800px;">
+      <div class="win" id="win-about" style="top: 20px; left: 18vw; width: 690px;">
         <RetroAboutMe xp={config.noGlass} />
       </div>
-      <div class="win" id="win-info" style="top: 315px; left: 80px; width: 400px;">
+      <div class="win" id="win-info" style="top: 270px; left: 3vw; width: 300px;">
         <RetroInfo xp={config.noGlass} />
       </div>
       
-  <div class="win" id="win-p1" style="top: 20px; left: 1200px; width: 500px;">
+  <div class="win" id="win-p1" style="top: 15px; left: 63vw; width: 500px;">
   <RetroProjectCardTabs 
     xp={config.noGlass} 
     title="Proyecto #1"
@@ -103,7 +105,7 @@ const config = THEMES[theme];
     color="var(--win-projects)" 
   />
 </div>
-<div class="win" id="win-p2" style="top: 300px; left: 1200px; width: 500px;">
+<div class="win" id="win-p2" style="top: 270px; left: 63vw; width: 500px;">
   <RetroProjectCardTabs 
     xp={config.noGlass} 
     title="Proyecto #2"
@@ -125,7 +127,7 @@ const config = THEMES[theme];
   />
 </div>
 
-<div class="win" id="win-p3" style="top: 610px; left: 1200px; width: 500px;">
+<div class="win" id="win-p3" style="top: 550px; left: 63vw; width: 500px;">
   <RetroProjectCardTabs 
     xp={config.noGlass} 
     title="Proyecto #3" 
@@ -149,13 +151,16 @@ const config = THEMES[theme];
     color="var(--win-projects)" 
   />
 </div>
-      <div class="win" id="win-tech" style="top: 580px; left: 80px; width: 750px;">
+      <div class="win" id="win-tech" style="top: 530px; left: 3vw; width: 780px;">
         <RetroTechStack xp={config.noGlass} />
       </div>
-      <div class="win" id="win-contact" style="top: 320px; left: 620px; width: 420px;">
+      <div class="win" id="win-contact" style="top: 280px; left: 30vw; width: 450px;">
         <RetroContact xp={config.noGlass} />
       </div>
 
+
+
+      
       <div id="retro-toolbar">
   <div style="display: flex; gap: 6px;">
   <button id="bg-switcher" data-i18n="btnChangeBg" style="display: flex; align-items: center; justify-content: center;">
@@ -164,10 +169,11 @@ const config = THEMES[theme];
  <button id="lang-switcher">EN</button>
 
   </div>
-  <div id="theme-switchers">
-  <a role="button" data-theme-target="win7" style="display: inline-flex; align-items: center; justify-content: center;">Win 7</a>
-  <a role="button" data-theme-target="xp" style="display: inline-flex; align-items: center; justify-content: center;">Win XP</a>
-  </div>
+<div id="theme-switchers">
+  <button data-theme-target="win7">Win 7</button>
+  <button data-theme-target="xp">Win XP</button>
+  <button id="music-toggle">Música: OFF</button>
+</div>
   </div>
     </main>
 
@@ -178,6 +184,7 @@ const config = THEMES[theme];
     <BgSwitcher bg1={bg1.src} bg2={bg2.src} bg3={bg3.src} bg4={bg4.src} />
     <ThemeSwitcher />
     <LangSwitcher />
+    <MusicPlayer />
 
 
 <script is:inline>
@@ -210,3 +217,19 @@ const config = THEMES[theme];
   </body>
 </html>
 
+
+
+<style>
+  @media (max-width: 640px) {
+  #retro-toolbar {
+    gap: 4px;
+    padding: 4px;
+  }
+
+  #retro-toolbar button {
+    font-size: 11px;
+    padding: 2px 5px;
+    min-width: unset;
+  }
+}
+</style>
