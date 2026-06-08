@@ -71,17 +71,17 @@ const config = THEMES[theme];
 
     
     <main class="desktop win7">
-      <div class="win" id="win-picture" style="top: 10px; left:1vw">
+      <div class="win" id="win-picture" style="top: 10px; left:3vw">
         <RetroPicture xp={config.noGlass} />
       </div>
-      <div class="win" id="win-about" style="top: 15px; left: 17vw; width: 590px;">
+      <div class="win" id="win-about" style="top: 20px; left: 18vw; width: 690px;">
         <RetroAboutMe xp={config.noGlass} />
       </div>
-      <div class="win" id="win-info" style="top: 240px; left: 2vw; width: 300px;">
+      <div class="win" id="win-info" style="top: 270px; left: 3vw; width: 300px;">
         <RetroInfo xp={config.noGlass} />
       </div>
       
-  <div class="win" id="win-p1" style="top: 10px; left: 63vw; width: 500px;">
+  <div class="win" id="win-p1" style="top: 15px; left: 63vw; width: 500px;">
   <RetroProjectCardTabs 
     xp={config.noGlass} 
     title="Proyecto #1"
@@ -105,7 +105,7 @@ const config = THEMES[theme];
     color="var(--win-projects)" 
   />
 </div>
-<div class="win" id="win-p2" style="top: 240px; left: 63vw; width: 500px;">
+<div class="win" id="win-p2" style="top: 270px; left: 63vw; width: 500px;">
   <RetroProjectCardTabs 
     xp={config.noGlass} 
     title="Proyecto #2"
@@ -127,7 +127,7 @@ const config = THEMES[theme];
   />
 </div>
 
-<div class="win" id="win-p3" style="top: 470px; left: 63vw; width: 500px;">
+<div class="win" id="win-p3" style="top: 550px; left: 63vw; width: 500px;">
   <RetroProjectCardTabs 
     xp={config.noGlass} 
     title="Proyecto #3" 
@@ -151,14 +151,12 @@ const config = THEMES[theme];
     color="var(--win-projects)" 
   />
 </div>
-      <div class="win" id="win-tech" style="top: 450px; left: 1vw; width: 750px;">
+      <div class="win" id="win-tech" style="top: 530px; left: 3vw; width: 780px;">
         <RetroTechStack xp={config.noGlass} />
       </div>
-      <div class="win" id="win-contact" style="top: 250px; left: 27vw; width: 400px;">
+      <div class="win" id="win-contact" style="top: 280px; left: 30vw; width: 450px;">
         <RetroContact xp={config.noGlass} />
       </div>
-
-
 
 
 
@@ -219,3 +217,19 @@ const config = THEMES[theme];
   </body>
 </html>
 
+
+
+<style>
+  @media (max-width: 640px) {
+  #retro-toolbar {
+    gap: 4px;
+    padding: 4px;
+  }
+
+  #retro-toolbar button {
+    font-size: 11px;
+    padding: 2px 5px;
+    min-width: unset;
+  }
+}
+</style>
