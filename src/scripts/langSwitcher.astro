@@ -21,7 +21,7 @@ import { translations } from '../lib/translations';
 
   document.getElementById('lang-switcher').textContent = lang === 'es' ? 'EN' : 'ES';
 
-  // Re-renderizar tech details
+
   document.querySelectorAll('[data-tech-container]').forEach(container => {
     const card = container.closest('.project-card');
     const techKeysStr = card?.getAttribute('data-tech-keys');
