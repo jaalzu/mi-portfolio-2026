@@ -13,7 +13,7 @@ export const translations = {
 
     // Info
     info1: "Desarrollador autodidacta.",
-    info2: "Inglés técnico fluido.",
+    info2: "Buen manejo de inglés.",
     info3: "+3 años de experiencia en desarrollo web.",
     info4: "Participación activa en decisiones técnicas y de producto.",
 
@@ -168,7 +168,7 @@ export const translations = {
       "I transform complex requirements into outstanding user experiences, approaching each project with enthusiasm and commitment.",
 
     info1: "Self-taught developer.",
-    info2: "Fluent technical English.",
+    info2: "English proficiency.",
     info3: "+3 years of experience in web development.",
     info4: "Active participation in technical and product decisions.",
 
