@@ -9,7 +9,7 @@ import ScrollBg from '../../components/ScrollBg.astro';
 
 
 import DragScript from '../../scripts/drag.astro';
-import ThemeSwitcher from '../../scripts/themeSwitcher.astro';
+// import ThemeSwitcher from '../../scripts/themeSwitcher.astro';
 import SliderScript from '../../scripts/slider.astro';
 import LangSwitcher from '../../scripts/langSwitcher.astro';
 
@@ -64,6 +64,10 @@ const config = THEMES[theme];
       <div class="win" id="win-picture" style="top: 10px; left:3vw">
         <RetroPicture xp={config.noGlass} />
       </div>
+   
+<div role="tooltip" class="is-top is-right" id="scroll-hint">
+  Scrollea hacia abajo para cambiar el día.
+</div>
       <div class="win" id="win-about" style="top: 250px; left: 3vw; width: 690px;">
         <RetroAboutMe xp={config.noGlass} />
       </div>
@@ -149,10 +153,10 @@ const config = THEMES[theme];
  <button id="lang-switcher">EN</button>
 
   </div>
-<div id="theme-switchers">
+<!-- <div id="theme-switchers">
   <button data-theme-target="win7">Win 7</button>
   <button data-theme-target="xp">Win XP</button>
-</div>
+</div> -->
   </div>
     </main>
 
@@ -160,7 +164,7 @@ const config = THEMES[theme];
 
     <DragScript />
     <SliderScript />
-    <ThemeSwitcher />
+    <!-- <ThemeSwitcher /> -->
     <LangSwitcher />
 
 
@@ -189,15 +193,26 @@ const config = THEMES[theme];
   });
 </script>
 
-
-
   </body>
 </html>
 
 
 
 <style>
-  @media (max-width: 640px) {
+  #scroll-hint {
+  position: absolute;
+  top: 10px;
+  left: calc(4vw + 158px);
+  z-index: 100;
+  font-size: .8rem;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+  white-space: nowrap;
+  padding: 4px 10px !important;
+}
+
+
+@media (max-width: 640px) {
   #retro-toolbar {
     gap: 4px;
     padding: 4px;
@@ -208,5 +223,20 @@ const config = THEMES[theme];
     padding: 2px 5px;
     min-width: unset;
   }
+
+  #scroll-hint {
+    position: fixed;
+    top: auto;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-10%);
+    white-space: nowrap;
+    height: 30px !important;
+    font-size: 10.5px;
+    padding: 6px 6px !important;
+    max-width: fit-content !important;
+    width: auto !important;
+  }
 }
+ 
 </style>

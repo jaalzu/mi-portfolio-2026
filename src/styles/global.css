@@ -60,15 +60,15 @@ body {
 /* ============================================
    VARIABLES DE COLOR
 ============================================ */
-:root {
-  --win-about: #2fff0038;
-  --win-projects: #d901ff4c;
-  --win-tech: #fef6005d;
-  --win-picture: #0de2db2f;
-  --win-contact: #0de2db89;
-  --win-info: #2fff0045;
-}
 
+:root {
+  --win-about: var(--win-border-color);
+  --win-projects: var(--win-border-color);
+  --win-tech: var(--win-border-color);
+  --win-picture: var(--win-border-color);
+  --win-contact: var(--win-border-color);
+  --win-info: var(--win-border-color);
+}
 /* ============================================
    TOOLBAR
 ============================================ */
