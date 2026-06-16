@@ -14,7 +14,7 @@ export const translations = {
       " Disfruto participar en todas las etapas de un producto, desde la idea inicial hasta su lanzamiento, colaborando tanto en aspectos técnicos como creativos.",
     // Info
     info1: "Desarrollador autodidacta.",
-    info2: "Inglés técnico fluido.",
+    info2: "Buen manejo de inglés.",
     info3: "+3 años de experiencia en desarrollo web.",
     info4: "Participación activa en decisiones técnicas y de producto.",
 
@@ -174,7 +174,7 @@ export const translations = {
       "I enjoy being involved in every stage of a product, whether technical or creative, contributing from the initial idea to the final launch.",
 
     info1: "Self-taught developer.",
-    info2: "Fluent technical English.",
+    info2: "English proficiency.",
     info3: "+3 years of experience in web development.",
     info4: "Active participation in technical and product decisions.",
 
