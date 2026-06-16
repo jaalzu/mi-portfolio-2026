@@ -1,23 +1,15 @@
 ---
-import { Image } from 'astro:assets';
-import bg4 from '../../assets/windows_7_194.webp';
-import bg2 from '../../assets/windows_vista_90hd.webp';
-import bg3 from '../../assets/city.webp';
-import bg1 from '../../assets/windows_xp_35.webp';
+
 import RetroAboutMe from '../sections/RetroAboutMe.astro';
 import RetroTechStack from '../sections/RetroTechStack.astro';
-import RetroContact from '../sections/RetroContact.astro';
-import RetroInfo from '../sections/RetroInfo.astro';
 import RetroProjectCardTabs from '../sections/RetroProjectCardTabs.astro';
 import RetroPicture from '../sections/RetroPicture.astro';
 import { THEMES, type ThemeKey } from '../../lib/themes';
-// import MusicPlayer from '../../scripts/musicPlayer.astro';
 
 
 import DragScript from '../../scripts/drag.astro';
 import ThemeSwitcher from '../../scripts/themeSwitcher.astro';
 import SliderScript from '../../scripts/slider.astro';
-import BgSwitcher from '../../scripts/bgSwitcher.astro';
 import LangSwitcher from '../../scripts/langSwitcher.astro';
 
 import '../../styles/win7.css';
@@ -65,21 +57,16 @@ const config = THEMES[theme];
   </head>
 
   <body>
-    <div class="bg-container">
-      <Image src={bg4} alt="Fondo Windows" quality="90" loading="eager" fetchpriority="high" />
-    </div>
-
+<ScrollBg />
     
     <main class="desktop win7">
       <div class="win" id="win-picture" style="top: 10px; left:3vw">
         <RetroPicture xp={config.noGlass} />
       </div>
-      <div class="win" id="win-about" style="top: 20px; left: 18vw; width: 690px;">
+      <div class="win" id="win-about" style="top: 250px; left: 3vw; width: 690px;">
         <RetroAboutMe xp={config.noGlass} />
       </div>
-      <div class="win" id="win-info" style="top: 270px; left: 3vw; width: 300px;">
-        <RetroInfo xp={config.noGlass} />
-      </div>
+
       
   <div class="win" id="win-p1" style="top: 15px; left: 63vw; width: 500px;">
   <RetroProjectCardTabs 
@@ -151,28 +138,19 @@ const config = THEMES[theme];
     color="var(--win-projects)" 
   />
 </div>
-      <div class="win" id="win-tech" style="top: 530px; left: 3vw; width: 780px;">
+      <div class="win" id="win-tech" style="top: 560px; left: 3vw; width: 780px;">
         <RetroTechStack xp={config.noGlass} />
       </div>
-      <div class="win" id="win-contact" style="top: 280px; left: 30vw; width: 450px;">
-        <RetroContact xp={config.noGlass} />
-      </div>
-
-
-
       
       <div id="retro-toolbar">
   <div style="display: flex; gap: 6px;">
-  <button id="bg-switcher" data-i18n="btnChangeBg" style="display: flex; align-items: center; justify-content: center;">
-  Cambiar Fondo
-</button>
+
  <button id="lang-switcher">EN</button>
 
   </div>
 <div id="theme-switchers">
   <button data-theme-target="win7">Win 7</button>
   <button data-theme-target="xp">Win XP</button>
-  <!-- <button id="music-toggle">Música: OFF</button> -->
 </div>
   </div>
     </main>
@@ -181,10 +159,8 @@ const config = THEMES[theme];
 
     <DragScript />
     <SliderScript />
-    <BgSwitcher bg1={bg1.src} bg2={bg2.src} bg3={bg3.src} bg4={bg4.src} />
     <ThemeSwitcher />
     <LangSwitcher />
-    <!-- <MusicPlayer /> -->
 
 
 <script is:inline>
