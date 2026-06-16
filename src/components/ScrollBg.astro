@@ -1,0 +1,133 @@
+<div class="scroll-bg" id="scroll-bg">
+  <div class="bg-layer" id="bg-day"    style="background-image: url('/images/city.webp')"></div>
+  <div class="bg-layer" id="bg-rain"   style="background-image: url('/images/rain.png');  opacity:0"></div>
+  <div class="bg-layer" id="bg-sunset" style="background-image: url('/images/sunset.png'); opacity:0"></div>
+  <div class="bg-layer" id="bg-night"  style="background-image: url('/images/night.png');  opacity:0"></div>
+  <canvas id="bg-rain-canvas" aria-hidden="true"></canvas>
+</div>
+
+<style>
+  .scroll-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .bg-layer {
+    position: absolute;
+    inset: -1px; /* margen para parallax */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    will-change: opacity, transform;
+    isolation: isolate;
+  }
+
+  #bg-rain-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+  }
+</style>
+
+<script>
+  // ── DOM ───────────────────────────────────────────────────
+  const bgSunset   = document.getElementById('bg-sunset')      as HTMLElement;
+  const bgRain     = document.getElementById('bg-rain')        as HTMLElement;
+  const bgNight    = document.getElementById('bg-night')       as HTMLElement;
+  const rainCanvas = document.getElementById('bg-rain-canvas') as HTMLCanvasElement;
+  const ctx        = rainCanvas.getContext('2d')!;
+
+
+  // ── Helpers ───────────────────────────────────────────────
+  const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
+  const segT  = (t: number, s: number, e: number)   => clamp((t - s) / (e - s), 0, 1);
+  const ease  = (t: number) => t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t;
+
+ 
+  const SEGS = {
+  dayToRain:     [0.15, 0.40] as [number, number],
+  rainToSunset:  [0.40, 0.62] as [number, number],
+  sunsetToNight: [0.60, 0.82] as [number, number],
+};
+
+
+  // ── Rain canvas ───────────────────────────────────────────
+  const resize = () => {
+    rainCanvas.width  = window.innerWidth;
+    rainCanvas.height = window.innerHeight;
+  };
+  resize();
+  window.addEventListener('resize', resize);
+
+  const drops = Array.from({ length:500 }, () => ({
+    x:     Math.random() * window.innerWidth,
+    y:     Math.random() * window.innerHeight,
+    speed: 9  + Math.random() * 10,
+    len:   14 + Math.random() * 22,
+    op:    0.2 + Math.random() * 0.5,
+  }));
+
+  let rainOp = 0;
+
+  function drawRain() {
+    ctx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
+    if (rainOp > 0.01) {
+      for (const d of drops) {
+        ctx.beginPath();
+        ctx.moveTo(d.x, d.y);
+        ctx.lineTo(d.x - 2, d.y + d.len);
+        ctx.strokeStyle = `rgba(180,210,255,${d.op * rainOp * 0.8})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        d.y += d.speed;
+        if (d.y > rainCanvas.height) { d.y = -d.len; d.x = Math.random() * rainCanvas.width; }
+      }
+    }
+    requestAnimationFrame(drawRain);
+  }
+  drawRain();
+
+  // ── Wheel → progress 0..1 ────────────────────────────────
+  // 0.0003 = sensibilidad. Subilo para transición más rápida.
+  const SENSITIVITY = 0.0003;
+  let progress = 0;
+
+
+  function updateLayers(t: number) {
+  const rainOp_  = ease(segT(t, ...SEGS.dayToRain));
+  const sunsetOp = ease(segT(t, ...SEGS.rainToSunset));
+  const nightOp  = ease(segT(t, ...SEGS.sunsetToNight));
+
+  bgRain.style.opacity   = String(rainOp_);
+  bgSunset.style.opacity = String(sunsetOp);
+  bgNight.style.opacity  = String(nightOp);
+
+  rainOp = rainOp_ * (1 - sunsetOp);
+  rainCanvas.style.opacity = rainOp > 0.01 ? '1' : '0';
+}
+
+  window.addEventListener('wheel', (e) => {
+    progress = clamp(progress + e.deltaY * SENSITIVITY, 0, 1);
+    updateLayers(progress);
+  }, { passive: true });
+
+  // Touch support para mobile
+  let lastTouchY = 0;
+  window.addEventListener('touchstart', (e) => {
+    lastTouchY = e.touches[0].clientY;
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    const delta = lastTouchY - e.touches[0].clientY;
+    lastTouchY  = e.touches[0].clientY;
+    progress = clamp(progress + delta * SENSITIVITY * 3, 0, 1);
+    updateLayers(progress);
+  }, { passive: true });
+
+  updateLayers(0);
+</script>

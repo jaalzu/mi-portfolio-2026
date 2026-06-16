@@ -7,10 +7,11 @@ export const translations = {
     // About
     aboutRole: "Desarrollador Frontend",
     aboutText:
-      "con experiencia en el diseño, desarrollo, mantenimiento y mejora de aplicaciones web.",
+      "con experiencia en el diseño, desarrollo y mejora de aplicaciones web. ",
     aboutText2:
       "Transformo requisitos complejos en experiencias de usuario destacadas, abordando cada proyecto con entusiasmo y compromiso.",
-
+    aboutText3:
+      " Disfruto participar en todas las etapas de un producto, desde la idea inicial hasta su lanzamiento, colaborando tanto en aspectos técnicos como creativos.",
     // Info
     info1: "Desarrollador autodidacta.",
     info2: "Inglés técnico fluido.",
@@ -162,10 +163,15 @@ export const translations = {
     winContact: "Contact",
 
     aboutRole: "Frontend Developer",
+
     aboutText:
       "with experience in the design, development, maintenance and improvement of web applications.",
+
     aboutText2:
       "I transform complex requirements into outstanding user experiences, approaching each project with enthusiasm and commitment.",
+
+    aboutText3:
+      "I enjoy being involved in every stage of a product, whether technical or creative, contributing from the initial idea to the final launch.",
 
     info1: "Self-taught developer.",
     info2: "Fluent technical English.",
