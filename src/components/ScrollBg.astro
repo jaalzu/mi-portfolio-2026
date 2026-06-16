@@ -35,70 +35,109 @@
 </style>
 
 <script>
-  // ── DOM ───────────────────────────────────────────────────
-  const bgSunset   = document.getElementById('bg-sunset')      as HTMLElement;
-  const bgRain     = document.getElementById('bg-rain')        as HTMLElement;
-  const bgNight    = document.getElementById('bg-night')       as HTMLElement;
-  const rainCanvas = document.getElementById('bg-rain-canvas') as HTMLCanvasElement;
-  const ctx        = rainCanvas.getContext('2d')!;
+// ── DOM ───────────────────────────────────────────────────
+const bgSunset   = document.getElementById('bg-sunset')      as HTMLElement;
+const bgRain     = document.getElementById('bg-rain')        as HTMLElement;
+const bgNight    = document.getElementById('bg-night')       as HTMLElement;
+const rainCanvas = document.getElementById('bg-rain-canvas') as HTMLCanvasElement;
+const ctx        = rainCanvas.getContext('2d')!;
 
+// ── Helpers ───────────────────────────────────────────────
+const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
+const segT  = (t: number, s: number, e: number)   => clamp((t - s) / (e - s), 0, 1);
+const ease  = (t: number) => t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t;
 
-  // ── Helpers ───────────────────────────────────────────────
-  const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
-  const segT  = (t: number, s: number, e: number)   => clamp((t - s) / (e - s), 0, 1);
-  const ease  = (t: number) => t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t;
-
- 
-  const SEGS = {
-  dayToRain:     [0.15, 0.40] as [number, number],
-  rainToSunset:  [0.40, 0.62] as [number, number],
-  sunsetToNight: [0.60, 0.82] as [number, number],
+const SEGS = {
+  dayToRain:     [0.05, 0.25] as [number, number],
+  rainToSunset:  [0.30, 0.53] as [number, number],
+  sunsetToNight: [0.55, 0.77] as [number, number],
 };
 
+// ── Rain canvas ───────────────────────────────────────────
+const resize = () => {
+  rainCanvas.width  = window.innerWidth;
+  rainCanvas.height = window.innerHeight;
+};
+resize();
+window.addEventListener('resize', resize);
 
-  // ── Rain canvas ───────────────────────────────────────────
-  const resize = () => {
-    rainCanvas.width  = window.innerWidth;
-    rainCanvas.height = window.innerHeight;
-  };
-  resize();
-  window.addEventListener('resize', resize);
+const drops = Array.from({ length: 1000 }, () => ({
+  x:     Math.random() * window.innerWidth,
+  y:     Math.random() * window.innerHeight,
+  speed: 9  + Math.random() * 10,
+  len:   14 + Math.random() * 22,
+  op:    0.2 + Math.random() * 0.5,
+}));
 
-  const drops = Array.from({ length:500 }, () => ({
-    x:     Math.random() * window.innerWidth,
-    y:     Math.random() * window.innerHeight,
-    speed: 9  + Math.random() * 10,
-    len:   14 + Math.random() * 22,
-    op:    0.2 + Math.random() * 0.5,
-  }));
+let rainOp = 0;
 
-  let rainOp = 0;
-
-  function drawRain() {
-    ctx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
-    if (rainOp > 0.01) {
-      for (const d of drops) {
-        ctx.beginPath();
-        ctx.moveTo(d.x, d.y);
-        ctx.lineTo(d.x - 2, d.y + d.len);
-        ctx.strokeStyle = `rgba(180,210,255,${d.op * rainOp * 0.8})`;
-        ctx.lineWidth = 1;
-        ctx.stroke();
-        d.y += d.speed;
-        if (d.y > rainCanvas.height) { d.y = -d.len; d.x = Math.random() * rainCanvas.width; }
-      }
+function drawRain() {
+  ctx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
+  if (rainOp > 0.01) {
+    for (const d of drops) {
+      ctx.beginPath();
+      ctx.moveTo(d.x, d.y);
+      ctx.lineTo(d.x - 2, d.y + d.len);
+      ctx.strokeStyle = `rgba(180,210,255,${d.op * rainOp * 0.8})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      d.y += d.speed;
+      if (d.y > rainCanvas.height) { d.y = -d.len; d.x = Math.random() * rainCanvas.width; }
     }
-    requestAnimationFrame(drawRain);
   }
-  drawRain();
+  requestAnimationFrame(drawRain);
+}
+drawRain();
 
-  // ── Wheel → progress 0..1 ────────────────────────────────
-  // 0.0003 = sensibilidad. Subilo para transición más rápida.
-  const SENSITIVITY = 0.0003;
-  let progress = 0;
+// ── Border color interpolation ────────────────────────────
+type RGBA = [number, number, number, number];
 
+const BORDER_COLORS: RGBA[] = [
+  [135, 206, 235, 0.25], // day
+  [150, 160, 170, 0.25], // rain
+  [255, 160,  80, 0.35], // sunset
+  [ 30,  30,  60, 0.15], // night
+];
 
-  function updateLayers(t: number) {
+function lerpRGBA(a: RGBA, b: RGBA, t: number): RGBA {
+  return [
+    a[0] + (b[0] - a[0]) * t,
+    a[1] + (b[1] - a[1]) * t,
+    a[2] + (b[2] - a[2]) * t,
+    a[3] + (b[3] - a[3]) * t,
+  ];
+}
+
+function getBorderColor(t: number): RGBA {
+  const dayT    = 1 - ease(segT(t, ...SEGS.dayToRain));
+  const rainT   = ease(segT(t, ...SEGS.dayToRain))    * (1 - ease(segT(t, ...SEGS.rainToSunset)));
+  const sunsetT = ease(segT(t, ...SEGS.rainToSunset)) * (1 - ease(segT(t, ...SEGS.sunsetToNight)));
+  const nightT  = ease(segT(t, ...SEGS.sunsetToNight));
+
+  const [r, g, b, a] = [0, 1, 2, 3].reduce<RGBA>((acc, i) => {
+    const weight = [dayT, rainT, sunsetT, nightT][i];
+    return [
+      acc[0] + BORDER_COLORS[i][0] * weight,
+      acc[1] + BORDER_COLORS[i][1] * weight,
+      acc[2] + BORDER_COLORS[i][2] * weight,
+      acc[3] + BORDER_COLORS[i][3] * weight,
+    ];
+  }, [0, 0, 0, 0]);
+
+  return [r, g, b, a];
+}
+
+function updateBorderColor(t: number) {
+  const [r, g, b, a] = getBorderColor(t);
+  const value = `rgba(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)}, ${a.toFixed(2)})`;
+  document.documentElement.style.setProperty('--win-border-color', value);
+}
+
+// ── Update layers ─────────────────────────────────────────
+const SENSITIVITY = 0.0003;
+let progress = 0;
+
+function updateLayers(t: number) {
   const rainOp_  = ease(segT(t, ...SEGS.dayToRain));
   const sunsetOp = ease(segT(t, ...SEGS.rainToSunset));
   const nightOp  = ease(segT(t, ...SEGS.sunsetToNight));
@@ -109,25 +148,47 @@
 
   rainOp = rainOp_ * (1 - sunsetOp);
   rainCanvas.style.opacity = rainOp > 0.01 ? '1' : '0';
+
+  updateBorderColor(t); // ← acá adentro
 }
 
-  window.addEventListener('wheel', (e) => {
-    progress = clamp(progress + e.deltaY * SENSITIVITY, 0, 1);
-    updateLayers(progress);
-  }, { passive: true });
+window.addEventListener('wheel', (e) => {
+  progress = clamp(progress + e.deltaY * SENSITIVITY, 0, 1);
+  updateLayers(progress);
+}, { passive: true });
 
-  // Touch support para mobile
-  let lastTouchY = 0;
-  window.addEventListener('touchstart', (e) => {
-    lastTouchY = e.touches[0].clientY;
-  }, { passive: true });
+let lastTouchY = 0;
+window.addEventListener('touchstart', (e) => {
+  lastTouchY = e.touches[0].clientY;
+}, { passive: true });
 
-  window.addEventListener('touchmove', (e) => {
-    const delta = lastTouchY - e.touches[0].clientY;
-    lastTouchY  = e.touches[0].clientY;
-    progress = clamp(progress + delta * SENSITIVITY * 3, 0, 1);
-    updateLayers(progress);
-  }, { passive: true });
+window.addEventListener('touchmove', (e) => {
+  const delta = lastTouchY - e.touches[0].clientY;
+  lastTouchY  = e.touches[0].clientY;
+  progress = clamp(progress + delta * SENSITIVITY * 3, 0, 1);
+  updateLayers(progress);
+}, { passive: true });
 
-  updateLayers(0);
+const hint = document.getElementById('scroll-hint') as HTMLElement;
+
+let hintHidden = false;
+function hideHint() {
+  if (hintHidden) return;
+  hintHidden = true;
+  hint.style.opacity = '0';
+  setTimeout(() => hint.style.display = 'none', 600);
+}
+
+window.addEventListener('wheel', (e) => {
+  hideHint();
+  // ... resto igual
+}, { passive: true });
+
+window.addEventListener('touchmove', (e) => {
+  hideHint();
+  // ... resto igual
+}, { passive: true });
+
+updateLayers(0); // init
+  
 </script>
