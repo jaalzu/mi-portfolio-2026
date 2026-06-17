@@ -58,6 +58,15 @@ const { title, titleKey = null, icon = null, noControls = false, noPadding = fal
     flex-shrink: 0;
   }
 
+.win7-window .window.glass.active::before,
+.win7-window .window.glass::before {
+  display: none !important;
+}
+.win7-window .window.glass {
+  backdrop-filter: blur(15px) !important;
+  background: rgba(255, 255, 255, 0.037) !important;
+}
+
  .xp-window .title-bar {
   display: flex;
   align-items: center;
@@ -68,6 +77,11 @@ const { title, titleKey = null, icon = null, noControls = false, noPadding = fal
   display: flex;
   align-items: center;
   gap: 4px;
+}
+
+.window-body{
+  /* background-color: rgba(255, 255, 255, 0.216) !important; */
+  background-color: rgba(255, 255, 255, 0.031) !important;
 }
 
 
