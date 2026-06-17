@@ -54,7 +54,8 @@ const config = THEMES[theme];
 <meta property="og:type" content="website" />
 <meta name="twitter:image" content="https://javalzu.vercel.app/og2.png" />
 <meta name="twitter:title" content="Javier Alzú · Frontend Developer" />
-
+<link rel="icon" type="image/webp" sizes="16x16" href="/favicon16.webp" />
+<link rel="icon" type="image/webp" sizes="32x32" href="/favicon32.webp" />
   </head>
 
   <body>
@@ -150,7 +151,7 @@ const config = THEMES[theme];
       <div id="retro-toolbar">
   <div style="display: flex; gap: 6px;">
 
- <button id="lang-switcher">EN</button>
+ <button id="lang-switcher" class="button-lang">EN</button>
 
   </div>
 <!-- <div id="theme-switchers">
@@ -210,6 +211,8 @@ const config = THEMES[theme];
   white-space: nowrap;
   padding: 4px 10px !important;
 }
+
+
 
 
 @media (max-width: 640px) {

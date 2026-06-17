@@ -1,8 +1,8 @@
 <div class="scroll-bg" id="scroll-bg">
   <div class="bg-layer" id="bg-day"    style="background-image: url('/images/city.webp')"></div>
-  <div class="bg-layer" id="bg-rain"   style="background-image: url('/images/rain.png');  opacity:0"></div>
-  <div class="bg-layer" id="bg-sunset" style="background-image: url('/images/sunset.png'); opacity:0"></div>
-  <div class="bg-layer" id="bg-night"  style="background-image: url('/images/night.png');  opacity:0"></div>
+  <div class="bg-layer" id="bg-rain"   style="background-image: url('/images/rain.webp');  opacity:0"></div>
+  <div class="bg-layer" id="bg-sunset" style="background-image: url('/images/sunset.webp'); opacity:0"></div>
+  <div class="bg-layer" id="bg-night"  style="background-image: url('/images/night.webp');  opacity:0"></div>
   <canvas id="bg-rain-canvas" aria-hidden="true"></canvas>
 </div>
 
@@ -133,6 +133,19 @@ function updateBorderColor(t: number) {
   document.documentElement.style.setProperty('--win-border-color', value);
 }
 
+function updateTextColor(nightOp: number) {
+  // día/atardecer: texto oscuro · noche: blanco
+  const from = [34, 34, 34];   // ajustá a tu negro/gris actual
+  const to   = [255, 255, 255];
+
+  const r = from[0] + (to[0] - from[0]) * nightOp;
+  const g = from[1] + (to[1] - from[1]) * nightOp;
+  const b = from[2] + (to[2] - from[2]) * nightOp;
+
+  const value = `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`;
+  document.documentElement.style.setProperty('--page-text-color', value);
+}
+
 // ── Update layers ─────────────────────────────────────────
 const SENSITIVITY = 0.0003;
 let progress = 0;
@@ -149,7 +162,8 @@ function updateLayers(t: number) {
   rainOp = rainOp_ * (1 - sunsetOp);
   rainCanvas.style.opacity = rainOp > 0.01 ? '1' : '0';
 
-  updateBorderColor(t); // ← acá adentro
+  updateBorderColor(t); 
+  updateTextColor(nightOp); 
 }
 
 window.addEventListener('wheel', (e) => {
