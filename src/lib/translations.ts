@@ -14,13 +14,13 @@ export const translations = {
       "Parece que bajaste tanto que llegaste a la luna! Qué viaje... bueno, disfruta la vista.",
 
     // About
-    aboutRole: "Desarrollador Frontend",
+    // aboutRole: "Desarrollador Frontend",
     aboutText:
-      "con experiencia en el diseño, desarrollo y mejora de aplicaciones web. ",
+      "En el desarrollo web encontré el balance perfecto entre resolver desafíos técnicos, expresar mi creatividad y mantener viva mi curiosidad aprendiendo algo nuevo cada día.",
     aboutText2:
-      "Transformo requisitos complejos en experiencias de usuario destacadas, abordando cada proyecto con entusiasmo y compromiso.",
+      "Disfruto trabajar en cualquier tipo de proyecto,cada uno representa una oportunidad para resolver problemas reales, aportar mi valor y seguir creciendo como desarrollador.",
     aboutText3:
-      " Disfruto participar en todas las etapas de un producto, desde la idea inicial hasta su lanzamiento, colaborando tanto en aspectos técnicos como creativos.",
+      "  Mi experiencia se centra principalmente en tecnologías frontend y el ecosistema moderno de JavaScript",
     // Info
     info1: "Desarrollador autodidacta.",
     info2: "Buen manejo de inglés.",
@@ -38,9 +38,6 @@ export const translations = {
     picCountry: "Argentina",
 
     // Proyectos títulos de ventana
-    p1WinTitle: "Proyecto #1",
-    p2WinTitle: "Proyecto #2",
-    p3WinTitle: "Proyecto #3",
 
     tratolibreNextjs: [
       "App Router con Server / Client Components",
@@ -180,16 +177,16 @@ export const translations = {
     tooltipMoon:
       "Looks like you scrolled so much you reached the moon! What a trip... well, enjoy the view.",
 
-    aboutRole: "Frontend Developer",
+    // aboutRole: "Frontend Developer",
 
     aboutText:
-      "with experience in the design, development, maintenance and improvement of web applications.",
+      "In web development, I found the perfect balance between solving technical challenges, expressing my creativity, and keeping my curiosity alive by learning something new every day.",
 
     aboutText2:
-      "I transform complex requirements into outstanding user experiences, approaching each project with enthusiasm and commitment.",
+      "I enjoy working on projects of all kinds; each one is an opportunity to solve real-world problems, contribute value, and continue growing as a developer.",
 
     aboutText3:
-      "I enjoy being involved in every stage of a product, whether technical or creative, contributing from the initial idea to the final launch.",
+      "My experience is primarily focused on frontend technologies and the modern JavaScript ecosystem.",
 
     info1: "Self-taught developer.",
     info2: "English proficiency.",
