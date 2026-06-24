@@ -1,0 +1,180 @@
+---
+import { translations } from '../../lib/translations';
+
+interface Props {
+  techKeys: Record<string, string>;
+  containerId: string;
+}
+
+const { techKeys, containerId } = Astro.props;
+---
+
+<ul class="stack-tree" data-stack-container={containerId} data-tech-keys={JSON.stringify(techKeys)}>
+</ul>
+
+<style>
+  .stack-tree,
+  :global(.stack-tree) {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+  }
+
+  :global(.stack-item) {
+    margin: 0 0 4px !important;
+    background: transparent !important;
+    border: none !important;
+  }
+
+  :global(.stack-trigger) {
+    all: unset;
+    display: flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+    width: 100% !important;
+    cursor: pointer !important;
+    padding: 4px 6px !important;
+    border-radius: 6px !important;
+    font-weight: 600 !important;
+    font-size: .78rem !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    transition: background 0.18s ease !important;
+  }
+
+  :global(.stack-trigger:hover) {
+    background: rgba(255, 255, 255, 0.09) !important;
+  }
+
+  :global(.stack-trigger[aria-expanded="true"]) {
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  :global(.tree-icon) {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 14px !important;
+    height: 14px !important;
+    flex-shrink: 0 !important;
+    font-size: 0.85em !important;
+    font-weight: 400 !important;
+    opacity: 0.6 !important;
+    line-height: 1 !important;
+    transition: transform 0.25s ease !important;
+  }
+
+  :global(.stack-trigger[aria-expanded="true"] .tree-icon) {
+    transform: rotate(45deg) !important;
+  }
+
+  :global(.tree-label) {
+    flex: 1;
+  }
+
+  :global(.stack-panel) {
+    display: grid !important;
+    grid-template-rows: 0fr !important;
+    overflow: hidden !important;
+    transition: grid-template-rows 0.28s ease !important;
+  }
+
+  :global(.stack-trigger[aria-expanded="true"] + .stack-panel) {
+    grid-template-rows: 1fr !important;
+  }
+
+  :global(.stack-panel-inner) {
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  :global(.stack-sublist) {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 6px 0 6px 28px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 3px !important;
+  }
+
+  :global(.stack-sublist li) {
+    font-size: .73rem !important;
+    font-weight: 500 !important;
+    opacity: 0.85 !important;
+    list-style: none !important;
+    position: relative !important;
+    padding-left: 10px !important;
+  }
+
+  :global(.stack-sublist li::before) {
+    content: '' !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0.55em !important;
+    width: 3px !important;
+    height: 3px !important;
+    border-radius: 50% !important;
+    background: currentColor !important;
+    opacity: 0.5 !important;
+  }
+</style>
+
+<script is:inline define:vars={{ translations }}>
+  (() => {
+    function renderStack(container, techKeys, lang) {
+      const t = translations[lang] || translations.es || {};
+      container.innerHTML = '';
+
+      Object.entries(techKeys).forEach(([category, key]) => {
+        const items = t[key] || [];
+        const li = document.createElement('li');
+        li.className = 'stack-item';
+        li.innerHTML = `
+          <button class="stack-trigger" type="button" aria-expanded="false">
+            <span class="tree-icon">+</span>
+            <span class="tree-label">${category}</span>
+          </button>
+          <div class="stack-panel">
+            <div class="stack-panel-inner">
+              <ul class="stack-sublist">
+                ${Array.isArray(items)
+                  ? items.map(item => `<li>${item}</li>`).join('')
+                  : `<li>${items}</li>`
+                }
+              </ul>
+            </div>
+          </div>
+        `;
+        container.appendChild(li);
+      });
+
+      container.querySelectorAll('.stack-trigger').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const isOpen = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', String(!isOpen));
+        });
+      });
+    }
+
+    function initAll() {
+      const lang = document.documentElement.getAttribute('lang') || 'es';
+      document.querySelectorAll('.stack-tree:not([data-initialized])').forEach(container => {
+        const techKeys = JSON.parse(container.getAttribute('data-tech-keys') || '{}');
+        renderStack(container, techKeys, lang);
+        container.setAttribute('data-initialized', 'true');
+      });
+    }
+
+    initAll();
+    document.addEventListener('astro:page-load', initAll);
+
+    window.addEventListener('langchange', (e) => {
+      const lang = e.detail?.lang || document.documentElement.getAttribute('lang') || 'es';
+      document.querySelectorAll('.stack-tree').forEach(container => {
+        const techKeys = JSON.parse(container.getAttribute('data-tech-keys') || '{}');
+        renderStack(container, techKeys, lang);
+      });
+    });
+  })();
+</script>
