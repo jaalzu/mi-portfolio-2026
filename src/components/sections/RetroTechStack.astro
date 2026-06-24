@@ -18,11 +18,12 @@ const techs = [
   { name: "TanStack Query",        icon: "/icons/reactquery.svg" },
   { name: "Playwright",        icon: "/icons/playwright.svg" },
   { name: "Zustand",        icon: "/icons/zustand-original.svg" },
+  { name: "PostgreSQL",        icon: "/icons/postgresql.svg" },
   { name: "Svelte",        icon: "/icons/svelte.svg" },
 ];
 ---
 
-<WinGlass title="Tech Stack"  icon="retro/tech-5.webp" color="var(--win-tech)">
+<WinGlass title="Tech Stack" noControls icon="retro/tech-5.webp" color="var(--win-tech)">
     <div class="tech-grid">
     {techs.map(tech => (
   <div class="tech-item">
@@ -44,6 +45,8 @@ const techs = [
     display: flex;
     flex-direction: column;
     font-weight: 600;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.130);
+
     align-items: center;
     gap: 5px;
     font-size: 0.820rem;

@@ -1,0 +1,94 @@
+---
+interface Props {
+  id: string;
+  text: string;
+  position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+  delay?: number;
+}
+
+const { id, text, position = 'top-right', delay = 0 } = Astro.props;
+
+const positionClasses = {
+  'top-left': 'is-top is-left',
+  'top-right': 'is-top is-right',
+  'bottom-left': 'is-bottom is-left',
+  'bottom-right': 'is-bottom is-right',
+};
+---
+
+<div 
+  role="tooltip" 
+  class={`retro-tooltip ${positionClasses[position]}`}
+  id={id}
+  data-text={text}
+  data-delay={delay}
+>
+  <span class="typing-text"></span>
+</div>
+
+<style>
+.retro-tooltip {
+  position: fixed;
+  z-index: 100;
+  font-size: 0.9rem;
+  font-family: inherit;
+  line-height: 1.15;
+  color: var(--tooltip-text-color, #222) !important;
+  pointer-events: none;
+  padding: 5px 9px !important;
+  white-space: normal;
+  max-width: min(340px, calc(100vw - 28px));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  letter-spacing: 0;
+}
+
+.retro-tooltip.is-hidden {
+  opacity: 0;
+}
+
+.retro-tooltip.is-visible {
+  opacity: 1;
+}
+
+.typing-text {
+  display: block;
+  min-height: 1.15em;
+  color: var(--tooltip-text-color, #222) !important;
+}
+
+.typing-text::after {
+  content: '|';
+  display: inline-block;
+  margin-left: 2px;
+  animation: blink 0.7s infinite;
+}
+
+.retro-tooltip.is-typed .typing-text::after {
+  content: '';
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.is-top { top: 10px; }
+.is-bottom { bottom: 60px; }
+.is-left { left: 3vw; }
+.is-right { left: calc(4vw + 158px); }
+
+@media (max-width: 640px) {
+  .retro-tooltip {
+    font-size: 10.5px;
+    line-height: 1.12;
+    padding: 5px 7px !important;
+    max-width: calc(100vw - 32px);
+    left: 50% !important;
+    transform: translateX(-50%);
+  }
+
+  .is-bottom { bottom: 60px; }
+  .is-top { top: auto; bottom: 60px; }
+}
+</style>

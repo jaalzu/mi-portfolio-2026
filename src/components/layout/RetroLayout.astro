@@ -4,6 +4,7 @@ import RetroAboutMe from '../sections/RetroAboutMe.astro';
 import RetroTechStack from '../sections/RetroTechStack.astro';
 import RetroProjectCardTabs from '../sections/RetroProjectCardTabs.astro';
 import RetroPicture from '../sections/RetroPicture.astro';
+import Retrotooltip from '../ui/Retrotooltip.astro';
 import { THEMES, type ThemeKey } from '../../lib/themes';
 import ScrollBg from '../../components/ScrollBg.astro';
 
@@ -66,9 +67,11 @@ const config = THEMES[theme];
         <RetroPicture xp={config.noGlass} />
       </div>
    
-<div role="tooltip" class="is-top is-right" id="scroll-hint">
-  Scrollea hacia abajo para cambiar el día.
-</div>
+<Retrotooltip
+  id="scroll-hint"
+  text=      "¡Bienvenido a mi portfolio! Scrollea hacia abajo si quieres cambiar de estación.",
+
+/>
       <div class="win" id="win-about" style="top: 250px; left: 3vw; width: 690px;">
         <RetroAboutMe xp={config.noGlass} />
       </div>
@@ -200,18 +203,6 @@ const config = THEMES[theme];
 
 
 <style>
-  #scroll-hint {
-  position: absolute;
-  top: 10px;
-  left: calc(4vw + 158px);
-  z-index: 100;
-  font-size: .8rem;
-  pointer-events: none;
-  transition: opacity 0.6s ease;
-  white-space: nowrap;
-  padding: 4px 10px !important;
-}
-
 .button-lang{
   color: black !important;
 }
@@ -230,19 +221,6 @@ const config = THEMES[theme];
     min-width: unset;
   }
 
-  #scroll-hint {
-    position: fixed;
-    top: auto;
-    bottom: 60px;
-    left: 50%;
-    transform: translateX(-10%);
-    white-space: nowrap;
-    height: 30px !important;
-    font-size: 10.5px;
-    padding: 6px 6px !important;
-    max-width: fit-content !important;
-    width: auto !important;
-  }
 }
  
 </style>
