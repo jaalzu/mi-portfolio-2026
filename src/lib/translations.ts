@@ -4,6 +4,15 @@ export const translations = {
     winAbout: "Sobre mí",
     winContact: "Contacto",
 
+    tooltipIntro:
+      "¡Bienvenido a mi portfolio! Scrollea hacia abajo si deseas cambiar de estación.",
+    tooltipSpecial:
+      "Continua bajando para una estación especial,valdra la pena.",
+    tooltipKeepGoing: "Ya casi estas!!",
+    tooltipAlmost: "¡Sigue bajando, ya casi llegas!",
+    tooltipMoon:
+      "Parece que bajaste tanto que llegaste a la luna! Qué viaje... bueno, disfruta la vista.",
+
     // About
     aboutRole: "Desarrollador Frontend",
     aboutText:
@@ -148,7 +157,7 @@ export const translations = {
 
     // Botones
     btnSite: "Sitio web",
-    btnCode: "Código",
+    btnCode: "Repositorio",
     btnChangeBg: "Cambiar Fondo",
     tabOverview: "Overview",
     tabStack: "Stack",
@@ -161,6 +170,15 @@ export const translations = {
   en: {
     winAbout: "About me",
     winContact: "Contact",
+
+    tooltipIntro:
+      "Welcome to my portfolio! Scroll down if you want to change the season.",
+    tooltipSpecial:
+      "Keep scrolling down for a special season, it'll be worth it.",
+    tooltipKeepGoing: "You're almost there!!",
+    tooltipAlmost: "Keep scrolling, you're almost there!",
+    tooltipMoon:
+      "Looks like you scrolled so much you reached the moon! What a trip... well, enjoy the view.",
 
     aboutRole: "Frontend Developer",
 
@@ -303,7 +321,7 @@ export const translations = {
       "The project came about when a digital mentor needed a private platform to offer courses to their students as part of their mentoring program.",
 
     btnSite: "Website",
-    btnCode: "Code",
+    btnCode: "Repository",
     btnChangeBg: "Change Background",
     tabOverview: "Overview",
     tabStack: "Stack",

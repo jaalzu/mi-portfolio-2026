@@ -8,7 +8,7 @@ const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
 ---
 
 <div class="project-card" data-tech-keys={JSON.stringify(techKeys)}>
-<WinGlass title={title} titleKey={titleKey} color={color} {xp} icon="retro/projects2-8.webp">
+<WinGlass noControls title={title} titleKey={titleKey} color={color} {xp} icon="retro/projects2-8.webp">
   <section class="tabs">
   <menu role="tablist">
   <button 
@@ -50,11 +50,11 @@ const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
       <p data-i18n={descKey}>{description}</p>
     </article>
 
-   <article role="tabpanel" id={`${id}-tech`} hidden data-tech-container={id}>
-      <ul class="tree-view has-container">
-        <!-- Se llenará dinámicamente con JS -->
-      </ul>
-    </article>
+<article role="tabpanel" id={`${id}-tech`} hidden data-tech-container={id}>
+  <ul class="tree-view has-container">
+    <!-- Se llenará dinámicamente con JS -->
+  </ul>
+</article>
 
     <article role="tabpanel" id={`${id}-images`} hidden>
       <div class="img-viewer">
@@ -240,46 +240,147 @@ const id = projectTitle.replace(/\s+/g, '-').toLowerCase();
 </script>
 
 <style>
-  .project-title {
-    display: block;
-  color: rgb(249, 8, 8);
-    font-size: 1rem;
-    margin-bottom: 3px;
-  }
+.project-title {
+  display: block;
+  color: rgb(77, 255, 0);
+  font-size: 1.040rem;
+  font-weight: 700;
+  margin-bottom: 3px;
+  text-shadow: 3px 3px 1px rgba(0, 0, 0, 0.250);
+  letter-spacing: .45px;
+}
 
 article[role="tabpanel"] {
   background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 4px 2px !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+  max-width: 100%;
 }
 
-button{
+.tabs {
+  border: none !important;
+}
+
+menu[role="tablist"] {
+  background: transparent !important;
+  border: none !important;
+  display: flex;
+  gap: 6px;
+  padding: 0 0 6px !important;
+  margin: 0 0 4px !important;
+}
+
+button[role="tab"] {
+  all: unset; /* 👈 resetea TODO lo heredado de la librería, partimos de cero */
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.22) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  border: 1px solid rgba(255, 255, 255, 0) !important;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.130);
+  color: inherit;
+  font-weight: 600 !important;
+  padding: .250rem .7rem !important;
+  font-size: .75rem;
+  clip-path: inset(0 round 999px) !important;
+}
+
+
+button[role="tab"]:hover,
+button[role="tab"]:focus,
+button[role="tab"]:active {
+  background: rgba(255, 255, 255, 0.13) !important;
+  outline: none !important;
+  box-shadow: none !important;
+  clip-path: inset(0 round 999px) !important;
+}
+
+button[role="tab"][aria-selected="true"] {
+  background: rgba(255, 255, 255, 0.16) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+button {
   background: transparent !important;
   font-weight: 600 !important;
   padding: .250rem .7rem !important;
+  outline: none !important;
 }
-
-menu[role="tablist"],
-button[role="tab"] {
-  background: transparent !important;
-}
+/* ======================================
+   STACK / TREE-VIEW
+   ====================================== */
 
 .tree-view,
+.tree-view ul,
 .tree-view li,
-.tree-view details,
-.tree-view summary {
+.tree-view details {
+  box-sizing: border-box !important;
+  max-width: 100% !important;
   background: transparent !important;
   border: none !important;
-    font-weight: 600 !important;
-
+  font-weight: 600 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow-x: hidden !important;
 }
 
-  p {
-    font-size: .790rem;
-    font-weight: 600;
-    line-height: 1.3;
-    margin: 0 0 0px;
-  }
+.tree-view {
+  margin-left: 1rem !important;
+}
 
-  .icon-btn {
+.tree-view li {
+  padding: 1px 0 1px 6px !important;
+}
+
+/* Mata el marker nativo de forma válida (display no funciona en ::marker) */
+.tree-view details > summary {
+  display: flex !important;
+  align-items: center;
+  list-style: none !important;
+  cursor: pointer;
+  position: relative;
+  padding: 2px 0 2px 16px !important;
+}
+
+.tree-view details > summary::-webkit-details-marker {
+  display: none !important;
+}
+
+.tree-view details > summary::marker {
+  content: '' !important;
+}
+
+.tree-view details > summary::before {
+  content: '+';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 400;
+  opacity: 0.5;
+  font-size: 0.85em;
+  width: 12px;
+  text-align: center;
+}
+
+.tree-view details[open] > summary::before {
+  content: '–';
+}
+
+p {
+  font-size: .790rem;
+  font-weight: 600;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.120);
+  line-height: 1.3;
+  margin: 0 0 0px;
+}
+
+.icon-btn {
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -289,38 +390,37 @@ button[role="tab"] {
   flex-shrink: 0;
 }
 
+.img-viewer {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
 
-  .img-viewer {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-  }
+.img-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .img-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.project-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 3px;
+  object-position: top;
+}
 
-  .project-img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 3px;
-    object-position: top;
-  }
+.img-prev, .img-next {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 11px;
+  min-width: 18px;
+}
 
-  .img-prev, .img-next {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2px 11px;
-    min-width: 18px;
-  }
-
-  .img-counter {
-    text-align: center;
-    font-size: .7rem;
-    margin: 8px 0 0;
-  }
+.img-counter {
+  text-align: center;
+  font-size: .7rem;
+  margin: 8px 0 0;
+}
 </style>

@@ -1,8 +1,13 @@
+---
+import { translations } from '../lib/translations';
+---
+
 <div class="scroll-bg" id="scroll-bg">
-  <div class="bg-layer" id="bg-day"    style="background-image: url('/images/city.webp')"></div>
-  <div class="bg-layer" id="bg-rain"   style="background-image: url('/images/rain.webp');  opacity:0"></div>
-  <div class="bg-layer" id="bg-sunset" style="background-image: url('/images/sunset.webp'); opacity:0"></div>
-  <div class="bg-layer" id="bg-night"  style="background-image: url('/images/night.webp');  opacity:0"></div>
+  <div class="bg-layer" id="bg-day" style="background-image: url('/images/city.webp')"></div>
+  <div class="bg-layer" id="bg-rain" style="background-image: url('/images/rain.webp'); opacity: 0"></div>
+  <div class="bg-layer" id="bg-sunset" style="background-image: url('/images/sunset.webp'); opacity: 0"></div>
+  <div class="bg-layer" id="bg-night" style="background-image: url('/images/night.webp'); opacity: 0"></div>
+  <div class="bg-layer" id="bg-moon" style="background-image: url('/images/moon.webp'); opacity: 0"></div>
   <canvas id="bg-rain-canvas" aria-hidden="true"></canvas>
 </div>
 
@@ -16,7 +21,7 @@
 
   .bg-layer {
     position: absolute;
-    inset: -1px; /* margen para parallax */
+    inset: -1px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -34,87 +39,113 @@
   }
 </style>
 
-<script>
-// ── DOM ───────────────────────────────────────────────────
-const bgSunset   = document.getElementById('bg-sunset')      as HTMLElement;
-const bgRain     = document.getElementById('bg-rain')        as HTMLElement;
-const bgNight    = document.getElementById('bg-night')       as HTMLElement;
-const rainCanvas = document.getElementById('bg-rain-canvas') as HTMLCanvasElement;
-const ctx        = rainCanvas.getContext('2d')!;
+<script is:inline define:vars={{ translations }}>
+document.addEventListener('DOMContentLoaded', () => {
 
-// ── Helpers ───────────────────────────────────────────────
-const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
-const segT  = (t: number, s: number, e: number)   => clamp((t - s) / (e - s), 0, 1);
-const ease  = (t: number) => t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t;
+const bgSunset = document.getElementById('bg-sunset');
+const bgRain = document.getElementById('bg-rain');
+const bgNight = document.getElementById('bg-night');
+const bgMoon = document.getElementById('bg-moon');
+const rainCanvas = document.getElementById('bg-rain-canvas');
+const ctx = rainCanvas.getContext('2d');
+const hint = document.getElementById('scroll-hint');
+const hintText = hint?.querySelector('.typing-text');
+
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+const segT = (t, s, e) => clamp((t - s) / (e - s), 0, 1);
+const ease = (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+const MAX_PROGRESS = 2.05;
+const SENSITIVITY = 0.0003;
 
 const SEGS = {
-  dayToRain:     [0.05, 0.25] as [number, number],
-  rainToSunset:  [0.30, 0.53] as [number, number],
-  sunsetToNight: [0.55, 0.77] as [number, number],
+  dayToRain: [0.05, 0.25],
+  rainToSunset: [0.30, 0.53],
+  sunsetToNight: [0.55, 0.83],
+  nightToMoon: [1.85, 2.05],
 };
 
-// ── Rain canvas ───────────────────────────────────────────
+function getCurrentLang() {
+  const urlLang = new URL(window.location.href).searchParams.get('lang');
+  return urlLang || localStorage.getItem('lang') || 'es';
+}
+
+function buildTooltipSteps() {
+  const lang = getCurrentLang();
+  const t = translations[lang] || translations.es;
+
+  return [
+    { id: 'intro', at: 0, text: t.tooltipIntro },
+    { id: 'special', at: 0.95, text: t.tooltipSpecial },
+    { id: 'almost', at: 1.45, text: t.tooltipAlmost },
+    { id: 'moon', at: 1.95, text: t.tooltipMoon },
+  ];
+}
+
+let TOOLTIP_STEPS = buildTooltipSteps();
+
 const resize = () => {
-  rainCanvas.width  = window.innerWidth;
+  rainCanvas.width = window.innerWidth;
   rainCanvas.height = window.innerHeight;
 };
 resize();
 window.addEventListener('resize', resize);
 
 const drops = Array.from({ length: 1000 }, () => ({
-  x:     Math.random() * window.innerWidth,
-  y:     Math.random() * window.innerHeight,
-  speed: 9  + Math.random() * 10,
-  len:   14 + Math.random() * 22,
-  op:    0.2 + Math.random() * 0.5,
+  x: Math.random() * window.innerWidth,
+  y: Math.random() * window.innerHeight,
+  speed: 9 + Math.random() * 10,
+  len: 14 + Math.random() * 22,
+  op: 0.2 + Math.random() * 0.5,
 }));
 
 let rainOp = 0;
+let progress = 0;
+let maxProgressReached = 0;
+let lastTouchY = 0;
+let activeTooltipStep = '__init__';
+let hintTimer = 0;
+let introDismissed = false;
+let journeyCompleted = false; // 👈 cuando es true, scroll nativo libre y sin tooltips
 
 function drawRain() {
   ctx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
+
   if (rainOp > 0.01) {
     for (const d of drops) {
       ctx.beginPath();
       ctx.moveTo(d.x, d.y);
       ctx.lineTo(d.x - 2, d.y + d.len);
-      ctx.strokeStyle = `rgba(180,210,255,${d.op * rainOp * 0.8})`;
+      ctx.strokeStyle = `rgba(180, 210, 255, ${d.op * rainOp * 0.8})`;
       ctx.lineWidth = 1;
       ctx.stroke();
+
       d.y += d.speed;
-      if (d.y > rainCanvas.height) { d.y = -d.len; d.x = Math.random() * rainCanvas.width; }
+      if (d.y > rainCanvas.height) {
+        d.y = -d.len;
+        d.x = Math.random() * rainCanvas.width;
+      }
     }
   }
+
   requestAnimationFrame(drawRain);
 }
 drawRain();
 
-// ── Border color interpolation ────────────────────────────
-type RGBA = [number, number, number, number];
-
-const BORDER_COLORS: RGBA[] = [
-  [135, 206, 235, 0.25], // day
-  [150, 160, 170, 0.25], // rain
-  [255, 160,  80, 0.35], // sunset
-  [ 30,  30,  60, 0.15], // night
+const BORDER_COLORS = [
+  [135, 206, 235, 0.25],
+  [150, 160, 170, 0.25],
+  [255, 160, 80, 0.35],
+  [30, 30, 60, 0.15],
 ];
 
-function lerpRGBA(a: RGBA, b: RGBA, t: number): RGBA {
-  return [
-    a[0] + (b[0] - a[0]) * t,
-    a[1] + (b[1] - a[1]) * t,
-    a[2] + (b[2] - a[2]) * t,
-    a[3] + (b[3] - a[3]) * t,
-  ];
-}
-
-function getBorderColor(t: number): RGBA {
-  const dayT    = 1 - ease(segT(t, ...SEGS.dayToRain));
-  const rainT   = ease(segT(t, ...SEGS.dayToRain))    * (1 - ease(segT(t, ...SEGS.rainToSunset)));
+function getBorderColor(t) {
+  const dayT = 1 - ease(segT(t, ...SEGS.dayToRain));
+  const rainT = ease(segT(t, ...SEGS.dayToRain)) * (1 - ease(segT(t, ...SEGS.rainToSunset)));
   const sunsetT = ease(segT(t, ...SEGS.rainToSunset)) * (1 - ease(segT(t, ...SEGS.sunsetToNight)));
-  const nightT  = ease(segT(t, ...SEGS.sunsetToNight));
+  const nightT = ease(segT(t, ...SEGS.sunsetToNight));
 
-  const [r, g, b, a] = [0, 1, 2, 3].reduce<RGBA>((acc, i) => {
+  return [0, 1, 2, 3].reduce((acc, i) => {
     const weight = [dayT, rainT, sunsetT, nightT][i];
     return [
       acc[0] + BORDER_COLORS[i][0] * weight,
@@ -123,86 +154,144 @@ function getBorderColor(t: number): RGBA {
       acc[3] + BORDER_COLORS[i][3] * weight,
     ];
   }, [0, 0, 0, 0]);
-
-  return [r, g, b, a];
 }
 
-function updateBorderColor(t: number) {
+function updateBorderColor(t) {
   const [r, g, b, a] = getBorderColor(t);
   const value = `rgba(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)}, ${a.toFixed(2)})`;
   document.documentElement.style.setProperty('--win-border-color', value);
 }
 
-function updateTextColor(nightOp: number) {
-  // día/atardecer: texto oscuro · noche: blanco
-  const from = [34, 34, 34];   // ajustá a tu negro/gris actual
-  const to   = [255, 255, 255];
+function updateTextColor(nightOp, moonOp) {
+  const from = [34, 34, 34];
+  const to = [255, 255, 255];
+  const amount = Math.max(nightOp, moonOp);
+  const r = from[0] + (to[0] - from[0]) * amount;
+  const g = from[1] + (to[1] - from[1]) * amount;
+  const b = from[2] + (to[2] - from[2]) * amount;
 
-  const r = from[0] + (to[0] - from[0]) * nightOp;
-  const g = from[1] + (to[1] - from[1]) * nightOp;
-  const b = from[2] + (to[2] - from[2]) * nightOp;
-
-  const value = `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`;
-  document.documentElement.style.setProperty('--page-text-color', value);
+  document.documentElement.style.setProperty('--page-text-color', `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`);
+  document.documentElement.style.setProperty('--tooltip-text-color', 'rgb(34, 34, 34)');
 }
 
-// ── Update layers ─────────────────────────────────────────
-const SENSITIVITY = 0.0003;
-let progress = 0;
+function getTypingDelay(char, speed = 22) {
+  if (char === ' ') return speed * 0.45;
+  if (/[,.!]/.test(char)) return speed * 2.2;
+  return speed + Math.random() * 8;
+}
 
-function updateLayers(t: number) {
-  const rainOp_  = ease(segT(t, ...SEGS.dayToRain));
+function hideHint() {
+  if (!hint) return;
+  hint.classList.add('is-hidden');
+  hint.classList.remove('is-visible');
+}
+
+function typeHint(text) {
+  if (!hint || !hintText || !text) return;
+
+  window.clearTimeout(hintTimer);
+  hint.dataset.currentText = text;
+  hint.classList.remove('is-hidden', 'is-typed');
+  hint.classList.add('is-visible', 'is-typing');
+  hintText.textContent = '';
+
+  let index = 0;
+
+  function typeNext() {
+    if (index < text.length) {
+      const char = text.charAt(index);
+      hintText.textContent += char;
+      index++;
+      hintTimer = window.setTimeout(typeNext, getTypingDelay(char));
+    } else {
+      hint.classList.remove('is-typing');
+      hint.classList.add('is-typed');
+    }
+  }
+
+  typeNext();
+}
+
+function updateTooltip(t) {
+  if (journeyCompleted) return; 
+  if (!introDismissed) {
+    if (t > 0.02) {
+      hideHint();
+      introDismissed = true;
+    } else if (activeTooltipStep !== 'intro') {
+      activeTooltipStep = 'intro';
+      typeHint(TOOLTIP_STEPS[0].text);
+    }
+  }
+
+  if (t <= maxProgressReached) return;
+  maxProgressReached = t;
+
+  const nextStep = [...TOOLTIP_STEPS].reverse().find((step) => step.id !== 'intro' && t >= step.at);
+  if (!nextStep || nextStep.id === activeTooltipStep) return;
+
+  activeTooltipStep = nextStep.id;
+  typeHint(nextStep.text);
+
+  if (nextStep.id === 'moon') {
+    window.clearTimeout(window.__moonHideTimer);
+    window.__moonHideTimer = window.setTimeout(() => {
+      hideHint();
+      journeyCompleted = true; 
+    }, 6000);
+  }
+}
+
+function updateLayers(t) {
+  const rainOpNext = ease(segT(t, ...SEGS.dayToRain));
   const sunsetOp = ease(segT(t, ...SEGS.rainToSunset));
-  const nightOp  = ease(segT(t, ...SEGS.sunsetToNight));
+  const nightOp = ease(segT(t, ...SEGS.sunsetToNight));
+  const moonOp = ease(segT(t, ...SEGS.nightToMoon));
 
-  bgRain.style.opacity   = String(rainOp_);
+  bgRain.style.opacity = String(rainOpNext);
   bgSunset.style.opacity = String(sunsetOp);
-  bgNight.style.opacity  = String(nightOp);
+  bgNight.style.opacity = String(nightOp);
+  bgMoon.style.opacity = String(moonOp);
 
-  rainOp = rainOp_ * (1 - sunsetOp);
+  rainOp = rainOpNext * (1 - sunsetOp);
   rainCanvas.style.opacity = rainOp > 0.01 ? '1' : '0';
 
-  updateBorderColor(t); 
-  updateTextColor(nightOp); 
+  updateBorderColor(t);
+  updateTextColor(nightOp, moonOp);
+  updateTooltip(t);
 }
 
-window.addEventListener('wheel', (e) => {
-  progress = clamp(progress + e.deltaY * SENSITIVITY, 0, 1);
+function advanceProgress(delta) {
+  progress = clamp(progress + delta, 0, MAX_PROGRESS);
   updateLayers(progress);
-}, { passive: true });
+}
+const FAST_SENSITIVITY = 0.0015;
 
-let lastTouchY = 0;
+function onWheel(e) {
+  const s = journeyCompleted ? FAST_SENSITIVITY : SENSITIVITY;
+  advanceProgress(e.deltaY * s);
+}
+
+function onTouchMove(e) {
+  const delta = lastTouchY - e.touches[0].clientY;
+  lastTouchY = e.touches[0].clientY;
+  const s = journeyCompleted ? FAST_SENSITIVITY : SENSITIVITY;
+  advanceProgress(delta * s * 3);
+}
+
+window.addEventListener('wheel', onWheel, { passive: true });
 window.addEventListener('touchstart', (e) => {
   lastTouchY = e.touches[0].clientY;
 }, { passive: true });
+window.addEventListener('touchmove', onTouchMove, { passive: true });
 
-window.addEventListener('touchmove', (e) => {
-  const delta = lastTouchY - e.touches[0].clientY;
-  lastTouchY  = e.touches[0].clientY;
-  progress = clamp(progress + delta * SENSITIVITY * 3, 0, 1);
-  updateLayers(progress);
-}, { passive: true });
+window.addEventListener('langchange', () => {
+  TOOLTIP_STEPS = buildTooltipSteps();
+  const current = TOOLTIP_STEPS.find(s => s.id === activeTooltipStep);
+  if (current && !journeyCompleted) typeHint(current.text);
+});
 
-const hint = document.getElementById('scroll-hint') as HTMLElement;
+updateLayers(0);
 
-let hintHidden = false;
-function hideHint() {
-  if (hintHidden) return;
-  hintHidden = true;
-  hint.style.opacity = '0';
-  setTimeout(() => hint.style.display = 'none', 600);
-}
-
-window.addEventListener('wheel', (e) => {
-  hideHint();
-  // ... resto igual
-}, { passive: true });
-
-window.addEventListener('touchmove', (e) => {
-  hideHint();
-  // ... resto igual
-}, { passive: true });
-
-updateLayers(0); // init
-  
+});
 </script>
