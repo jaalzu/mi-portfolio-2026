@@ -24,6 +24,12 @@ body {
   overflow: hidden;
 }
 
+/* Esto aplica a toda la página */
+::selection {
+  background-color: #0ce3dce2; /* El color de fondo del resaltado */
+  color: #ffffffd3; /* El color del texto al ser seleccionado */
+}
+
 p,
 span,
 ul,
