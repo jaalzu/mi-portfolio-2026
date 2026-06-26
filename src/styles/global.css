@@ -24,6 +24,11 @@ body {
   overflow: hidden;
 }
 
+::selection {
+  background-color: #0ce3dce2;
+  color: #ffffffd3;
+}
+
 p,
 span,
 ul,
