@@ -12,6 +12,7 @@
 
 * {
   cursor: url("/cursor/cursor1.cur"), default !important;
+  outline: none !important;
 }
 
 /* ============================================
