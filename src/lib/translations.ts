@@ -5,11 +5,11 @@ export const translations = {
     winContact: "Contacto",
 
     tooltipIntro:
-      "¡Bienvenido a mi portfolio! Scrollea hacia abajo si deseas cambiar de estación.",
-    tooltipSpecial:
-      "Continua bajando para una estación especial,valdra la pena.",
-    tooltipKeepGoing: "Ya casi estas!!",
-    tooltipAlmost: "¡Sigue bajando, ya casi llegas!",
+      "¡Bienvenido a mi portfolio! Scrollea hacia abajo si deseas cambiar de estación, pero ten cuidado de no bajar mucho.",
+    // tooltipSpecial:
+    //   "Continua bajando para una estación especial,valdra la pena.",
+    // tooltipKeepGoing: "Ya casi estas!!",
+    // tooltipAlmost: "¡Sigue bajando, ya casi llegas!",
     tooltipMoon:
       "Parece que bajaste tanto que llegaste a la luna! Qué viaje... bueno, disfruta la vista.",
 
@@ -169,11 +169,11 @@ export const translations = {
     winContact: "Contact",
 
     tooltipIntro:
-      "Welcome to my portfolio! Scroll down if you want to change the season.",
-    tooltipSpecial:
-      "Keep scrolling down for a special season, it'll be worth it.",
-    tooltipKeepGoing: "You're almost there!!",
-    tooltipAlmost: "Keep scrolling, you're almost there!",
+      "Welcome to my portfolio! Scroll down if you want to change the season, but be careful not to scroll too far down.",
+    // tooltipSpecial:
+    //   "Keep scrolling down for a special season, it'll be worth it.",
+    // tooltipKeepGoing: "You're almost there!!",
+    // tooltipAlmost: "Keep scrolling, you're almost there!",
     tooltipMoon:
       "Looks like you scrolled so much you reached the moon! What a trip... well, enjoy the view.",
 

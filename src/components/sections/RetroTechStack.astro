@@ -28,7 +28,7 @@ const techs = [
     {techs.map(tech => (
   <div class="tech-item">
     <img loading="lazy" src={tech.icon} alt={tech.name} width="30" height="30" />
-    <span>{tech.name}</span>
+    <span class="tech-name">{tech.name}</span>
   </div>
 ))}
   </div>
@@ -41,19 +41,78 @@ const techs = [
   padding: .6rem;
   gap: 30px 5px;
 }
-  .tech-item {
-    display: flex;
-    flex-direction: column;
-    font-weight: 600;
+
+.tech-item {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.130);
+  align-items: center;
+  font-size: 0.820rem;
+  text-align: center;
+  cursor: pointer;
+  height: 54px;
+  position: relative;
+  justify-content: center;
+}
 
-    align-items: center;
-    gap: 5px;
-    font-size: 0.820rem;
-    text-align: center;
+.tech-item img {
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: none;
+}
+
+.tech-item:hover img {
+  animation: iconUp 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.tech-item:not(:hover) img {
+  animation: iconDown 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes iconUp {
+  from {
+    transform: translateY(-50%) scale(1);
   }
+  to {
+    transform: translateY(-80%) scale(0.78);
+  }
+}
 
-  @media (max-width: 1300px) {
+@keyframes iconDown {
+  from {
+    transform: translateY(-80%) scale(0.78);
+  }
+  to {
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+.tech-name {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transform: translateY(5px);
+  transition:
+    opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.05s,
+    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.05s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.72rem;
+}
+
+.tech-item:hover .tech-name {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 1300px) {
   .tech-grid {
     grid-template-columns: repeat(6, 1fr);
     gap: 9px 11px;
@@ -71,15 +130,17 @@ const techs = [
   }
 }
 
-  @media (max-width: 900px) {
-    .tech-grid { grid-template-columns: repeat(6, 1fr); 
-                gap: 10px 13px;
-    }
+@media (max-width: 900px) {
+  .tech-grid { 
+    grid-template-columns: repeat(6, 1fr); 
+    gap: 10px 13px;
   }
+}
 
-  @media (max-width: 500px) {
-    .tech-grid { grid-template-columns: repeat(3, 1fr);
-               gap: 5px 15px;
-    }
+@media (max-width: 500px) {
+  .tech-grid { 
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px 15px;
   }
+}
 </style>
