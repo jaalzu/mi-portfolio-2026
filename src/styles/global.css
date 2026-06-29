@@ -26,7 +26,7 @@ body {
 }
 
 ::selection {
-  background-color: #0ce3dce2;
+  background-color: #0ce30ce2;
   color: #ffffffd3;
 }
 
@@ -224,30 +224,3 @@ button {
     grid-row: auto !important;
   }
 }
-/* 
-@media (min-width: 1920px) {
-  #win-picture {
-    left: 3.1vw;
-  }
-  #win-about {
-    left: 16.9vw;
-  }
-  #win-info {
-    left: 4.2vw;
-  }
-  #win-contact {
-    left: 32.3vw;
-  }
-  #win-tech {
-    left: 4.2vw;
-  }
-  #win-p3 {
-    left: 62.5vw;
-  }
-  #win-p2 {
-    left: 62.5vw;
-  }
-  #win-p1 {
-    left: 62.5vw;
-  }
-} */
