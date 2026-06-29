@@ -1,0 +1,109 @@
+---
+/**
+ * ImageDots.astro
+ * Átomo de estilos para los dots de navegación de imágenes.
+ * El contenedor en sí se renderiza en Tabs.astro (porque vive en el
+ * header, fuera del panel de imágenes); este componente solo aporta
+ * el <style> con :global() para no duplicarlo en cada lugar que lo
+ * necesite. No se instancia directamente — se importa por su <style>.
+ *
+ * Si en el futuro preferís que el contenedor de dots viva acá en vez
+ * de en Tabs.astro, movés el markup de abajo (queda comentado como
+ * referencia) y quitás el bloque equivalente de Tabs.astro.
+ */
+---
+
+<style>
+  :global(.img-dots) {
+    all: revert;
+    position: static !important;
+    flex-shrink: 0 !important;
+    z-index: 5 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 7px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: fit-content !important;
+    height: auto !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  :global(.img-dots[hidden]) {
+    display: none !important;
+  }
+
+  :global(.img-dots.img-dots .img-dot.img-dot) {
+    display: inline-block !important;
+    box-sizing: border-box !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    cursor: pointer !important;
+    width: 12px !important;
+    height: 12px !important;
+    min-width: 0 !important;
+    max-width: 12px !important;
+    min-height: 0 !important;
+    max-height: 12px !important;
+    flex-shrink: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 999px !important;
+    background-color: rgba(255, 255, 255, 0.18) !important;
+    background-image: none !important;
+    backdrop-filter: blur(6px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(6px) saturate(160%) !important;
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, 0.35),
+      inset 0 -1px 2px rgba(0, 0, 0, 0.1),
+      0 1px 3px rgba(0, 0, 0, 0.15) !important;
+    font: inherit !important;
+    line-height: 0 !important;
+    text-align: center !important;
+    transition:
+      width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      background-color 0.3s ease,
+      box-shadow 0.3s ease,
+      border-color 0.3s ease,
+      transform 0.2s ease !important;
+  }
+
+  :global(.img-dots .img-dot::before),
+  :global(.img-dots .img-dot::after) {
+    content: none !important;
+    display: none !important;
+    background: none !important;
+    box-shadow: none !important;
+  }
+
+  :global(.img-dots.img-dots .img-dot.img-dot:hover) {
+    background-color: rgba(255, 255, 255, 0.32) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    transform: scale(1.12) !important;
+  }
+
+  :global(.img-dots .img-dot:focus-visible) {
+    outline: 2px solid rgba(255, 255, 255, 0.6) !important;
+    outline-offset: 2px !important;
+  }
+
+  :global(.img-dots.img-dots .img-dot.img-dot.is-active) {
+    width: 17px !important;
+    background-color: rgba(77, 255, 0, 0.28) !important;
+    border-color: rgba(77, 255, 0, 0.65) !important;
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, 0.4),
+      inset 0 -1px 2px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  :global(.img-dots .img-dot.is-active:hover) {
+    transform: none !important;
+  }
+</style>

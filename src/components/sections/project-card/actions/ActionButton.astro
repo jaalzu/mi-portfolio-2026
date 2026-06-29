@@ -1,0 +1,57 @@
+---
+/**
+ * ActionButton.astro
+ * Átomo reusable: un botón con ícono que abre una URL en nueva pestaña.
+ * "Sitio web" y "Código" son dos instancias de este mismo componente.
+ */
+interface Props {
+  url: string;
+  label: string;
+  i18nKey?: string;
+  Icon: any;
+}
+
+const { url, label, i18nKey, Icon } = Astro.props;
+---
+
+<button class="icon-btn" data-open-url={url}>
+  <span class="icon-btn-icon">
+    <Icon />
+  </span>
+  <span data-i18n={i18nKey}>{label}</span>
+</button>
+
+<style>
+  .icon-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0.35rem 0.7rem !important;
+    background: transparent !important;
+    font-weight: 600 !important;
+    outline: none !important;
+  }
+
+  .icon-btn-icon {
+    display: inline-flex;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  .icon-btn-icon :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<script>
+  // Delegado una sola vez por documento; cada botón expone su URL via
+  // data-open-url en vez de un onclick inline (mejor CSP, mejor testeo).
+  document.addEventListener("click", (e) => {
+    const btn = (e.target as HTMLElement)?.closest<HTMLElement>("[data-open-url]");
+    if (!btn) return;
+    const url = btn.getAttribute("data-open-url");
+    if (url) window.open(url, "_blank");
+  });
+</script>

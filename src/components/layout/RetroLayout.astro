@@ -1,24 +1,21 @@
 ---
-
 import RetroAboutMe from '../sections/RetroAboutMe.astro';
 import RetroTechStack from '../sections/RetroTechStack.astro';
-import RetroProjectCardTabs from '../sections/RetroProjectCardTabs.astro';
+import ProjectCard from '../sections/project-card/ProjectCard.astro';
 import RetroPicture from '../sections/RetroPicture.astro';
 import Retrotooltip from '../ui/Retrotooltip.astro';
 import { THEMES, type ThemeKey } from '../../lib/themes';
 import ScrollBg from '../../components/ScrollBg.astro';
 
-
 import DragScript from '../../scripts/drag.astro';
-// import ThemeSwitcher from '../../scripts/themeSwitcher.astro';
 import SliderScript from '../../scripts/slider.astro';
 import LangSwitcher from '../../scripts/langSwitcher.astro';
 
 import '../../styles/win7.css';
-import '../../styles/winxp.css';
 import '../../styles/global.css';
 
-const { theme = 'xp' } = Astro.props as { theme: ThemeKey };
+// XP fue removido: ahora el único tema soportado es 'win7'.
+const { theme = 'win7' } = Astro.props as { theme: ThemeKey };
 const config = THEMES[theme];
 ---
 
@@ -37,8 +34,6 @@ const config = THEMES[theme];
     gtag('js', new Date());
     gtag('config', 'G-D213Q3J7LS');
   </script>
-
-  
 
 
     <meta charset="utf-8" />
@@ -61,12 +56,12 @@ const config = THEMES[theme];
 
   <body>
 <ScrollBg />
-    
+
     <main class="desktop win7">
       <div class="win" id="win-picture" style="top: 10px; left:3vw">
         <RetroPicture xp={config.noGlass} />
       </div>
-   
+
 <Retrotooltip
   id="scroll-hint"
   text=      "¡Bienvenido a mi portfolio! Scrollea hacia abajo si quieres cambiar de estación.",
@@ -76,19 +71,19 @@ const config = THEMES[theme];
         <RetroAboutMe xp={config.noGlass} />
       </div>
 
-      
+
   <div class="win" id="win-p1" style="top: 15px; left: 63vw; width: 500px;">
-  <RetroProjectCardTabs 
-    xp={config.noGlass} 
+  <ProjectCard
+    xp={config.noGlass}
    title="TratoLibre"
     titleKey="p1WinTitle"
-    projectTitle="TratoLibre" 
+    projectTitle="TratoLibre"
     description="Marketplace de segunda mano para alquilar y vender objetos entre personas..."
     descKey="p1Desc"
     origin="Todos tenemos objetos que nos da vergüenza..."
     originKey="p1Origin"
-    projectUrl="https://tratolibre.vercel.app" 
-    codeUrl="https://github.com/jaalzu/tratolibre" 
+    projectUrl="https://tratolibre.vercel.app"
+    codeUrl="https://github.com/jaalzu/tratolibre"
     techKeys={{
       "Next.js 16": "tratolibreNextjs",
       "Client State": "tratolibreClientState",
@@ -97,44 +92,44 @@ const config = THEMES[theme];
       "UI": "tratolibreUI",
         "Testing & Monitoring": "tratolibreValidation"
     }}
-    images={["/projects/marketplace/1.webp","/projects/marketplace/2.webp","/projects/marketplace/3.webp","/projects/marketplace/4.webp","/projects/marketplace/5.webp"]} 
-    color="var(--win-projects)" 
+    images={["/projects/marketplace/1.webp","/projects/marketplace/2.webp","/projects/marketplace/3.webp","/projects/marketplace/4.webp","/projects/marketplace/5.webp"]}
+    color="var(--win-projects)"
   />
 </div>
 <div class="win" id="win-p2" style="top: 270px; left: 63vw; width: 500px;">
-  <RetroProjectCardTabs 
-    xp={config.noGlass} 
+  <ProjectCard
+    xp={config.noGlass}
     title="PickYourColor"
     titleKey="p2WinTitle"
-    projectTitle="PickYourColor" 
+    projectTitle="PickYourColor"
     description="Visualizador interactivo de paletas de color con toolbar para modificar colores en tiempo real. Los cambios se aplican instantáneamente sobre componentes de UI y las paletas se pueden compartir por URL."
     descKey="p2Desc"
     origin="Nació para evitar el constante ir y venir entre el código y el navegador al crear y ajustar paletas de colores, permitiendo ver cambios en tiempo real y probar los colores directamente en una web profesional."
     originKey="p2Origin"
-    projectUrl="https://pick-your-color-fi6u5v9bm-javier-alzus-projects.vercel.app/" 
-    codeUrl="https://github.com/jaalzu/PickYourColor" 
+    projectUrl="https://pick-your-color-fi6u5v9bm-javier-alzus-projects.vercel.app/"
+    codeUrl="https://github.com/jaalzu/PickYourColor"
     techKeys={{
       "Core": "colorCore",
       "UI & UX": "colorUI",
       "Color Engine": "colorEngine"
     }}
-    images={["/projects/color/hero.webp","/projects/color/features.webp","/projects/color/comments.webp"]} 
-    color="var(--win-projects)" 
+    images={["/projects/color/hero.webp","/projects/color/features.webp","/projects/color/comments.webp"]}
+    color="var(--win-projects)"
   />
 </div>
 
 <div class="win" id="win-p3" style="top: 550px; left: 63vw; width: 500px;">
-  <RetroProjectCardTabs 
-    xp={config.noGlass} 
+  <ProjectCard
+    xp={config.noGlass}
     title="Courses WebApp"
     titleKey="p3WinTitle"
-    projectTitle="Courses WebApp" 
-    description="Plataforma e-Learning con acceso por roles, gestión de cursos y lecciones, progreso de alumnos en tiempo real y foro de comunidad por curso." 
+    projectTitle="Courses WebApp"
+    description="Plataforma e-Learning con acceso por roles, gestión de cursos y lecciones, progreso de alumnos en tiempo real y foro de comunidad por curso."
     descKey="p3Desc"
     origin="El proyecto surgió cuando un mentor digital necesitaba una plataforma privada para ofrecer cursos a sus alumnos como parte de su programa de mentoría."
     originKey="p3Origin"
-    projectUrl="https://courses-webapp-delta.vercel.app/login" 
-    codeUrl="https://github.com/jaalzu/courses-webapp" 
+    projectUrl="https://courses-webapp-delta.vercel.app/login"
+    codeUrl="https://github.com/jaalzu/courses-webapp"
     techKeys={{
       "Next.js 16": "coursesNextjs",
       "Client State": "coursesClientState",
@@ -143,32 +138,27 @@ const config = THEMES[theme];
       "UI": "coursesUI",
       "Validation & Testing": "coursesValidation"
     }}
-    images={["/projects/course/home.webp","/projects/course/form.webp","/projects/course/lesson.webp"]} 
-    color="var(--win-projects)" 
+    images={["/projects/course/home.webp","/projects/course/form.webp","/projects/course/lesson.webp"]}
+    color="var(--win-projects)"
   />
 </div>
       <div class="win" id="win-tech" style="top: 560px; left: 3vw; width: 780px;">
         <RetroTechStack xp={config.noGlass} />
       </div>
-      
+
       <div id="retro-toolbar">
   <div style="display: flex; gap: 6px;">
 
  <button id="lang-switcher" class="button-lang">EN</button>
 
   </div>
-<!-- <div id="theme-switchers">
-  <button data-theme-target="win7">Win 7</button>
-  <button data-theme-target="xp">Win XP</button>
-</div> -->
   </div>
     </main>
 
-  
+
 
     <DragScript />
-    <SliderScript />
-    <!-- <ThemeSwitcher /> -->
+    <!-- <SliderScript /> -->
     <LangSwitcher />
 
 
@@ -176,24 +166,21 @@ const config = THEMES[theme];
   document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', (e) => {
       if (e.target.id !== 'btn-about-portfolio') return;
-      
-      const theme = document.documentElement.getAttribute('data-theme');
-      const id = theme === 'xp' ? 'win-about-portfolio-xp' : 'win-about-portfolio-w7';
-      const modal = document.getElementById(id);
+
+      const modal = document.getElementById('win-about-portfolio-w7');
       if (modal) {
         modal.style.display = 'block';
         modal.style.zIndex = '50';
       }
     });
 
-    ['win-about-portfolio-w7', 'win-about-portfolio-xp'].forEach(id => {
-      const modal = document.getElementById(id);
-      if (!modal) return;
+    const modal = document.getElementById('win-about-portfolio-w7');
+    if (modal) {
       modal.querySelectorAll('[aria-label="Minimize"], [aria-label="Close"]')
         .forEach(b => b.addEventListener('click', () => {
           modal.style.display = 'none';
         }));
-    });
+    }
   });
 </script>
 
@@ -222,5 +209,5 @@ const config = THEMES[theme];
   }
 
 }
- 
+
 </style>

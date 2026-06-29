@@ -1,5 +1,0 @@
-@import "xp.css/dist/XP.css";
-
-[data-theme="xp"] .win7 .window {
-  all: revert;
-}

@@ -1,0 +1,38 @@
+---
+/**
+ * ProjectActions.astro
+ * Wrapper flex de las acciones del proyecto: "Sitio web" y "Código".
+ * Son dos instancias de ActionButton.
+ */
+import ActionButton from "./ActionButton.astro";
+import LinkIcon from "./icons/LinkIcon.astro";
+import CodeIcon from "./icons/CodeIcon.astro";
+
+interface Props {
+  projectUrl: string;
+  codeUrl: string;
+  siteLabel?: string;
+  codeLabel?: string;
+}
+
+const {
+  projectUrl,
+  codeUrl,
+  siteLabel = "Sitio web",
+  codeLabel = "Código",
+} = Astro.props;
+---
+
+<section class="project-actions">
+  <ActionButton url={projectUrl} label={siteLabel} i18nKey="btnSite" Icon={LinkIcon} />
+  <ActionButton url={codeUrl} label={codeLabel} i18nKey="btnCode" Icon={CodeIcon} />
+</section>
+
+<style>
+  .project-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+    margin-top: 8px;
+  }
+</style>

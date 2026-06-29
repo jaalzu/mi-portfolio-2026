@@ -1,0 +1,21 @@
+---
+/**
+ * StackPanel.astro
+ * Contenido del tab "Stack" — envuelve tu StackAccordion existente.
+ */
+import TabPanel from "../tabs/TabPanel.astro";
+import StackAccordion from "../../../ui/StackAccordion.astro";
+
+interface Props {
+  id: string;
+  hidden?: boolean;
+  techKeys: Record<string, string>;
+  containerId: string;
+}
+
+const { id, hidden, techKeys, containerId } = Astro.props;
+---
+
+<TabPanel id={id} hidden={hidden}>
+  <StackAccordion techKeys={techKeys} containerId={containerId} />
+</TabPanel>

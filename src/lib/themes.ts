@@ -9,23 +9,12 @@ export interface ThemeConfig {
   links: ThemeLink[];
 }
 
-export type ThemeKey = "win7" | "xp";
+export type ThemeKey = "win7";
 
 export const THEMES: Record<ThemeKey, ThemeConfig> = {
   win7: {
     noGlass: false,
     dataTheme: "win7",
-    links: [
-      { href: "/", label: "Win 7" },
-      { href: "/retro-xp", label: "Win XP" },
-    ],
-  },
-  xp: {
-    noGlass: true,
-    dataTheme: "xp",
-    links: [
-      { href: "/", label: "Win 7" },
-      { href: "/retro-xp", label: "Win XP" },
-    ],
+    links: [{ href: "/", label: "Win 7" }],
   },
 };

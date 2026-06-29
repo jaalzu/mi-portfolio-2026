@@ -1,0 +1,146 @@
+---
+/**
+ * ProjectCard.astro
+ * Orquestador: une todas las piezas atómicas en la card de proyecto
+ * completa. Este es el componente que se usa desde afuera — el resto
+ * de los archivos en este folder son piezas internas que él compone.
+ *
+ * Estructura:
+ *   WinGlass (marco visual ya existente)
+ *    └─ Tabs (shell de tabs)
+ *        ├─ OverviewPanel
+ *        ├─ StackPanel
+ *        ├─ ImagesPanel
+ *        └─ OriginPanel
+ *    └─ ProjectActions (botones Sitio web / Código)
+ */
+import WinGlass from "../../ui/WinGlass.astro";
+
+import Tabs from "./tabs/Tabs.astro";
+import EyeClosedIcon from "./tabs/icons/EyeClosedIcon.astro";
+import EyeIcon from "./tabs/icons/EyeIcon.astro";
+import StackSimpleIcon from "./tabs/icons/StackSimpleIcon.astro";
+import StackIcon from "./tabs/icons/StackIcon.astro";
+import ImageIcon from "./tabs/icons/ImageIcon.astro";
+import ImagesIcon from "./tabs/icons/ImagesIcon.astro";
+import CircleDashedIcon from "./tabs/icons/CircleDashedIcon.astro";
+import CircleIcon from "./tabs/icons/CircleIcon.astro";
+
+import OverviewPanel from "./panels/OverviewPanel.astro";
+import StackPanel from "./panels/StackPanel.astro";
+import ImagesPanel from "./panels/ImagesPanel.astro";
+import OriginPanel from "./panels/OriginPanel.astro";
+
+import ProjectActions from "./actions/ProjectActions.astro";
+
+interface Props {
+  title: string;
+  titleKey?: string;
+  projectTitle: string;
+  description: string;
+  descKey?: string;
+  projectUrl: string;
+  codeUrl: string;
+  color: string;
+  images: string[];
+  origin: string;
+  originKey?: string;
+  techKeys: Record<string, string>;
+  xp?: boolean;
+}
+
+const {
+  title,
+  titleKey,
+  projectTitle,
+  description,
+  descKey,
+  projectUrl,
+  codeUrl,
+  color,
+  images,
+  origin,
+  originKey,
+  techKeys,
+  xp = false,
+} = Astro.props;
+
+const id = projectTitle.replace(/\s+/g, "-").toLowerCase();
+
+const tabs = [
+  {
+    id: "overview",
+    label: "Overview",
+    i18nKey: "tabOverview",
+    IconDefault: EyeClosedIcon,
+    IconHover: EyeIcon,
+  },
+  {
+    id: "tech",
+    label: "Stack",
+    i18nKey: "tabStack",
+    IconDefault: StackSimpleIcon,
+    IconHover: StackIcon,
+  },
+  {
+    id: "images",
+    label: "Imágenes",
+    i18nKey: "tabImages",
+    IconDefault: ImageIcon,
+    IconHover: ImagesIcon,
+  },
+  {
+    id: "origin",
+    label: "Origen",
+    i18nKey: "tabOrigin",
+    IconDefault: CircleDashedIcon,
+    IconHover: CircleIcon,
+  },
+];
+---
+
+<div class="project-card">
+  <WinGlass noControls title={title} titleKey={titleKey} color={color} xp={xp} icon="retro/projects2-8.webp" colorTitle>
+    <Tabs containerId={id} tabs={tabs}>
+      <OverviewPanel
+        id={`${id}-overview`}
+        hidden={false}
+        description={description}
+        descKey={descKey}
+      />
+      <StackPanel
+        id={`${id}-tech`}
+        hidden={true}
+        techKeys={techKeys}
+        containerId={id}
+      />
+      <ImagesPanel
+        id={`${id}-images`}
+        hidden={true}
+        images={images}
+        projectTitle={projectTitle}
+        imgId={`${id}-img`}
+      />
+      <OriginPanel
+        id={`${id}-origin`}
+        hidden={true}
+        origin={origin}
+        originKey={originKey}
+      />
+    </Tabs>
+
+    <ProjectActions projectUrl={projectUrl} codeUrl={codeUrl} />
+  </WinGlass>
+</div>
+
+<style>
+  .project-title {
+    display: block;
+    color: rgb(77, 255, 0);
+    font-size: 1.04rem;
+    font-weight: 700;
+    margin-bottom: 3px;
+    text-shadow: 3px 3px 1px rgba(0, 0, 0, 0.25);
+    letter-spacing: 0.45px;
+  }
+</style>
