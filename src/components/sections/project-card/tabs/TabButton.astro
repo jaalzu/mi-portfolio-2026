@@ -1,33 +1,4 @@
 ---
-/**
- * TabButton.astro
- * Átomo: un solo tab, estilo glass simple (blur + transparencia, sin
- * distorsión tipo liquid-glass de Apple — eso se descartó a propósito).
- *
- * --- Por qué NO es un <button> ---
- * Tu CSS global carga 7.css en su variante "scoped" bajo la clase
- * .win7, que envuelve TODA la página (<main class="desktop win7">).
- * La doc oficial de 7.css confirma que esa hoja scoped apunta al
- * selector de tipo `button` dentro de `.win7 ...`, y como nuestro tab
- * vive dentro de ese mismo ancestro, cualquier <button> real ahí
- * adentro queda bajo su alcance — pelear regla por regla con
- * !important nunca ganaba de forma consistente (el empate de
- * especificidad lo resolvía el orden de aparición en el CSS final,
- * no algo que controlemos desde el componente).
- *
- * Solución definitiva: el tab deja de ser un <button> real y pasa a
- * ser un <div role="tab">. Ninguna regla de 7.css que apunte al
- * selector de tipo `button` puede aplicarle nada, sin importar su
- * especificidad, porque el elemento ya no matchea ese selector.
- * Para no perder accesibilidad, se repone a mano: tabindex, Enter,
- * Espacio y aria-selected ya estaban; ahora además escuchamos
- * keydown directamente acá (el click ya lo escucha tabs-controller.js
- * vía delegación en [role="tab"], eso no cambia).
- *
- * Fix de íconos: `color` fijo en `.tab-icon` para que el SVG con
- * fill="currentColor" siempre tenga un valor concreto de dónde
- * heredar, en vez de depender de lo que venga de afuera.
- */
 interface Props {
   controls: string;
   selected?: boolean;
@@ -58,7 +29,11 @@ const { controls, selected = false, i18nKey, label, IconDefault, IconHover } = A
   <span class="tab-label" data-i18n={i18nKey}>{label}</span>
 </div>
 
-<style>
+<!-- is:global porque el scoped CSS de Astro no penetra hijos SVG importados -->
+<style is:global>
+
+  /* ─── base del tab ─────────────────────────────────────────────── */
+
   .tab-btn {
     display: inline-flex;
     align-items: center;
@@ -92,7 +67,7 @@ const { controls, selected = false, i18nKey, label, IconDefault, IconHover } = A
     border-color: rgba(255, 255, 255, 0.32);
   }
 
-  /* ---------- icon ---------- */
+  /* ─── contenedor de icono ──────────────────────────────────────── */
 
   .tab-icon {
     position: relative;
@@ -100,59 +75,180 @@ const { controls, selected = false, i18nKey, label, IconDefault, IconHover } = A
     width: 14px;
     height: 14px;
     flex-shrink: 0;
-    color: #fff; /* base concreta: el SVG hereda currentColor de ACÁ */
+    color: #fff;
+    overflow: visible;
   }
 
   .tab-icon-layer {
     position: absolute;
     inset: 0;
     display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .tab-icon-layer :global(svg) {
+  .tab-icon-layer svg {
     display: block;
     width: 100%;
     height: 100%;
+    overflow: visible;
   }
 
+  /* ─── estado reposo ────────────────────────────────────────────── */
+
   .is-default {
-    opacity: 1;
-    transform: scale(1);
-    transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: icon-out-reverse 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   .is-hover {
-    opacity: 0;
-    transform: scale(0.6);
-    transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: icon-in-reverse 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
+
+  /* ─── estado hover ─────────────────────────────────────────────── */
 
   .tab-btn:hover .is-default,
   .tab-btn:focus-visible .is-default {
-    opacity: 0;
-    transform: scale(0.6);
+    animation: icon-out 0.35s cubic-bezier(0.4, 0, 0.6, 1) both;
   }
 
   .tab-btn:hover .is-hover,
   .tab-btn:focus-visible .is-hover {
-    opacity: 1;
-    transform: scale(1);
+    animation: icon-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .is-default, .is-hover {
-      transition: none;
-    }
+  /* ─── keyframes del swap de icono ──────────────────────────────── */
+
+  /* default sale: achica, opaca, sube */
+  @keyframes icon-out {
+    0%   { opacity: 1; transform: scale(1)    translateY(0px)   rotate(0deg); }
+    100% { opacity: 0; transform: scale(0.3)  translateY(-7px)  rotate(-20deg); }
   }
+
+  /* default vuelve cuando se va el hover */
+  @keyframes icon-out-reverse {
+    0%   { opacity: 0; transform: scale(0.3)  translateY(-7px)  rotate(-20deg); }
+    100% { opacity: 1; transform: scale(1)    translateY(0px)   rotate(0deg); }
+  }
+
+  /* hover entra: crece desde abajo con bounce */
+  @keyframes icon-in {
+    0%   { opacity: 0; transform: scale(0.3)  translateY(7px)   rotate(20deg); }
+    60%  { opacity: 1; transform: scale(1.15) translateY(-1px)  rotate(-3deg); }
+    100% { opacity: 1; transform: scale(1)    translateY(0px)   rotate(0deg); }
+  }
+
+  /* hover vuelve a su estado oculto */
+  @keyframes icon-in-reverse {
+    0%   { opacity: 1; transform: scale(1)    translateY(0px)   rotate(0deg); }
+    100% { opacity: 0; transform: scale(0.3)  translateY(7px)   rotate(20deg); }
+  }
+
+  /* ─── animaciones internas de los SVG ──────────────────────────── */
+
+  /*
+   * Cada SVG tiene partes animables. Las activamos cuando el tab-btn
+   * está en hover Y la capa .is-hover ya entró.
+   * Usamos animation-delay para que empiecen cuando el icono ya llegó.
+   */
+
+  /* ── EYE: el iris late una vez que aparece ── */
+  .tab-btn:hover .is-hover svg circle,
+  .tab-btn:focus-visible .is-hover svg circle {
+    animation: iris-pulse 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  @keyframes iris-pulse {
+    0%   { transform: scale(0.4); opacity: 0; }
+    60%  { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1);   opacity: 1; }
+  }
+
+  /* ── STACK: las líneas bajan escalonadamente ── */
+  .tab-btn:hover .is-hover svg polyline:first-of-type,
+  .tab-btn:focus-visible .is-hover svg polyline:first-of-type {
+    animation: stack-drop 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
+    transform-origin: center top;
+    transform-box: fill-box;
+  }
+
+  .tab-btn:hover .is-hover svg polyline:last-of-type,
+  .tab-btn:focus-visible .is-hover svg polyline:last-of-type {
+    animation: stack-drop 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.38s both;
+    transform-origin: center top;
+    transform-box: fill-box;
+  }
+
+  @keyframes stack-drop {
+    0%   { opacity: 0; transform: translateY(-8px); }
+    60%  { opacity: 1; transform: translateY(1px);  }
+    100% { opacity: 1; transform: translateY(0);    }
+  }
+
+  /* ── CIRCLE: el stroke se dibuja girando ── */
+  .tab-btn:hover .is-hover svg circle,
+  .tab-btn:focus-visible .is-hover svg circle {
+    stroke-dasharray: 603;
+    stroke-dashoffset: 603;
+    animation: circle-draw 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards;
+  }
+
+  @keyframes circle-draw {
+    to { stroke-dashoffset: 0; }
+  }
+
+  /* ── IMAGE: el frame se expande y las líneas aparecen ── */
+  .tab-btn:hover .is-hover svg rect,
+  .tab-btn:focus-visible .is-hover svg rect {
+    animation: frame-expand 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  @keyframes frame-expand {
+    0%   { transform: scale(0.7); opacity: 0; }
+    60%  { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1);   opacity: 1; }
+  }
+
+  .tab-btn:hover .is-hover svg path,
+  .tab-btn:focus-visible .is-hover svg path {
+    animation: lines-appear 0.4s ease-out 0.32s both;
+  }
+
+  @keyframes lines-appear {
+    0%   { opacity: 0; transform: translateY(3px); }
+    100% { opacity: 1; transform: translateY(0);   }
+  }
+
+  /* ─── reduced motion ───────────────────────────────────────────── */
+
+  @media (prefers-reduced-motion: reduce) {
+    .is-default,
+    .is-hover,
+    .tab-btn:hover .is-default,
+    .tab-btn:hover .is-hover,
+    .tab-btn:focus-visible .is-default,
+    .tab-btn:focus-visible .is-hover,
+    .tab-btn:hover .is-hover svg circle,
+    .tab-btn:hover .is-hover svg polyline,
+    .tab-btn:hover .is-hover svg rect,
+    .tab-btn:hover .is-hover svg path {
+      animation: none !important;
+      opacity: inherit;
+      transform: none !important;
+    }
+    .is-hover { opacity: 0; }
+    .tab-btn:hover .is-default,
+    .tab-btn:focus-visible .is-default { opacity: 0; }
+    .tab-btn:hover .is-hover,
+    .tab-btn:focus-visible .is-hover { opacity: 1; }
+  }
+
 </style>
 
 <script>
-  // role="tab" en un <div> no dispara click con Enter/Espacio de forma
-  // nativa (eso solo lo hace un <button> real) — lo repone a mano.
-  // El click en sí ya lo escucha tabs-controller.js vía delegación en
-  // [role="tab"], así que acá solo traducimos teclado -> click.
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Enter" && e.key !== " ") return;
     const tab = (e.target as HTMLElement)?.closest?.('[role="tab"]');
