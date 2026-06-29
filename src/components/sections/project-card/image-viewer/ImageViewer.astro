@@ -1,0 +1,34 @@
+---
+/**
+ * ImageViewer.astro
+ * Une ImageFrame + carga el controller JS (swipe + dots + fade).
+ * Los dots en sí viven en Tabs.astro (.img-dots), porque por diseño
+ * están en el header de tabs, no dentro del panel — el controller los
+ * puebla dinámicamente buscando el .img-dots más cercano.
+ */
+import ImageFrame from "./ImageFrame.astro";
+
+interface Props {
+  images: string[];
+  alt: string;
+  imgId: string;
+}
+
+const { images, alt, imgId } = Astro.props;
+---
+
+<div class="img-viewer">
+  <ImageFrame images={images} alt={alt} imgId={imgId} />
+</div>
+
+<style>
+  .img-viewer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+</style>
+
+<script>
+  import "../scripts/image-viewer-controller.js";
+</script>

@@ -1,0 +1,114 @@
+---
+/**
+ * Tabs.astro
+ * Shell completo del sistema de tabs: header (lista de botones + slot
+ * de dots) + container animado de panels.
+ *
+ * Deliberadamente NO está más fragmentado (sin TabsHeader/TabList/
+ * TabsContainer separados) — header + lista + container viven juntos
+ * acá porque son el "esqueleto" de un solo sistema, no piezas que se
+ * reusen por separado en otro contexto.
+ *
+ * Sí son átomos aparte:
+ *  - TabButton.astro      (un botón individual, reusable)
+ *  - cada *Panel.astro     (el contenido de cada tab, va por <slot/>)
+ *
+ * Uso:
+ *   <Tabs tabs={[{...}]} containerId={id}>
+ *     <OverviewPanel ... />
+ *     <StackPanel ... />
+ *     <ImagesPanel ... />
+ *     <OriginPanel ... />
+ *   </Tabs>
+ *
+ * Los panels van como children directos (slot default) — el orden en
+ * que los pongas no afecta cuál se ve primero; eso lo decide su prop
+ * `hidden` individual + `defaultTab` acá.
+ *
+ * La lógica de click / altura animada / ResizeObserver vive en
+ * scripts/tabs-controller.js (importado una sola vez, se auto-dedupea
+ * en Astro aunque haya N instancias de <Tabs> en la página).
+ */
+import TabButton from "./TabButton.astro";
+import ImageDots from "../image-viewer/ImageDots.astro";
+
+interface TabDef {
+  id: string;            // sufijo del id del panel, ej: "overview"
+  label: string;
+  i18nKey?: string;
+  IconDefault: any;
+  IconHover: any;
+}
+
+interface Props {
+  containerId: string;   // prefijo único, ej: el id del ProjectCard
+  tabs: TabDef[];
+  defaultTab?: string;   // id del tab seleccionado por default (primero si no se pasa)
+}
+
+const { containerId, tabs, defaultTab } = Astro.props;
+const activeId = defaultTab ?? tabs[0]?.id;
+---
+
+<section class="tabs" data-tabs-root>
+  <div class="tabs-header">
+    <menu role="tablist">
+      {tabs.map((tab) => (
+        <TabButton
+          controls={`${containerId}-${tab.id}`}
+          selected={tab.id === activeId}
+          i18nKey={tab.i18nKey}
+          label={tab.label}
+          IconDefault={tab.IconDefault}
+          IconHover={tab.IconHover}
+        />
+      ))}
+    </menu>
+
+    <div class="img-dots" role="group" aria-label="Imágenes del proyecto" hidden></div>
+    <ImageDots />
+  </div>
+
+  <div class="tabs-container" data-tabs-container>
+    <slot />
+  </div>
+</section>
+
+<style>
+  .tabs {
+    border: none !important;
+  }
+
+  .tabs-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 0 0 4px;
+  }
+
+  menu[role="tablist"] {
+    background: transparent !important;
+    border: none !important;
+    display: flex !important;
+    gap: 6px;
+    padding: 0 !important;
+    margin: 0 !important;
+    flex-wrap: wrap;
+    list-style: none !important;
+  }
+
+  .tabs-container {
+    height: auto;
+    overflow: hidden;
+    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+</style>
+
+<script>
+  // Import de cliente correcto: este <script> SÍ corre en el navegador,
+  // a diferencia de un import en el frontmatter (que corre en build/SSR
+  // y no tiene `document`). Astro deduplica el bundle resultante aunque
+  // haya N <Tabs> en la página, así que el archivo no se duplica.
+  import "../scripts/tabs-controller.js";
+</script>

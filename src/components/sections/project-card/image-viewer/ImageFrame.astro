@@ -1,0 +1,56 @@
+---
+/**
+ * ImageFrame.astro
+ * Átomo: el marco + la <img> propiamente dicha. No sabe de dots ni de
+ * swipe — solo renderiza la imagen activa. La lógica de cambiar de
+ * imagen vive en scripts/image-viewer-controller.js.
+ */
+interface Props {
+  images: string[];
+  alt: string;
+  imgId: string;
+}
+
+const { images, alt, imgId } = Astro.props;
+---
+
+<div class="img-frame">
+  <img
+    id={imgId}
+    src={images?.[0]}
+    data-images={images?.join(",")}
+    alt={alt}
+    class="project-img"
+  />
+</div>
+
+<style>
+  .img-frame {
+    position: relative !important;
+    width: 100%;
+  }
+
+  .project-img {
+    display: block !important;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    object-position: top;
+  }
+
+  .project-img.is-fading {
+    animation: imgFade 0.35s ease-out;
+  }
+
+  @keyframes imgFade {
+    from {
+      opacity: 0.35;
+      filter: blur(4px);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+</style>

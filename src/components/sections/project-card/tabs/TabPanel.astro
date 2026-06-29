@@ -1,0 +1,47 @@
+---
+/**
+ * TabPanel.astro
+ * Átomo genérico: el <article role="tabpanel"> con su fade-in y estilos
+ * base. Cada panel específico (OverviewPanel, StackPanel, etc.) es un
+ * wrapper delgado de este componente + su contenido por <slot/>.
+ */
+interface Props {
+  id: string;
+  hidden?: boolean;
+}
+
+const { id, hidden = false } = Astro.props;
+---
+
+<article role="tabpanel" id={id} hidden={hidden}>
+  <slot />
+</article>
+
+<style>
+  article[role="tabpanel"] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 4px 2px !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+    max-width: 100%;
+    opacity: 1;
+    animation: fadeIn 0.3s ease-out 0.1s both;
+  }
+
+  article[role="tabpanel"][hidden] {
+    display: none;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

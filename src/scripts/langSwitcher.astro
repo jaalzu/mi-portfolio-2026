@@ -27,7 +27,6 @@ import { translations } from '../lib/translations';
     const switcherBtn = document.getElementById('lang-switcher');
     if (switcherBtn) switcherBtn.textContent = lang === 'es' ? 'EN' : 'ES';
 
-    // 👇 avisa a CUALQUIER componente que escuche (StackAccordion, ScrollBg, etc.)
     window.dispatchEvent(new CustomEvent('langchange', { detail: { lang } }));
   }
 

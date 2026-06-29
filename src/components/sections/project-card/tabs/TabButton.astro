@@ -1,0 +1,163 @@
+---
+/**
+ * TabButton.astro
+ * Átomo: un solo tab, estilo glass simple (blur + transparencia, sin
+ * distorsión tipo liquid-glass de Apple — eso se descartó a propósito).
+ *
+ * --- Por qué NO es un <button> ---
+ * Tu CSS global carga 7.css en su variante "scoped" bajo la clase
+ * .win7, que envuelve TODA la página (<main class="desktop win7">).
+ * La doc oficial de 7.css confirma que esa hoja scoped apunta al
+ * selector de tipo `button` dentro de `.win7 ...`, y como nuestro tab
+ * vive dentro de ese mismo ancestro, cualquier <button> real ahí
+ * adentro queda bajo su alcance — pelear regla por regla con
+ * !important nunca ganaba de forma consistente (el empate de
+ * especificidad lo resolvía el orden de aparición en el CSS final,
+ * no algo que controlemos desde el componente).
+ *
+ * Solución definitiva: el tab deja de ser un <button> real y pasa a
+ * ser un <div role="tab">. Ninguna regla de 7.css que apunte al
+ * selector de tipo `button` puede aplicarle nada, sin importar su
+ * especificidad, porque el elemento ya no matchea ese selector.
+ * Para no perder accesibilidad, se repone a mano: tabindex, Enter,
+ * Espacio y aria-selected ya estaban; ahora además escuchamos
+ * keydown directamente acá (el click ya lo escucha tabs-controller.js
+ * vía delegación en [role="tab"], eso no cambia).
+ *
+ * Fix de íconos: `color` fijo en `.tab-icon` para que el SVG con
+ * fill="currentColor" siempre tenga un valor concreto de dónde
+ * heredar, en vez de depender de lo que venga de afuera.
+ */
+interface Props {
+  controls: string;
+  selected?: boolean;
+  i18nKey?: string;
+  label: string;
+  IconDefault: any;
+  IconHover: any;
+}
+
+const { controls, selected = false, i18nKey, label, IconDefault, IconHover } = Astro.props;
+---
+
+<div
+  role="tab"
+  tabindex="0"
+  aria-controls={controls}
+  aria-selected={selected ? "true" : "false"}
+  class="tab-btn"
+>
+  <span class="tab-icon">
+    <span class="tab-icon-layer is-default">
+      <IconDefault />
+    </span>
+    <span class="tab-icon-layer is-hover">
+      <IconHover />
+    </span>
+  </span>
+  <span class="tab-label" data-i18n={i18nKey}>{label}</span>
+</div>
+
+<style>
+  .tab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    user-select: none;
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    color: inherit;
+    font-weight: 600;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.75rem;
+    transition: background 0.25s ease, border-color 0.25s ease;
+  }
+
+  .tab-btn:hover {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.22);
+  }
+
+  .tab-btn:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+  }
+
+  .tab-btn[aria-selected="true"] {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.32);
+  }
+
+  /* ---------- icon ---------- */
+
+  .tab-icon {
+    position: relative;
+    display: inline-flex;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    color: #fff; /* base concreta: el SVG hereda currentColor de ACÁ */
+  }
+
+  .tab-icon-layer {
+    position: absolute;
+    inset: 0;
+    display: inline-flex;
+  }
+
+  .tab-icon-layer :global(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .is-default {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .is-hover {
+    opacity: 0;
+    transform: scale(0.6);
+    transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .tab-btn:hover .is-default,
+  .tab-btn:focus-visible .is-default {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+
+  .tab-btn:hover .is-hover,
+  .tab-btn:focus-visible .is-hover {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .is-default, .is-hover {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // role="tab" en un <div> no dispara click con Enter/Espacio de forma
+  // nativa (eso solo lo hace un <button> real) — lo repone a mano.
+  // El click en sí ya lo escucha tabs-controller.js vía delegación en
+  // [role="tab"], así que acá solo traducimos teclado -> click.
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    const tab = (e.target as HTMLElement)?.closest?.('[role="tab"]');
+    if (!tab) return;
+    e.preventDefault();
+    tab.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  });
+</script>
