@@ -4,11 +4,9 @@ interface Props {
   selected?: boolean;
   i18nKey?: string;
   label: string;
-  IconDefault: any;
-  IconHover: any;
+  iconType: "eye" | "stack" | "circle" | "image";
 }
-
-const { controls, selected = false, i18nKey, label, IconDefault, IconHover } = Astro.props;
+const { controls, selected = false, i18nKey, label, iconType } = Astro.props;
 ---
 
 <div
@@ -17,243 +15,267 @@ const { controls, selected = false, i18nKey, label, IconDefault, IconHover } = A
   aria-controls={controls}
   aria-selected={selected ? "true" : "false"}
   class="tab-btn"
+  data-icon={iconType}
 >
   <span class="tab-icon">
-    <span class="tab-icon-layer is-default">
-      <IconDefault />
-    </span>
-    <span class="tab-icon-layer is-hover">
-      <IconHover />
-    </span>
+{iconType === "eye" && (
+  <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+    <!-- pestañas cerradas: visibles en reposo -->
+    <line class="lash-closed" x1="224" y1="168" x2="200.62" y2="127.09" stroke="currentColor" stroke-linecap="round" stroke-width="16"/>
+    <line class="lash-closed" x1="160" y1="192" x2="152.91" y2="149.45" stroke="currentColor" stroke-linecap="round" stroke-width="16"/>
+    <line class="lash-closed" x1="96"  y1="192" x2="103.09" y2="149.45" stroke="currentColor" stroke-linecap="round" stroke-width="16"/>
+    <line class="lash-closed" x1="32"  y1="168" x2="55.38"  y2="127.09" stroke="currentColor" stroke-linecap="round" stroke-width="16"/>
+  
+ 
+    <path class="eyelid" d="M32,104c16.81,20.81,47.63,48,96,48s79.19-27.19,96-48"
+      fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+    <!-- outline ojo abierto: oculto en reposo -->
+    <path class="eye-open" d="M128,56C48,56,16,128,16,128s32,72,112,72,112-72,112-72S208,56,128,56Z"
+      fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" opacity="0"/>
+    <!-- iris: oculto en reposo -->
+    <circle class="iris" cx="128" cy="128" r="40"
+      fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="16" opacity="0"/>
+  </svg>
+)}
+
+
+    {iconType === "stack" && (
+      <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+        <!-- cap1: cae primero, queda arriba (misma Y que s-mid del reposo) -->
+        <polyline class="s-cap1" points="16 144 128 208 240 144"
+          fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"
+          opacity="0"/>
+        <!-- cap2: cae segundo, queda debajo de cap1 (más abajo) -->
+        <polyline class="s-cap2" points="16 176 128 240 224 176"
+          fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"
+          opacity="0"/>
+        <!-- base: siempre visible, baja en hover para hacer espacio -->
+        <polygon class="s-base" points="16 104 128 168 240 104 128 40 16 104"
+          fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+      </svg>
+    )}
+
+    {iconType === "circle" && (
+      <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+        {/* los 6 arcos del dashed — se rellenan los huecos con el solid encima */}
+        <path class="arc" d="M104,35a95.51,95.51,0,0,1,48,0"            fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="8"/>
+        <path class="arc" d="M35.49,102.3a95.54,95.54,0,0,1,24,-41.56"  fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="8"/>
+        <path class="arc" d="M59.49,195.27a95.54,95.54,0,0,1,-24,-41.58" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="8"/>
+        <path class="arc" d="M152,221a95.51,95.51,0,0,1,-48,0"           fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="8"/>
+        <path class="arc" d="M220.51,153.7a95.54,95.54,0,0,1,-24,41.56"  fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="8"/>
+        <path class="arc" d="M196.51,60.73a95.54,95.54,0,0,1,24,41.58"   fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="8"/>
+        {/* círculo completo encima: se dibuja sobre los huecos */}
+        <circle class="solid" cx="128" cy="128" r="96"
+          fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="8"
+          opacity="0"/>
+      </svg>
+    )}
+
+    {iconType === "image" && (
+      <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+        {/* frame */}
+        <rect class="frame" x="32" y="48" width="192" height="160" rx="8"
+          fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
+        {/* dot/sol: escala en hover */}
+        <circle class="dot" cx="156" cy="100" r="8" fill="currentColor"/>
+        {/* montañas: se dibujan con strokeDashoffset en hover */}
+        <path class="mount-a" d="M147.31,164,173,138.34a8,8,0,0,1,11.31,0L224,178.06"
+          fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
+        <path class="mount-b" d="M32,168.69l54.34-54.35a8,8,0,0,1,11.32,0L191.31,208"
+          fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
+      </svg>
+    )}
+
   </span>
   <span class="tab-label" data-i18n={i18nKey}>{label}</span>
 </div>
 
-<!-- is:global porque el scoped CSS de Astro no penetra hijos SVG importados -->
 <style is:global>
-
-  /* ─── base del tab ─────────────────────────────────────────────── */
-
-  .tab-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-    user-select: none;
-    background: rgba(255, 255, 255, 0.10);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 999px;
-    color: inherit;
-    font-weight: 600;
-    padding: 0.3rem 0.75rem;
-    font-size: 0.75rem;
-    transition: background 0.25s ease, border-color 0.25s ease;
-  }
-
-  .tab-btn:hover {
-    background: rgba(255, 255, 255, 0.16);
-    border-color: rgba(255, 255, 255, 0.22);
-  }
-
-  .tab-btn:focus-visible {
-    outline: 2px solid rgba(255, 255, 255, 0.5);
-    outline-offset: 2px;
-  }
-
-  .tab-btn[aria-selected="true"] {
-    background: rgba(255, 255, 255, 0.22);
-    border-color: rgba(255, 255, 255, 0.32);
-  }
-
-  /* ─── contenedor de icono ──────────────────────────────────────── */
-
-  .tab-icon {
-    position: relative;
-    display: inline-flex;
-    width: 14px;
-    height: 14px;
-    flex-shrink: 0;
-    color: #fff;
-    overflow: visible;
-  }
-
-  .tab-icon-layer {
-    position: absolute;
-    inset: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .tab-icon-layer svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-    overflow: visible;
-  }
-
-  /* ─── estado reposo ────────────────────────────────────────────── */
-
-  .is-default {
-    animation: icon-out-reverse 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-
-  .is-hover {
-    animation: icon-in-reverse 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-
-  /* ─── estado hover ─────────────────────────────────────────────── */
-
-  .tab-btn:hover .is-default,
-  .tab-btn:focus-visible .is-default {
-    animation: icon-out 0.35s cubic-bezier(0.4, 0, 0.6, 1) both;
-  }
-
-  .tab-btn:hover .is-hover,
-  .tab-btn:focus-visible .is-hover {
-    animation: icon-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-
-  /* ─── keyframes del swap de icono ──────────────────────────────── */
-
-  /* default sale: achica, opaca, sube */
-  @keyframes icon-out {
-    0%   { opacity: 1; transform: scale(1)    translateY(0px)   rotate(0deg); }
-    100% { opacity: 0; transform: scale(0.3)  translateY(-7px)  rotate(-20deg); }
-  }
-
-  /* default vuelve cuando se va el hover */
-  @keyframes icon-out-reverse {
-    0%   { opacity: 0; transform: scale(0.3)  translateY(-7px)  rotate(-20deg); }
-    100% { opacity: 1; transform: scale(1)    translateY(0px)   rotate(0deg); }
-  }
-
-  /* hover entra: crece desde abajo con bounce */
-  @keyframes icon-in {
-    0%   { opacity: 0; transform: scale(0.3)  translateY(7px)   rotate(20deg); }
-    60%  { opacity: 1; transform: scale(1.15) translateY(-1px)  rotate(-3deg); }
-    100% { opacity: 1; transform: scale(1)    translateY(0px)   rotate(0deg); }
-  }
-
-  /* hover vuelve a su estado oculto */
-  @keyframes icon-in-reverse {
-    0%   { opacity: 1; transform: scale(1)    translateY(0px)   rotate(0deg); }
-    100% { opacity: 0; transform: scale(0.3)  translateY(7px)   rotate(20deg); }
-  }
-
-  /* ─── animaciones internas de los SVG ──────────────────────────── */
-
-  /*
-   * Cada SVG tiene partes animables. Las activamos cuando el tab-btn
-   * está en hover Y la capa .is-hover ya entró.
-   * Usamos animation-delay para que empiecen cuando el icono ya llegó.
-   */
-
-  /* ── EYE: el iris late una vez que aparece ── */
-  .tab-btn:hover .is-hover svg circle,
-  .tab-btn:focus-visible .is-hover svg circle {
-    animation: iris-pulse 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
-    transform-origin: center;
-    transform-box: fill-box;
-  }
-
-  @keyframes iris-pulse {
-    0%   { transform: scale(0.4); opacity: 0; }
-    60%  { transform: scale(1.2); opacity: 1; }
-    100% { transform: scale(1);   opacity: 1; }
-  }
-
-  /* ── STACK: las líneas bajan escalonadamente ── */
-  .tab-btn:hover .is-hover svg polyline:first-of-type,
-  .tab-btn:focus-visible .is-hover svg polyline:first-of-type {
-    animation: stack-drop 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
-    transform-origin: center top;
-    transform-box: fill-box;
-  }
-
-  .tab-btn:hover .is-hover svg polyline:last-of-type,
-  .tab-btn:focus-visible .is-hover svg polyline:last-of-type {
-    animation: stack-drop 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.38s both;
-    transform-origin: center top;
-    transform-box: fill-box;
-  }
-
-  @keyframes stack-drop {
-    0%   { opacity: 0; transform: translateY(-8px); }
-    60%  { opacity: 1; transform: translateY(1px);  }
-    100% { opacity: 1; transform: translateY(0);    }
-  }
-
-  /* ── CIRCLE: el stroke se dibuja girando ── */
-  .tab-btn:hover .is-hover svg circle,
-  .tab-btn:focus-visible .is-hover svg circle {
-    stroke-dasharray: 603;
-    stroke-dashoffset: 603;
-    animation: circle-draw 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards;
-  }
-
-  @keyframes circle-draw {
-    to { stroke-dashoffset: 0; }
-  }
-
-  /* ── IMAGE: el frame se expande y las líneas aparecen ── */
-  .tab-btn:hover .is-hover svg rect,
-  .tab-btn:focus-visible .is-hover svg rect {
-    animation: frame-expand 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
-    transform-origin: center;
-    transform-box: fill-box;
-  }
-
-  @keyframes frame-expand {
-    0%   { transform: scale(0.7); opacity: 0; }
-    60%  { transform: scale(1.05); opacity: 1; }
-    100% { transform: scale(1);   opacity: 1; }
-  }
-
-  .tab-btn:hover .is-hover svg path,
-  .tab-btn:focus-visible .is-hover svg path {
-    animation: lines-appear 0.4s ease-out 0.32s both;
-  }
-
-  @keyframes lines-appear {
-    0%   { opacity: 0; transform: translateY(3px); }
-    100% { opacity: 1; transform: translateY(0);   }
-  }
-
-  /* ─── reduced motion ───────────────────────────────────────────── */
-
-  @media (prefers-reduced-motion: reduce) {
-    .is-default,
-    .is-hover,
-    .tab-btn:hover .is-default,
-    .tab-btn:hover .is-hover,
-    .tab-btn:focus-visible .is-default,
-    .tab-btn:focus-visible .is-hover,
-    .tab-btn:hover .is-hover svg circle,
-    .tab-btn:hover .is-hover svg polyline,
-    .tab-btn:hover .is-hover svg rect,
-    .tab-btn:hover .is-hover svg path {
-      animation: none !important;
-      opacity: inherit;
-      transform: none !important;
-    }
-    .is-hover { opacity: 0; }
-    .tab-btn:hover .is-default,
-    .tab-btn:focus-visible .is-default { opacity: 0; }
-    .tab-btn:hover .is-hover,
-    .tab-btn:focus-visible .is-hover { opacity: 1; }
-  }
-
+.tab-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  cursor: pointer; user-select: none;
+  background: rgba(255,255,255,0.10);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 999px; color: inherit; font-weight: 600;
+  padding: 0.3rem 0.75rem; font-size: 0.75rem;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+.tab-btn:hover                 { background: rgba(255,255,255,0.16); border-color: rgba(255,255,255,0.22); }
+.tab-btn:focus-visible         { outline: 2px solid rgba(255,255,255,0.5); outline-offset: 2px; }
+.tab-btn[aria-selected="true"] { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.32); }
+.tab-icon { position: relative; display: inline-flex; width: 14px; height: 14px; flex-shrink: 0; color: #fff; }
+.ico      { display: block; width: 100%; height: 100%; overflow: visible; }
 </style>
 
 <script>
-  document.addEventListener("keydown", (e) => {
-    if (e.key !== "Enter" && e.key !== " ") return;
-    const tab = (e.target as HTMLElement)?.closest?.('[role="tab"]');
-    if (!tab) return;
-    e.preventDefault();
-    tab.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+import gsap from "gsap";
+
+function getPathLength(el: SVGGeometryElement) {
+  return el.getTotalLength();
+}
+
+function initTabIcons() {
+  document.querySelectorAll<HTMLElement>('.tab-btn:not([data-gsap-ready])').forEach(btn => {
+    btn.setAttribute("data-gsap-ready", "1");
+    const type = btn.dataset.icon;
+    const svg  = btn.querySelector("svg");
+    if (!svg) return;
+
+    const tlIn  = gsap.timeline({ paused: true });
+    const tlOut = gsap.timeline({ paused: true });
+
+   /* ── EYE ──────────────────────────────────────────────────────
+       Reposo : eyelid + lashes visibles. eye-open e iris OCULTOS.
+       Hover  : eyelid+lashes → 0, eye-open → 1, iris ya está ahí
+                (opacity 1 desde el inicio, no aparece mágicamente)
+    ────────────────────────────────────────────────────────────── */
+if (type === "eye" && svg) {
+  const lashesClosed = svg.querySelectorAll(".lash-closed");
+  const lashesOpen   = svg.querySelectorAll(".lash-open");
+  const eyelid  = svg.querySelector(".eyelid")!;
+  const eyeOpen = svg.querySelector(".eye-open")!;
+  const iris    = svg.querySelector(".iris")!;
+
+  gsap.set([eyeOpen, iris, ...Array.from(lashesOpen)], { opacity: 0, immediateRender: true });
+
+  tlIn
+    .to([...Array.from(lashesClosed), eyelid], { opacity: 0, duration: 0.18, ease: "power2.in" }, 0)
+    .to(eyeOpen,     { opacity: 1, duration: 0.22, ease: "power2.out" }, 0.15)
+    .to(iris,        { opacity: 1, duration: 0.22, ease: "power2.out" }, 0.15)
+    .to(lashesOpen,  { opacity: 1, duration: 0.22, ease: "power2.out" }, 0.15);
+
+  tlOut
+    .to([eyeOpen, iris, ...Array.from(lashesOpen)], { opacity: 0, duration: 0.15, ease: "power2.in" }, 0)
+    .to([...Array.from(lashesClosed), eyelid], { opacity: 1, duration: 0.2, ease: "power2.out" }, 0.12);
+}
+ 
+
+  /* ── STACK ────────────────────────────────────────────────────
+       Reposo : solo s-base visible.
+       Hover  : s-base baja, cap1 cae primero (arriba), cap2 cae después (abajo).
+       FIFO desde arriba: cap1 llega antes y queda en el top.
+    ────────────────────────────────────────────────────────────── */
+    if (type === "stack" && svg) {
+      const sBase = svg.querySelector(".s-base")!;
+      const cap1  = svg.querySelector(".s-cap1")!;
+      const cap2  = svg.querySelector(".s-cap2")!;
+      const icon  = btn.querySelector<HTMLElement>(".tab-icon")!;
+ 
+      svg.style.overflow = "visible";
+      icon.style.overflow = "visible";
+ 
+      gsap.set(cap1, { opacity: 0, attr: { transform: "translate(0,-256)" }, immediateRender: true });
+      gsap.set(cap2, { opacity: 0, attr: { transform: "translate(0,-256)" }, immediateRender: true });
+      gsap.set(sBase, { attr: { transform: "translate(0,20)" }, immediateRender: true });
+ 
+      tlIn
+        // base baja para hacer espacio a las dos capas
+        // cap1 cae primero — queda en el top
+        .to(cap1,  { opacity: 1, attr: { transform: "translate(0,20)" }, duration: 0.42, ease: "back.out(2)" }, 0.04)
+        // cap2 cae después — queda entre cap1 y base
+        .to(cap2,  { opacity: 1, attr: { transform: "translate(0,20)" }, duration: 0.42, ease: "back.out(2)" }, 0.16);
+ 
+      tlOut
+        .to(cap2,  { opacity: 0, attr: { transform: "translate(0,-256)" }, duration: 0.18, ease: "power3.in" }, 0)
+        .to(cap1,  { opacity: 0, attr: { transform: "translate(0,-256)" }, duration: 0.18, ease: "power3.in" }, 0.08)
+    }
+
+    /* ── CIRCLE ──────────────────────────────────────────────────
+       Reposo: 6 arcos separados (dashed look)
+       Hover:  arcos se mantienen, círculo completo se traza ENCIMA
+               rellenando los huecos — de dashed a solid
+    ──────────────────────────────────────────────────────────── */
+    if (type === "circle") {
+      const arcs  = svg.querySelectorAll<SVGPathElement>(".arc");
+      const solid = svg.querySelector<SVGCircleElement>(".solid")!;
+      const circ  = 2 * Math.PI * 96; // 603.18
+
+      gsap.set(solid, { strokeDasharray: circ, strokeDashoffset: circ, opacity: 1 });
+
+      tlIn
+        // los arcos se atenúan suavemente mientras el solid se dibuja encima
+        .to(arcs,  { opacity: 0.25, stagger: 0.025, duration: 0.15, ease: "power1.in" }, 0)
+        .to(solid, { strokeDashoffset: 0,            duration: 0.6,  ease: "power2.out" }, 0.05)
+        .to(arcs,  { opacity: 0,                     duration: 0.1                      }, 0.4);
+
+      tlOut
+        .to(solid, { strokeDashoffset: circ, duration: 0.35, ease: "power2.in" }, 0)
+        .to(arcs,  { opacity: 1, stagger: 0.03, duration: 0.2, ease: "power1.out" }, 0.2);
+    }
+
+    /* ── IMAGE ───────────────────────────────────────────────────
+       Reposo: frame + dot + montañas estáticos
+       Hover:  dot sube y crece (sol que brilla),
+               mount-a y mount-b se dibujan con stroke-dash
+               frame hace un micro-bounce
+    ──────────────────────────────────────────────────────────── */
+    if (type === "image") {
+      const frame  = svg.querySelector<SVGRectElement>(".frame")!;
+      const dot    = svg.querySelector<SVGCircleElement>(".dot")!;
+      const mountA = svg.querySelector<SVGPathElement>(".mount-a")!;
+      const mountB = svg.querySelector<SVGPathElement>(".mount-b")!;
+
+      const lenA = getPathLength(mountA);
+      const lenB = getPathLength(mountB);
+
+      // reset montañas al estado invisible para dibujarlas
+      gsap.set(mountA, { strokeDasharray: lenA, strokeDashoffset: lenA });
+      gsap.set(mountB, { strokeDasharray: lenB, strokeDashoffset: lenB });
+
+      tlIn
+        // frame bounce sutil
+        .fromTo(frame,
+          { scale: 1,    transformOrigin: "128px 128px" },
+          { scale: 1.05, transformOrigin: "128px 128px", duration: 0.18, ease: "power2.out", yoyo: true, repeat: 1 }
+        )
+        // dot sube un poco y agranda
+        .to(dot,
+          { y: -6, scale: 1.4, transformOrigin: "156px 100px", duration: 0.35, ease: "back.out(2)" },
+          0
+        )
+        // montañas se dibujan de izquierda a derecha
+        .to(mountB, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 0.08)
+        .to(mountA, { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, 0.2);
+
+      tlOut
+        .to(dot,    { y: 0, scale: 1, transformOrigin: "156px 100px", duration: 0.25, ease: "power2.in" }, 0)
+        .to(mountA, { strokeDashoffset: lenA, duration: 0.25, ease: "power2.in" }, 0)
+        .to(mountB, { strokeDashoffset: lenB, duration: 0.3,  ease: "power2.in" }, 0.04);
+    }
+
+  // ── eventos ──────────────────────────────────────────────────
+const isSelected = () => btn.getAttribute("aria-selected") === "true";
+let active = isSelected();
+let hovered = false;
+
+btn.addEventListener("mouseenter", () => { hovered = true;  if (!active) { tlOut.pause(); tlIn.restart(); } });
+btn.addEventListener("mouseleave", () => { hovered = false; if (!active) { tlIn.pause(); tlOut.restart(); } });
+btn.addEventListener("focus",      () => { if (!active && !hovered) { tlOut.pause(); tlIn.restart(); } });
+btn.addEventListener("blur",       () => { if (!active) { tlIn.pause(); tlOut.restart(); } });
+
+new MutationObserver((mutations) => {
+  const changed = mutations[0].oldValue !== btn.getAttribute("aria-selected");
+  if (!changed) return;
+  active = isSelected();
+  if (active) { tlOut.pause(); if (!hovered) tlIn.play(); }
+  else        { tlIn.pause(); tlOut.restart(); }
+}).observe(btn, { attributes: true, attributeFilter: ["aria-selected"], attributeOldValue: true });
+
+if (isSelected()) { active = true; tlIn.progress(1); }
   });
+}
+
+initTabIcons();
+document.addEventListener("astro:page-load", initTabIcons);
+
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Enter" && e.key !== " ") return;
+  const tab = (e.target as HTMLElement)?.closest?.('[role="tab"]');
+  if (!tab) return;
+  e.preventDefault();
+  tab.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+});
+
+
 </script>

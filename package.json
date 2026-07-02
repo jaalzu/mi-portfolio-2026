@@ -12,6 +12,7 @@
   "dependencies": {
     "7.css": "^0.21.1",
     "astro-icon": "^1.1.5",
+    "gsap": "^3.15.0",
     "sharp": "^0.34.5",
     "xp.css": "^0.2.6"
   },
