@@ -1,1 +1,3 @@
-@import "7.css/dist/7.scoped.css";
+/* @layer vendor, base, components, utilities;
+
+@import "7.css/dist/7.scoped.css" layer(vendor); */

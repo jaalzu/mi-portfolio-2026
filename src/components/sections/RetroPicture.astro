@@ -3,9 +3,8 @@ import WinGlass from '../ui/WinGlass.astro';
 const { xp = false } = Astro.props;
 ---
 
-<WinGlass title="Javier Alzú" noControls noPadding icon="retro/jpg-8.webp" color="var(--win-picture)" xp={xp}>
+<WinGlass title="Javier" noControls noPadding icon="retro/jpg-8.webp" color="var(--win-picture)" xp={xp}>
   <img src="me/me13.webp" alt="Foto" class="profile-img" />
-
 </WinGlass>
 
 <style>
@@ -13,18 +12,11 @@ const { xp = false } = Astro.props;
     width: 100%;
     height: 140px;
     object-fit: cover;
-
     display: block;
   }
 
-  .status-bar{
-    background: transparent !important;
-  }
 
-  p{
-    font-size: .8rem;
-  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.130);
-    
-  }
+
+
 
 </style>

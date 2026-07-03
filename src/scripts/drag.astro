@@ -6,7 +6,7 @@
 
     document.querySelectorAll('.win').forEach(win => {
       win.addEventListener('mousedown', (e) => {
-        if (!e.target.closest('.title-bar')) return;
+        if (!e.target.closest('.glass-titlebar')) return;
         if (window.innerWidth <= 1300) return;
 
         dragging = win;
@@ -18,11 +18,11 @@
       });
     });
 
-   document.addEventListener('mousemove', (e) => {
-  if (!dragging) return;
-  dragging.style.left = (e.clientX - offsetX) + 'px';
-  dragging.style.top  = (e.clientY - offsetY) + 'px';
-});
+    document.addEventListener('mousemove', (e) => {
+      if (!dragging) return;
+      dragging.style.left = (e.clientX - offsetX) + 'px';
+      dragging.style.top  = (e.clientY - offsetY) + 'px';
+    });
 
     document.addEventListener('mouseup', () => { dragging = null; });
   });

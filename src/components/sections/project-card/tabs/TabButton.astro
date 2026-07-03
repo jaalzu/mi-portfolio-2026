@@ -21,20 +21,20 @@ const { controls, selected = false, i18nKey, label, iconType } = Astro.props;
 {iconType === "eye" && (
   <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
     <!-- pestañas cerradas: visibles en reposo -->
-    <line class="lash-closed" x1="224" y1="168" x2="200.62" y2="127.09" stroke="currentColor" stroke-linecap="round" stroke-width="21"/>
-    <line class="lash-closed" x1="160" y1="192" x2="152.91" y2="149.45" stroke="currentColor" stroke-linecap="round" stroke-width="21"/>
-    <line class="lash-closed" x1="96"  y1="192" x2="103.09" y2="149.45" stroke="currentColor" stroke-linecap="round" stroke-width="21"/>
-    <line class="lash-closed" x1="32"  y1="168" x2="55.38"  y2="127.09" stroke="currentColor" stroke-linecap="round" stroke-width="21"/>
+    <line class="lash-closed" x1="224" y1="168" x2="200.62" y2="127.09" stroke="currentColor" stroke-linecap="round" stroke-width="20"/>
+    <line class="lash-closed" x1="160" y1="192" x2="152.91" y2="149.45" stroke="currentColor" stroke-linecap="round" stroke-width="20"/>
+    <line class="lash-closed" x1="96"  y1="192" x2="103.09" y2="149.45" stroke="currentColor" stroke-linecap="round" stroke-width="20"/>
+    <line class="lash-closed" x1="32"  y1="168" x2="55.38"  y2="127.09" stroke="currentColor" stroke-linecap="round" stroke-width="20"/>
   
  
     <path class="eyelid" d="M32,104c16.81,20.81,47.63,48,96,48s79.19-27.19,96-48"
-      fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="21"/>
+      fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="20"/>
     <!-- outline ojo abierto: oculto en reposo -->
     <path class="eye-open" d="M128,56C48,56,16,128,16,128s32,72,112,72,112-72,112-72S208,56,128,56Z"
-      fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="21" opacity="0"/>
+      fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" opacity="0"/>
     <!-- iris: oculto en reposo -->
     <circle class="iris" cx="128" cy="128" r="40"
-      fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="21" opacity="0"/>
+      fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="20" opacity="0"/>
   </svg>
 )}
 
@@ -58,15 +58,15 @@ const { controls, selected = false, i18nKey, label, iconType } = Astro.props;
     {iconType === "circle" && (
       <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
         {/* los 6 arcos del dashed — se rellenan los huecos con el solid encima */}
-        <path class="arc" d="M104,35a95.51,95.51,0,0,1,48,0"            fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="24"/>
-        <path class="arc" d="M35.49,102.3a95.54,95.54,0,0,1,24,-41.56"  fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="24"/>
-        <path class="arc" d="M59.49,195.27a95.54,95.54,0,0,1,-24,-41.58" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="24"/>
-        <path class="arc" d="M152,221a95.51,95.51,0,0,1,-48,0"           fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="24"/>
-        <path class="arc" d="M220.51,153.7a95.54,95.54,0,0,1,-24,41.56"  fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="24"/>
-        <path class="arc" d="M196.51,60.73a95.54,95.54,0,0,1,24,41.58"   fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="24"/>
+        <path class="arc" d="M104,35a95.51,95.51,0,0,1,48,0"            fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="22"/>
+        <path class="arc" d="M35.49,102.3a95.54,95.54,0,0,1,24,-41.56"  fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="22"/>
+        <path class="arc" d="M59.49,195.27a95.54,95.54,0,0,1,-24,-41.58" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="22"/>
+        <path class="arc" d="M152,221a95.51,95.51,0,0,1,-48,0"           fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="22"/>
+        <path class="arc" d="M220.51,153.7a95.54,95.54,0,0,1,-24,41.56"  fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="22"/>
+        <path class="arc" d="M196.51,60.73a95.54,95.54,0,0,1,24,41.58"   fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="22"/>
         {/* círculo completo encima: se dibuja sobre los huecos */}
         <circle class="solid" cx="128" cy="132" r="96"
-          fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="24"
+          fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="23"
           opacity="0"/>
       </svg>
     )}
@@ -88,62 +88,6 @@ const { controls, selected = false, i18nKey, label, iconType } = Astro.props;
 
   </span>
 </div>
-<style is:global>
-.tab-btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  cursor: pointer; user-select: none;
-  
-  /* Fondo estilo Apple: Muy traslúcido con gradiente sutil */
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  
-  /* Borde "biselado" (El truco de Apple: un borde claro exterior y una sombra oscura pequeña) */
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px; 
-  padding: 0.4rem .7rem;
-  
-  /* Sombra sutil que separa el cristal del fondo */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.2);
-  
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.tab-btn:hover {
-  background: linear-gradient(180deg, rgba(21, 255, 0, 0.25) 0%, rgba(21, 255, 0, 0.1) 100%);
-  border-color: rgba(21, 255, 0, 0.4);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.3);
-}
-
-.tab-btn[aria-selected="true"] {
-  background: rgba(21, 255, 0, 0.2);
-  border-color: rgba(21, 255, 0, 0.6);
-  box-shadow: inset 0 0 0 1px rgba(21, 255, 0, 0.3), 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.tab-icon { 
-  position: relative; display: inline-flex; width: 21px; height: 21px; 
-  flex-shrink: 0; color: white;
-}
-</style>
-<!-- <style is:global>
-.tab-btn {
-  display: inline-flex; align-items: center; gap: 6px;
-  cursor: pointer; user-select: none;
-  background: rgba(21, 255, 0, 0.665);
-  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-  border-radius: 999px; color: inherit; font-weight: 600;
-  padding: 0.40rem 0.40rem;
-   font-size: 0.75rem;
-  transition: background 0.25s ease, border-color 0.25s ease;
-}
-.tab-btn:hover                 { background:  rgba(21, 255, 0, 0.665); border-color: rgba(255,255,255,0.22); }
-.tab-btn:focus-visible         { outline: 1px solid rgba(43, 244, 8, 0.9); outline-offset: 2px; }
-.tab-btn[aria-selected="true"] { background: rgba(255,255,255,0.22); border-color: rgba(255, 255, 255, 0.468); }
-.tab-icon { position: relative; display: inline-flex; width: 21px; height: 21px; flex-shrink: 0; color: #ffffff !important; }
-
-.ico      { display: block; width: 100%; height: 100%; overflow: visible; }
-</style> -->
 
 <script>
 import gsap from "gsap";
