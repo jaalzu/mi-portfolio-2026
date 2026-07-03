@@ -55,7 +55,7 @@ const config = THEMES[theme];
   </head>
 
   <body>
-<ScrollBg />
+<!-- <ScrollBg /> -->
 
     <main class="desktop win7">
       <div class="win" id="win-picture" style="top: 10px; left:3vw">
@@ -190,6 +190,14 @@ const config = THEMES[theme];
 
 
 <style>
+
+  body {
+  background: url('/bg/3.jpg') center / cover no-repeat fixed;
+}
+
+:root {
+  --page-text-color: #fffffff7;
+}
 .button-lang{
   color: black !important;
 }
