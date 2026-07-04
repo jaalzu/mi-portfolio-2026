@@ -5,8 +5,7 @@
 *::-webkit-scrollbar {
   display: none;
 }
-
-[data-theme="win7"] * {
+* {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -30,7 +29,7 @@ span,
 ul,
 li,
 button {
-  color: var(--page-text-color, #222) !important;
+  color: var(--page-text-color) !important;
 }
 
 .bg-container {
