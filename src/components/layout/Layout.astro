@@ -1,6 +1,6 @@
 ---
-import RetroAboutMe from '../sections/RetroAboutMe.astro';
-import RetroTechStack from '../sections/RetroTechStack.astro';
+import RetroAboutMe from '../sections/AboutMe.astro';
+import RetroTechStack from '../sections/TechStack.astro';
 import ProjectCard from '../sections/project-card/ProjectCard.astro';
 import RetroPicture from '../sections/RetroPicture.astro';
 import ScrollBg from '../../components/ScrollBg.astro';
@@ -49,12 +49,8 @@ import '../../styles/global.css';
     <!-- <ScrollBg /> -->
 
     <main class="desktop">
-      <div class="win" id="win-picture" style="top: 10px; left:3vw">
-        <RetroPicture />
-      </div>
 
-
-      <div class="win" id="win-about" style="top: 250px; left: 3vw; width: 790px;">
+      <div class="win" id="win-about" style="top: 50px; left: 3vw; width: 790px;">
         <RetroAboutMe />
       </div>
 
@@ -168,7 +164,7 @@ import '../../styles/global.css';
 
 <style>
   body {
-    background: url('/bg/3.jpg') center / cover no-repeat fixed;
+    background: url('/bg/3.webp') center / cover no-repeat fixed;
   }
 
   :root {
