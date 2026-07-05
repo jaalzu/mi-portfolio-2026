@@ -1,0 +1,31 @@
+---
+/**
+ *
+ * IMPORTANTE: reemplazá el prop `email` (o el default) por tu dirección real.
+ * Usamos el compose link de Gmail (view=cm&fs=1&to=...) en lugar de
+ * /mail/u/0 porque ese último abre la bandeja de entrada de QUIEN VISITA
+ * la página (su propia cuenta logueada), no te manda un mail a vos. El
+ * compose link sí abre Gmail con un mensaje nuevo ya dirigido a tu mail.
+ */
+import GmailIcon from "./GmailIcon.astro";
+
+const { email = "javieralzuu@gmail.com", subject = "Contacto desde el portfolio" } = Astro.props;
+const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent(subject)}`;
+---
+<div
+  class="icon-btn tab-btn gmail-btn"
+  role="button"
+  tabindex="0"
+  onclick={`window.open('${gmailUrl}', '_blank')`}
+  onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"
+>
+  <span class="tab-icon">
+    <GmailIcon />
+  </span>
+</div>
+
+<style>
+  .icon-btn {
+    color: #fff;
+  }
+</style>
