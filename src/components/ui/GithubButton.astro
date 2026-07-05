@@ -1,0 +1,31 @@
+---
+/**
+ * GithubButton.astro
+ * Botón standalone (para usar suelto, ej. <GithubButton />).
+ * El SVG animado vive en icons/GithubIcon.astro; acá solo se pone
+ * el div-botón alrededor con sus clases y el onclick.
+ *
+ * Ajustá la ruta del import según dónde tengas GithubIcon.astro
+ * (por convención: src/components/icons/GithubIcon.astro).
+ */
+import GithubIcon from "./GithubIcon.astro";
+
+const { url = 'https://github.com/jaalzu' } = Astro.props;
+---
+<div
+  class="icon-btn tab-btn github-btn"
+  role="button"
+  tabindex="0"
+  onclick={`window.open('${url}', '_blank')`}
+  onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"
+>
+  <span class="tab-icon">
+    <GithubIcon />
+  </span>
+</div>
+
+<style>
+  .icon-btn {
+    color: white;
+  }
+</style>

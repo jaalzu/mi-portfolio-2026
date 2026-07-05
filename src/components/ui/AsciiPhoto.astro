@@ -1,24 +1,24 @@
-<!-- ---
-import WinGlass from '../ui/WinGlass.astro';
-const { xp = false } = Astro.props;
+---
+// Solo la foto + efecto ascii, sin WinGlass ni bordes.
+// Pensado para vertical (mas alta que ancha): default 160x260.
+interface Props {
+  src?: string;
+  width?: string;
+  height?: string;
+}
+const { src = "me/me13.webp", width = "220px", height = "340px" } = Astro.props;
 ---
 
-<WinGlass  noControls noPadding icon="retro/jpg-8.webp" color="var(--win-picture)" xp={xp}>
-  <div class="ascii-profile-wrapper">
-    <canvas class="ascii-canvas"></canvas>
-  </div>
-</WinGlass>
+<div class="ascii-photo-wrapper" style={`width:${width}; height:${height};`}>
+  <canvas class="ascii-canvas" data-src={src}></canvas>
+</div>
 
 <style>
-  .ascii-profile-wrapper {
-    width: 100%;
-    height: 140px;
-    background-color: #050505; /* Fondo muy oscuro para que el verde retro resalte */
+  .ascii-photo-wrapper {
+    background-color: transparent;
     overflow: hidden;
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-shrink: 0;
   }
 
   .ascii-canvas {
@@ -31,23 +31,25 @@ const { xp = false } = Astro.props;
 </style>
 
 <script>
-  const initAsciiEffect = () => {
-    const wrapper = document.querySelector('.ascii-profile-wrapper');
-    const canvas = document.querySelector('.ascii-canvas');
-    if (!wrapper || !canvas) return;
+  function initAsciiEffect(wrapper: HTMLElement) {
+    if (wrapper.dataset.asciiReady) return;
+    wrapper.dataset.asciiReady = "1";
 
+    const canvas = wrapper.querySelector<HTMLCanvasElement>('canvas');
+    if (!canvas) return;
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
-    let particles = [];
-    let animationId;
-    let startTime;
-    
+    if (!ctx) return;
+
+    let particles: any[] = [];
+    let startTime = 0;
+
     const mouse = { x: -1000, y: -1000, active: false };
     const mouseTarget = { x: -1000, y: -1000 };
     const chars = " .:-=+*#%@".split("");
 
     let canvasWidth = wrapper.clientWidth;
     let canvasHeight = wrapper.clientHeight;
-    let dpr = window.devicePixelRatio || 1;
+    const dpr = window.devicePixelRatio || 1;
 
     const setSize = () => {
       canvasWidth = wrapper.clientWidth;
@@ -57,16 +59,15 @@ const { xp = false } = Astro.props;
       ctx.scale(dpr, dpr);
     };
 
-    // Procesa la imagen y genera las partículas en tiempo real
-    const processImage = (img) => {
+    const processImage = (img: HTMLImageElement) => {
       const offscreen = document.createElement("canvas");
-      const offCtx = offscreen.getContext("2d", { willReadFrequently: true });
+      const offCtx = offscreen.getContext("2d", { willReadFrequently: true })!;
       offscreen.width = canvasWidth;
       offscreen.height = canvasHeight;
 
-      const scale = 0.9; // Escala de la imagen dentro del canvas
+      const scale = 0.9;
       const imgAspect = img.width / img.height;
-      
+
       let drawHeight = canvasHeight * scale;
       let drawWidth = drawHeight * imgAspect;
 
@@ -83,8 +84,8 @@ const { xp = false } = Astro.props;
       const pixels = imageData.data;
 
       const rawParticles = [];
-      const isMobileSize = canvasWidth <= 280;
-      const fontSize = isMobileSize ? 5 : 7;
+      const isSmall = canvasWidth <= 200;
+      const fontSize = isSmall ? 5 : 7;
       const colGap = fontSize * 0.7;
       const rowGap = fontSize * 1.1;
 
@@ -93,14 +94,13 @@ const { xp = false } = Astro.props;
           const i = (Math.floor(y) * canvasWidth + Math.floor(x)) * 4;
           const alpha = pixels[i + 3];
 
-          // Si el píxel no es transparente
           if (alpha > 128) {
             const r = pixels[i];
             const g = pixels[i + 1];
             const b = pixels[i + 2];
             const brightness = (r + g + b) / (3 * 255);
             const charIndex = Math.floor(brightness * (chars.length - 1));
-            
+
             rawParticles.push({
               x: x + (Math.random() - 0.5) * 400,
               y: y + (Math.random() - 0.5) * 400,
@@ -121,7 +121,7 @@ const { xp = false } = Astro.props;
     };
 
     const draw = () => {
-      animationId = requestAnimationFrame(draw);
+      requestAnimationFrame(draw);
       ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
       if (!particles.length) return;
@@ -131,8 +131,8 @@ const { xp = false } = Astro.props;
       mouse.x += (mouseTarget.x - mouse.x) * 0.15;
       mouse.y += (mouseTarget.y - mouse.y) * 0.15;
 
-      const isMobileSize = canvasWidth <= 280;
-      const fontSize = isMobileSize ? 5 : 7;
+      const isSmall = canvasWidth <= 200;
+      const fontSize = isSmall ? 5 : 7;
       ctx.font = `${fontSize}px monospace`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
@@ -143,7 +143,7 @@ const { xp = false } = Astro.props;
 
         const fadeProgress = Math.min(particleTime / 1.5, 1);
         const easedFade = 1 - Math.pow(1 - fadeProgress, 2);
-        
+
         const isActive = mouse.active || particleTime < 3.0;
         const shimmerVal = isActive ? Math.sin(elapsed * 2 + p.shimmer) * 0.1 : 0;
         p.currentAlpha = Math.max(0, p.baseAlpha * easedFade + shimmerVal);
@@ -151,7 +151,6 @@ const { xp = false } = Astro.props;
         const moveProgress = Math.min(particleTime / 2.5, 1);
         const easedMove = 1 - Math.pow(1 - moveProgress, 3);
 
-        // Interacción con el mouse
         if (mouse.active) {
           const dx = p.x - mouse.x;
           const dy = p.y - mouse.y;
@@ -168,11 +167,10 @@ const { xp = false } = Astro.props;
         const dx = p.targetX - p.x;
         const dy = p.targetY - p.y;
         const pullStrength = 0.01 + easedMove * 0.08;
-        
+
         p.vx += dx * pullStrength;
         p.vy += dy * pullStrength;
 
-        // Efecto de respiración
         if (isActive) {
           p.vx += Math.sin(elapsed * 0.5 + p.targetY * 0.1) * 0.15;
           p.vy += Math.cos(elapsed * 0.5 + p.targetX * 0.1) * 0.15;
@@ -181,7 +179,7 @@ const { xp = false } = Astro.props;
         } else {
           p.vx *= 0.85;
           p.vy *= 0.85;
-          
+
           if (particleTime > 4.0 && Math.abs(dx) < 0.01 && Math.abs(dy) < 0.01) {
             p.x = p.targetX;
             p.y = p.targetY;
@@ -198,10 +196,9 @@ const { xp = false } = Astro.props;
       });
     };
 
-    // Inicialización y carga de la imagen
     const img = new Image();
     img.crossOrigin = "Anonymous";
-    img.src = "me/me13.webp"; // Tu ruta original
+    img.src = canvas.dataset.src || "me/me13.webp";
     img.onload = () => {
       setSize();
       particles = processImage(img);
@@ -209,8 +206,7 @@ const { xp = false } = Astro.props;
       draw();
     };
 
-    // Controladores de eventos
-    const updateMouse = (x, y) => {
+    const updateMouse = (x: number, y: number) => {
       const rect = canvas.getBoundingClientRect();
       mouseTarget.x = x - rect.left;
       mouseTarget.y = y - rect.top;
@@ -230,13 +226,14 @@ const { xp = false } = Astro.props;
     }, { passive: false });
     canvas.addEventListener("mouseleave", resetMouse);
     canvas.addEventListener("touchend", resetMouse);
-    
-    window.addEventListener("resize", () => {
-      setSize();
-      // Opcional: recalcular partículas en resize, pero al ser altura fija (140px) no es estrictamente necesario.
-    });
-  };
 
-  // En Astro, aseguramos que el script corra una vez que el DOM está listo
-  document.addEventListener('DOMContentLoaded', initAsciiEffect);
-</script> -->
+    window.addEventListener("resize", setSize);
+  }
+
+  function initAll() {
+    document.querySelectorAll<HTMLElement>('.ascii-photo-wrapper').forEach(initAsciiEffect);
+  }
+
+  document.addEventListener('DOMContentLoaded', initAll);
+  document.addEventListener('astro:page-load', initAll);
+</script>

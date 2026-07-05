@@ -5,8 +5,8 @@
  * Son dos instancias de ActionButton.
  */
 import ActionButton from "./ActionButton.astro";
-import LinkIcon from "./icons/LinkIcon.astro";
-import CodeIcon from "./icons/CodeIcon.astro";
+import LinkIconAstroComponent from "../../../ui/LinkIcon.astro";
+import GithubIcon from "../../../ui/GithubIcon.astro"
 
 interface Props {
   projectUrl: string;
@@ -24,8 +24,8 @@ const {
 ---
 
 <section class="project-actions">
-  <ActionButton url={projectUrl} label={siteLabel} i18nKey="btnSite" Icon={LinkIcon} />
-  <ActionButton url={codeUrl} label={codeLabel} i18nKey="btnCode" Icon={CodeIcon} />
+  <ActionButton url={projectUrl} label={siteLabel} i18nKey="btnSite" Icon={LinkIconAstroComponent} />
+  <ActionButton url={codeUrl} label={codeLabel} i18nKey="btnCode" Icon={GithubIcon} />
 </section>
 
 <style>
