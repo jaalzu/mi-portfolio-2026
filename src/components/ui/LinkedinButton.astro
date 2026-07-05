@@ -1,0 +1,55 @@
+---
+const { url = 'https://www.linkedin.com/in/javier-alz%C3%BA-332ab2261/' } = Astro.props;
+---
+<div
+  class="icon-btn tab-btn linkedin-btn"
+  role="button"
+  tabindex="0"
+  onclick={`window.open('${url}', '_blank')`}
+  onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"
+>
+  <span class="tab-icon linkedin-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+      <defs>
+        <clipPath id="li-round-clip">
+          <rect x="24" y="24" width="208" height="208" rx="16"/>
+        </clipPath>
+      </defs>
+
+      <path class="li-frame" d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216Z" fill="currentColor"/>
+      <rect class="li-fill" x="24" y="232" width="208" height="0" fill="#fff" clip-path="url(#li-round-clip)"/>
+      <path class="li-letters" d="M96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z" fill="currentColor"/>
+    </svg>
+  </span>
+</div>
+
+<style>
+  .icon-btn {
+    color: white;
+  }
+</style>
+
+<script>
+  import gsap from "gsap";
+
+  function initLinkedinFill() {
+    document.querySelectorAll<HTMLElement>('.linkedin-btn:not([data-gsap-ready])').forEach(btn => {
+      btn.setAttribute("data-gsap-ready", "1");
+      const fill = btn.querySelector('.li-fill');
+      const letters = btn.querySelector('.li-letters');
+      if (!fill || !letters) return;
+
+      const tl = gsap.timeline({ paused: true })
+        .to(fill, { attr: { y: 24, height: 208 }, duration: 0.55, ease: "power2.inOut" }, 0)
+        .to(letters, { fill: "#0a0a0a", duration: 0.3, ease: "power1.out" }, 0.15);
+
+      btn.addEventListener("mouseenter", () => tl.play());
+      btn.addEventListener("mouseleave", () => tl.reverse());
+      btn.addEventListener("focus", () => tl.play());
+      btn.addEventListener("blur", () => tl.reverse());
+    });
+  }
+
+  initLinkedinFill();
+  document.addEventListener("astro:page-load", initLinkedinFill);
+</script>
