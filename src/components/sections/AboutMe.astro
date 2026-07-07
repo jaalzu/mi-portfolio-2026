@@ -4,7 +4,6 @@ import AsciiPhoto from '../ui/AsciiPhoto.astro';
 import GithubButton from '../ui/GithubButton.astro';
 import LinkedinButton from '../ui/LinkedinButton.astro';
 import GmailButton from '../ui/GmailButton.astro';
-
 const { xp = false } = Astro.props;
 ---
 
@@ -36,9 +35,16 @@ const { xp = false } = Astro.props;
             <div class="slide">
               <h1>
                 <span class="rol" data-i18n="aboutRole"></span>
-                <span data-i18n="aboutText"></span>
+<span class="intro-line">
+  Hola! soy <span class="name-binary" data-text="Javier">Javier</span>.
+</span>
+<br />
+<span data-i18n="aboutText">Soy desarrollador de software y disfruto crear para el lado del cliente. Mi experiencia abarca todo el proceso de desarrollo de un producto, desde el diseño de interfaces hasta el desarrollo de aplicaciones web escalables, principalmente dentro del ecosistema moderno de 
+  Javascript.</span>
                 <br />
-                <span data-i18n="aboutText2"></span>
+                <span data-i18n="aboutText2">
+
+                </span>
                 <br />
                 <span data-i18n="aboutText3"></span>
               </h1>
@@ -46,7 +52,7 @@ const { xp = false } = Astro.props;
 
             <div class="slide">
               <h1>
-                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+                <span>La programación me permite combinar creatividad e ingeniería. Disfruto resolver desafíos técnicos y crear productos digitales intuitivos, seguros, mantenibles y pensados para perdurar. La curiosidad, el aprendizaje continuo y la atención al detalle son los pilares que guían mi forma de desarrollar.</span>
               </h1>
             </div>
 
@@ -66,7 +72,7 @@ const { xp = false } = Astro.props;
                 </span>
                 <span>
                   <a
-                    href="https://javalzu-5dg4kxo9t-javier-alzus-projects.vercel.app/?lang=es"
+                    href="https://javalzuold.vercel.app/"
                     target="_blank"
                     rel="noopener noreferrer"
                     class="old-portfolio-link"
@@ -128,10 +134,66 @@ const { xp = false } = Astro.props;
   }
 
   .about-text h1 {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 600;
     line-height: 1.4;
   }
+
+
+
+.intro-line {
+  display: block;
+  font-size: 1.65em;
+  font-weight: 700;
+}
+
+.name-binary {
+  position: relative;
+  display: inline-block;
+  color: rgba(21, 255, 0, 0.9) !important;
+  font-weight: 800;
+  
+  letter-spacing: 1px;
+}
+
+.name-binary::before,
+.name-binary::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  background: transparent;
+  pointer-events: none;
+}
+
+.name-binary::before {
+  color: #ffffff;
+  clip-path: inset(0 0 60% 0);
+  animation: glitch-shift-1 2.6s infinite steps(2, end);
+}
+
+.name-binary::after {
+  color: rgb(77, 255, 0);
+  clip-path: inset(60% 0 0 0);
+  animation: glitch-shift-2 2.6s infinite steps(2, end);
+}
+
+@keyframes glitch-shift-1 {
+  0%, 92%, 100% { transform: translate(0, 0); opacity: 0; }
+  93% { transform: translate(-3px, -1px); opacity: 0.9; }
+  95% { transform: translate(3px, 1px); opacity: 0.9; }
+  97% { transform: translate(-2px, 1px); opacity: 0.6; }
+}
+
+@keyframes glitch-shift-2 {
+  0%, 92%, 100% { transform: translate(0, 0); opacity: 0; }
+  93% { transform: translate(3px, 1px); opacity: 0.9; }
+  95% { transform: translate(-3px, -1px); opacity: 0.9; }
+  97% { transform: translate(2px, -1px); opacity: 0.6; }
+}
+  
 
   .about-text .old-portfolio-link {
     color: rgba(21, 255, 0, 0.832);
@@ -240,6 +302,7 @@ const { xp = false } = Astro.props;
 
 <script>
 import { gsap } from 'gsap';
+
 
 function initAboutSlider() {
   const track = document.getElementById('about-track');

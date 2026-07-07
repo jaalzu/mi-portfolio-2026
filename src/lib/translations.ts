@@ -4,38 +4,13 @@ export const translations = {
     winAbout: "Sobre mí",
     winContact: "Contacto",
 
-    tooltipIntro:
-      "¡Bienvenido a mi portfolio! Scrollea hacia abajo si deseas cambiar de estación, pero ten cuidado de no bajar mucho.",
-    // tooltipSpecial:
-    //   "Continua bajando para una estación especial,valdra la pena.",
-    // tooltipKeepGoing: "Ya casi estas!!",
-    // tooltipAlmost: "¡Sigue bajando, ya casi llegas!",
-    tooltipMoon:
-      "Parece que bajaste tanto que llegaste a la luna! Qué viaje... bueno, disfruta la vista.",
-
     // About
     // aboutRole: "Desarrollador Frontend",
-    aboutText:
-      "En el desarrollo web encontré el balance perfecto entre resolver desafíos técnicos, expresar mi creatividad y mantener viva mi curiosidad aprendiendo algo nuevo cada día.",
-    aboutText2:
-      "Disfruto trabajar en cualquier tipo de proyecto,cada uno representa una oportunidad para resolver problemas reales, aportar mi valor y seguir creciendo como desarrollador.",
-    aboutText3:
-      "  Mi experiencia se centra principalmente en tecnologías frontend y el ecosistema moderno de JavaScript",
-    // Info
-    info1: "Desarrollador autodidacta.",
-    info2: "Buen manejo de inglés.",
-    info3: "+3 años de experiencia en desarrollo web.",
-    info4: "Participación activa en decisiones técnicas y de producto.",
-
-    // Contact
-    contactP: "Podés contactarme por cualquiera de estos medios!",
-    contactEmail: "Ver correo",
-    contactCopied: "✓ Copiado!",
-    contactHover: "· click para copiar",
-
-    // Picture
-    picAge: "25 años",
-    picCountry: "Argentina",
+    aboutText: "",
+    // aboutText2:
+    //   "Disfruto trabajar en cualquier tipo de proyecto,cada uno representa una oportunidad para resolver problemas reales, aportar mi valor y seguir creciendo como desarrollador.",
+    // aboutText3:
+    //   "  Mi experiencia se centra principalmente en tecnologías frontend y el ecosistema moderno de JavaScript",
 
     // Proyectos títulos de ventana
 

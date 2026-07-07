@@ -42,6 +42,8 @@ const activeId = defaultTab ?? tabs[0]?.id;
 
 <style>
   .tabs { border: none !important; }
+  .tabs-container { height: auto; overflow: hidden; transition: height 0.4s cubic-bezier(0.4,0,0.2,1); }
+.tabs-container.is-syncing { transition: none !important; }
   .tabs-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0 0 4px; }
   menu[role="tablist"] {
     background: transparent !important; border: none !important;

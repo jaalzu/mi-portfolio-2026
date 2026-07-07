@@ -1,29 +1,3 @@
-/**
- * tabs-controller.js
- * Lógica de comportamiento de los tabs:
- *  - click en un [role="tab"] muestra su panel y oculta los demás
- *  - anima la altura del .tabs-container al cambiar de panel
- *  - muestra/oculta el .img-dots según si el panel activo es de imágenes
- *
- * Se importa desde Tabs.astro. Astro deduplica scripts idénticos, así
- * que aunque haya N <Tabs> en la página esto corre una sola vez.
- *
- * --- Fix del salto/espacio vacío al abrir/cerrar el Stack accordion ---
- * Intento anterior (debounce + transitionend en .stack-panel) seguía
- * fallando: a veces medía a mitad de la transición interna, dejando
- * un salto al abrir o un hueco vacío al cerrar.
- *
- * Estrategia nueva, más directa: en vez de "esperar y medir después",
- * escuchamos el click en .stack-trigger en el momento exacto en que
- * pasa (capture en el documento, delegado), y dos cosas:
- *   1) Medimos la altura objetivo ANTES Y DESPUÉS del toggle (next
- *      frame), para tener ambos extremos reales.
- *   2) Animamos .tabs-container con la MISMA duración/curva que usa
- *      .stack-panel en su CSS (280ms ease) usando una transición CSS
- *      normal de `height`, en vez de perseguir mediciones por evento.
- * Así .tabs-container y .stack-panel quedan sincronizados 1 a 1, sin
- * carrera entre dos observadores compitiendo.
- */
 (() => {
   const STACK_TRANSITION_MS = 280; // debe matchear .stack-panel { transition: grid-template-rows 0.28s }
 
@@ -66,12 +40,24 @@
         // de una sola medición al final (que puede leer un frame viejo).
         const animateAlongside = (panel) => {
           if (!tabsContainer || !panel || panel.hidden) return;
+
+          // Apagamos la transición propia del contenedor: durante el sync
+          // frame-a-frame no queremos que compita con el easing del
+          // acordeón interno (que ya viene de grid-template-rows).
+          tabsContainer.classList.add("is-syncing");
+
           const start = performance.now();
           const step = (now) => {
             const elapsed = now - start;
             measureNow(panel);
             if (elapsed < STACK_TRANSITION_MS + 40) {
               requestAnimationFrame(step);
+            } else {
+              // Medición final precisa + reactivamos la transición para
+              // que los cambios de tab (updateContainerHeight) sigan
+              // animando normal.
+              measureNow(panel);
+              tabsContainer.classList.remove("is-syncing");
             }
           };
           requestAnimationFrame(step);
