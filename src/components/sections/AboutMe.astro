@@ -280,7 +280,7 @@ const { xp = false } = Astro.props;
 
   .slider-counter {
     position: absolute;
-    top: -8px;
+    top: -4px;
     right: 6px;
     font-size: 0.65rem;
     font-weight: 400;
@@ -317,27 +317,7 @@ function initAboutSlider() {
 
   // --- Brillo verde sobre la flecha "next": aparece una vez y
   // vuelve a aparecer cada ~3s mientras la flecha esté visible/activa.
-  let shineTl = null;
-
-  function startShine() {
-    if (shineTl) return;
-    shineTl = gsap.timeline({ repeat: -1, repeatDelay: 3 });
-    shineTl
-      .fromTo(
-        nextBtn,
-        { textShadow: '0 0 0px rgba(21,255,0,0)' },
-        { textShadow: '0 0 10px rgba(21,255,0,0.9)', duration: 0.5, ease: 'power2.out' }
-      )
-      .to(nextBtn, { textShadow: '0 0 0px rgba(21,255,0,0)', duration: 0.6, ease: 'power2.in' });
-  }
-
-  function stopShine() {
-    if (shineTl) {
-      shineTl.kill();
-      shineTl = null;
-    }
-    gsap.set(nextBtn, { textShadow: '0 0 0px rgba(21,255,0,0)' });
-  }
+ 
 
   function updateArrows() {
     const nextVisible = current < slides.length - 1;
