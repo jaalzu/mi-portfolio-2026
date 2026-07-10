@@ -2,6 +2,8 @@
 import { translations } from '../lib/translations';
 ---
 
+
+
 <script is:inline define:vars={{ translations }}>
   let currentLang = 'es';
 
@@ -12,7 +14,7 @@ import { translations } from '../lib/translations';
 
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
-      if (t[key]) el.textContent = t[key];
+      if (t[key]) el.innerHTML = t[key];
     });
 
     document.documentElement.setAttribute('lang', lang);
@@ -25,7 +27,9 @@ import { translations } from '../lib/translations';
     }
 
     const switcherBtn = document.getElementById('lang-switcher');
-    if (switcherBtn) switcherBtn.textContent = lang === 'es' ? 'EN' : 'ES';
+    if (switcherBtn) {
+      switcherBtn.textContent = lang === 'es' ? 'EN' : 'ES';
+    }
 
     window.dispatchEvent(new CustomEvent('langchange', { detail: { lang } }));
   }
@@ -33,6 +37,7 @@ import { translations } from '../lib/translations';
   document.addEventListener('DOMContentLoaded', () => {
     const urlLang = new URL(window.location.href).searchParams.get('lang');
     const saved = urlLang || localStorage.getItem('lang') || 'es';
+
     applyLang(saved, false);
 
     document.getElementById('lang-switcher')?.addEventListener('click', () => {
@@ -40,3 +45,45 @@ import { translations } from '../lib/translations';
     });
   });
 </script>
+
+<style>
+  .lang-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+
+    width: 54px;
+    height: 34px;
+    padding: 0;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 999px;
+
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .lang-switcher:hover {
+    transform: translateY(-2px);
+  }
+
+  .lang-switcher:active {
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    .lang-switcher {
+      top: 12px;
+      right: 12px;
+      width: 48px;
+      height: 30px;
+      font-size: 0.75rem;
+    }
+  }
+</style>

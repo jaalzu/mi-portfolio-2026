@@ -82,9 +82,8 @@ button {
 ============================================ */
 #retro-toolbar {
   position: fixed;
-  bottom: 5px;
+  top: 5px;
   left: 5px;
-  right: 3px;
   z-index: 100;
   display: flex;
   justify-content: space-between;
