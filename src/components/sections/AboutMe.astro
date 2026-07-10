@@ -39,8 +39,9 @@ const { xp = false } = Astro.props;
   Hola! soy <span class="name-binary" data-text="Javier">Javier</span>.
 </span>
 <br />
-<span data-i18n="aboutText">Soy desarrollador de software y disfruto crear para el lado del cliente. Mi experiencia abarca todo el proceso de desarrollo de un producto, desde el diseño de interfaces hasta el desarrollo de aplicaciones web escalables, principalmente dentro del ecosistema moderno de 
-  Javascript.</span>
+<span data-i18n="aboutText">Frontend Engineer que disfruta diseñar, mantener y escalar productos digitales. Encontré el balance perfecto entre resolver desafíos técnicos complejos y expresar mi creatividad a través del desarrollo de software.
+La curiosidad y la disciplina fueron fundamentales en mi formación, impulsándome a afrontar  desafíos nuevos todos los días.
+</span>
                 <br />
                 <span data-i18n="aboutText2">
 
@@ -50,36 +51,60 @@ const { xp = false } = Astro.props;
               </h1>
             </div>
 
-            <div class="slide">
+            <div class="slide slide-2">
               <h1>
-                <span>La programación me permite combinar creatividad e ingeniería. Disfruto resolver desafíos técnicos y crear productos digitales intuitivos, seguros, mantenibles y pensados para perdurar. La curiosidad, el aprendizaje continuo y la atención al detalle son los pilares que guían mi forma de desarrollar.</span>
+                <span>
+            Desarrollo paginas y aplicaciones web utilizando principalmente JavaScript y su ecosistema moderno. 
+            <br>
+            Me gusta explorar nuevas herramientas y mantenerme al día con las tecnologías que impulsan la industria. 
+            <br>
+            En el último tiempo incorporé la inteligencia artificial a mi proceso de desarrollo para potenciar mis capacidades y mantener altos estándares de calidad en el código.
+            
+                </span>
               </h1>
             </div>
 
-            <div class="slide">
-              <h1>
-                <span>El portfolio esta construido sobre Astro con HTML,CSS y Javascript. 
-                  <br>
-                  Deployado en Vercel.
-                  <br>
-                  Utilice GSAP para las animaciones .
-                  <br>
-                  La foto del fondo la saque yo.
-                  <br>
-                  Buscaba diseñar algo rapido de leer , atractivo con pequeños pero poderosos detalles , comenzo como un tributo a windows xp y 7 , pero termine diseñando mi propia UI.
-                  <br>
-                  Puedes ver mi anterior portfolio 
-                </span>
-                <span>
-                  <a
-                    href="https://javalzuold.vercel.app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="old-portfolio-link"
-                  > aquí</a>.
-                </span>
-              </h1>
-            </div>
+          <div class="slide slide-3">
+  <h1>
+   <span>
+  Este portfolio nació como un tributo a Windows XP y Windows 7, que podés ver
+  <a
+    href="https://javalzuold.vercel.app/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="old-portfolio-link"
+  >
+    aquí
+  </a>.
+  Con el tiempo evolucionó hasta convertirse en una interfaz completamente propia. Mi objetivo siempre fue diseñar una experiencia simple, rápida de recorrer y cuidada hasta el último detalle.
+</span>
+
+ <div class="portfolio-stack">
+
+  <div class="stack-row">
+    <span class="stack-label">Construido con</span>
+
+    <img src="/icons/tech/astro-icon-dark.svg" alt="Astro" title="Astro" />
+    <img src="/icons/tech/html5.svg" alt="HTML5" title="HTML5" />
+    <img src="/icons/tech/css.svg" alt="CSS3" title="CSS3" />
+ 
+  </div>
+
+  <div class="stack-row">
+    <span class="stack-label">Animado con</span>
+   <img src="/icons/tech/javascript.svg" alt="JavaScript" title="JavaScript" />
+    <img src="/icons/tech/gsap.svg" alt="GSAP" title="GSAP" />
+  </div>
+
+  <div class="stack-row">
+    <span class="stack-label">Deployado en</span>
+
+    <img src="/icons/tech/vercel_dark.svg" alt="Vercel" title="Vercel" />
+  </div>
+
+</div>
+  </h1>
+</div>
           </div>
         </div>
 
@@ -97,6 +122,8 @@ const { xp = false } = Astro.props;
     </div>
   </div>
 </WinGlass>
+
+
 <style>
 
   
@@ -155,6 +182,35 @@ const { xp = false } = Astro.props;
   
   letter-spacing: 1px;
 }
+
+
+
+.portfolio-stack {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.stack-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stack-label {
+  font-size: .75rem;
+  color: rgba(255,255,255,.65);
+  font-weight: 600;
+  min-width: 95px;
+}
+
+.stack-row img {
+  width: 18px;
+  height: 18px;
+  opacity: .9;
+}
+
 
 .name-binary::before,
 .name-binary::after {
