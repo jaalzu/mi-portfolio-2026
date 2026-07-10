@@ -7,7 +7,6 @@ import GmailButton from '../ui/GmailButton.astro';
 const { xp = false } = Astro.props;
 ---
 
-
 <WinGlass
   title="Sobre mí"
   titleKey="winAbout"
@@ -19,6 +18,7 @@ const { xp = false } = Astro.props;
   <div class="about-body">
     <div class="photo-column">
       <AsciiPhoto width="220px" height="200px" />
+
       <div class="contact-links">
         <GithubButton />
         <LinkedinButton />
@@ -28,93 +28,129 @@ const { xp = false } = Astro.props;
 
     <div class="about-content">
       <div class="about-text">
-          <span class="slider-counter" id="about-counter"></span>
+        <span class="slider-counter" id="about-counter"></span>
 
         <div class="slider" id="about-slider">
           <div class="slider-track" id="about-track">
+
+            <!-- Slide 1 -->
             <div class="slide">
               <h1>
                 <span class="rol" data-i18n="aboutRole"></span>
-<span class="intro-line">
-  Hola! soy <span class="name-binary" data-text="Javier">Javier</span>.
-</span>
-<br />
-<span data-i18n="aboutText">Frontend Engineer que disfruta diseñar, mantener y escalar productos digitales. Encontré el balance perfecto entre resolver desafíos técnicos complejos y expresar mi creatividad a través del desarrollo de software.
-La curiosidad y la disciplina fueron fundamentales en mi formación, impulsándome a afrontar  desafíos nuevos todos los días.
-</span>
-                <br />
-                <span data-i18n="aboutText2">
 
+                <span class="intro-line">
+                  <span data-i18n="aboutGreeting"></span>
+                  <span class="name-binary" data-text="Javier">Javier</span>.
                 </span>
+
                 <br />
-                <span data-i18n="aboutText3"></span>
+
+                <span data-i18n="aboutText"></span>
               </h1>
             </div>
 
+            <!-- Slide 2 -->
             <div class="slide slide-2">
               <h1>
-                <span>
-            Desarrollo paginas y aplicaciones web utilizando principalmente JavaScript y su ecosistema moderno. 
-            <br>
-            Me gusta explorar nuevas herramientas y mantenerme al día con las tecnologías que impulsan la industria. 
-            <br>
-            En el último tiempo incorporé la inteligencia artificial a mi proceso de desarrollo para potenciar mis capacidades y mantener altos estándares de calidad en el código.
-            
-                </span>
+                <span data-i18n="aboutWork"></span>
               </h1>
             </div>
 
-          <div class="slide slide-3">
-  <h1>
-   <span>
-  Este portfolio nació como un tributo a Windows XP y Windows 7, que podés ver
-  <a
-    href="https://javalzuold.vercel.app/"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="old-portfolio-link"
-  >
-    aquí
-  </a>.
-  Con el tiempo evolucionó hasta convertirse en una interfaz completamente propia. Mi objetivo siempre fue diseñar una experiencia simple, rápida de recorrer y cuidada hasta el último detalle.
-</span>
+            <!-- Slide 3 -->
+            <div class="slide slide-3">
+              <h1>
+                <span>
+                  <span data-i18n="aboutPortfolio"></span>
 
- <div class="portfolio-stack">
+                  <a
+                    href="https://javalzuold.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="old-portfolio-link"
+                    data-i18n="aboutPortfolioLink"
+                  ></a>.
 
-  <div class="stack-row">
-    <span class="stack-label">Construido con</span>
+                  <br />
 
-    <img src="/icons/tech/astro-icon-dark.svg" alt="Astro" title="Astro" />
-    <img src="/icons/tech/html5.svg" alt="HTML5" title="HTML5" />
-    <img src="/icons/tech/css.svg" alt="CSS3" title="CSS3" />
- 
-  </div>
+                  <span data-i18n="aboutPortfolio2"></span>
+                </span>
 
-  <div class="stack-row">
-    <span class="stack-label">Animado con</span>
-   <img src="/icons/tech/javascript.svg" alt="JavaScript" title="JavaScript" />
-    <img src="/icons/tech/gsap.svg" alt="GSAP" title="GSAP" />
-  </div>
+                <div class="portfolio-stack">
 
-  <div class="stack-row">
-    <span class="stack-label">Deployado en</span>
+                  <div class="stack-group">
+                    <span class="stack-label" data-i18n="stackFramework"></span>
 
-    <img src="/icons/tech/vercel_dark.svg" alt="Vercel" title="Vercel" />
-  </div>
+                    <div class="stack-icons">
+                      <img
+                        src="/icons/tech/astro-icon-dark.svg"
+                        alt="Astro"
+                        title="Astro"
+                      />
+                    </div>
+                  </div>
 
-</div>
-  </h1>
-</div>
+                  <div class="stack-group">
+                    <span class="stack-label" data-i18n="stackStyling"></span>
+
+                    <div class="stack-icons">
+                      <img
+                        src="/icons/tech/css.svg"
+                        alt="CSS3"
+                        title="CSS3"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="stack-group">
+                    <span class="stack-label" data-i18n="stackAnimations"></span>
+
+                    <div class="stack-icons">
+                      <img
+                        src="/icons/tech/javascript.svg"
+                        alt="JavaScript"
+                        title="JavaScript"
+                      />
+                      <img
+                        src="/icons/tech/gsap.svg"
+                        alt="GSAP"
+                        title="GSAP"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="stack-group">
+                    <span class="stack-label" data-i18n="stackDeployment"></span>
+
+                    <div class="stack-icons">
+                      <img
+                        src="/icons/tech/vercel_dark.svg"
+                        alt="Vercel"
+                        title="Vercel"
+                      />
+                    </div>
+                  </div>
+
+                </div>
+              </h1>
+            </div>
+
           </div>
         </div>
 
         <div class="slider-nav">
-          <button class="nav-arrow prev" id="about-prev" aria-label="Anterior">
+          <button
+            class="nav-arrow prev"
+            id="about-prev"
+            aria-label="Anterior"
+          >
             &#8592;
           </button>
 
-
-          <button class="nav-arrow next" id="about-next" aria-label="Siguiente">
+          <button
+            class="nav-arrow next"
+            id="about-next"
+            aria-label="Siguiente"
+          >
             &#8594;
           </button>
         </div>
@@ -184,33 +220,38 @@ La curiosidad y la disciplina fueron fundamentales en mi formación, impulsándo
 }
 
 
-
 .portfolio-stack {
-  margin-top: 24px;
   display: flex;
-  flex-direction: column;
-  gap: 14px;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 2.5rem;
+  padding-right: .6rem;
 }
 
-.stack-row {
+.stack-group {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: .55rem;
 }
 
 .stack-label {
-  font-size: .75rem;
-  color: rgba(255,255,255,.65);
-  font-weight: 600;
-  min-width: 95px;
+  font-size: .72rem;
+  color: rgba(221, 221, 221, 0.921) !important;
+  font-weight: 400;
+  text-align: center;
 }
 
-.stack-row img {
-  width: 18px;
-  height: 18px;
-  opacity: .9;
+.stack-icons {
+  display: flex;
+  gap: .75rem;
+  align-items: center;
 }
 
+.stack-icons img {
+  width: 22px;
+  height: 22px;
+}
 
 .name-binary::before,
 .name-binary::after {

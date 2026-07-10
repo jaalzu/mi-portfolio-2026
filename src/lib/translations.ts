@@ -2,16 +2,27 @@ export const translations = {
   es: {
     // Ventanas - títulos
     winAbout: "Sobre mí",
-    winContact: "Contacto",
 
-    // About
-    // aboutRole: "Desarrollador Frontend",
-    aboutText: "",
-    // aboutText2:
-    //   "Disfruto trabajar en cualquier tipo de proyecto,cada uno representa una oportunidad para resolver problemas reales, aportar mi valor y seguir creciendo como desarrollador.",
-    // aboutText3:
-    //   "  Mi experiencia se centra principalmente en tecnologías frontend y el ecosistema moderno de JavaScript",
+    aboutGreeting: "Hola! Soy",
 
+    aboutText:
+      "Frontend Engineer que disfruta diseñar, mantener y escalar productos digitales. Encontré el balance perfecto entre resolver desafíos técnicos complejos y expresar mi creatividad a través del desarrollo de software.<br> La curiosidad y la disciplina fueron fundamentales en mi formación, impulsándome a afrontar desafíos nuevos todos los días.",
+
+    aboutWork:
+      "Desarrollo páginas y aplicaciones web utilizando principalmente JavaScript y su ecosistema moderno.<br> Me gusta explorar nuevas herramientas y mantenerme al día con las tecnologías que impulsan la industria.<br> En el último tiempo incorporé la inteligencia artificial a mi proceso de desarrollo para potenciar mis capacidades y mantener altos estándares de calidad en el código.",
+
+    aboutPortfolio:
+      "Este portfolio nació como un tributo a Windows XP y Windows 7, que podés ver",
+
+    aboutPortfolioLink: "aquí",
+
+    aboutPortfolio2:
+      "Mantuve la idea, pero diseñando mi propia UI con un estilo moderno y minimalista, cuidando cada detalle y mejorándola continuamente.",
+
+    stackFramework: "Framework",
+    stackStyling: "Styling",
+    stackAnimations: "Animaciones",
+    stackDeployment: "Deployment",
     // Proyectos títulos de ventana
 
     tratolibreNextjs: [
@@ -141,44 +152,31 @@ export const translations = {
 
   en: {
     winAbout: "About me",
-    winContact: "Contact",
 
-    tooltipIntro:
-      "Welcome to my portfolio! Scroll down if you want to change the season, but be careful not to scroll too far down.",
-    // tooltipSpecial:
-    //   "Keep scrolling down for a special season, it'll be worth it.",
-    // tooltipKeepGoing: "You're almost there!!",
-    // tooltipAlmost: "Keep scrolling, you're almost there!",
-    tooltipMoon:
-      "Looks like you scrolled so much you reached the moon! What a trip... well, enjoy the view.",
-
-    // aboutRole: "Frontend Developer",
+    aboutGreeting: "Hi! I'm",
 
     aboutText:
-      "In web development, I found the perfect balance between solving technical challenges, expressing my creativity, and keeping my curiosity alive by learning something new every day.",
+      "Frontend Engineer who enjoys designing, maintaining, and scaling digital products. I found the perfect balance between solving complex technical challenges and expressing my creativity through software development. Curiosity and discipline have been fundamental throughout my journey, driving me to embrace new challenges every single day.",
 
-    aboutText2:
-      "I enjoy working on projects of all kinds; each one is an opportunity to solve real-world problems, contribute value, and continue growing as a developer.",
+    aboutWork:
+      "I build websites and web applications primarily using the modern JavaScript ecosystem. I enjoy exploring new tools and staying up to date with the technologies shaping the industry. More recently, I've integrated AI into my development workflow to enhance my capabilities and maintain high standards of code quality.",
 
-    aboutText3:
-      "My experience is primarily focused on frontend technologies and the modern JavaScript ecosystem.",
+    aboutPortfolio:
+      "This portfolio started as a tribute to Windows XP and Windows 7, which you can see",
 
-    info1: "Self-taught developer.",
-    info2: "English proficiency.",
-    info3: "+3 years of experience in web development.",
-    info4: "Active participation in technical and product decisions.",
+    aboutPortfolioLink: "here",
 
-    contactP: "You can reach me through any of these channels!",
-    contactEmail: "View email",
-    contactCopied: "✓ Copied!",
-    contactHover: "· click to copy",
+    aboutPortfolio2:
+      "I kept the original concept while designing my own UI with a modern, minimalist style, continuously refining it and paying close attention to every detail.",
 
-    picAge: "25 years",
-    picCountry: "Argentina",
+    stackFramework: "Framework",
+    stackStyling: "Styling",
+    stackAnimations: "Animations",
+    stackDeployment: "Deployment",
 
-    p1WinTitle: "Project #1",
-    p2WinTitle: "Project #2",
-    p3WinTitle: "Project #3",
+    p1WinTitle: "TratoLibre",
+    p2WinTitle: "PickYourColor",
+    p3WinTitle: "Courses WebApp",
 
     // Tech Details - TratoLibre
     tratolibreNextjs: [

@@ -2,11 +2,7 @@
 import RetroAboutMe from '../sections/AboutMe.astro';
 import RetroTechStack from '../sections/TechStack.astro';
 import ProjectCard from '../sections/project-card/ProjectCard.astro';
-import RetroPicture from '../sections/RetroPicture.astro';
-import ScrollBg from '../../components/ScrollBg.astro';
-
 import DragScript from '../../scripts/drag.astro';
-import SliderScript from '../../scripts/slider.astro';
 import LangSwitcher from '../../scripts/langSwitcher.astro';
 
 import '../../styles/global.css';
@@ -127,22 +123,35 @@ import '../../styles/global.css';
         <RetroTechStack />
       </div>
 
-      <div id="retro-toolbar">
-        <div style="display: flex; gap: 6px;">
-          <button id="lang-switcher" class="button-lang">EN</button>
-        </div>
-      </div>
+      
     </main>
 
     <DragScript />
-    <!-- <SliderScript /> -->
     <LangSwitcher />
+     <div id="retro-toolbar">
+  <button
+    id="lang-switcher"
+    class="tab-btn lang-switcher"
+    type="button"
+  >
+  </button>
+</div>
 
     <script is:inline>
       document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('click', (e) => {
           if (e.target.id !== 'btn-about-portfolio') return;
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('loaded');
 
+  const btn = document.getElementById('lang-switcher');
+  console.log(btn);
+
+  btn?.addEventListener('click', () => {
+    console.log('click');
+    applyLang(currentLang === 'es' ? 'en' : 'es');
+  });
+});
           const modal = document.getElementById('win-about-portfolio-w7');
           if (modal) {
             modal.style.display = 'block';
@@ -171,9 +180,7 @@ import '../../styles/global.css';
     --page-text-color: #fffffff7;
   }
 
-  .button-lang {
-    color: black !important;
-  }
+ 
 
   @media (max-width: 640px) {
     #retro-toolbar {
