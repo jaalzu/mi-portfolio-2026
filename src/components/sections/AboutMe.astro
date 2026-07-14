@@ -68,6 +68,7 @@ const { xp = false } = Astro.props;
                     rel="noopener noreferrer"
                     class="old-portfolio-link"
                     data-i18n="aboutPortfolioLink"
+                    data-preview="/og2.webp"
                   ></a>.
 
                   <br />
@@ -80,13 +81,14 @@ const { xp = false } = Astro.props;
                   <div class="stack-group">
                     <span class="stack-label" data-i18n="stackFramework"></span>
 
-                    <div class="stack-icons">
-                      <img
-                        src="/icons/tech/astro-icon-dark.svg"
-                        alt="Astro"
-                        title="Astro"
-                      />
-                    </div>
+               <div class="stack-icons">
+    <img
+      src="/icons/tech/astro-icon-dark.svg"
+      alt="Astro"
+      title="Astro"
+      class="astro-icon"
+    />
+  </div>
                   </div>
 
                   <div class="stack-group">
@@ -94,7 +96,7 @@ const { xp = false } = Astro.props;
 
                     <div class="stack-icons">
                       <img
-                        src="/icons/tech/css.svg"
+                        src="/icons/tech/css-dark.svg"
                         alt="CSS3"
                         title="CSS3"
                       />
@@ -106,7 +108,7 @@ const { xp = false } = Astro.props;
 
                     <div class="stack-icons">
                       <img
-                        src="/icons/tech/javascript.svg"
+                        src="/icons/tech/javascript-dark.svg"
                         alt="JavaScript"
                         title="JavaScript"
                       />
@@ -161,6 +163,7 @@ const { xp = false } = Astro.props;
 
 
 <style>
+  
 
   
   .about-body {
@@ -237,7 +240,8 @@ const { xp = false } = Astro.props;
 
 .stack-label {
   font-size: .72rem;
-  color: rgba(221, 221, 221, 0.921) !important;
+    color: rgba(255, 255, 255, 0.679) !important;
+
   font-weight: 400;
   text-align: center;
 }
@@ -263,6 +267,10 @@ const { xp = false } = Astro.props;
   overflow: hidden;
   background: transparent;
   pointer-events: none;
+}
+
+.astro-icon {
+  filter: brightness(0) invert(1);
 }
 
 .name-binary::before {
@@ -328,10 +336,10 @@ const { xp = false } = Astro.props;
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     line-height: 1;
     padding: 2px 6px;
-       color: #fff;
+       color: #10d35e !important;
 
     opacity: 0;
     pointer-events: none;
@@ -373,6 +381,8 @@ const { xp = false } = Astro.props;
   }
 }
 
+
+
  
 
   .slider-counter {
@@ -384,6 +394,40 @@ const { xp = false } = Astro.props;
     color: rgba(21, 255, 0, 0.887) !important;
     z-index: 1;
   }
+
+  .old-portfolio-link {
+    position: relative;
+    display: inline-block;
+  }
+
+  .old-portfolio-link::after {
+    content: "";
+    position: absolute;
+    top: 180%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px) scale(0.95);
+    width: 220px;
+    height: 140px;
+    background-image: var(--preview-img);
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    z-index: 50;
+  }
+
+  .old-portfolio-link:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-14px) scale(1);
+  }
+
+  
 
 
   @media (max-width: 500px) {
@@ -398,8 +442,6 @@ const { xp = false } = Astro.props;
 </style>
 
 <script>
-import { gsap } from 'gsap';
-
 
 function initAboutSlider() {
   const track = document.getElementById('about-track');
@@ -412,8 +454,13 @@ function initAboutSlider() {
   const counterEl = document.getElementById('about-counter');
   let current = 0;
 
-  // --- Brillo verde sobre la flecha "next": aparece una vez y
-  // vuelve a aparecer cada ~3s mientras la flecha esté visible/activa.
+
+  document.querySelectorAll<HTMLElement>('.old-portfolio-link').forEach((link) => {
+    const img = link.dataset.preview;
+    if (img) {
+      link.style.setProperty('--preview-img', `url(${img})`);
+    }
+  });
  
 
   function updateArrows() {
@@ -461,9 +508,6 @@ function initAboutSlider() {
   requestAnimationFrame(() => {
     track.style.transition = '';
   });
-
-
-
 }
 
 document.addEventListener('astro:page-load', initAboutSlider);

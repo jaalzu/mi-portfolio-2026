@@ -1,8 +1,4 @@
 ---
-/**
- * ImagesPanel.astro
- * Contenido del tab "Imágenes" — envuelve el ImageViewer.
- */
 import TabPanel from "../tabs/TabPanel.astro";
 import ImageViewer from "../image-viewer/ImageViewer.astro";
 
@@ -11,12 +7,13 @@ interface Props {
   hidden?: boolean;
   images: string[];
   projectTitle: string;
-  imgId: string; // id único para el <img>, ej: `${id}-img`
+  imgId: string;
+  fit?: "cover" | "contain";
 }
 
-const { id, hidden, images, projectTitle, imgId } = Astro.props;
+const { id, hidden, images, projectTitle, imgId, fit } = Astro.props;
 ---
 
 <TabPanel id={id} hidden={hidden}>
-  <ImageViewer images={images} alt={projectTitle} imgId={imgId} />
+  <ImageViewer images={images} alt={projectTitle} imgId={imgId} fit={fit} />
 </TabPanel>

@@ -46,11 +46,11 @@ import '../../styles/global.css';
 
     <main class="desktop">
 
-      <div class="win" id="win-about" style="top: 50px; left: 3vw; width: 790px;">
+      <div class="win" id="win-about" style="top: 50px; left: 2vw; width: 780px;">
         <RetroAboutMe />
       </div>
 
-      <div class="win" id="win-p1" style="top: 15px; left: 63vw; width: 500px;">
+      <div class="win" id="win-p1" style="top: 50px; left: 45vw; width: 450px;">
         <ProjectCard
           title="TratoLibre"
           titleKey="p1WinTitle"
@@ -74,7 +74,27 @@ import '../../styles/global.css';
         />
       </div>
 
-      <div class="win" id="win-p2" style="top: 270px; left: 63vw; width: 500px;">
+ <div class="win" id="win-p4" style="top: 50px; left: 72vw; width: 450px;">
+        <ProjectCard
+          title="Mundial 2026"
+          titleKey="p4WinTitle"
+          projectTitle="Mundial 2026"
+          description="Juego de predicciones privado para el Mundial 2026. Sin registro con email ni password: el usuario elige nombre y avatar, predice resultados de partidos y hace picks generales del torneo (campeón, MVP, etc), y compite en un leaderboard global único."
+          descKey="p4Desc"
+          origin="Surgió como una forma de competir con amigos y familia durante el Mundial sin depender de planillas de Excel ni grupos de WhatsApp desordenados: una sola app donde cada predicción queda guardada, puntuada automáticamente y visible en un ranking en tiempo real."
+          originKey="p4Origin"
+          projectUrl="https://mundialito26rcia.vercel.app/"
+          codeUrl="https://github.com/jaalzu/mundial2026-game"
+        techKeys={{
+  "Stack": "mundialStack",
+  "Arquitectura": "mundialArquitectura"
+}}
+          images={["/projects/mundial/mundial1.webp","/projects/mundial/mundial2.webp","/projects/mundial/mundial3.webp","/projects/mundial/mundial4.webp"]}
+          color="var(--win-projects)"
+        />
+      </div>
+
+      <div class="win" id="win-p2" style="top: 450px; left: 45vw; width: 450px;">
         <ProjectCard
           title="PickYourColor"
           titleKey="p2WinTitle"
@@ -95,7 +115,7 @@ import '../../styles/global.css';
         />
       </div>
 
-      <div class="win" id="win-p3" style="top: 550px; left: 63vw; width: 500px;">
+      <div class="win" id="win-p3" style="top: 450px; left: 72vw; width: 450px;">
         <ProjectCard
           title="Courses WebApp"
           titleKey="p3WinTitle"
@@ -119,7 +139,9 @@ import '../../styles/global.css';
         />
       </div>
 
-      <div class="win" id="win-tech" style="top: 560px; left: 3vw; width: 780px;">
+     
+
+      <div class="win" id="win-tech" style="top: 560px; left: 2vw; width: 780px;">
         <RetroTechStack />
       </div>
 
@@ -173,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <style>
   body {
-    background: url('/bg/3.webp') center / cover no-repeat fixed;
+    background: url('/bg/3.webp') top / cover no-repeat fixed;
   }
 
   :root {
