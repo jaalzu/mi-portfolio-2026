@@ -120,6 +120,19 @@ export const translations = {
       "Sentry — monitoreo de errores",
     ],
 
+    // Tech Details - Mundial 2026
+    mundialStack: [
+      "Next.js 16 (App Router) + React 19 + Zustand + Tailwind 4",
+      "Server Actions + Prisma 6.19 + PostgreSQL (Supabase)",
+      "Auth anónima de Supabase — sin email/password, solo nombre + avatar",
+      "TypeScript strict + Vitest + Docker para migraciones locales",
+    ],
+    mundialArquitectura: [
+      "Feature-based: auth, predictions, leaderboard, profile, admin, landing",
+      "Lógica de negocio separada de la UI en una capa de servidor propia",
+      "Modelo de datos relacional normalizado en PostgreSQL",
+    ],
+
     // Proyecto rentalibre
     p1Desc:
       "Marketplace de venta y intercambio de objetos nuevos y usados. Mensajería en tiempo real, sistema de reviews mutuas y flujo completo de compra con estados y notificaciones.",
@@ -137,6 +150,12 @@ export const translations = {
       "Plataforma e-Learning con acceso por roles, gestión de cursos y lecciones, progreso de alumnos en tiempo real y foro de comunidad por curso.",
     p3Origin:
       "El proyecto surgió cuando un mentor digital necesitaba una plataforma privada para ofrecer cursos a sus alumnos como parte de su programa de mentoría.",
+
+    // Proyecto Mundial 2026
+    p4Desc:
+      "Prode del Mundial 2026. El usuario elige nombre y avatar, predice resultados de partidos y hace picks generales del torneo (campeón, MVP, etc), y compite en un leaderboard global único.",
+    p4Origin:
+      "Nació como un prode del Mundial para armar entre amigos y apostar , y terminó sumando más gente de la que esperaba.",
 
     // Botones
     btnSite: "Sitio web",
@@ -177,6 +196,7 @@ export const translations = {
     p1WinTitle: "TratoLibre",
     p2WinTitle: "PickYourColor",
     p3WinTitle: "Courses WebApp",
+    p4WinTitle: "Mundial 2026",
 
     // Tech Details - TratoLibre
     tratolibreNextjs: [
@@ -275,6 +295,19 @@ export const translations = {
       "Sentry — error monitoring",
     ],
 
+    // Tech Details - Mundial 2026
+    mundialStack: [
+      "Next.js 16 (App Router) + React 19 + Zustand + Tailwind 4",
+      "Server Actions + Prisma 6.19 + PostgreSQL (Supabase)",
+      "Supabase anonymous auth — no email/password, just name + avatar",
+      "TypeScript strict + Vitest + Docker for local migrations",
+    ],
+    mundialArquitectura: [
+      "Feature-based: auth, predictions, leaderboard, profile, admin, landing",
+      "Business logic separated from the UI in its own server layer",
+      "Normalized relational data model in PostgreSQL",
+    ],
+
     p1Desc:
       "Marketplace to sell and exchange new and used items between people. Real-time messaging, mutual review system and complete purchase flow with statuses and notifications.",
     p1Origin:
@@ -289,6 +322,11 @@ export const translations = {
       "e-Learning platform with role-based access, course and lesson management, real-time student progress and a community forum per course.",
     p3Origin:
       "The project came about when a digital mentor needed a private platform to offer courses to their students as part of their mentoring program.",
+
+    p4Desc:
+      "A private predictions game for the 2026 World Cup. No email or password signup — users pick a name and avatar, predict match results, make tournament-wide picks (champion, MVP, etc), and compete on a single global leaderboard.",
+    p4Origin:
+      "It started as a World Cup prediction pool to play with friends for some money, but ended up pulling in way more people than expected.",
 
     btnSite: "Website",
     btnCode: "Repository",

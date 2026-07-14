@@ -21,9 +21,11 @@ interface Props {
   originKey?: string;
   techKeys: Record<string, string>;
   xp?: boolean;
+  imagesFit?: "cover" | "contain";
 }
 
-const { title, titleKey, projectTitle, description, descKey, projectUrl, codeUrl, color, images, origin, originKey, techKeys, xp = false } = Astro.props;
+const { title, titleKey, projectTitle, description, descKey, projectUrl, codeUrl, color, images, origin, originKey, techKeys, xp = false, imagesFit } = Astro.props;
+
 
 const id = projectTitle.replace(/\s+/g, "-").toLowerCase();
 
@@ -40,7 +42,7 @@ const tabs: { id: string; label: string; i18nKey: string; iconType: "eye" | "sta
     <Tabs containerId={id} tabs={tabs}>
       <OverviewPanel id={`${id}-overview`} hidden={false} description={description} descKey={descKey} />
       <StackPanel    id={`${id}-tech`}     hidden={true}  techKeys={techKeys} containerId={id} />
-      <ImagesPanel   id={`${id}-images`}   hidden={true}  images={images} projectTitle={projectTitle} imgId={`${id}-img`} />
+    <ImagesPanel id={`${id}-images`} hidden={true} images={images} projectTitle={projectTitle} imgId={`${id}-img`} fit={imagesFit} />
       <OriginPanel   id={`${id}-origin`}   hidden={true}  origin={origin} originKey={originKey} />
     </Tabs>
     <ProjectActions projectUrl={projectUrl} codeUrl={codeUrl} />
