@@ -1,21 +1,20 @@
 ---
-/**
- * OriginPanel.astro
- * Contenido del tab "Origen" — la historia/motivación del proyecto.
- */
 import TabPanel from "../tabs/TabPanel.astro";
 
 interface Props {
   id: string;
   hidden?: boolean;
+  description?: string;
+  descKey?: string;
   origin: string;
   originKey?: string;
 }
 
-const { id, hidden, origin, originKey } = Astro.props;
+const { id, hidden, description, descKey, origin, originKey } = Astro.props;
 ---
 
 <TabPanel id={id} hidden={hidden}>
+  <p data-i18n={descKey}>{description}</p>
   <p data-i18n={originKey}>{origin}</p>
 </TabPanel>
 
@@ -26,5 +25,9 @@ const { id, hidden, origin, originKey } = Astro.props;
     text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.12);
     line-height: 1.5;
     margin: 0;
+  }
+
+  p + p {
+    margin-top: 10px;
   }
 </style>

@@ -1,18 +1,20 @@
 ---
-const { title, titleKey = null, icon = null, noControls = false, noPadding = false, color, colorTitle = false } = Astro.props;
+const { title, titleKey = null, icon = null, noControls = false, noTitlebar = false, noPadding = false, color, colorTitle = false } = Astro.props;
 ---
 
 <div class="glass-window" style={color ? `--accent: ${color};` : ''}>
-  <div class="glass-titlebar">
-    <span class="glass-title" data-i18n={titleKey || undefined}>{title}</span>
-    {!noControls && (
-      <div class="glass-controls">
-        <button class="glass-btn min" aria-label="Minimize"><span>&#8211;</span></button>
-        <button class="glass-btn max" aria-label="Maximize"><span>&#9633;</span></button>
-        <button class="glass-btn close" aria-label="Close"><span>&#10005;</span></button>
-      </div>
-    )}
-  </div>
+  {!noTitlebar && (
+    <div class="glass-titlebar">
+      <span class="glass-title" data-i18n={titleKey || undefined}>{title}</span>
+      {!noControls && (
+        <div class="glass-controls">
+          <button class="glass-btn min" aria-label="Minimize"><span>&#8211;</span></button>
+          <button class="glass-btn max" aria-label="Maximize"><span>&#9633;</span></button>
+          <button class="glass-btn close" aria-label="Close"><span>&#10005;</span></button>
+        </div>
+      )}
+    </div>
+  )}
 
   <div class={noPadding ? 'glass-body' : 'glass-body has-space'}>
     <slot />
@@ -34,6 +36,10 @@ const { title, titleKey = null, icon = null, noControls = false, noPadding = fal
       0 8px 24px rgba(0, 0, 0, 0.35),
       inset 0 1px 0 rgba(255, 255, 255, 0.18),
       inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
   }
 
   .glass-titlebar {
@@ -44,25 +50,30 @@ const { title, titleKey = null, icon = null, noControls = false, noPadding = fal
     padding: 5px 12px;
     background: linear-gradient(180deg, var(--accent) 0%, rgba(255, 255, 255, 0.05) 100%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.096);
-    cursor: move;
+    /* cursor: move; */
     -webkit-backdrop-filter: blur(6px);
     backdrop-filter: blur(6px);
+    min-width: 0;
   }
-
-
 
   .glass-title {
     font-size: 0.750rem;
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .glass-controls {
-  opacity: 0;
+    opacity: 0;
   }
-
 
   .glass-body {
     background: rgba(255, 255, 255, 0.030);
     box-sizing: border-box;
+    min-width: 0;
+    overflow-x: hidden;
   }
 
   .glass-body.has-space {

@@ -3,15 +3,14 @@ import WinGlass from "../../ui/WinGlass.astro";
 import Tabs from "./tabs/Tabs.astro";
 import OverviewPanel from "./panels/OverviewPanel.astro";
 import StackPanel from "./panels/StackPanel.astro";
-import ImagesPanel from "./panels/ImagesPanel.astro";
 import OriginPanel from "./panels/OriginPanel.astro";
 import ProjectActions from "./actions/ProjectActions.astro";
 
 interface Props {
-  title: string;
+  title?: string;
   titleKey?: string;
-  projectTitle: string;
-  description: string;
+  projectTitle?: string;
+  description?: string;
   descKey?: string;
   projectUrl: string;
   codeUrl: string;
@@ -26,33 +25,38 @@ interface Props {
 
 const { title, titleKey, projectTitle, description, descKey, projectUrl, codeUrl, color, images, origin, originKey, techKeys, xp = false, imagesFit } = Astro.props;
 
-
 const id = projectTitle.replace(/\s+/g, "-").toLowerCase();
 
-const tabs: { id: string; label: string; i18nKey: string; iconType: "eye" | "stack" | "circle" | "image" }[] = [
+const tabs: { id: string; label: string; i18nKey: string; iconType: "eye" | "stack" | "circle" }[] = [
   { id: "overview", label: "Overview", i18nKey: "tabOverview", iconType: "eye"    },
   { id: "tech",     label: "Stack",    i18nKey: "tabStack",    iconType: "stack"  },
-  { id: "images",   label: "Imágenes", i18nKey: "tabImages",   iconType: "image"  },
   { id: "origin",   label: "Origen",   i18nKey: "tabOrigin",   iconType: "circle" },
 ];
 ---
 
 <div class="project-card">
-  <WinGlass noControls title={title} titleKey={titleKey} color={color} xp={xp} icon="retro/projects2-8.webp" colorTitle>
+<WinGlass noControls noTitlebar title={title} titleKey={titleKey} color={color} xp={xp} icon="retro/projects2-8.webp" colorTitle>
     <Tabs containerId={id} tabs={tabs}>
-      <OverviewPanel id={`${id}-overview`} hidden={false} description={description} descKey={descKey} />
-      <StackPanel    id={`${id}-tech`}     hidden={true}  techKeys={techKeys} containerId={id} />
-    <ImagesPanel id={`${id}-images`} hidden={true} images={images} projectTitle={projectTitle} imgId={`${id}-img`} fit={imagesFit} />
-      <OriginPanel   id={`${id}-origin`}   hidden={true}  origin={origin} originKey={originKey} />
+      <ProjectActions slot="actions" projectUrl={projectUrl} codeUrl={codeUrl} />
+
+      <OverviewPanel
+        id={`${id}-overview`}
+        hidden={false}
+        projectTitle={projectTitle}
+        titleKey={titleKey}
+        images={images}
+        imgId={`${id}-img`}
+        fit={imagesFit}
+      />
+      <StackPanel id={`${id}-tech`} hidden={true} techKeys={techKeys} containerId={id} />
+      <OriginPanel
+        id={`${id}-origin`}
+        hidden={true}
+        description={description}
+        descKey={descKey}
+        origin={origin}
+        originKey={originKey}
+      />
     </Tabs>
-    <ProjectActions projectUrl={projectUrl} codeUrl={codeUrl} />
   </WinGlass>
 </div>
-
-<style>
-  .project-title {
-    display: block; color: rgb(77,255,0); font-size: 1.04rem;
-    font-weight: 700; margin-bottom: 3px;
-    text-shadow: 3px 3px 1px rgba(0,0,0,0.25); letter-spacing: 0.45px;
-  }
-</style>
