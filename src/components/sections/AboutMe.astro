@@ -28,7 +28,6 @@ const { xp = false } = Astro.props;
 
     <div class="about-content">
       <div class="about-text">
-        <span class="slider-counter" id="about-counter"></span>
 
         <div class="slider" id="about-slider">
           <div class="slider-track" id="about-track">
@@ -81,14 +80,14 @@ const { xp = false } = Astro.props;
                   <div class="stack-group">
                     <span class="stack-label" data-i18n="stackFramework"></span>
 
-               <div class="stack-icons">
-    <img
-      src="/icons/tech/astro-icon-dark.svg"
-      alt="Astro"
-      title="Astro"
-      class="astro-icon"
-    />
-  </div>
+                    <div class="stack-icons">
+                      <img
+                        src="/icons/tech/astro-icon-dark.svg"
+                        alt="Astro"
+                        title="Astro"
+                        class="astro-icon"
+                      />
+                    </div>
                   </div>
 
                   <div class="stack-group">
@@ -139,23 +138,14 @@ const { xp = false } = Astro.props;
           </div>
         </div>
 
-        <div class="slider-nav">
-          <button
-            class="nav-arrow prev"
-            id="about-prev"
-            aria-label="Anterior"
-          >
-            &#8592;
-          </button>
-
-          <button
-            class="nav-arrow next"
-            id="about-next"
-            aria-label="Siguiente"
-          >
-            &#8594;
-          </button>
+        <div class="slider-footer">
+          <div class="slider-lines" id="about-lines">
+            <span class="slider-line" data-index="0"></span>
+            <span class="slider-line" data-index="1"></span>
+            <span class="slider-line" data-index="2"></span>
+          </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -163,14 +153,14 @@ const { xp = false } = Astro.props;
 
 
 <style>
-  
-
-  
+  /* ============================================
+     LAYOUT GENERAL (foto + contenido)
+  ============================================ */
   .about-body {
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    padding-bottom: 1rem;    
+    padding-bottom: 1rem;
   }
 
   .photo-column {
@@ -195,209 +185,131 @@ const { xp = false } = Astro.props;
     min-width: 0;
   }
 
-  .about-text {
-    position: relative;
-  }
+ .about-text {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
 
-  .about-text h1 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    line-height: 1.4;
-  }
+.slider {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-width: 0;
+}
 
-
-
+.about-text h1 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+  /* ============================================
+     INTRO / NOMBRE (efecto glitch)
+  ============================================ */
 .intro-line {
   display: block;
   font-size: 1.65em;
   font-weight: 700;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
-.name-binary {
-  position: relative;
-  display: inline-block;
-  color: rgba(21, 255, 0, 0.9) !important;
-  font-weight: 800;
-  
-  letter-spacing: 1px;
-}
-
-
-.portfolio-stack {
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-  margin-top: 2.5rem;
-  padding-right: .6rem;
-}
-
-.stack-group {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: .55rem;
-}
-
-.stack-label {
-  font-size: .72rem;
-    color: rgba(255, 255, 255, 0.679) !important;
-
-  font-weight: 400;
-  text-align: center;
-}
-
-.stack-icons {
-  display: flex;
-  gap: .75rem;
-  align-items: center;
-}
-
-.stack-icons img {
-  width: 22px;
-  height: 22px;
-}
-
-.name-binary::before,
-.name-binary::after {
-  content: attr(data-text);
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  overflow: hidden;
-  background: transparent;
-  pointer-events: none;
-}
-
-.astro-icon {
-  filter: brightness(0) invert(1);
-}
-
-.name-binary::before {
-  color: #ffffff;
-  clip-path: inset(0 0 60% 0);
-  animation: glitch-shift-1 2.6s infinite steps(2, end);
-}
-
-.name-binary::after {
-  color: rgb(77, 255, 0);
-  clip-path: inset(60% 0 0 0);
-  animation: glitch-shift-2 2.6s infinite steps(2, end);
-}
-
-@keyframes glitch-shift-1 {
-  0%, 92%, 100% { transform: translate(0, 0); opacity: 0; }
-  93% { transform: translate(-3px, -1px); opacity: 0.9; }
-  95% { transform: translate(3px, 1px); opacity: 0.9; }
-  97% { transform: translate(-2px, 1px); opacity: 0.6; }
-}
-
-@keyframes glitch-shift-2 {
-  0%, 92%, 100% { transform: translate(0, 0); opacity: 0; }
-  93% { transform: translate(3px, 1px); opacity: 0.9; }
-  95% { transform: translate(-3px, -1px); opacity: 0.9; }
-  97% { transform: translate(2px, -1px); opacity: 0.6; }
-}
-  
-
-  .about-text .old-portfolio-link {
-    color: rgba(21, 255, 0, 0.832);
-    text-decoration: none;
-    font-weight: 600;
-  }
-
-  .slider {
+  .name-binary {
     position: relative;
-    overflow: hidden;
-    min-height: 90px;
+    display: inline-block;
+    color: rgba(21, 255, 0, 0.9) !important;
+    font-weight: 800;
+    letter-spacing: 1px;
   }
 
-  .slider-track {
-    display: flex;
-    width: 300%;
-    transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
-    will-change: transform;
-  }
-
-  .slide {
-    flex: 0 0 33.3333%;
-    min-width: 0;
-  }
-
-
-
-.slider-nav {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 4px;
-}
-
-  .about-text .slider-nav .nav-arrow {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.7rem;
-    line-height: 1;
-    padding: 2px 6px;
-       color: #10d35e !important;
-
-    opacity: 0;
-    pointer-events: none;
-    transform: translateX(0);
-    transition: opacity 0.18s ease, color 0.15s ease;
-  }
-
-  .about-text .slider-nav .nav-arrow.prev {
-    transform: translateX(-4px);
-  }
- 
-
-  .about-text .slider-nav .nav-arrow.next {
-    transform: translateX(4px);
-  }
-.about-text .slider-nav .nav-arrow.visible {
-  opacity: 0.85;
-  pointer-events: auto;
-  transform: translateX(0);
-  color: rgba(21, 255, 0, 0.75);
-  transition: opacity 0.18s ease, transform 0.18s ease;
-}
-
-.about-text .slider-nav .nav-arrow.prev.visible:hover {
-  opacity: 1;
-  transform: translateX(-2px);
-}
-
-.about-text .slider-nav .nav-arrow.next.visible:hover {
-  opacity: 1;
-  transform: translateX(2px);
-}
-@keyframes shine-sweep {
-  from {
-    background-position: 100% 50%;
-  }
-  to {
-    background-position: -100% 50%;
-  }
-}
-
-
-
- 
-
-  .slider-counter {
+  .name-binary::before,
+  .name-binary::after {
+    content: attr(data-text);
     position: absolute;
-    top: -4px;
-    right: 6px;
-    font-size: 0.65rem;
+    left: 0;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    background: transparent;
+    pointer-events: none;
+  }
+
+  .name-binary::before {
+    color: #ffffff;
+    clip-path: inset(0 0 60% 0);
+    animation: glitch-shift-1 2.6s infinite steps(2, end);
+  }
+
+  .name-binary::after {
+    color: rgb(77, 255, 0);
+    clip-path: inset(60% 0 0 0);
+    animation: glitch-shift-2 2.6s infinite steps(2, end);
+  }
+
+  @keyframes glitch-shift-1 {
+    0%, 92%, 100% { transform: translate(0, 0); opacity: 0; }
+    93% { transform: translate(-3px, -1px); opacity: 0.9; }
+    95% { transform: translate(3px, 1px); opacity: 0.9; }
+    97% { transform: translate(-2px, 1px); opacity: 0.6; }
+  }
+
+  @keyframes glitch-shift-2 {
+    0%, 92%, 100% { transform: translate(0, 0); opacity: 0; }
+    93% { transform: translate(3px, 1px); opacity: 0.9; }
+    95% { transform: translate(-3px, -1px); opacity: 0.9; }
+    97% { transform: translate(2px, -1px); opacity: 0.6; }
+  }
+
+  /* ============================================
+     PORTFOLIO STACK (slide 3: iconos de tech)
+  ============================================ */
+  .portfolio-stack {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 2.5rem;
+    padding-right: .6rem;
+  }
+
+  .stack-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .55rem;
+  }
+
+  .stack-label {
+    font-size: .69rem;
+    /* color: rgba(255, 255, 255, 0.679) !important; */
+    color: rgb(77, 255, 0) !important;
+    opacity: 1;
     font-weight: 400;
-    color: rgba(21, 255, 0, 0.887) !important;
-    z-index: 1;
+    text-align: center;
+  }
+
+  .stack-icons {
+    display: flex;
+    gap: .75rem;
+    align-items: center;
+  }
+
+  .stack-icons img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .astro-icon {
+    filter: brightness(0) invert(1);
   }
 
   .old-portfolio-link {
     position: relative;
     display: inline-block;
+    color: rgba(21, 255, 0, 0.832);
+    font-weight: 600;
   }
 
   .old-portfolio-link::after {
@@ -406,7 +318,7 @@ const { xp = false } = Astro.props;
     top: 180%;
     left: 50%;
     transform: translateX(-50%) translateY(-8px) scale(0.95);
-    width: 220px;
+    width: 270px;
     height: 140px;
     background-image: var(--preview-img);
     background-size: cover;
@@ -427,9 +339,70 @@ const { xp = false } = Astro.props;
     transform: translateX(-50%) translateY(-14px) scale(1);
   }
 
-  
+  /* ============================================
+     SLIDER (track + slides)
+  ============================================ */
+  .slider {
+    position: relative;
+    overflow: hidden;
+    min-height: 90px;
+  }
 
+  .slider-track {
+    display: flex;
+    width: 300%;
+    transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+    will-change: transform;
+  }
 
+  .slide {
+    flex: 0 0 33.3333%;
+    min-width: 0;
+  }
+
+  /* ============================================
+     SLIDER FOOTER (líneas indicadoras / navegación)
+  ============================================ */
+  .slider-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .slider-lines {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .slider-line {
+  position: relative;
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: background 0.25s ease, width 0.25s ease;
+}
+
+.slider-line::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  bottom: -10px;
+  left: -4px;
+  right: -4px;
+}
+
+  .slider-line.is-active {
+    width: 28px;
+    background: rgba(21, 255, 0, 0.85);
+  }
+
+  /* ============================================
+     RESPONSIVE
+  ============================================ */
   @media (max-width: 500px) {
     .about-body {
       flex-direction: column;
@@ -442,74 +415,47 @@ const { xp = false } = Astro.props;
 </style>
 
 <script>
+  function initAboutSlider() {
+    const track = document.getElementById('about-track');
+    if (!track || track.dataset.initialized) return;
+    track.dataset.initialized = 'true';
 
-function initAboutSlider() {
-  const track = document.getElementById('about-track');
-  if (!track || track.dataset.initialized) return;
-  track.dataset.initialized = 'true';
+    const slides = Array.from(track.children);
+    const lines = Array.from(document.querySelectorAll<HTMLElement>('#about-lines .slider-line'));
+    let current = 0;
 
-  const slides = Array.from(track.children);
-  const prevBtn = document.getElementById('about-prev');
-  const nextBtn = document.getElementById('about-next');
-  const counterEl = document.getElementById('about-counter');
-  let current = 0;
+    document.querySelectorAll<HTMLElement>('.old-portfolio-link').forEach((link) => {
+      const img = link.dataset.preview;
+      if (img) {
+        link.style.setProperty('--preview-img', `url(${img})`);
+      }
+    });
 
-
-  document.querySelectorAll<HTMLElement>('.old-portfolio-link').forEach((link) => {
-    const img = link.dataset.preview;
-    if (img) {
-      link.style.setProperty('--preview-img', `url(${img})`);
+    function updateLines() {
+      lines.forEach((line, i) => {
+        line.classList.toggle('is-active', i === current);
+      });
     }
-  });
- 
 
-  function updateArrows() {
-    const nextVisible = current < slides.length - 1;
-    prevBtn.classList.toggle('visible', current > 0);
-    nextBtn.classList.toggle('visible', nextVisible);
-    if (nextVisible) {
-      startShine();
-    } else {
-      stopShine();
+    function render() {
+      (track as HTMLElement).style.transform = `translateX(-${current * (100 / slides.length)}%)`;
+      updateLines();
     }
+
+    lines.forEach((line) => {
+      line.addEventListener('click', () => {
+        current = Number(line.dataset.index);
+        render();
+      });
+    });
+
+    (track as HTMLElement).style.transition = 'none';
+    render();
+    requestAnimationFrame(() => {
+      (track as HTMLElement).style.transition = '';
+    });
   }
 
-  function updateCounter(animate) {
-    counterEl.textContent = `${current + 1}/${slides.length}`;
-    if (!animate) return;
-    counterEl.classList.remove('fade');
-    void counterEl.offsetWidth;
-    counterEl.classList.add('fade');
-  }
-
-  function render(animate = true) {
-    track.style.transform = `translateX(-${current * (100 / slides.length)}%)`;
-    updateCounter(animate);
-    updateArrows();
-  }
-
-  prevBtn.addEventListener('click', () => {
-    if (current > 0) {
-      current--;
-      render();
-    }
-  });
-
-  nextBtn.addEventListener('click', () => {
-    if (current < slides.length - 1) {
-      current++;
-      render();
-    }
-  });
-
-  track.style.transition = 'none';
-  updateArrows();
-  render(false);
-  requestAnimationFrame(() => {
-    track.style.transition = '';
-  });
-}
-
-document.addEventListener('astro:page-load', initAboutSlider);
-initAboutSlider();
+  document.addEventListener('astro:page-load', initAboutSlider);
+  initAboutSlider();
 </script>
