@@ -1,12 +1,11 @@
 ---
 import TabButton from "./TabButton.astro";
-import ImageDots from "../image-viewer/ImageDots.astro";
 
 interface TabDef {
   id: string;
   label: string;
   i18nKey?: string;
-  iconType: "eye" | "stack" | "circle" | "image";
+  iconType: "eye" | "stack" | "circle";
 }
 
 interface Props {
@@ -32,8 +31,9 @@ const activeId = defaultTab ?? tabs[0]?.id;
         />
       ))}
     </menu>
-    <div class="img-dots" role="group" aria-label="Imágenes del proyecto" hidden></div>
-    <ImageDots />
+    <div class="tabs-actions">
+      <slot name="actions" />
+    </div>
   </div>
   <div class="tabs-container" data-tabs-container>
     <slot />
@@ -43,14 +43,25 @@ const activeId = defaultTab ?? tabs[0]?.id;
 <style>
   .tabs { border: none !important; }
   .tabs-container { height: auto; overflow: hidden; transition: height 0.4s cubic-bezier(0.4,0,0.2,1); }
-.tabs-container.is-syncing { transition: none !important; }
-  .tabs-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0 0 4px; }
+  .tabs-container.is-syncing { transition: none !important; }
+  .tabs-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 0 0 8px;
+    flex-wrap: wrap;
+  }
   menu[role="tablist"] {
     background: transparent !important; border: none !important;
     display: flex !important; gap: 6px; padding: 0 !important;
     margin: 0 !important; flex-wrap: wrap; list-style: none !important;
   }
-  .tabs-container { height: auto; overflow: hidden; transition: height 0.4s cubic-bezier(0.4,0,0.2,1); }
+  .tabs-actions {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
 </style>
 
 <script>

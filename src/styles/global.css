@@ -160,27 +160,38 @@ button.tab-btn span {
 ============================================ */
 @media (min-width: 1301px) {
   main.desktop {
-    max-width: 1800px; /* evita que en 4K/ultrawide todo se disperse */
+    max-width: 1920px; /* evita que en 4K/ultrawide todo se disperse */
     margin: 0 auto;
   }
 
   #win-about,
   #win-tech {
-    left: 0% !important;
+    left: 1% !important;
     width: clamp(480px, 40vw, 750px) !important;
   }
 
   #win-p1,
   #win-p2 {
-    left: 43% !important;
-    width: clamp(350px, 23vw, 500px) !important;
+    left: 44% !important;
+    width: clamp(350px, 25vw, 500px) !important;
   }
 
   #win-p3,
   #win-p4 {
-    left: 74% !important;
-    width: clamp(350px, 23vw, 500px) !important;
+    left: 72% !important;
+    width: clamp(350px, 25vw, 500px) !important;
   }
+}
+
+.win,
+.project-card,
+.project-card * {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.project-card {
+  overflow-x: hidden;
 }
 
 @media (max-width: 1300px) {

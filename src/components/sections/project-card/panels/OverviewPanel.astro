@@ -1,30 +1,32 @@
 ---
-/**
- * OverviewPanel.astro
- * Contenido del tab "Overview" — la descripción del proyecto.
- */
 import TabPanel from "../tabs/TabPanel.astro";
+import ImageViewer from "../image-viewer/ImageViewer.astro";
 
 interface Props {
   id: string;
   hidden?: boolean;
-  description: string;
-  descKey?: string;
+  projectTitle?: string;
+  titleKey?: string;
+  images: string[];
+  imgId: string;
+  fit?: "cover" | "contain";
 }
 
-const { id, hidden, description, descKey } = Astro.props;
+const { id, hidden, projectTitle, titleKey, images, imgId, fit } = Astro.props;
 ---
 
 <TabPanel id={id} hidden={hidden}>
-  <p data-i18n={descKey}>{description}</p>
+  <ImageViewer images={images} alt={projectTitle} imgId={imgId} fit={fit} />
+  <span class="project-title" data-i18n={titleKey ? `${titleKey}Name` : undefined}>{projectTitle}</span>
 </TabPanel>
 
 <style>
-  p {
-    font-size: 0.79rem;
+  .project-title {
+    display: block;
+    color: rgb(77, 255, 0) !important;
+    font-size: 1.04rem;
+    margin-left: .2rem;
     font-weight: 600;
-    text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.12);
-        line-height: 1.5;
-    margin: 0;
+    letter-spacing: 0.45px;
   }
 </style>

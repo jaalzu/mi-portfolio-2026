@@ -1,7 +1,7 @@
 export const translations = {
   es: {
     // Ventanas - títulos
-    winAbout: "Sobre mí",
+    // winAbout: "Sobre mí",
 
     aboutGreeting: "Hola! Soy",
 
@@ -170,7 +170,7 @@ export const translations = {
   ////////////////// English //////////////////
 
   en: {
-    winAbout: "About me",
+    // winAbout: "About me",
 
     aboutGreeting: "Hi! I'm",
 
