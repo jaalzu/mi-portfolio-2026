@@ -20,7 +20,7 @@ body {
 }
 
 ::selection {
-  background-color: #0ce30ce2;
+  background-color: rgba(var(--accent-rgb), 0.89);
   color: #ffffffd3;
 }
 
@@ -70,13 +70,18 @@ button {
 ============================================ */
 
 :root {
-  --win-about: var(--win-border-color);
-  --win-projects: var(--win-border-color);
-  --win-tech: var(--win-border-color);
-  --win-picture: var(--win-border-color);
-  --win-contact: var(--win-border-color);
-  --win-info: var(--win-border-color);
+  --accent-rgb: 52, 213, 221;
+  --accent-rgb-alt: 52, 213, 221;
+
+  --accent-solid: rgb(var(--accent-rgb));
+  --accent-15: rgba(var(--accent-rgb), 0.15);
+  --accent-25: rgba(var(--accent-rgb), 0.25);
+  --accent-28: rgba(var(--accent-rgb), 0.28);
+  --accent-65: rgba(var(--accent-rgb), 0.65);
+  --accent-85: rgba(var(--accent-rgb), 0.85);
+  --accent-90: rgba(var(--accent-rgb), 0.9);
 }
+
 /* ============================================
    TOOLBAR
 ============================================ */
@@ -123,18 +128,18 @@ button {
 .tab-btn:hover {
   background: linear-gradient(
     180deg,
-    rgba(21, 255, 0, 0.25) 0%,
-    rgba(21, 255, 0, 0.1) 100%
+    var(--accent-25) 0%,
+    var(--accent-15) 100%
   );
-  border-color: rgba(21, 255, 0, 0.4);
+  border-color: var(--accent-25);
   box-shadow:
     0 6px 12px rgba(0, 0, 0, 0.15),
     inset 0 1px 1px rgba(255, 255, 255, 0.3);
 }
 
 .tab-btn[aria-selected="true"] {
-  background: rgba(21, 255, 0, 0.2);
-  border-color: rgba(21, 255, 0, 0.6);
+  background: var(--accent-25);
+  border-color: var(--accent-65);
   box-shadow:
     inset 0 0 0 1px rgba(21, 255, 0, 0.3),
     0 2px 4px rgba(0, 0, 0, 0.1);
@@ -236,5 +241,64 @@ button.tab-btn span {
   #win-p3,
   #win-p4 {
     grid-column: span 1;
+  }
+
+  /* ============================================
+   TOOLTIP ACCESIBLE (data-tooltip="texto")
+============================================ */
+  [data-tooltip] {
+    position: relative;
+  }
+
+  [data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    white-space: nowrap;
+    background: rgba(15, 15, 15, 0.92);
+    color: #fff !important;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 5px 9px;
+    border-radius: 6px;
+    border: 1px solid var(--accent-25);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 100;
+    transition:
+      opacity 0.18s ease,
+      transform 0.18s ease,
+      visibility 0.18s;
+  }
+
+  [data-tooltip]::before {
+    content: "";
+    position: absolute;
+    bottom: calc(100% + 3px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    border: 5px solid transparent;
+    border-top-color: rgba(15, 15, 15, 0.92);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 100;
+    transition:
+      opacity 0.18s ease,
+      transform 0.18s ease,
+      visibility 0.18s;
+  }
+
+  [data-tooltip]:hover::after,
+  [data-tooltip]:hover::before,
+  [data-tooltip]:focus-visible::after,
+  [data-tooltip]:focus-visible::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
   }
 }

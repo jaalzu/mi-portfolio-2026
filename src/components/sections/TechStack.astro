@@ -7,19 +7,20 @@ const techs = [
   { name: "JavaScript", icon: "/icons/tech/javascript.svg" },
   { name: "Git",        icon: "/icons/tech/git.svg" },
   { name: "Figma",      icon: "/icons/tech/figma.svg" },
+  { name: "PostgreSQL",        icon: "/icons/tech/postgresql.svg" },
   { name: "TypeScript", icon: "/icons/tech/typescript.svg" },
   { name: "Tailwind",   icon: "/icons/tech/tailwindcss.svg" },
   { name: "React",      icon: "/icons/tech/react_light.svg" },
   { name: "Next.js",    icon: "/icons/tech/nextjs_dark.svg" },
   { name: "Astro",      icon: "/icons/tech/astro-icon-dark.svg" },
-  // { name: "Supabase",   icon: "/icons/tech/supabase.svg" },
+  { name: "Docker",      icon: "/icons/tech/docker.svg" },
+  { name: "Supabase",   icon: "/icons/tech/supabase.svg" },
   { name: "Claude",     icon: "/icons/tech/claude.svg" },
   { name: "Zod",        icon: "/icons/tech/zod.svg" },
   { name: "TanStack Query",        icon: "/icons/tech/reactquery.svg" },
   { name: "Playwright",        icon: "/icons/tech/playwright.svg" },
   { name: "Zustand",        icon: "/icons/tech/zustand-original.svg" },
-  { name: "PostgreSQL",        icon: "/icons/tech/postgresql.svg" },
-  { name: "Svelte",        icon: "/icons/tech/svelte.svg" },
+  // { name: "Svelte",        icon: "/icons/tech/svelte.svg" },
 ];
 ---
 
@@ -27,7 +28,7 @@ const techs = [
     <div class="tech-grid">
     {techs.map(tech => (
   <div class="tech-item">
-    <img loading="lazy" src={tech.icon} alt={tech.name} width="30" height="30" />
+    <img loading="lazy" src={tech.icon} alt={tech.name} width="32" height="32" />
     <span class="tech-name">{tech.name}</span>
   </div>
 ))}
@@ -46,7 +47,6 @@ const techs = [
   display: flex;
   flex-direction: column;
   font-weight: 600;
-  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.130);
   align-items: center;
   font-size: 0.820rem;
   text-align: center;
@@ -57,8 +57,8 @@ const techs = [
 }
 
 .tech-item img {
-  width: 36px;
-  height: 36px;
+  width: 37px;
+  height: 37px;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);

@@ -220,7 +220,7 @@ const { xp = false } = Astro.props;
   .name-binary {
     position: relative;
     display: inline-block;
-    color: rgba(21, 255, 0, 0.9) !important;
+    color: var(--accent-90) !important;
     font-weight: 800;
     letter-spacing: 1px;
   }
@@ -244,7 +244,7 @@ const { xp = false } = Astro.props;
   }
 
   .name-binary::after {
-    color: rgb(77, 255, 0);
+    color: rgb(var(--accent-rgb-alt));
     clip-path: inset(60% 0 0 0);
     animation: glitch-shift-2 2.6s infinite steps(2, end);
   }
@@ -270,7 +270,8 @@ const { xp = false } = Astro.props;
     display: flex;
     justify-content: space-between;
     gap: 2rem;
-    margin-top: 2.5rem;
+    margin-top: 5%;
+    margin-bottom: 2rem;
     padding-right: .6rem;
   }
 
@@ -283,10 +284,7 @@ const { xp = false } = Astro.props;
 
   .stack-label {
     font-size: .69rem;
-    /* color: rgba(255, 255, 255, 0.679) !important; */
-    color: rgb(77, 255, 0) !important;
-    opacity: 1;
-    font-weight: 400;
+  color: rgb(var(--accent-rgb-alt)) !important;
     text-align: center;
   }
 
@@ -308,8 +306,8 @@ const { xp = false } = Astro.props;
   .old-portfolio-link {
     position: relative;
     display: inline-block;
-    color: rgba(21, 255, 0, 0.832);
-    font-weight: 600;
+   color: var(--accent-90); 
+    font-weight: 700;
   }
 
   .old-portfolio-link::after {
@@ -397,7 +395,7 @@ const { xp = false } = Astro.props;
 
   .slider-line.is-active {
     width: 28px;
-    background: rgba(21, 255, 0, 0.85);
+    background: var(--accent-85);
   }
 
   /* ============================================

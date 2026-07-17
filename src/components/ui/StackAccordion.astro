@@ -41,15 +41,10 @@ const { techKeys, containerId } = Astro.props;
     font-size: .78rem ;
   }
 
-  :global(.stack-trigger:hover) {
-       background: rgba(21, 255, 0, 0.25) ;
-
-  }
-
-  :global(.stack-trigger[aria-expanded="true"]) {
-          background: rgba(21, 255, 0, 0.25);
-
-  }
+:global(.stack-trigger:hover),
+:global(.stack-trigger[aria-expanded="true"]) {
+  background: var(--accent-25);
+}
 
   :global(.tree-icon) {
     display: inline-flex ;
@@ -113,7 +108,7 @@ const { techKeys, containerId } = Astro.props;
     color: rgb(15, 232, 0);
     height: 3px ;
     border-radius: 50% ;
-    background: currentColor ;
+     background: var(--accent-solid);
   }
 </style>
 
