@@ -6,7 +6,7 @@ export const translations = {
     aboutGreeting: "Hola! Soy",
 
     aboutText:
-      "Frontend Engineer que disfruta diseñar, mantener y escalar productos digitales. Encontré el balance perfecto entre resolver desafíos técnicos complejos y expresar mi creatividad a través del desarrollo de software.<br> La curiosidad y la disciplina fueron fundamentales en mi formación, impulsándome a afrontar desafíos nuevos todos los días.",
+      "Frontend Engineer que disfruta diseñar, mantener y escalar productos digitales. Encontré el balance perfecto entre resolver desafíos técnicos complejos y expresar mi creatividad a través del desarrollo de software.<br> Mi curiosidad y disciplina fueron fundamentales en mi formación, impulsándome a afrontar desafíos nuevos todos los días.",
 
     aboutWork:
       "Desarrollo páginas y aplicaciones web utilizando principalmente JavaScript y su ecosistema moderno.<br> Me gusta explorar nuevas herramientas y mantenerme al día con las tecnologías que impulsan la industria.<br> En el último tiempo incorporé la inteligencia artificial a mi proceso de desarrollo para potenciar mis capacidades y mantener altos estándares de calidad en el código.",
