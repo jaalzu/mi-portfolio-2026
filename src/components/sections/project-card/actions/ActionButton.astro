@@ -16,7 +16,12 @@ interface Props {
 const { url, label, i18nKey, Icon } = Astro.props;
 ---
 
-<button class="icon-btn tab-btn" data-open-url={url}>
+<button
+  class="icon-btn tab-btn"
+  data-open-url={url}
+  data-tooltip={label}
+  aria-label={label}
+>
   <span class="icon-btn-icon tab-icon">
     <Icon />
   </span>

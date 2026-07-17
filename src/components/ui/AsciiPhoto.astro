@@ -31,12 +31,15 @@ const { src = "me/me13.webp", width = "220px", height = "340px" } = Astro.props;
 <script>
   function initAsciiEffect(wrapper: HTMLElement) {
     if (wrapper.dataset.asciiReady) return;
-    wrapper.dataset.asciiReady = "1";
-
+wrapper.dataset.asciiReady = "1";
     const canvas = wrapper.querySelector<HTMLCanvasElement>('canvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d', { willReadFrequently: true });
-    if (!ctx) return;
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
+  if (!ctx) return;
+
+ const accentRgb = getComputedStyle(document.documentElement)
+  .getPropertyValue('--accent-rgb')
+  .trim() || '52, 213, 221';
 
     let particles: any[] = [];
     let startTime = 0;
@@ -189,7 +192,7 @@ const { src = "me/me13.webp", width = "220px", height = "340px" } = Astro.props;
         p.x += p.vx;
         p.y += p.vy;
 
-        ctx.fillStyle = `rgba(100, 255, 218, ${p.currentAlpha})`;
+        ctx.fillStyle = `rgba(${accentRgb}, ${p.currentAlpha})`;
         ctx.fillText(p.char, p.x, p.y);
       });
     };

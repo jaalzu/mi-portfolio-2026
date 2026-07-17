@@ -6,10 +6,10 @@ export const translations = {
     aboutGreeting: "Hola! Soy",
 
     aboutText:
-      "Frontend Engineer que disfruta diseñar, mantener y escalar productos digitales. Encontré el balance perfecto entre resolver desafíos técnicos complejos y expresar mi creatividad a través del desarrollo de software.<br> Mi curiosidad y disciplina fueron fundamentales en mi formación, impulsándome a afrontar desafíos nuevos todos los días.",
+      "Desarrollador de software enfocado en la web. Desarrollo aplicaciones, landing pages y diseño de interfaces para construir y mejorar productos digitales dentro del ecosistema moderno de JavaScript. Autodidacta, impulsado por la curiosidad y los desafíos.",
 
     aboutWork:
-      "Desarrollo páginas y aplicaciones web utilizando principalmente JavaScript y su ecosistema moderno.<br> Me gusta explorar nuevas herramientas y mantenerme al día con las tecnologías que impulsan la industria.<br> En el último tiempo incorporé la inteligencia artificial a mi proceso de desarrollo para potenciar mis capacidades y mantener altos estándares de calidad en el código.",
+      "En el desarrollo web encontré el equilibrio perfecto entre resolver desafíos técnicos y expresar mi creatividad a través de píxeles y código. Disfruto aprender nuevas herramientas, trabajar en proyectos reales y compartir ideas con otras personas para construir las mejores soluciones posibles. Últimamente estoy aprendiendo más sobre aplicaciones mobile y experimentando con agentes de IA.",
 
     aboutPortfolio:
       "Este portfolio nació como un tributo a Windows XP y Windows 7, que podés ver",
@@ -175,10 +175,10 @@ export const translations = {
     aboutGreeting: "Hi! I'm",
 
     aboutText:
-      "Frontend Engineer who enjoys designing, maintaining, and scaling digital products. I found the perfect balance between solving complex technical challenges and expressing my creativity through software development. Curiosity and discipline have been fundamental throughout my journey, driving me to embrace new challenges every single day.",
+      "Software developer focused on building for the web. I create applications, landing pages, and interfaces for digital products within the modern JavaScript ecosystem. Self-taught, driven by curiosity and challenges.",
 
     aboutWork:
-      "I build websites and web applications primarily using the modern JavaScript ecosystem. I enjoy exploring new tools and staying up to date with the technologies shaping the industry. More recently, I've integrated AI into my development workflow to enhance my capabilities and maintain high standards of code quality.",
+      "In web development, I found the perfect balance between solving technical challenges and expressing my creativity through pixels and code. I enjoy learning new tools, working on real-world projects, and sharing ideas with others to build the best solutions possible.Recently, I'm learning more about mobile applications and experimenting with AI agents.",
 
     aboutPortfolio:
       "This portfolio started as a tribute to Windows XP and Windows 7, which you can see",
