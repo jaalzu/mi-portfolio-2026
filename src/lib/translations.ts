@@ -149,7 +149,7 @@ export const translations = {
     p3Desc:
       "Plataforma e-Learning con acceso por roles, gestión de cursos y lecciones, progreso de alumnos en tiempo real y foro de comunidad por curso.",
     p3Origin:
-      "El proyecto surgió cuando un mentor digital necesitaba una plataforma privada para ofrecer cursos a sus alumnos como parte de su programa de mentoría.",
+      "El proyecto surgió cuando un mentor digital necesitaba una plataforma privada para ofrecer cursos a sus alumnos como parte de su programa de mentoría. El proyecto original ya no está activo,esta versión es un mock ",
 
     // Proyecto Mundial 2026
     p4Desc:
@@ -321,7 +321,7 @@ export const translations = {
     p3Desc:
       "e-Learning platform with role-based access, course and lesson management, real-time student progress and a community forum per course.",
     p3Origin:
-      "The project came about when a digital mentor needed a private platform to offer courses to their students as part of their mentoring program.",
+      "The project came about when a digital mentor needed a private platform to offer courses to their students as part of their mentoring program. The original project is no longer active,this version is a mock.",
 
     p4Desc:
       "A private predictions game for the 2026 World Cup. No email or password signup — users pick a name and avatar, predict match results, make tournament-wide picks (champion, MVP, etc), and compete on a single global leaderboard.",

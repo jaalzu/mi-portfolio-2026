@@ -14,19 +14,34 @@ const { id, hidden, description, descKey, origin, originKey } = Astro.props;
 ---
 
 <TabPanel id={id} hidden={hidden}>
+  <h3 data-i18n="tabOverview">Overview</h3>
   <p data-i18n={descKey}>{description}</p>
+
+  <h3 data-i18n="tabOrigin">Origen</h3>
   <p data-i18n={originKey}>{origin}</p>
 </TabPanel>
-
 <style>
+h3 {
+  margin: 0;
+  font-size: 0.81rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--accent-90);
+}
+
   p {
+    margin: 0;
     font-size: 0.79rem;
     font-weight: 600;
     line-height: 1.5;
-    margin: 0;
   }
 
-  p + p {
-    margin-top: 10px;
+  h3 + p {
+    margin-top: 4px;
+  }
+
+  p + h3 {
+    margin-top: 14px;
   }
 </style>
