@@ -23,12 +23,12 @@ const techs = [
   // { name: "Svelte",        icon: "/icons/tech/svelte.svg" },
 ];
 ---
-
 <WinGlass noTitlebar noControls icon="retro/tech-5.webp" color="var(--win-tech)">
+    <h2 class="tech-title" data-i18n="techTitle">Tech Stack</h2>
     <div class="tech-grid">
-    {techs.map(tech => (
+  {techs.map(tech => (
   <div class="tech-item">
-    <img loading="lazy" src={tech.icon} alt={tech.name} width="32" height="32" />
+    <img loading="lazy" src={tech.icon} alt={tech.name}  />
     <span class="tech-name">{tech.name}</span>
   </div>
 ))}
@@ -36,11 +36,21 @@ const techs = [
 </WinGlass>
 
 <style>
+.tech-title {
+  margin: 0;
+  text-align: center;
+  margin-top: .4rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--accent-solid);
+}
+
 .tech-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  padding: .6rem;
-  gap: 30px 5px;
+  padding: .7rem;
+  margin-block: .5rem;
+  gap: 37px 5px;
 }
 
 .tech-item {
@@ -57,8 +67,8 @@ const techs = [
 }
 
 .tech-item img {
-  width: 37px;
-  height: 37px;
+  width: 38px;
+  height: 38px;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -115,7 +125,7 @@ const techs = [
 @media (max-width: 1300px) {
   .tech-grid {
     grid-template-columns: repeat(6, 1fr);
-    gap: 9px 11px;
+    gap: 29px 11px;
     padding: 0.2rem;
   }
 
@@ -124,23 +134,26 @@ const techs = [
     gap: 5px;
   }
 
-  .tech-item img {
-    width: 24px;
-    height: 24px;
-  }
 }
 
 @media (max-width: 900px) {
   .tech-grid { 
-    grid-template-columns: repeat(6, 1fr); 
-    gap: 10px 13px;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 23px 13px;
+  }
+   .tech-item img {
+    width:36px;
+    height:36px;
   }
 }
 
 @media (max-width: 500px) {
   .tech-grid { 
     grid-template-columns: repeat(3, 1fr);
-    gap: 5px 15px;
+  }
+  .tech-item img {
+    width: 32px;
+    height: 32px;
   }
 }
 </style>
