@@ -6,10 +6,10 @@ export const translations = {
     aboutGreeting: "Hola! Soy",
 
     aboutText:
-      "Desarrollador de software enfocado en la web. Desarrollo aplicaciones, landing pages y diseño de interfaces para construir y mejorar productos digitales dentro del ecosistema moderno de JavaScript. Autodidacta, impulsado por la curiosidad y los desafíos.",
+      "Desarrollador de software enfocado en el frontend.\n Desarrollo aplicaciones web, landing pages y diseño de interfaces para construir y mejorar productos digitales dentro del ecosistema de JavaScript.\n\nAutodidacta, impulsado por la curiosidad y los desafíos.",
 
     aboutWork:
-      "En el desarrollo web encontré el equilibrio perfecto entre resolver desafíos técnicos y expresar mi creatividad a través de píxeles y código. Disfruto aprender nuevas herramientas, trabajar en proyectos reales y compartir ideas con otras personas para construir las mejores soluciones posibles. Últimamente estoy aprendiendo más sobre aplicaciones mobile y experimentando con agentes de IA.",
+      "Creo en que la dedicación y la paciencia te permiten alcanzar cualquier objetivo que te propongas.\nAprendí a aprender, y eso me dio la confianza para convertir cualquier idea en realidad.\n\nMe considero una persona positiva con grandes aspiraciones.\nSi te identificás con esta mentalidad, no dudes en contactarme.",
 
     aboutPortfolio:
       "Este portfolio nació como un tributo a Windows XP y Windows 7, que podés ver",
@@ -175,10 +175,10 @@ export const translations = {
     aboutGreeting: "Hi! I'm",
 
     aboutText:
-      "Software developer focused on building for the web. I create applications, landing pages, and interfaces for digital products within the modern JavaScript ecosystem. Self-taught, driven by curiosity and challenges.",
+      "Software developer focused on building for the frontend. I create web applications, landing pages, and interfaces for digital products within the modern JavaScript ecosystem.\n\nSelf-taught, driven by curiosity and challenges.",
 
     aboutWork:
-      "In web development, I found the perfect balance between solving technical challenges and expressing my creativity through pixels and code. I enjoy learning new tools, working on real-world projects, and sharing ideas with others to build the best solutions possible.Recently, I'm learning more about mobile applications and experimenting with AI agents.",
+      "I believe that dedication and patience can help you achieve any goal.\nLearning how to learn gave me the confidence to turn any idea into reality.\n\nI consider myself a positive person with big aspirations.\nIf you share this mindset, don't hesitate to get in touch.",
 
     aboutPortfolio:
       "This portfolio started as a tribute to Windows XP and Windows 7, which you can see",
