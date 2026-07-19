@@ -15,6 +15,7 @@ interface Props {
   projectUrl: string;
   codeUrl: string;
   color: string;
+  heroImageEn?: string;
   images: string[];
   origin: string;
   originKey?: string;
@@ -23,20 +24,35 @@ interface Props {
   imagesFit?: "cover" | "contain";
 }
 
-const { title, titleKey, projectTitle, description, descKey, projectUrl, codeUrl, color, images, origin, originKey, techKeys, xp = false, imagesFit } = Astro.props;
+const {
+  title,
+  titleKey,
+  projectTitle,
+  description,
+  descKey,
+  projectUrl,
+  codeUrl,
+  color,
+  images,
+  heroImageEn,
+  origin,
+  originKey,
+  techKeys,
+  xp = false,
+  imagesFit,
+} = Astro.props;
 
 const id = projectTitle.replace(/\s+/g, "-").toLowerCase();
 
 const tabs: { id: string; label: string; i18nKey: string; iconType: "eye" | "stack" | "circle" }[] = [
-  { id: "overview", label: "Overview", i18nKey: "tabOverview", iconType: "eye"    },
-  
-  { id: "origin",   label: "Origen",   i18nKey: "tabOrigin",   iconType: "circle" },
-  { id: "tech",     label: "Stack",    i18nKey: "tabStack",    iconType: "stack"  },
+  { id: "overview", label: "Overview", i18nKey: "tabOverview", iconType: "eye" },
+  { id: "origin", label: "Origen", i18nKey: "tabOrigin", iconType: "circle" },
+  { id: "tech", label: "Stack", i18nKey: "tabStack", iconType: "stack" },
 ];
 ---
 
 <div class="project-card">
-<WinGlass noControls noTitlebar title={title} titleKey={titleKey} color={color} xp={xp} icon="retro/projects2-8.webp" colorTitle>
+  <WinGlass noControls noTitlebar title={title} titleKey={titleKey} color={color} xp={xp} icon="retro/projects2-8.webp" colorTitle>
     <Tabs containerId={id} tabs={tabs}>
       <ProjectActions slot="actions" projectUrl={projectUrl} codeUrl={codeUrl} />
 
@@ -46,6 +62,7 @@ const tabs: { id: string; label: string; i18nKey: string; iconType: "eye" | "sta
         projectTitle={projectTitle}
         titleKey={titleKey}
         images={images}
+        heroImageEn={heroImageEn}
         imgId={`${id}-img`}
         fit={imagesFit}
       />

@@ -17,6 +17,35 @@ import { translations } from '../lib/translations';
       if (t[key]) el.innerHTML = t[key];
     });
 
+    // Imagen simple sin carousel (data-i18n-img-es / -en directo en el <img>)
+    document.querySelectorAll('[data-i18n-img-es]:not(.project-img)').forEach(el => {
+      const src = el.getAttribute(`data-i18n-img-${lang}`);
+      if (src) el.src = src;
+    });
+
+    // Imagen de portada dentro de un carousel (.project-img con data-images)
+    document.querySelectorAll('.project-img[data-i18n-img-en]').forEach(img => {
+      const esSrc = img.getAttribute('data-i18n-img-es');
+      const enSrc = img.getAttribute('data-i18n-img-en');
+      const newFirst = lang === 'en' ? enSrc : esSrc;
+
+      const list = img.getAttribute('data-images')?.split(',').filter(Boolean) ?? [];
+      if (list.length > 0) {
+        list[0] = newFirst;
+        img.setAttribute('data-images', list.join(','));
+      }
+
+      const dotsContainer = img.closest('.tabs')?.querySelector('.img-dots');
+      const activeDot = dotsContainer?.querySelector('.img-dot.is-active');
+      const activeIndex = activeDot
+        ? Array.from(dotsContainer.querySelectorAll('.img-dot')).indexOf(activeDot)
+        : 0;
+
+      if (activeIndex === 0) {
+        img.src = newFirst;
+      }
+    });
+
     document.documentElement.setAttribute('lang', lang);
     localStorage.setItem('lang', lang);
 
@@ -28,7 +57,7 @@ import { translations } from '../lib/translations';
 
     const switcherBtn = document.getElementById('lang-switcher');
     if (switcherBtn) {
-      switcherBtn.textContent = lang === 'es' ? 'EN' : 'ES';
+      switcherBtn.textContent = lang === 'es' ? 'ENG' : 'ESP';
     }
 
     window.dispatchEvent(new CustomEvent('langchange', { detail: { lang } }));
@@ -46,45 +75,3 @@ import { translations } from '../lib/translations';
   });
 </script>
 
-<style>
-  
-  .lang-switcher {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 9999;
-
-    width: 54px;
-    height: 34px;
-    padding: 0;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 999px;
-
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .lang-switcher:hover {
-    transform: translateY(-2px);
-  }
-
-  .lang-switcher:active {
-    transform: translateY(0);
-  }
-
-  @media (max-width: 768px) {
-    .lang-switcher {
-      top: 12px;
-      right: 12px;
-      width: 58px;
-      height: 30px;
-      font-size: 0.85rem;
-    }
-  }
-</style>

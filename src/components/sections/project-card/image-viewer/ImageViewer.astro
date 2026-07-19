@@ -4,16 +4,17 @@ import ImageDots from "./ImageDots.astro";
 
 interface Props {
   images: string[];
+  heroImageEn?: string;
   alt?: string;
   imgId: string;
   fit?: "cover" | "contain";
 }
 
-const { images, alt, imgId, fit } = Astro.props;
+const { images, heroImageEn, alt, imgId, fit } = Astro.props;
 ---
 
 <div class="img-viewer">
-  <ImageFrame images={images} alt={alt} imgId={imgId} fit={fit} />
+  <ImageFrame images={images} heroImageEn={heroImageEn} alt={alt} imgId={imgId} fit={fit} />
   <div class="img-dots" role="group" aria-label="Imágenes del proyecto"></div>
 </div>
 <ImageDots />
