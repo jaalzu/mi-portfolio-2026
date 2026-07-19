@@ -1,12 +1,13 @@
 ---
 interface Props {
   images: string[];
+  heroImageEn?: string;
   alt?: string;
   imgId: string;
   fit?: "cover" | "contain";
 }
 
-const { images, alt, imgId, fit = "cover" } = Astro.props;
+const { images, heroImageEn, alt, imgId, fit = "cover" } = Astro.props;
 ---
 
 <div class="img-frame">
@@ -14,9 +15,14 @@ const { images, alt, imgId, fit = "cover" } = Astro.props;
     id={imgId}
     src={images?.[0]}
     data-images={images?.join(",")}
+    data-i18n-img-es={images?.[0]}
+    data-i18n-img-en={heroImageEn || images?.[0]}
     alt={alt}
     class="project-img"
     style={`object-fit: ${fit};`}
+    loading="eager"
+    fetchpriority="high"
+    decoding="async"
   />
 </div>
 

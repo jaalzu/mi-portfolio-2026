@@ -8,15 +8,16 @@ interface Props {
   projectTitle?: string;
   titleKey?: string;
   images: string[];
+  heroImageEn?: string;
   imgId: string;
   fit?: "cover" | "contain";
 }
 
-const { id, hidden, projectTitle, titleKey, images, imgId, fit } = Astro.props;
+const { id, hidden, projectTitle, titleKey, images, heroImageEn, imgId, fit } = Astro.props;
 ---
 
 <TabPanel id={id} hidden={hidden}>
-  <ImageViewer images={images} alt={projectTitle} imgId={imgId} fit={fit} />
+  <ImageViewer images={images} heroImageEn={heroImageEn} alt={projectTitle} imgId={imgId} fit={fit} />
   <span class="project-title" data-i18n={titleKey ? `${titleKey}Name` : undefined}>{projectTitle}</span>
 </TabPanel>
 
