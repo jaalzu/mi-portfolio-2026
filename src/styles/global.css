@@ -51,6 +51,7 @@ button {
   position: relative;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
 }
 
 /* ============================================
@@ -155,7 +156,6 @@ button {
   color: #fff;
 }
 
-/* button.tab-btn necesita ganarle a la regla button{...!important} de más arriba */
 button.tab-btn,
 button.tab-btn span {
   color: #fff !important;
@@ -166,7 +166,7 @@ button.tab-btn span {
 ============================================ */
 @media (min-width: 1301px) {
   main.desktop {
-    max-width: 1920px; /* evita que en 4K/ultrawide todo se disperse */
+    max-width: 1920px;
     margin: 0 auto;
   }
 
@@ -208,11 +208,12 @@ button.tab-btn span {
     grid-template-rows: auto;
     gap: 12px;
     padding: 16px;
-    padding-bottom: 60px;
+    padding-bottom: 100px;
     width: 100%;
     box-sizing: border-box;
     overflow-y: auto;
     height: 100vh;
+    height: 100dvh;
   }
 
   .win {
