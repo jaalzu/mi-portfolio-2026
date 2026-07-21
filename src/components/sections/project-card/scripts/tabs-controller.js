@@ -1,6 +1,5 @@
 (() => {
-  const STACK_TRANSITION_MS = 280; // debe matchear .stack-panel { transition: grid-template-rows 0.28s }
-
+  const STACK_TRANSITION_MS = 280;
   function initTabs() {
     document
       .querySelectorAll(".tabs:not([data-initialized])")

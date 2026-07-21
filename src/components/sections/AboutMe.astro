@@ -417,13 +417,13 @@ const { xp = false } = Astro.props;
     }
   }
 </style>
-
 <script>
   function initAboutSlider() {
     const track = document.getElementById('about-track');
     if (!track || track.dataset.initialized) return;
     track.dataset.initialized = 'true';
 
+    const slider = document.getElementById('about-slider');
     const slides = Array.from(track.children);
     const lines = Array.from(document.querySelectorAll<HTMLElement>('#about-lines .slider-line'));
     let current = 0;
@@ -446,11 +446,65 @@ const { xp = false } = Astro.props;
       updateLines();
     }
 
+    function goTo(index: number) {
+      current = Math.max(0, Math.min(slides.length - 1, index));
+      render();
+    }
+
     lines.forEach((line) => {
       line.addEventListener('click', () => {
         current = Number(line.dataset.index);
         render();
       });
+    });
+
+    // ===== Swipe táctil (mobile) =====
+    let startX = 0;
+    let startY = 0;
+    let deltaX = 0;
+    let isDragging = false;
+    const SWIPE_THRESHOLD = 40; // px mínimos para considerar swipe
+
+    slider?.addEventListener('touchstart', (e: TouchEvent) => {
+      const touch = e.touches[0];
+      startX = touch.clientX;
+      startY = touch.clientY;
+      deltaX = 0;
+      isDragging = true;
+      (track as HTMLElement).style.transition = 'none';
+    }, { passive: true });
+
+    slider?.addEventListener('touchmove', (e: TouchEvent) => {
+      if (!isDragging) return;
+      const touch = e.touches[0];
+      deltaX = touch.clientX - startX;
+      const deltaY = touch.clientY - startY;
+
+      // Si el gesto es más vertical que horizontal, dejamos que scrollee la página
+      if (Math.abs(deltaY) > Math.abs(deltaX)) return;
+
+      const percentPerSlide = 100 / slides.length;
+      const dragPercent = (deltaX / (slider as HTMLElement).offsetWidth) * percentPerSlide;
+      (track as HTMLElement).style.transform =
+        `translateX(-${current * percentPerSlide - dragPercent}%)`;
+    }, { passive: true });
+
+    slider?.addEventListener('touchend', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      (track as HTMLElement).style.transition = '';
+
+      if (Math.abs(deltaX) > SWIPE_THRESHOLD) {
+        if (deltaX < 0) {
+          goTo(current + 1); // swipe izquierda -> siguiente
+        } else {
+          goTo(current - 1); // swipe derecha -> anterior
+        }
+      } else {
+        render(); // vuelve al slide actual si no superó el umbral
+      }
+
+      deltaX = 0;
     });
 
     (track as HTMLElement).style.transition = 'none';
