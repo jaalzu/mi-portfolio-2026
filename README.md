@@ -1,9 +1,9 @@
 # My Portfolio
 
-This is a my personal portfolio built with Astro, using HTML, CSS and TypeScript.
+This is my personal portfolio built with Astro, using HTML, CSS and TypeScript.
 
-The project is inspired by Windows 7 and Windows Vista aesthetics. It includes two visual modes that replicate those styles. The interface is designed as a single view without scrolling, so everything is immediately accessible and fast to explore.
-Really aesthetic and visually pleasing interface, customizable background-image and window styles
+The project started as a tribute to the Windows 7 and Windows XP aesthetics, and evolved from there into its own custom UI. The interface is designed as a single view without scrolling, so everything is immediately accessible and fast to explore.
+Really aesthetic and visually pleasing interface, customizable background-image and window styles.
 
 ## Tech Stack
 
@@ -14,20 +14,16 @@ Really aesthetic and visually pleasing interface, customizable background-image 
 
 ## Features
 
-- Retro UI inspired by Windows 7 and Vista
+- Custom UI, originally inspired by Windows 7 and XP
 - Single screen layout (no scroll)
 - Multi-language support
 - Dynamic CSS for theme switching
 - Optimized image loading for better performance
 - Basic protection against scraping using RTL-based CSS inversion
 
-### Windows 7 Style
+### Preview
 
-![Windows 7 Mode](./public/og2.png)
-
-### Windows Vista Style
-
-![Windows Vista Mode](./public/winVista.webp)
+![Preview](./public/og.webp)
 
 ## Commands
 
