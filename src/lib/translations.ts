@@ -17,7 +17,7 @@ export const translations = {
     aboutPortfolioLink: "aquí",
 
     aboutPortfolio2:
-      "Mantuve la idea, pero diseñando mi propia UI con un estilo moderno y minimalista, cuidando cada detalle y mejorándola continuamente.",
+      "Mantuve el mismo concepto, pero diseñando mi propia UI con un estilo moderno y minimalista, cuidando cada detalle y mejorándola continuamente.",
 
     stackFramework: "Framework",
     stackStyling: "Styling",
