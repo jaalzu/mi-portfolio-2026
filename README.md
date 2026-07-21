@@ -10,7 +10,8 @@ Really aesthetic and visually pleasing interface, customizable background-image 
 - Astro
 - HTML
 - CSS
-- TypeScript
+- Javascript
+- GSAP
 
 ## Features
 
